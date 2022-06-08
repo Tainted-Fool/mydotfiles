@@ -63,6 +63,25 @@ dotfiles checkout
 ```
 Might need to add a `-f` to force the changes
 
+Install these PowerShell modules
+```PowerShell
+Install-Module -Name DockerCompletion
+Install-Module -Name Posh-Git
+Install-Module -Name PSReadLine
+Install-Module -Name PackageManagement
+Install-Module -Name PowerShellGet
+Install-Module -Name PSWindowsUpdate
+Install-Module -Name Terminal-Icons
+Install-Module -Name Z
+Update-Module -Name <moduleName> # update command
+```
+
+Overwrite current PowerShell profile by copying the apporiate file
+```PowerShell
+cp ~\PowerShellProfile\Microsoft.PowerShell_profile.ps1 $PROFILE
+cp ~\PowerShellProfile\Microsoft.VSCode.ps1 $PROFILE
+```
+
 ### Installing Oh-My-Posh
 Finally, we need to install [Oh-My-Posh](https://ohmyposh.dev/)
 
@@ -95,19 +114,6 @@ choco install bat -y
 Install `clink` to make `cmd.exe` more bash-like
 ```PowerShell
 choco install clink -y
-```
-
-Install PowerShell modules
-```PowerShell
-Install-Module -Name DockerCompletion
-Install-Module -Name Posh-Git
-Install-Module -Name PSReadLine
-Install-Module -Name PackageManagement
-Install-Module -Name PowerShellGet
-Install-Module -Name PSWindowsUpdate
-Install-Module -Name Terminal-Icons
-Install-Module -Name Z
-Update-Module -Name <moduleName> # update command
 ```
 
 Install Azure CLI
