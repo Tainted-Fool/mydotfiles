@@ -1,0 +1,22 @@
+[user]
+	username = Tainted-Fool
+	name = Tainted-Fool
+	email = lazaro1herrera@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	editor = "code --new-window --wait"
+	pager = cat
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = "code --new-window --wait --diff $LOCAL $REMOTE"
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = "code --new-window --wait $MERGED"
+[credential]
+	helper = store
