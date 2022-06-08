@@ -1,0 +1,17 @@
+[user]
+	email = lazaro1herrera@gmail.com
+	name = Tainted-Fool
+	username = Tainted-Fool
+[core]
+	editor = "code --new-window --wait"
+	pager = cat
+[credential]
+	helper = store
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = "code --new-window --wait --diff $LOCAL $REMOTE"
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = "code --new-window --wait $MERGED"

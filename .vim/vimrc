@@ -1,0 +1,299 @@
+" use fold commands to open/close sections
+" zo = open fold under cursor
+" zc = close folder under cursor
+" zR = open all folds
+" zM = close all folds
+" PLUGINS ---------------------------------------------------------------- {{{
+
+" must have vim-plug installed to call plugins
+" https://github.com/junegunn/vim-plug
+
+" Automatic installation of vim-plug and missing plugins
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+      \| PlugInstall --sync | source $MYVIMRC
+      \| endif
+
+" will need to change the folder location below if using something else
+" Linux default = ~/.vim/plugged; Windows default = $HOME/vimfiles/plugged
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf.vim' " command-line fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " needed for above
+Plug 'junegunn/vim-peekaboo' " see contents of registries with '@' or double quotes
+Plug 'frazrepo/vim-rainbow' " adds color to brackets and parenthesis
+Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree >> set alias for F5
+" Plug 'ludovicchabant/vim-gutentags' " generate tags
+" Plug 'mhinz/vim-signify' " adds VCS status
+Plug 'vim-airline/vim-airline' " better status bar than above
+Plug 'vim-airline/vim-airline-themes' " themes for the status bar - use ':AirlineTheme <theme>'
+Plug 'ryanoasis/vim-devicons' " adds icons to vim
+Plug 'tpope/vim-fugitive' " git commands - call with :Git
+Plug 'tpope/vim-commentary' " comments stuff out - use 'gcc' or 'gc' in visual mode
+Plug 'iggredible/totitle-vim' " title case text - use 'gt'
+Plug 'tpope/vim-surround' " surround text - use cs, ds, ys
+"Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
+Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
+Plug 'justinmk/vim-sneak' " jump to any located specified by two characters - use 's<char><char>
+Plug 'bkad/CamelCaseMotion' " move between camel case words - use <Leader><action>
+Plug 'ConradIrwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
+Plug 'sheerun/vim-polyglot' " syntaxt highlighting for various lanuages
+Plug 'preservim/nerdtree' " file explorer for vim - use ':NERDTree' >> set alias for F6
+Plug 'sonph/onehalf', { 'rtp': 'vim' } " color scheme for vim layout
+" Plug 'rafi/awesome-vim-colorschemes' " a collection of color schemes - has onehalf and more
+Plug 'mg979/vim-visual-multi' " adds multiple cursors
+Plug 'dkarter/bullets.vim' " automate bullet lists and numbering
+Plug 'terryma/vim-smooth-scroll' " smooth scrolling
+
+call plug#end()
+
+" }}}
+
+" SETTINGS ---------------------------------------------------------------- {{{
+
+" set UTF encoding
+set encoding=utf-8
+
+" enable spell checking
+" set spell spelllang=en_us
+
+" do not use vi - legacy mode
+set nocompatible
+
+" syntax highlight
+syntax on
+
+" highlight all search results
+set hlsearch
+
+" show incremental search results as you type
+set incsearch
+
+" display line number
+set number
+
+" display relative numbers i.e. current line starts at 0
+set relativenumber
+
+" set buffer to not disappear 
+set hidden
+
+" do case insensitive search
+set ignorecase smartcase
+
+" set search to cycle to top once it hits the bottom
+set wrapscan
+
+" set ripgrep as search
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
+" allows you to copy/paste text from external program i.e. clipboard
+set clipboard=unnamed
+
+" increment/decrement alphanumberic values with CTRL + A and CTRL + X
+set nrformats+=alpha
+
+" save views of buffers
+autocmd BufWinLeave *.txt mkview
+autocmd BufWinEnter *.txt loadview
+
+" can split vimrc into multiple files to easier manage
+" source <path>/settings/plugins.vim
+" source <path>/settings/configs.vim
+" source <path>/settings/functions.vim
+" source <path>/settings/mappings.vim
+
+" toggle spell check on or off
+"nnoremap <leader>s :set spell!
+
+" allow words to wrap
+set wrap
+
+" enable file type detection
+filetype on
+
+" load indent file
+filetype indent on
+
+" show the command you type last
+set showcmd
+
+" show the mode you are on the last line
+set showmode
+
+" set the amount of commands to save in history default is 20
+set history=1000
+
+" enable auto-completion menu after pressing tab
+set wildmenu
+
+" make the menu behave similar to bash
+set wildmode=list:longest
+
+" set cursor type
+" 0 = blinking block
+" 1 = blinking block (default)
+" 2 = steady block
+" 3 = blinking underline
+" 4 = steady underline
+" 5 = blinking bar (xterm)
+" 6 = steady bar (xterm)
+
+" set cursor on vim startup
+autocmd VimEnter * silent exec "! echo -ne '\e[1 q'" 
+" set cursor on vim exit
+autocmd VimLeave * silent exec "! echo -ne '\e[3 q'" 
+
+" cursor for everything else
+let &t_EI = "\e[1 q" 
+" cursor for insert mode
+let &t_SI = "\e[3 q" 
+
+" set default mapping to CamelCaseMotion plugin
+let g:camelcasemotion_key = '<leader>'
+
+" }}}
+
+" MAPPINGS  ---------------------------------------------------------------- {{{
+
+" remap syntax is as follows:
+" map_mode <whatYouType> <whatYouExecute>
+
+" map modes:
+" nnoremap = allows you to map keys in normal mode
+" inoremap = allows you to map keys in insert mode
+" vnoremap = allows you to map keys in visual mode
+
+" example: remap 'jk' as the escape key
+"inoremap jk <ESC>
+
+" change leader key (default is backslash '\')
+"let mapleader = ";"
+
+" map the F5 key to run a Python script inside Vim.
+" I map F5 to a chain of commands here.
+" :w saves the file.
+" <CR> (carriage return) is like pressing the enter key.
+" !clear runs the external clear screen command.
+" !python3 % executes the current file with Python.
+"nnoremap <f5> :w <CR>:!clear <CR>:!python3 % <CR>
+
+" yank from cursor to the end of line.
+"nnoremap Y y$
+
+" create a new line and exit
+" nnoremap o o<esc>
+" nnoremap O O<esc>
+
+" press enter twice to turn off highlights after search
+"nnoremap <CR> :nohlsearch<CR><CR>
+
+" press F5 for MundoToggle which is the vim undo tree
+nnoremap <F5> :MundoToggle<CR>
+
+" press F6 for NERDTreeToggle which is vim file explorer
+nnoremap <F6> :NERDTreeToggle<CR>
+
+" press F8 to highlight occurance of the current word(s)
+nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
+" press CTRL + J instead of ESC to switch to NORMAL mode from INSERT mode
+inoremap <C-j> <esc>
+
+" press CTRL + J instead of 'i' to switch to INSERT mode from NORMAL mode
+nnoremap <C-j> i
+
+" mapping for vim-smooth-scroll plugin
+" smooth_scroll(distance, duration, speed)
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" }}}
+
+" VIMSCRIPT -------------------------------------------------------------- {{{
+
+" this will enable code folding
+" use the marker method of folding
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+" onehalfdark theme
+set t_Co=256
+set cursorline
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
+" lightline
+" let g:lightline = { 'colorscheme': 'onehalfdark' }
+
+" set true colors for theme
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+" enable persistent undo so that undo history presist across vim sessions
+" Linux default = ~/.vim/undo; Windows default = $HOME/vimfiles/undo
+if version >= 703
+    set undodir=~/.vim/undo
+    set undofile
+    set undoreload=1000
+endif
+
+" enable rainbow brackets
+let g:rainbow_active = 1
+
+" press enter to highlight occurance of the current word(s)
+let g:highlighting = 0
+function! Highlighting()
+  if g:highlighting == 1 && @/ =~ '^\\<'.expand('<cword>').'\\>$'
+    let g:highlighting = 0
+    return ":silent nohlsearch\<CR>"
+  endif
+  let @/ = '\<'.expand('<cword>').'\>'
+  let g:highlighting = 1
+  return ":silent set hlsearch\<CR>"
+endfunction
+nnoremap <silent> <expr> <CR> Highlighting()
+
+" }}}
+
+" STATUS BAR -------------------------------------------------------------- {{{
+
+" clear status line when vimrc is reloaded.
+"set statusline=
+
+" status line left side.
+"set statusline+=\ %F\ %M\ %Y\ %R
+" %F = display full path of file
+" %M = display modified flag i.e. show if file is not save
+" %Y = display type of buffer
+" %R = display read-only flag
+
+" use a divider to separate the left side from the right side.
+"set statusline+=%=
+
+" status line right side.
+"set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+" %b = display ascii/unicode character under cursor
+" 0x%B = show the hexadecimal character under cursor
+" %l = display the row number
+" %c = display the column number
+" %p%% = show the cursor percentage from the top of the file
+
+" show the status on the second to last line.
+"set laststatus=2
+
+" using vim-airline for status bar and changing Y output
+"let g:airline_section_y = 'W %{winnr()}'
+
+" }}}
