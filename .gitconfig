@@ -1,15 +1,14 @@
 [user]
-	username = Tainted-Fool
-	name = Tainted-Fool
 	email = lazaro1herrera@gmail.com
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+	name = Tainted-Fool
+	username = Tainted-Fool
 [core]
 	editor = "code --new-window --wait"
 	pager = cat
+[credential]
+	helper = store
+[color]
+	ui = auto
 [diff]
 	tool = vscode
 [difftool "vscode"]
@@ -17,6 +16,18 @@
 [merge]
 	tool = vscode
 [mergetool "vscode"]
-	cmd = "code --new-window --wait $MERGED"
-[credential]
-	helper = store
+	cmd = "code --wait $MERGED"
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[alias]
+	alias = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
+	cm = commit
+	co = checkout
+	df = diff
+	dfs = diff --staged
+	lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
+	reword = commit --amend # Edit last commit message
+	st = status
+	oops = commit --amend --no-edit # Add files to previous commit WITHOUT changing message
+	uncommit = reset --soft HEAD~1 # Undo last commit but keep files in stage area
+	untrack = rm --cache --	# Remove files from Git but not from disk
