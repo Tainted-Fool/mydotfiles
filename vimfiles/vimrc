@@ -1,4 +1,4 @@
-" use fold commands to view configs
+" use fold commands to open/close sections
 " zo = open fold under cursor
 " zc = close folder under cursor
 " zR = open all folds
@@ -24,43 +24,50 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
       \| endif
 
 " will need to change the folder location below if using something else
-" My Linux default = ~/.vim/plugged; Windows default = $HOME/vimfiles/plugged
+" Linux default = ~/.vim/plugged; Windows default = $HOME/vimfiles/plugged
 call plug#begin('$HOME/vimfiles/plugged')
 
+" Plug 'ludovicchabant/vim-gutentags' " generate tags
+" Plug 'mhinz/vim-signify' " adds VCS status
+" Plug 'rafi/awesome-vim-colorschemes' " a collection of color schemes - has onehalf and more
+" Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
+Plug 'chun-yang/auto-pairs' " inserts/deletes brackets, parens, and quotes in pairs
+Plug 'ConradIrwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
+Plug 'bkad/CamelCaseMotion' " move between camel case words - use <Leader><action>
+Plug 'dkarter/bullets.vim' " automate bullet lists and numbering
+Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
+Plug 'frazrepo/vim-rainbow' " adds color to brackets and parenthesis
+Plug 'iggredible/totitle-vim' " title case text - use 'gt'
+"Plug 'inkarkat/vim-SpellCheck' " adds a better spell checker
+Plug 'inkarkat/vim-ingo-library' " dependency for vim-spellcheck
+Plug 'inkarkat/vim-visualrepeat' " like vim-repeat but for VISUAL mode
 Plug 'junegunn/fzf.vim' " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " needed for above
 Plug 'junegunn/vim-peekaboo' " see contents of registries with '@' or double quotes
-Plug 'frazrepo/vim-rainbow' " adds color to brackets and parenthesis
+Plug 'justinmk/vim-sneak' " jump to any located specified by two characters - use 's<char><char>
+" Plug 'michaeljsmith/vim-indent-object' " adds auto indent for objects
+Plug 'mg979/vim-visual-multi' " adds multiple cursors
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " auto completion for code
+Plug 'preservim/nerdtree' " file explorer for vim - use ':NERDTree' >> set alias for F6
+Plug 'preservim/vim-markdown' " syntax highlighting, matching rule and mapping
+Plug 'ryanoasis/vim-devicons' " adds icons to vim
+Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
 Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree >> set alias for F5
-" Plug 'ludovicchabant/vim-gutentags' " generate tags
-" Plug 'mhinz/vim-signify' " adds VCS status
+Plug 'sonph/onehalf', { 'rtp': 'vim' } " color scheme for vim layout
+Plug 'terryma/vim-smooth-scroll' " smooth scrolling
+Plug 'tpope/vim-commentary' " comments stuff out - use 'gcc' or 'gc' in visual mode
+Plug 'tpope/vim-fugitive' " git commands - call with :Git
+Plug 'tpope/vim-repeat' " repeat last `.` command as a whole
+Plug 'tpope/vim-surround' " surround text - use cs, ds, ys
 Plug 'vim-airline/vim-airline' " better status bar than above
 Plug 'vim-airline/vim-airline-themes' " themes for the status bar - use ':AirlineTheme <theme>'
-Plug 'ryanoasis/vim-devicons' " adds icons to vim
-Plug 'tpope/vim-fugitive' " git commands - call with :Git
-Plug 'tpope/vim-commentary' " comments stuff out - use 
-Plug 'iggredible/totitle-vim' " title case text - use 'gt'
-Plug 'tpope/vim-surround' " surround text - use cs, ds, ys
-"Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
-Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
-Plug 'justinmk/vim-sneak' " jump to any located specified by two characters - use 's<char><char>
-Plug 'bkad/CamelCaseMotion' " move between camel case words - use <Leader><action>
-Plug 'ConradIrwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
-Plug 'sheerun/vim-polyglot' " syntaxt highlighting for various lanuages
-Plug 'preservim/nerdtree' " file explorer for vim - use ':NERDTree' >> set alias for F6
-Plug 'sonph/onehalf', { 'rtp': 'vim' } " color scheme for vim layout
-" Plug 'rafi/awesome-vim-colorschemes' " a collection of color schemes - has onehalf and more
-Plug 'mg979/vim-visual-multi' " adds multiple cursors
-Plug 'dkarter/bullets.vim' " automate bullet lists and numbering
+Plug 'vimwiki/vimwiki' " organize notes and ideas
 
 call plug#end()
-j
+
 " }}}
 
 " SETTINGS ---------------------------------------------------------------- {{{
-
-" set vim shell
-" set shell=pwsh.exe
 
 " set UTF encoding
 set encoding=utf-8
@@ -101,7 +108,7 @@ set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 " allows you to copy/paste text from external program i.e. clipboard
 set clipboard=unnamed
 
-" increment/decrement letters
+" increment/decrement alphanumeric values with CTRL + A and CTRL + X
 set nrformats+=alpha
 
 " save views of buffers
@@ -121,7 +128,7 @@ autocmd BufWinEnter *.txt loadview
 set wrap
 
 " enable file type detection
-filetype on
+filetype plugin on
 
 " load indent file
 filetype indent on
@@ -135,11 +142,32 @@ set showmode
 " set the amount of commands to save in history default is 20
 set history=1000
 
-" enable autop completion menu after pressing tab
+" enable auto-completion menu after pressing tab
 set wildmenu
 
 " make the menu behave similar to bash
 set wildmode=list:longest
+
+" no backup files
+set nobackup
+set nowritebackup
+
+" give more space for displaying messages
+set cmdheight=2
+
+" shorter updatetime for less delay
+set updatetime=300
+
+" don't pass messages to |ins-completion-menu
+set shortmess+=c
+
+" always show the signcolumn or else it would shift the text
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 " set cursor type
 " 0 = blinking block
@@ -162,6 +190,29 @@ let &t_SI = "\e[3 q"
 
 " set default mapping to CamelCaseMotion plugin
 let g:camelcasemotion_key = '<leader>'
+
+" declare coc.nvim extensions
+let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-markdownlint', 'coc-pyright', 'coc-sh', 'coc-snippets', 'coc-spell-checker', 'coc-word']
+
+" set default vimwiki syntax
+let g:vimwiki_list = [{'path': '$HOME/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
+" highlight the symvol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integration with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " }}}
 
@@ -205,24 +256,162 @@ nnoremap <F5> :MundoToggle<CR>
 " press F6 for NERDTreeToggle which is vim file explorer
 nnoremap <F6> :NERDTreeToggle<CR>
 
-" press F8 to highlight occurance of the current word(s)
+" press F8 to highlight occurrence of the current word(s)
 nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " press CTRL + J instead of ESC to switch to NORMAL mode from INSERT mode
 inoremap <C-j> <esc>
 
+" press CTRL + J instead of 'i' to switch to INSERT mode from NORMAL mode
+" nnoremap <C-j> i
+
+" mapping for vim-smooth-scroll plugin
+" smooth_scroll(distance, duration, speed)
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" press SPACE to disable highlight search
+noremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+" map tab for auto-completion for coc.nvim
+" MAKE SURE YOU DO NOT HAVE ANY MAPS FOR TAB
+" run 'verbose imap <tab>' to check beforehand
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" use ENTER to auto-select the first completion item
+" MAKE SURE YOU DO NOT HAVE ANY MAPS FOR <CR>
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" use CTRL + space to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" use `[g` and `]g` to navigate diagnostics
+" use `:CocDiagnostics` to get all diagnostics of current buffer in location
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" code navigation with GoTo
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" formatting selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " setup formatexpr specified filetypes
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" applying codeAction to the selected region
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" remap keys for applying codeAction to the current buffer
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" apply AutoFix to problem on the current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" run the Code Lens action on the current line
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" remap CTRL + f and CTRL + b for scroll float windows/popups
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" use CTRL + S for selections ranges
+" requires 'textDocument/selectionRange' support of language server
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" mappings for CoCList
+" show all diagnostics
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" manage extensions
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" show commands
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" find symbol of current document
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" search workspace symbols
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" do default action for next item
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" do default action for previous item
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" resume latest coc list
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" remap for do codeAction of selection region - coc-spell-checker
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
+
 " }}}
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
 
-" This will enable code folding.
-" Use the marker method of folding.
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
+" this will enable code folding
+" use the marker method of folding
+" augroup filetype_vim
+"     autocmd!
+"     autocmd FileType vim setlocal foldmethod=marker
+" augroup END
 
-" onedark theme
+" onehalfdark theme
 set t_Co=256
 set cursorline
 colorscheme onehalfdark
@@ -237,8 +426,8 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" enable persistent undo so that undo history presist across vim sessions
-" My Linux default = ~/.vim/undo; Windows default = $HOME/vimfiles/undo
+" enable persistent undo so that undo history persist across vim sessions
+" Linux default = ~/.vim/undo; Windows default = $HOME/vimfiles/undo
 if version >= 703
     set undodir=~/.vim/undo
     set undofile
@@ -248,18 +437,23 @@ endif
 " enable rainbow brackets
 let g:rainbow_active = 1
 
-" press enter to highlight occurance of the current word(s)
-let g:highlighting = 0
-function! Highlighting()
-  if g:highlighting == 1 && @/ =~ '^\\<'.expand('<cword>').'\\>$'
-    let g:highlighting = 0
-    return ":silent nohlsearch\<CR>"
-  endif
-  let @/ = '\<'.expand('<cword>').'\>'
-  let g:highlighting = 1
-  return ":silent set hlsearch\<CR>"
-endfunction
-nnoremap <silent> <expr> <CR> Highlighting()
+" set python environment variable from anaconda
+if has('nvim') && !empty($CONDA_PREFIX)
+  let g:python3_host_prog = $CONDA_PREFIX . '/bin/python'
+endif
+
+" press enter to highlight occurrence of the current word(s)
+" let g:highlighting = 0
+" function! Highlighting()
+"   if g:highlighting == 1 && @/ =~ '^\\<'.expand('<cword>').'\\>$'
+"     let g:highlighting = 0
+"     return ":silent nohlsearch\<CR>"
+"   endif
+"   let @/ = '\<'.expand('<cword>').'\>'
+"   let g:highlighting = 1
+"   return ":silent set hlsearch\<CR>"
+" endfunction
+" nnoremap <silent> <expr> <CR> Highlighting()
 
 " }}}
 
@@ -293,4 +487,3 @@ nnoremap <silent> <expr> <CR> Highlighting()
 "let g:airline_section_y = 'W %{winnr()}'
 
 " }}}
-

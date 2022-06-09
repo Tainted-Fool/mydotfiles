@@ -17,7 +17,7 @@ function touchfile()
 }
 
 # `git` command alternative for Mydotfiles repo
-function dotfiles()
+function dit()
 {
   git --git-dir=$HOME\.dotfiles\ --work-tree=$HOME $args
 }
