@@ -145,7 +145,8 @@ plugins=(
 
 # added extra plugins - these have to be downloaded from github and added to $ZSH_CUSTOM/plugins/
 plugins+=(
-	zsh-aliases 
+	zsh-aliases
+  zsh-autopair
 	zsh-autosuggestions 
 	zsh-functions
 	zsh-syntax-highlighting 
@@ -153,6 +154,9 @@ plugins+=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Activate `zsh-autopair`
+autopair-init
 
 # User configuration
 
