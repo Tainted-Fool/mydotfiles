@@ -4,8 +4,9 @@
 " zR = open all folds
 " zM = close all folds
 
-" set vim shell
+" set vim shell. NOTE: pwsh has issues with `:PlugClean`
 set shell=pwsh.exe
+set shellcmdflag=\ -ExecutionPolicy\ RemoteSigned\ -NoProfile\ -Nologo\ -NonInteractive\ -Command
 
 " PLUGINS ---------------------------------------------------------------- {{{
 

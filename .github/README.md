@@ -152,6 +152,13 @@ Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI
 Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
 ```
 
+Install Anaconda
+
+```PowerShell
+Invoke-WebRequest -Uri https://repo.anaconda.com/archive/Anaconda3-2022.05-Windows-x86_64.exe -OutFile .\Anaconda.exe;
+.\Anaconda.exe
+```
+
 Set WSL environment variables
 
 ```PowerShell
