@@ -46,3 +46,38 @@ function notes()
   $currentPath = (Get-Location).Path
   code "G:\My Drive\Documents\Obsidian Notebook\PersonalNotebook"; Set-Location $currentPath
 }
+
+# Similar to linux `time` command
+function time 
+{ 
+  Measure-Command { Invoke-Expression $args 2>&1 | out-default} 
+}
+
+# Edit alias with vim
+function vima()
+{
+  vim ~\PowerShellProfile\Alias.ps1
+}
+
+# Edit functions with vim
+function vimf()
+{
+  vim ~\PowerShellProfile\Functions.ps1
+}
+
+# Edit PowerShellProfile with vim
+function vimpsp()
+{
+  vim ~\PowerShellProfile\Profile.ps1
+}
+
+# Edit vimrc with vim
+function vimrc()
+{
+  vim ~\vimfiles\vimrc
+}
+
+function src()
+{
+  . $PROFILE; & $PROFILE
+}
