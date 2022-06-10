@@ -22,6 +22,8 @@ fi
 # Declare Windows C and D directories
 export HOMEC="/mnt/c/"
 export HOMED="/mnt/d/"
+
+# Declare Google drive
 export HOMEG="/mnt/g/"
 
 # Declare Anaconda path
