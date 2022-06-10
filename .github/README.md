@@ -146,3 +146,9 @@ curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py --silent
 python3 get-pip.py
 pip install azure-cli
 ```
+
+Install Anaconda
+
+```Bash
+curl -sL https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh | sudo bash
+```
