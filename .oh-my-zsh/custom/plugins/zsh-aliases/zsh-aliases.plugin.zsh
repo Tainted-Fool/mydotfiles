@@ -92,10 +92,10 @@ alias cat="batcat -pp --paging=never --style='plain' --theme=TwoDark "
 alias rdp="remmina"
 
 # Edit alias file
-alias aalias='vim ~/.oh-my-zsh/custom/plugins/zsh-aliases/zsh-aliases.plugin.zsh'
+alias vima='vim ~/.oh-my-zsh/custom/plugins/zsh-aliases/zsh-aliases.plugin.zsh'
 
 # Edit functions file
-alias falias='vim ~/.oh-my-zsh/custom/plugins/zsh-functions/zsh-functions.plugin.zsh'
+alias vimf='vim ~/.oh-my-zsh/custom/plugins/zsh-functions/zsh-functions.plugin.zsh'
 
 # Edit zshrc file
 alias vimzsh="vim ~/.zshrc"
@@ -104,7 +104,7 @@ alias vimzsh="vim ~/.zshrc"
 alias vimrc="vim ~/.vim/vimrc"
 
 # Source zsh file
-alias srczsh="source ~/.zshrc"
+alias src="source ~/.zshrc"
 
 # Add alias to 'colorls' and 'exa' if found on machine
 if [ -x "$(command -v colorls)" ]; then
