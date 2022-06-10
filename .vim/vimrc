@@ -65,6 +65,10 @@ call plug#end()
 
 " SETTINGS ---------------------------------------------------------------- {{{
 
+" disable beep sound and use a visual queue instead
+set visualbell
+set t_vb=
+
 " set UTF encoding
 set encoding=utf-8
 
