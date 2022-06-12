@@ -1,15 +1,18 @@
-# Table of Contents
+- [Intro](#intro)
+- [Starting From Zero](#starting-from-zero)
+- [Starting On A New System](#starting-on-a-new-system)
+  - [Installing Oh-My-Posh](#installing-oh-my-posh)
+- [Optional](#optional)
 
-- [Table of Contents](#table-of-contents)
-  - [Intro](#intro)
-  - [Starting From Zero](#starting-from-zero)
-  - [Starting On A New System](#starting-on-a-new-system)
-    - [Installing Oh-My-Posh](#installing-oh-my-posh)
-  - [Optional](#optional)
+- [Intro](#intro)
+- [Starting From Zero](#starting-from-zero)
+- [Starting On A New System](#starting-on-a-new-system)
+  - [Installing Oh-My-Posh](#installing-oh-my-posh)
+- [Optional](#optional)
 
 ## Intro
 
-All my dot files used for Windows - more specificly for vim and [oh-my-posh](#installing-oh-my-posh)
+All my dot files used for Windows - more specifically for vim and [oh-my-posh](#installing-oh-my-posh)
 
 Check the other branch `linux` for that operating system
 
@@ -31,7 +34,7 @@ dit config --local status.showuntrackedfiles no
 - The third line creates a flag to hide files we are not tracking yet
 - The last line adds the alias to `$PROFILE` for convenience
 
-Now we can version the files we want with `dit` i.e. same commands as `git`
+Now we can version the files we want with `dit` i.e same commands as `git`
 
 ```PowerShell
 dit status
@@ -71,7 +74,7 @@ dit config --local status.showuntrackedfiles no
 - The second line creates an alias for `git` as `dit`
 - The last line hides untracked files
 
-Now we can checkout the repo to acquire the neccessary files
+Now we can checkout the repo to acquire the necessary files
 
 ```PowerShell
 dit checkout
@@ -83,6 +86,7 @@ Install these PowerShell modules
 
 ```PowerShell
 Install-Module -Name DockerCompletion
+1
 Install-Module -Name Posh-Git
 Install-Module -Name PSReadLine
 Install-Module -Name PackageManagement
@@ -93,7 +97,7 @@ Install-Module -Name Z
 Update-Module -Name <moduleName> # update command
 ```
 
-Overwrite current PowerShell profile by copying the apporiate file
+Overwrite current PowerShell profile by copying the appropriate file
 
 ```PowerShell
 cp ~\PowerShellProfile\Microsoft.PowerShell_profile.ps1 $PROFILE

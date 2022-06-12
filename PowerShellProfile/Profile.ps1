@@ -8,8 +8,8 @@ Import-module Z
 Import-Module PSReadLine
 Import-Module PSWindowsUpdate
 Import-Module DockerCompletion
-# Import-Module AZ.Tools.Predictor
-# Enable-AZPredictor
+#Import-Module AZ.Tools.Predictor
+#Enable-AZPredictor
 
 # Import-Module, the chocolately profile contains the necessary code to enable tab-complettion for 'choco'
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -17,6 +17,10 @@ if (Test-Path($ChocolateyProfile))
 {
   Import-Module "$ChocolateyProfile"
 }
+
+# region profile alias initialize
+#Import-Module -Name HackF5.ProfileAlias -Force -Global -ErrorAction SilentlyContinue
+# end region
 
 # Execute scripts
 . $HOME\PowerShellProfile\Alias.ps1

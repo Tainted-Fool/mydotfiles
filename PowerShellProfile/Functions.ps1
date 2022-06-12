@@ -79,5 +79,8 @@ function vimrc()
 
 function src()
 {
-  . $PROFILE; & $PROFILE
+   # dot(.) sourcing makes functions, alias, and variables to current scope
+   # you can NOT set an alias for `.`
+   # call(&) runs a function or script and NOT added to current scope
+   & $PROFILE
 }
