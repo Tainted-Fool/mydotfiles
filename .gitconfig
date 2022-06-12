@@ -3,7 +3,7 @@
 	name = Tainted-Fool
 	username = Tainted-Fool
 [core]
-	editor = "code --new-window --wait"
+	editor = "code --wait"
 	pager = cat
 [credential]
 	helper = store
@@ -12,7 +12,7 @@
 [diff]
 	tool = vscode
 [difftool "vscode"]
-	cmd = "code --new-window --wait --diff $LOCAL $REMOTE"
+	cmd = "code --wait --diff $LOCAL $REMOTE"
 [merge]
 	tool = vscode
 [mergetool "vscode"]
@@ -23,7 +23,7 @@
 	co = checkout
 	df = diff
 	dfs = diff --staged
-	fetch = git fetch --tags
+	ft = fetch --tags --all
 	lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
 	oops = commit --amend --no-edit # Add files to previous commit WITHOUT changing message
 	reword = commit --amend # Edit last commit message
