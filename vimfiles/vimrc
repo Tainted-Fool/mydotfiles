@@ -1,4 +1,5 @@
-" set vim shell. NOTE: pwsh has issues with `:PlugClean`
+" set vim shell. NOTE: pwsh has issues with `:PlugClean` and others
+" comment out below to go back to default settings
 set shell=pwsh.exe
 set shellcmdflag=\ -ExecutionPolicy\ RemoteSigned\ -NoProfile\ -Nologo\ -NonInteractive\ -Command
 
@@ -77,8 +78,8 @@ Plug 'vimwiki/vimwiki' " organize notes and ideas
 call plug#end()
 
 " call other configurations
-source C:/Users/Laz/vimfiles/settings/settings.vim
-source C:/Users/Laz/vimfiles/settings/remapings.vim
-source C:/Users/Laz/vimfiles/settings/functions.vim
-"source C:/Users/Laz/vimfiles/settings/barconfigs.vim
-"source C:/Users/Laz/vimfiles/settings/coc-configs.vim
+source $HOME/vimfiles/settings/settings.vim
+source $HOME/vimfiles/settings/remapings.vim
+source $HOME/vimfiles/settings/functions.vim
+"source $HOME/vimfiles/settings/barconfigs.vim
+"source $HOME/vimfiles/settings/coc-configs.vim
