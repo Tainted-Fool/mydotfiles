@@ -47,6 +47,11 @@ function notes()
   code "G:\My Drive\Documents\Obsidian Notebook\PersonalNotebook"; Set-Location $currentPath
 }
 
+function notescs()
+{
+  code "G:\My Drive\Programming\C#\Notebook"; Set-Location $(Get-Location).Path
+}
+
 # Similar to linux `time` command
 function time 
 { 

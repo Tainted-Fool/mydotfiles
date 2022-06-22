@@ -27,3 +27,8 @@ if (Test-Path($ChocolateyProfile))
 . $HOME\PowerShellProfile\Functions.ps1
 . $HOME\PowerShellProfile\PSReadLine.ps1
 . $HOME\PowerShellProfile\Settings.ps1
+
+#region conda initialize
+# !! Contents within this block are managed by 'conda init' !!
+(& "C:\Python\Anaconda39\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
+#endregion

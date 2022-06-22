@@ -56,7 +56,7 @@ Plug 'junegunn/fzf.vim' " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " needed for above
 Plug 'junegunn/vim-peekaboo' " see contents of registries with '@' or double quotes
 Plug 'justinmk/vim-sneak' " jump to any located specified by two characters - use 's<char><char>
-Plug 'michaeljsmith/vim-indent-object' " adds auto indent for objects
+Plug 'michaeljsmith/vim-indent-object' " adds indentation level for languages like python
 Plug 'mg979/vim-visual-multi' " adds multiple cursors
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} " auto completion for code
 Plug 'preservim/nerdtree' " file explorer for vim - use ':NERDTree' >> set alias for F6
