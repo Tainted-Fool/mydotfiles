@@ -24,9 +24,10 @@ Plug 'bkad/CamelCaseMotion' " move between camel case words - use <Leader><actio
 Plug 'dkarter/bullets.vim' " automate bullet lists and numbering
 Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
 Plug 'frazrepo/vim-rainbow' " adds color to brackets and parenthesis
+Plug 'francoiscabrol/ranger.vim' " file manager similar to NERDTree
 Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
 Plug 'honza/vim-snippets' " snippets engine
-Plug 'iamcco/markdown-preview.nvim' " markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " markdown preview
 Plug 'iggredible/totitle-vim' " title case text - use 'gt'
 Plug 'inkarkat/vim-SpellCheck' " adds a better spell checker
 Plug 'inkarkat/vim-ingo-library' " dependency for vim-spellcheck
@@ -48,7 +49,6 @@ Plug 'preservim/vim-markdown' " syntax highlighting, matching rule and mapping
 Plug 'qpkorr/vim-renamer' " create a buffer with a list of directories to rename with :Renamer
 Plug 'rafi/awesome-vim-colorschemes' " a collection of color schemes - has onehalf and more
 Plug 'ryanoasis/vim-devicons' " adds icons to vim and NERDTree
-Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
 Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree
 Plug 'SirVer/ultisnips' " snippets documentation for programming languages
 Plug 'terryma/vim-smooth-scroll' " smooth scrolling
@@ -71,6 +71,7 @@ Plug 'Yggdroot/indentline' " adds thin vertical lines at each indentation level 
 "Plug 'mhinz/vim-signify' " adds VCS status
 "Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
 "Plug 'psliwka/vim-dirtytalk, { 'do': 'DirtytalkUpdate' } " spellcheck dictionary for programmers
+"Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
 "Plug 'sonph/onehalf', { 'rtp': 'vim' } " color scheme for vim layout
 "Plug 'vim-airline/vim-airline' " another status bar
 "Plug 'vim-airline/vim-airline-themes' " themes for the status bar - use ':AirlineTheme <theme>'
@@ -101,13 +102,6 @@ let &t_EI = "\e[1 q"
 
 " set the timeout len for cursor to change faster
 "set timeoutlen=300
-
-"""""""""""""""""""""""
-"Commands and Managers"
-"""""""""""""""""""""""
-:command Ra !ranger
-:command Vi !vifm
-:command Na tabnew file
 
 """""""""""""""
 "Miscellaneous"
@@ -302,7 +296,24 @@ set laststatus=2
 set noshowmode
 
 " set status bar themes and views
-let g:lightline = {'colorscheme': 'onehalfdark', 'active': {'left': [['mode'], ['gitbranch', 'readonly', 'absolutepath', 'modified']], 'right': [['lineinfo'], ['percent'], ['fileencoding', 'filetype', 'charvaluehex']]}, 'component': {'charvaluehex': '0x%B'}, 'component_function': {'gitbranch': 'FugitiveHead'}}
+let g:lightline = {
+            \ 'colorscheme': 'onehalfdark', 
+            \ 'active': {
+                \ 'left': [['mode'],
+                    \ ['gitbranch', 'readonly', 'absolutepath', 'modified']], 
+                \ 'right': [['lineinfo'], 
+                    \ ['percent'], ['fileencoding', 'filetype', 'charvaluehex']]
+                \ },
+            \'component': {
+                \ 'charvaluehex': '0x%B'
+                \ }, 
+            \ 'component_function': {
+                \ 'gitbranch': 'FugitiveHead', 'cocstatus': 'coc#status'
+                \ }
+            \ }
+
+" use autocmd to force lightline to update
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 """""""
 "Theme"
@@ -496,8 +507,8 @@ autocmd FileType css noremap <buffer> <C-f> :call CSSBeautify()<Cr>
 """"""""""""""""""""""""
 "Better Escape Settings"
 """"""""""""""""""""""""
-" press 'jj' instead of ESC to switch to NORMAL mode from INSERT mode
-let g:better_escape_shortcut = 'jj'
+" press 'jj' or 'ff' instead of ESC to switch from INSERT mode to NORMAL mode
+let g:better_escape_shortcut = ['jj', 'ff']
 
 """""""""""""""""
 "Bracey Settings"
@@ -515,6 +526,23 @@ let g:camelcasemotion_key = '<leader>'
 """""""""""""""""""
 "Coc.nvim Settings"
 """""""""""""""""""
+" textedit fails if hidden is not set 
+set hidden
+
+" some servers have issues with backup files
+set nobackup
+set nowritebackup
+
+" don't pass messages to |ins-completition-menu|
+set shortmess+=c
+
+" always show signcolumn
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
 " declare Coc.nvim extensions
 let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-markdownlint', 'coc-snippets', 'coc-word', 'coc-dictionary', 'coc-emoji', 'coc-syntax', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-pyright', 'coc-sh', 'coc-yaml']
 
@@ -523,6 +551,20 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " rename all symbols
 nmap <leader>rn <Plug>(coc-rename)
+
+" apply codeAction to the selected region
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" apply codeAction to the current buffer
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" apply AutoFix to problem on the current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" run the CodeLens action on the current line
+nmap <leader>cl  <Plug>(coc-codelens-action)
 
 " use 'tab' to trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TAB>" : coc#refresh()
@@ -538,6 +580,16 @@ endif
 " make 'enter' auto-select the first completion item
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" jump between linting errors
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" goto code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " use 'K' to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<Cr>
@@ -563,8 +615,6 @@ let g:floaterm_autoclose = 2
 let g:floaterm_height = 30
 let g:floaterm_width  = 120
 
-nnoremap <leader>v :FloatermNew vifm<Cr>
-nnoremap <leader>r :FloatermNew ranger<Cr>
 nnoremap <leader>t :FloatermToggle<Cr>
 
 """"""""""""""""""""""
@@ -596,11 +646,7 @@ nmap <silent> <F9> <Plug>StopMarkdownPreview
 imap <silent> <F9> <Plug>StopMarkdownPreview
 
 " path to the chrome or the command to open chrome (or other modern browsers)
-" if set, g:mkdp_browserfunc would be ignore
-let g:mkdp_path_to_chrome = ""
-
-" callback Vim function to open browser, the only parameter is the URL to open
-let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+let g:mkdp_browser='firefox'
 
 " set to 1, Vim will open the preview window on entering the Markdown buffer
 let g:mkdp_auto_start = 0
@@ -734,61 +780,14 @@ let g:WebDevIconsDefaultFolderSymbolColor = s:beige
 " sets the color for files that did not match any rule
 let g:WebDevIconsDefaultFileSymbolColor = s:blue
 
-""""""""""""""""
-"Netrw Settings"
-""""""""""""""""
-" uncomment to use Netrw instead of NERDTree
-nnoremap <leader>e :call ToggleNetrw()<Cr>
+"""""""""""""""""
+"Ranger Settings"
+"""""""""""""""""
+" disable ranger default key mapping of `<leader>f`
+let g:ranger_map_keys = 0
 
-" autocmd filetype Netrw call Netrw_mappings()
-" function! Netrw_mappings()
-"   noremap <buffer>% :call CreateInPreview() <Cr>
-" endfunction
-
-" function! CreateInPreview()
-"   let l:filename = input("enter filename: ")
-"   execute 'pedit ' . b:netrw_curdir.'/'.l:filename
-" endfunction
-
-" function! CreateInPreview()
-"   let l:filename = input("enter filename: ")
-"   execute 'silent !touch ' . b:netrw_curdir.'/'.l:filename
-"   redraw!
-" endfunction
-
-" let g:NetrwIsOpen = 0
-
-" function! ToggleNetrw()
-"   if g:NetrwIsOpen
-"     let i = bufnr("$")
-"     while (i >= 1)
-"       if (getbufvar(i, "&filetype") == "netrw")
-"         silent exe "bwipeout " . i
-"       endif
-"       let i -= 1
-"     endwhile
-"     let g:NetrwIsOpen = 0
-"   else
-"     let g:NetrwIsOpen = 1
-"     silent Vexplore
-"   endif
-" endfunction
-
-" augroup projectdrawer
-"   autocmd!
-"   autocmd vimenter * :Vexplore | wincmd p
-" augroup end
-
-" autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
-
-" let ghregex = '\(^\|\s\s\)\zs\.\S\+'
-" let g:netrw_list_hide = ghregex
-" let g:netrw_special_syntax = 3
-" let g:netrw_banner = 0
-" let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-" let g:netrw_altv = 1
-" let g:netrw_winsize = 15
+" set new mapping to '<leader>r'
+nnoremap <leader>r :Ranger<Cr>
 
 """"""""""""""""""""""""
 "Smooth Scroll Settings"
@@ -869,6 +868,11 @@ let g:syntastic_auto_jump = 3
 highlight SyntasticErrorSign ctermfg=red ctermbg=yellow
 highlight SyntasticErrorLine ctermbg=black
 
+"""""""""""""""""""""""
+"Vim-Markdown Settings"
+"""""""""""""""""""""""
+let g:vim_markdown_folding_disabled = 1
+
 """"""""""""""""""""""
 "Vim-Rainbow Settings"
 """"""""""""""""""""""
@@ -882,7 +886,8 @@ let g:SpellCheck_OnNospell = function('SpellCheck#AutoEnableSpell')
 """"""""""""""""""
 "VimWiki Settings"
 """"""""""""""""""
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_ext2syntax = {}
+"let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 """""""""""""""""""
 "WhichKey Settings"
@@ -898,9 +903,7 @@ let g:which_key_disable_default_offset = 1
 let g:dict= {
       \ '<leader>h'   : ['WhichKey'               , 'Show Keybindings']       ,
       \ '<leader>n'   : ['NERDTree'               , 'NERDTree Toggle']        ,
-      \ '<leader>e'   : ['NETRW'                  , 'NETRW Toggle']           ,
       \ '<leader>i'   : ['Startify'               , 'Startify Toggle']        ,
-      \ '<leader>v'   : ['Vifm'                   , 'Vifm']                   ,
       \ '<leader>r'   : ['Ranger'                 , 'Ranger']                 ,
       \ '<leader>t'   : ['Terminal'               , 'Terminal']               ,
       \ '<leader>T'   : ['NewTab'                 , 'New Tab']                ,
@@ -940,6 +943,16 @@ let g:dict= {
       \ 'K'           : ['Show Documentation'     , 'Show Documentation']     ,
       \ '<leader>rn'  : ['Rename Symbols'         , 'Rename Symbols']         ,
       \ '<leader>op'  : ['Source Vimrc'           , 'Source Vimrc']           ,
+      \ '[g'          : ['Previous Lint Error'    , 'Previous Lint Error']    ,
+      \ ']g'          : ['Next Lint Error'        , 'Next Lint Error']        ,
+      \ 'gd'          : ['Code Definition'        , 'Code Definition']        ,
+      \ 'gy'          : ['Code Type Definition'   , 'Code Type Definition']   ,
+      \ 'gi'          : ['Code Implementation'    , 'Code Implementation']    ,
+      \ 'gr'          : ['Code Reference'         , 'Code Reference']         ,
+      \ '<leader>a'   : ['Code Action Selection'  , 'Code Action Selection']  ,
+      \ '<leader>ac'  : ['Code Action Buffer'     , 'Code Action Buffer']     ,
+      \ '<leader>qf'  : ['Code Action Current'    , 'Code Action Current']    ,
+      \ '<leader>cl'  : ['Code Lens on Line'      , 'Code Lens on Line']      ,
       \ }
 
 " change WhichKey menu colors

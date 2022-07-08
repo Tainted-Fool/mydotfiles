@@ -1,4 +1,4 @@
-# Table of Contents
+# Table of Contents.
 
 - [Table of Contents](#table-of-contents)
   - [Intro](#intro)
@@ -9,7 +9,7 @@
 
 ## Intro
 
-All my dot files used for Linux - more specificly for vim and [oh-my-zsh](#installing-oh-my-zsh)
+All my dot files used for Linux - more specifically for vim and [oh-my-zsh](#installing-oh-my-zsh)
 
 Check the other branch `windows` for that operating system
 
@@ -23,11 +23,15 @@ Check the other branch `windows` for that operating system
 - xsel for shared clipboard
 - FZF for fuzzy search files/folders
 - Figlet for ascii art
+- Ranger for file management
+- ueberzug to draw image files
 - A Nerd Font (see optional)
+- wslu for WSL utilities (see optional)
+- wsl-open for opening files with WSL (see optional)
 
 ```Bash
 sudo apt update && sudo apt upgrade
-sudo apt install nodejs npm figlet fzf vifm xsel
+sudo apt install nodejs npm figlet fzf vifm xsel ranger ueberzug
 ```
 
 ## Starting From Zero
@@ -136,7 +140,11 @@ vim-mode-bindkey       vicmd -- vi-insert                          '^J'
 
 ## Optional
 
-Add a font to vim/terminal like [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/font-downloads)
+### Install NerdFont
+
+A font with glyphs(icons) [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/font-downloads)
+
+### Install Colorls
 
 Add color to the `ls` command
 
@@ -148,13 +156,17 @@ sudo apt install ruby-full
 sudo apt install exa
 ```
 
-Add `batcat`, an alternative to `cat` with syntax highlight
+### Install Batcat
+
+An alternative to `cat` with syntax highlight
 
 ```Bash
 sudo apt install bat
 ```
 
-Install Azure CLI
+### Install Azure CLI
+
+Usful for doing a lot of Azure stuff
 
 ```Bash
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py --silent
@@ -162,8 +174,56 @@ python3 get-pip.py
 pip install azure-cli
 ```
 
-Install Anaconda
+### Install Anaconda
+
+A python environmental variable manager
 
 ```Bash
 curl -sL https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh | sudo bash
+```
+
+### Install WSL Utilities
+
+A collection of utilities for WSL [repo](https://github.com/wslutilities/wslu)
+
+> Run these commands on Debian distros
+
+```bash
+sudo apt install gnupg2 apt-transport-https
+wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
+
+# Debian 10
+echo "deb https://pkg.wslutiliti.es/debian buster main" | sudo tee -a /etc/apt/sources.list
+# Debian 11
+echo "deb https://pkg.wslutiliti.es/debian bullseye main" | sudo tee -a /etc/apt/sources.list
+
+sudo apt update
+sudo apt install wslu
+```
+> Run these commands on Kali distros
+
+```bash
+sudo apt install gnupg2 apt-transport-https
+wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
+echo "deb https://pkg.wslutiliti.es/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt install wslu
+```
+
+> Run these commands on Ubuntu distros
+
+```bash
+sudo apt update
+sudo apt install ubuntu-wsl
+```
+
+### Install WSL-Open
+
+Allows you to open WSL files using Windows GUI applications [repo here](https://github.com/4U6U57/wsl-open)
+
+```bash
+curl https://raw.githubusercontent.com/4U6U57/wsl-open/master/wsl-open.sh -o wsl-open
+# OR
+sudo apt install -yqq npm
+sudo npm install -g wsl-open
 ```
