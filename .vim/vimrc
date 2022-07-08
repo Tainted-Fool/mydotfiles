@@ -111,6 +111,38 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+" toggle colorcolumn at cursor position vim9 only
+" set vartabstop accordingly
+def ToggleCC(all: bool = false)
+    if all
+        b:cc = &cc ?? get(b:, "cc", "80")
+        &cc = empty(&cc) ? b:cc : ""
+    else
+        var col = virtcol('.')
+        var cc = split(&cc, ",")->map((_, v) => str2nr(v))
+        if index(cc, col) == -1
+            exe "set cc=" .. cc->add(col)->sort('f')->map((_, v) => printf("%s", v))->join(',')
+        else
+            exe "set cc-=" .. col
+        endif
+    endif
+    var cc = split(&cc, ",")->map((_, v) => str2nr(v))
+    if len(cc) > 1 || len(cc) == 1 && cc[0] < 60
+        setl vsts&
+        var shift = 1
+        for v in cc
+            if v == 1 | continue | endif
+            exe "set vsts+=" .. (v - shift)
+            shift = v
+        endfor
+        exe "setl vsts+=" .. &sw
+    else
+        setl vsts&
+    endif
+enddef
+nnoremap <silent> yoc <ScriptCmd>ToggleCC()<CR>
+nnoremap <silent> yoC <ScriptCmd>ToggleCC(true)<CR>
+
 """"""""""
 "Settings"
 """"""""""
@@ -217,9 +249,6 @@ set updatetime=300
 " set spell checking language
 set spelllang=en_us
 
-" enable spell check
-"set spell
-
 " set ripgrep as search
 " set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
@@ -323,7 +352,7 @@ map <leader>bf :Buffers<Cr>
 map <leader>s :Files<Cr>
 map <leader>W :Windows<Cr>
 map <leader>H :History<Cr>
-map <leader>Hc :History:<Cr>
+map <leader>cm :History:<Cr>
 map <leader>M :Maps<Cr>
 
 nnoremap <leader>mk :mkview<Cr>
@@ -858,50 +887,50 @@ let g:which_key_max_size = 1
 let g:which_key_disable_default_offset = 1
 
 let g:dict= {
-      \ 'h'          : ['WhichKey'                     , 'Show Keybindings']                ,
-      \ 'n'          : ['NERDTree'                     , 'NERDTree Toggle']                 ,
-      \ 'e'          : ['NETRW'                        , 'NETRW Toggle']                    ,
-      \ 'i'          : ['Startify'                     , 'Startify Toggle']                 ,
-      \ 'v'          : ['Vifm'                         , 'Vifm']                            ,
-      \ 'r'          : ['Ranger'                       , 'Ranger']                          ,
-      \ 't'          : ['Terminal'                     , 'Terminal']                        ,
-      \ 'T'          : ['NewTab'                       , 'New Tab']                         ,
-      \ 'd'          : ['Clean Duplicate'              , 'Delete Duplicate Lines']          ,
-      \ 'mr'         : ['MRU'                          , 'View File History']               ,
-      \ '1-9'        : ['Go To Tab By Number'          , 'Go to Tab by Number']             ,
-      \ '0'          : ['Close Last Tab'               , 'Close Last Tab']                  ,
-      \ 'x'          : ['Close Current Tab'            , 'Close Current Tab']               ,
-      \ 'tm'         : ['Move Tab'                     , 'Move Tab']                        ,
-      \ 'F2'         : ['Bracey Start'                 , 'Web Server Start']                ,
-      \ 'F3'         : ['Bracey Reload'                , 'Web Server Reload']               ,
-      \ 'F4'         : ['Bracey Stop'                  , 'Web Server Stop']                 ,
-      \ 'F5'         : ['Mundo'                        , 'View Undo History']               ,
-      \ 'F6'         : ['Spellcheck'                   , 'Spellcheck Toggle']                      ,
-      \ 'F8'         : ['Markdown Start'               , 'MD Server Start']                 ,
-      \ 'F9'         : ['Markdown Stop'                , 'MD Server Stop']                  ,
-      \ 'C-arrows'   : ['Move Between Buffers'         , 'Move Between Buffers']            ,
-      \ 'S-arrows'   : ['Resize Buffers'               , 'Resize Buffers']                  ,
-      \ 'Alt-arrows' : ['Tab Right or Left'            , 'Tab Right or Left']               ,
-      \ 'c'          : ['Colors'                       , 'Colors']                          ,
-      \ 'bf'         : ['Buffers'                      , 'Buffers']                         ,
-      \ 's'          : ['Files'                        , 'Files']                           ,
-      \ 'W'          : ['Windows'                      , 'Windows']                         ,
-      \ 'H'          : ['History'                      , 'History']                         ,
-      \ 'Hc'         : ['CMD History'                  , 'CMD History']                     ,
-      \ 'M'          : ['Maps'                         , 'Maps']                            ,
-      \ 'END'        : ['Trigger Snippets'             , 'Trigger Snippets']                ,
-      \ 'C-j'        : ['Move Within Snippet'          , 'Move Within Snippet']             ,
-      \ 'C-k'        : ['Move Within Snippet'          , 'Move Within Snippet']             ,
-      \ 'C-PgDn'     : ['List Snippets'                , 'List Snipets']                    ,
-      \ 'C-u'        : ['Scroll Up'                    , 'Scroll Up']                       ,
-      \ 'C-d'        : ['Scroll Down'                  , 'Scroll Down']                     ,
-      \ 'C-b'        : ['Scroll Page Up'               , 'Scroll Page Up']                  ,
-      \ 'C-f'        : ['Scroll Page Down'             , 'Scroll Page Down']                ,
-      \ 'C-a'        : ['Increment Alphanumeric'       , 'Increment Alphanumeric']          ,
-      \ 'C-x'        : ['Decrement Alphanumeric'       , 'Decrement Alphanumeric']          ,
-      \ 'K'          : ['Show Documentation'           , 'Show Documentation']              ,
-      \ 'rn'         : ['Rename Symbols'               , 'Rename Symbols']                  ,
-      \ 'op'         : ['Source Vimrc'                 , 'Source Vimrc']                    ,
+      \ '<leader>h'   : ['WhichKey'               , 'Show Keybindings']       ,
+      \ '<leader>n'   : ['NERDTree'               , 'NERDTree Toggle']        ,
+      \ '<leader>e'   : ['NETRW'                  , 'NETRW Toggle']           ,
+      \ '<leader>i'   : ['Startify'               , 'Startify Toggle']        ,
+      \ '<leader>v'   : ['Vifm'                   , 'Vifm']                   ,
+      \ '<leader>r'   : ['Ranger'                 , 'Ranger']                 ,
+      \ '<leader>t'   : ['Terminal'               , 'Terminal']               ,
+      \ '<leader>T'   : ['NewTab'                 , 'New Tab']                ,
+      \ '<leader>d'   : ['Clean Duplicate'        , 'Delete Duplicate Lines'] ,
+      \ '<leader>mr'  : ['MRU'                    , 'View File History']      ,
+      \ '<leader>1-9' : ['Go To Tab By Number'    , 'Go to Tab by Number']    ,
+      \ '<leader>0'   : ['Close Last Tab'         , 'Close Last Tab']         ,
+      \ '<leader>x'   : ['Close Current Tab'      , 'Close Current Tab']      ,
+      \ '<leader>tm'  : ['Move Tab'               , 'Move Tab']               ,
+      \ 'F2'          : ['Bracey Start'           , 'Web Server Start']       ,
+      \ 'F3'          : ['Bracey Reload'          , 'Web Server Reload']      ,
+      \ 'F4'          : ['Bracey Stop'            , 'Web Server Stop']        ,
+      \ 'F5'          : ['Mundo'                  , 'View Undo History']      ,
+      \ 'F6'          : ['Spellcheck'             , 'Spellcheck Toggle']      ,
+      \ 'F8'          : ['Markdown Start'         , 'MD Server Start']        ,
+      \ 'F9'          : ['Markdown Stop'          , 'MD Server Stop']         ,
+      \ 'C-arrows'    : ['Move Between Buffers'   , 'Move Between Buffers']   ,
+      \ 'S-arrows'    : ['Resize Buffers'         , 'Resize Buffers']         ,
+      \ 'Alt-arrows'  : ['Tab Right or Left'      , 'Tab Right or Left']      ,
+      \ '<leader>c'   : ['Colors'                 , 'Colors']                 ,
+      \ '<leader>bf'  : ['Buffers'                , 'Buffers']                ,
+      \ '<leader>s'   : ['Files'                  , 'Files']                  ,
+      \ '<leader>W'   : ['Windows'                , 'Windows']                ,
+      \ '<leader>H'   : ['History'                , 'History']                ,
+      \ '<leader>cm'  : ['CMD History'            , 'CMD History']            ,
+      \ '<leader>M'   : ['Maps'                   , 'Maps']                   ,
+      \ 'END'         : ['Trigger Snippets'       , 'Trigger Snippets']       ,
+      \ 'C-j'         : ['Move Within Snippet'    , 'Move Within Snippet']    ,
+      \ 'C-k'         : ['Move Within Snippet'    , 'Move Within Snippet']    ,
+      \ 'C-PgDn'      : ['List Snippets'          , 'List Snipets']           ,
+      \ 'C-u'         : ['Scroll Up'              , 'Scroll Up']              ,
+      \ 'C-d'         : ['Scroll Down'            , 'Scroll Down']            ,
+      \ 'C-b'         : ['Scroll Page Up'         , 'Scroll Page Up']         ,
+      \ 'C-f'         : ['Scroll Page Down'       , 'Scroll Page Down']       ,
+      \ 'C-a'         : ['Increment Alphanumeric' , 'Increment Alphanumeric'] ,
+      \ 'C-x'         : ['Decrement Alphanumeric' , 'Decrement Alphanumeric'] ,
+      \ 'K'           : ['Show Documentation'     , 'Show Documentation']     ,
+      \ '<leader>rn'  : ['Rename Symbols'         , 'Rename Symbols']         ,
+      \ '<leader>op'  : ['Source Vimrc'           , 'Source Vimrc']           ,
       \ }
 
 " change WhichKey menu colors
