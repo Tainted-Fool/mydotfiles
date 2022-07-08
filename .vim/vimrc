@@ -32,6 +32,7 @@ Plug 'inkarkat/vim-SpellCheck' " adds a better spell checker
 Plug 'inkarkat/vim-ingo-library' " dependency for vim-spellcheck
 Plug 'inkarkat/vim-visualrepeat' " like vim-repeat but for VISUAL mode
 Plug 'itchyny/lightline.vim' " a lightweight status like
+Plug 'jdhao/better-escape.vim' " no lag when pressing 'esc' or keybindings to 'esc'
 Plug 'junegunn/fzf.vim' " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " needed for above
 Plug 'junegunn/vim-peekaboo' " see contents of registries with '@' or double quotes
@@ -56,6 +57,7 @@ Plug 'tpope/vim-commentary' " comments stuff out - use 'gcc' or 'gc' in visual m
 Plug 'tpope/vim-fugitive' " git commands - call with :Git
 Plug 'tpope/vim-repeat' " repeat last `.` command as a whole
 Plug 'tpope/vim-surround' " surround text - use cs, ds, ys
+Plug 'tpope/vim-unimpaired' " useful mapings like ']<space>' to insert lines and many more
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'} " live HTML, css, and JavaScript preview
 Plug 'vim-syntastic/syntastic' " syntax checker and displays resulting errors
 Plug 'vimwiki/vimwiki' " organize notes and ideas
@@ -96,6 +98,9 @@ autocmd VimLeave * silent exec "! echo -ne '\e[3 q'"
 let &t_SI = "\e[3 q" 
 " set cursor for everything else
 let &t_EI = "\e[1 q" 
+
+" set the timeout len for cursor to change faster
+"set timeoutlen=300
 
 """""""""""""""""""""""
 "Commands and Managers"
@@ -249,6 +254,9 @@ set updatetime=300
 " set spell checking language
 set spelllang=en_us
 
+" remove printed buffer area when vim starts up
+"set t_u7=
+
 " set ripgrep as search
 " set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
@@ -277,15 +285,14 @@ endfunction
 
 " no statusline in NERDTree window
 augroup filetype_nerdtree
-  au!
-  au FileType nerdtree call s:disable_lightline_on_nerdtree()
-  au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
+    au!
+    au FileType nerdtree call s:disable_lightline_on_nerdtree()
+    au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
 augroup END
 
 fu s:disable_lightline_on_nerdtree() abort
-  let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree')
-  + 1
-  call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
+    let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree') + 1
+    call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
 endfu
 
 " set window to always have a status line
@@ -357,10 +364,6 @@ map <leader>M :Maps<Cr>
 
 nnoremap <leader>mk :mkview<Cr>
 nnoremap <leader>d :g/^\(.*\)$\n\1/d<Cr>
-
-" create a new line without going into insert mode
-nnoremap <leader>o o<esc>
-nnoremap <leader>O O<esc>
 
 " press SPACE to disable highlight search
 noremap <silent> <Space> :nohlsearch<Bar>:echo<Cr>
@@ -489,6 +492,12 @@ autocmd FileType html noremap <buffer> <C-f> :call HtmlBeautify()<Cr>
 
 " for css or scss
 autocmd FileType css noremap <buffer> <C-f> :call CSSBeautify()<Cr>
+
+""""""""""""""""""""""""
+"Better Escape Settings"
+""""""""""""""""""""""""
+" press 'jj' instead of ESC to switch to NORMAL mode from INSERT mode
+let g:better_escape_shortcut = 'jj'
 
 """""""""""""""""
 "Bracey Settings"
@@ -942,4 +951,3 @@ highlight WhichKeyFloating ctermfg=grey
 """""""""""""""""""""
 "PLUGIN SETTINGS END"
 """""""""""""""""""""
-
