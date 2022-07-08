@@ -1,13 +1,6 @@
-" use fold commands to open/close sections
-" zo = open fold under cursor
-" zc = close folder under cursor
-" zR = open all folds
-" zM = close all folds
-" PLUGINS ---------------------------------------------------------------- {{{
-
-" must have vim-plug installed to call plugins
-" https://github.com/junegunn/vim-plug
-
+"""""""""
+"Plugins"
+"""""""""
 " Automatic installation of vim-plug and missing plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -23,152 +16,68 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 " Linux default = ~/.vim/plugged; Windows default = $HOME/vimfiles/plugged
 call plug#begin('~/.vim/plugged')
 
-" Plug 'ludovicchabant/vim-gutentags' " generate tags
-" Plug 'mhinz/vim-signify' " adds VCS status
-" Plug 'rafi/awesome-vim-colorschemes' " a collection of color schemes - has onehalf and more
-" Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
+Plug 'ackyshake/VimCompletesMe' " tab completion for vim
+Plug 'ap/vim-css-color' " displays css colors in vim
+Plug 'christoomey/vim-system-copy' " copy to OS clipboard - use 'cp' to copy and 'cv' to paste
 Plug 'chun-yang/auto-pairs' " inserts/deletes brackets, parens, and quotes in pairs
 Plug 'ConradIrwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
 Plug 'bkad/CamelCaseMotion' " move between camel case words - use <Leader><action>
 Plug 'dkarter/bullets.vim' " automate bullet lists and numbering
 Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
 Plug 'frazrepo/vim-rainbow' " adds color to brackets and parenthesis
+Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
+Plug 'honza/vim-snippets' " snippets engine
+Plug 'iamcco/markdown-preview.nvim' " markdown preview
 Plug 'iggredible/totitle-vim' " title case text - use 'gt'
-"Plug 'inkarkat/vim-SpellCheck' " adds a better spell checker
+Plug 'inkarkat/vim-SpellCheck' " adds a better spell checker
 Plug 'inkarkat/vim-ingo-library' " dependency for vim-spellcheck
 Plug 'inkarkat/vim-visualrepeat' " like vim-repeat but for VISUAL mode
+Plug 'itchyny/lightline.vim' " a lightweight status like
 Plug 'junegunn/fzf.vim' " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " needed for above
 Plug 'junegunn/vim-peekaboo' " see contents of registries with '@' or double quotes
 Plug 'justinmk/vim-sneak' " jump to any located specified by two characters - use 's<char><char>
-" Plug 'michaeljsmith/vim-indent-object' " adds auto indent for objects
+Plug 'liuchengxu/vim-which-key' " adds a popup that displays available keybindings
+Plug 'maksimr/vim-jsbeautify' " beautify JavaScript code
+Plug 'mhinz/vim-startify' " a start screen for Vim
+Plug 'michaeljsmith/vim-indent-object' " adds auto indent for objects
 Plug 'mg979/vim-visual-multi' " adds multiple cursors
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " auto completion for code
-Plug 'preservim/nerdtree' " file explorer for vim - use ':NERDTree' >> set alias for F6
+Plug 'preservim/nerdtree' " file explorer for vim - use ':NERDTree'
 Plug 'preservim/vim-markdown' " syntax highlighting, matching rule and mapping
-Plug 'ryanoasis/vim-devicons' " adds icons to vim
+Plug 'qpkorr/vim-renamer' " create a buffer with a list of directories to rename with :Renamer
+Plug 'rafi/awesome-vim-colorschemes' " a collection of color schemes - has onehalf and more
+Plug 'ryanoasis/vim-devicons' " adds icons to vim and NERDTree
 Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
-Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree >> set alias for F5
-Plug 'sonph/onehalf', { 'rtp': 'vim' } " color scheme for vim layout
+Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree
+Plug 'SirVer/ultisnips' " snippets documentation for programming languages
 Plug 'terryma/vim-smooth-scroll' " smooth scrolling
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " adds color to file extensions
 Plug 'tpope/vim-commentary' " comments stuff out - use 'gcc' or 'gc' in visual mode
 Plug 'tpope/vim-fugitive' " git commands - call with :Git
 Plug 'tpope/vim-repeat' " repeat last `.` command as a whole
 Plug 'tpope/vim-surround' " surround text - use cs, ds, ys
-Plug 'vim-airline/vim-airline' " better status bar than above
-Plug 'vim-airline/vim-airline-themes' " themes for the status bar - use ':AirlineTheme <theme>'
+Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'} " live HTML, css, and JavaScript preview
+Plug 'vim-syntastic/syntastic' " syntax checker and displays resulting errors
 Plug 'vimwiki/vimwiki' " organize notes and ideas
+Plug 'voldikss/vim-floaterm' " adds a popup for the terminal
+Plug 'yegappan/mru' " to open a file from the recently used list use 'MRU:'
+Plug 'Yggdroot/indentline' " adds thin vertical lines at each indentation level for code
+
+" old plugins no longer in use
+"Plug 'ludovicchabant/vim-gutentags' " generate tags
+"Plug 'mhinz/vim-signify' " adds VCS status
+"Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
+"Plug 'psliwka/vim-dirtytalk, { 'do': 'DirtytalkUpdate' } " spellcheck dictionary for programmers
+"Plug 'sonph/onehalf', { 'rtp': 'vim' } " color scheme for vim layout
+"Plug 'vim-airline/vim-airline' " another status bar
+"Plug 'vim-airline/vim-airline-themes' " themes for the status bar - use ':AirlineTheme <theme>'
 
 call plug#end()
 
-" }}}
-
-" SETTINGS ---------------------------------------------------------------- {{{
-
-" disable beep sound and use a visual queue instead
-set visualbell
-set t_vb=
-
-" set UTF encoding
-set encoding=utf-8
-
-" enable spell checking
-" set spell spelllang=en_us
-
-" do not use vi - legacy mode
-set nocompatible
-
-" syntax highlight
-syntax on
-
-" highlight all search results
-set hlsearch
-
-" show incremental search results as you type
-set incsearch
-
-" display line number
-set number
-
-" display relative numbers i.e. current line starts at 0
-set relativenumber
-
-" set buffer to not disappear 
-set hidden
-
-" do case insensitive search
-set ignorecase smartcase
-
-" set search to cycle to top once it hits the bottom
-set wrapscan
-
-" set ripgrep as search
-set grepprg=rg\ --vimgrep\ --smart-case\ --follow
-
-" allows you to copy/paste text from external program i.e. clipboard
-set clipboard=unnamed
-
-" increment/decrement alphanumeric values with CTRL + A and CTRL + X
-set nrformats+=alpha
-
-" save views of buffers
-autocmd BufWinLeave *.txt mkview
-autocmd BufWinEnter *.txt loadview
-
-" can split vimrc into multiple files to easier manage
-" source <path>/settings/plugins.vim
-" source <path>/settings/configs.vim
-" source <path>/settings/functions.vim
-" source <path>/settings/mappings.vim
-
-" toggle spell check on or off
-"nnoremap <leader>s :set spell!
-
-" allow words to wrap
-set wrap
-
-" enable file type detection
-filetype plugin on
-
-" load indent file
-filetype indent on
-
-" show the command you type last
-set showcmd
-
-" show the mode you are on the last line
-set showmode
-
-" set the amount of commands to save in history default is 20
-set history=1000
-
-" enable auto-completion menu after pressing tab
-set wildmenu
-
-" make the menu behave similar to bash
-set wildmode=list:longest
-
-" no backup files
-set nobackup
-set nowritebackup
-
-" give more space for displaying messages
-set cmdheight=2
-
-" shorter updatetime for less delay
-set updatetime=300
-
-" don't pass messages to |ins-completion-menu
-set shortmess+=c
-
-" always show the signcolumn or else it would shift the text
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
+""""""""
+"Cursor"
+""""""""
 " set cursor type
 " 0 = blinking block
 " 1 = blinking block (default)
@@ -183,264 +92,378 @@ autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
 " set cursor on vim exit
 autocmd VimLeave * silent exec "! echo -ne '\e[3 q'" 
 
-" cursor for everything else
-let &t_EI = "\e[1 q" 
-" cursor for insert mode
+" set cursor for insert mode
 let &t_SI = "\e[3 q" 
+" set cursor for everything else
+let &t_EI = "\e[1 q" 
 
-" set default mapping to CamelCaseMotion plugin
-let g:camelcasemotion_key = '<leader>'
+""""""""""
+"Settings"
+""""""""""
+" set syntax highlighting
+syntax on
 
-" declare coc.nvim extensions
-let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-markdownlint', 'coc-pyright', 'coc-sh', 'coc-snippets', 'coc-spell-checker', 'coc-word']
+" set event to trigger based on filetype
+filetype plugin indent on
 
-" set default vimwiki syntax
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" set encoding and font
+set encoding=utf-8
 
-" highlight the symvol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" allows you to copy/paste text from system clipboard
+set clipboard=unnamedplus
+" use this for OSX and Windows
+" set clipboard=unnamed
 
-" add `:Format` command to format current buffer
-command! -nargs=0 Format :call CocActionAsync('format')
+" more powerful backspacing
+set backspace=indent,eol,start
 
-" add `:Fold` command to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" allow buffer content to be modified
+set modifiable
 
-" add `:OR` command for organize imports of the current buffer
-command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+" auto re-read files if unmodified inside vim
+set autoread
 
-" add (Neo)Vim's native statusline support
-" NOTE: Please see `:h coc-status` for integration with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set number of screen lines to use for the command line
+set cmdheight=2
 
-" }}}
+" set all folds to close
+set foldenable
 
-" MAPPINGS  ---------------------------------------------------------------- {{{
+" set the kind of folding to be used for the current window
+set foldmethod=manual
 
-" remap syntax is as follows:
-" map_mode <whatYouType> <whatYouExecute>
+" set the list of directories which will be searched for files
+set path+=**
 
-" map modes:
-" nnoremap = allows you to map keys in normal mode
-" inoremap = allows you to map keys in insert mode
-" vnoremap = allows you to map keys in visual mode
+" allow no swap file
+set noswapfile
 
-" example: remap 'jk' as the escape key
-"inoremap jk <ESC>
+" highlight all search results
+set hlsearch
 
-" change leader key (default is backslash '\')
-"let mapleader = ";"
+" ignore case in search patterns '/'
+set ignorecase
 
+" override the ignorecase option if the search pattern contains upper case characters
+set smartcase
+
+" show incremental search results as you type
+set incsearch
+
+" set screen to not redrawn while execution macros, registers, or commands
+set lazyredraw
+
+" disable beep sound and visual queue
+set noerrorbells
+set novisualbell
+set noeb vb t_vb=
+
+" display line number
+set number
+
+" display relative numbers
+set relativenumber
+
+" convert tab to spaces
+set expandtab
+
+" set auto indent - copy indent from current line when starting a new line
+set autoindent
+
+" set the number of spaces to use for each step of autoindent
+set shiftwidth=4
+
+" set the number of spaces that a tab in the file counts for
+set tabstop=4
+
+" set search to cycle to top once it hits the bottom
+set wrapscan
+
+" allow words to wrap
+set wrap
+
+" increment/decrement alphanumeric values with CTRL + A and CTRL + X
+set nrformats+=alpha
+
+" set the amount of commands to save in history default is 20
+set history=1000
+
+" enable completion mode for command mode
+set wildmode=longest,list,full
+
+" allow mouse to be used
+set mouse=a
+
+" set GUI cursor
+set guicursor+=a:blinkon0
+
+" shorter updatetime for less delay
+set updatetime=300
+
+" set spell checking language
+set spelllang=en_us
+
+" enable spell check
+"set spell
+
+" set ripgrep as search
+" set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
+""""""""""""
+"Status Bar"
+""""""""""""
+" minimal info on narrow splits
+let g:lightline = {'component_function': {'lineinfo': 'LightlineLineinfo'}}
+
+function! LightlineLineinfo() abort
+  if winwidth(0) < 86
+    return ''
+  endif
+  let l:current_line = printf('%-3s', line('.'))
+  let l:max_line = printf('%-3s', line('$'))
+  let l:lineinfo = ' ' . l:current_line . '/' . l:max_line
+  return l:lineinfo
+endfunction
+
+" remove readonly in help window
+let g:lightline = {'component_function': {'readonly': 'LightlineReadonly'}}
+
+function! LightlineReadonly()
+  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
+
+" no statusline in NERDTree window
+augroup filetype_nerdtree
+  au!
+  au FileType nerdtree call s:disable_lightline_on_nerdtree()
+  au WinEnter,BufWinEnter,TabEnter * call s:disable_lightline_on_nerdtree()
+augroup END
+
+fu s:disable_lightline_on_nerdtree() abort
+  let nerdtree_winnr = index(map(range(1, winnr('$')), {_,v -> getbufvar(winbufnr(v), '&ft')}), 'nerdtree')
+  + 1
+  call timer_start(0, {-> nerdtree_winnr && setwinvar(nerdtree_winnr, '&stl', '%#Normal#')})
+endfu
+
+" set window to always have a status line
+set laststatus=2
+
+" do not put a message on the last line
+set noshowmode
+
+" set status bar themes and views
+let g:lightline = {'colorscheme': 'onehalfdark', 'active': {'left': [['mode'], ['readonly', 'absolutepath', 'modified']], 'right': [['lineinfo'], ['percent'], ['filetype']]}, 'component': {'charvaluehex': '0x%B'}}
+
+"""""""
+"Theme"
+"""""""
+" inspect $TERM instead of $t_Co
+if &term =~ '256color'
+  " enable true 24-bit colors instead of 8-bit colors
+  if has('termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+  endif
+  colorscheme onehalfdark
+endif
+
+" set background color
+set background=dark
+
+""""""""""""""""""""
+"Key Mappings Begin"
+""""""""""""""""""""
+" set leader key to space
+"let mapleader = " "
+
+"""""""""""""""""""
+"Buffer Navigation"
+"""""""""""""""""""
+" splitting on a window will put the new window below/right of current one
+set splitbelow splitright
+
+" CTRL + vimkeys allows us to navigate between buffers
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" CTRL + arrowkeys allows us to navigate between buffers
+map <C-Left> <C-w>h
+map <C-Down> <C-w>j
+map <C-Up> <C-w>k
+map <C-Right> <C-w>l
+
+" Shift + arrowkeys allows us to resize the current buffer
+map <S-Left> :vertical resize +5<Cr>
+map <S-Right> :vertical resize -5<Cr>
+map <S-Up> :resize +5<Cr>
+map <S-Down> :resize -5<Cr>
+
+"""""""""""
+"Remapping"
+"""""""""""
+map <leader>c :Colors<Cr>
+map <leader>bf :Buffers<Cr>
+map <leader>s :Files<Cr>
+map <leader>W :Windows<Cr>
+map <leader>H :History<Cr>
+map <leader>Hc :History:<Cr>
+map <leader>M :Maps<Cr>
+
+nnoremap <leader>mk :mkview<Cr>
+nnoremap <leader>d :g/^\(.*\)$\n\1/d<Cr>
+
+" create a new line without going into insert mode
+nnoremap <leader>o o<esc>
+nnoremap <leader>O O<esc>
+
+" press SPACE to disable highlight search
+noremap <silent> <Space> :nohlsearch<Bar>:echo<Cr>
+
+" delete duplicate lines
+nnoremap <leader>d :g/^\(.*\)$\n\1/d<Cr>
+
+" source vimrc file
+nnoremap <leader>op :source %<Cr>
+
+""""""""""""""""
+"Tab Navigation"
+""""""""""""""""
+" go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+
+" go to last tab
+noremap <leader>0 :tablast<Cr>
+
+" close current tab
+nnoremap <leader>x :tabclose<Cr>
+
+" Alt + vimkeys allows us to navigate between tabs
+nnoremap <M-h> :tabprevious<Cr>
+nnoremap <M-l> :tabnext<Cr>
+
+" Alt + arrowkeys allows us to navigate between tabs
+nnoremap <M-Left> :tabprevious<Cr>
+nnoremap <M-Right> :tabnext<Cr>
+
+" move tab
+map <leader>tm :tabmove<Cr>
+
+" make new tab
+nnoremap <leader>T :tabnew file<Cr>
+
+"""""""""""""""
+"Bracey Plugin"
+"""""""""""""""
+" Bracey won't do anything until it is explicitly called
+map <F2> :Bracey<Cr>
+map <F3> :BraceyReload<Cr>
+map <F4> :BraceyStop<Cr>
+
+"""""""""""""""""
+"Floaterm Plugin"
+"""""""""""""""""
+nnoremap <leader>v :FloatermNew vifm<Cr>
+nnoremap <leader>r :FloatermNew ranger<Cr>
+nnoremap <leader>t :FloatermToggle<Cr>
+
+"""""""""""""""""""""""""
+"Markdown Preview Plugin"
+"""""""""""""""""""""""""
+" toggle preview in normal mode
+nmap <silent> <F8> <Plug>MarkdownPreview
+
+" toggle preview in insert mode
+imap <silent> <F8> <Plug>MarkdownPreview
+
+" stop preview in normal mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview
+
+" stop preview in insert mode
+imap <silent> <F9> <Plug>StopMarkdownPreview
+
+""""""""""""
+"MRU Plugin"
+""""""""""""
+nnoremap <leader>mr :MRU<Cr>
+
+""""""""""""""
+"Mundo Plugin"
+""""""""""""""
+map <F5> :MundoToggle<CR>
+
+"""""""""""""""""
+"NERDTree Plugin"
+"""""""""""""""""
+nnoremap <leader>n :NERDTreeToggle<Cr>
+
+""""""""""""""
+"Netrw Plugin"
+""""""""""""""
+nnoremap <leader>e :call ToggleNetrw()<Cr>
+
+""""""""""""""""""""""
+"Smooth Scroll Plugin"
+""""""""""""""""""""""
+" smooth_scroll(distance, duration, speed)
+noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<Cr>
+noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<Cr>
+noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 0, 4)<Cr>
+noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 0, 4)<Cr>
+
+"""""""""""""""""
+"Startify Plugin"
+"""""""""""""""""
+nnoremap <leader>i :Startify<Cr>
+
+"""""""""""""""""
+"WhichKey Plugin"
+"""""""""""""""""
+map <leader>h :WhichKey! g:dict<Cr>
+
+""""""""""""""""
+"Spell Checking"
+""""""""""""""""
+map <F6> :call ToggleSpell()<Cr>
+hi SpellBad ctermfg=red guifg=red
+
+function! ToggleSpell()
+    if &spell
+      set spell!
+    else
+      :SpellCheck
+    endif
+endfunction
+
+""""""""""""""
+"Old Mappings"
+""""""""""""""
 " map the F5 key to run a Python script inside Vim.
 " I map F5 to a chain of commands here.
 " :w saves the file.
 " <CR> (carriage return) is like pressing the enter key.
 " !clear runs the external clear screen command.
 " !python3 % executes the current file with Python.
-"nnoremap <f5> :w <CR>:!clear <CR>:!python3 % <CR>
-
-" yank from cursor to the end of line.
-"nnoremap Y y$
-
-" create a new line and exit
-" nnoremap o o<esc>
-" nnoremap O O<esc>
-
-" press enter twice to turn off highlights after search
-"nnoremap <CR> :nohlsearch<CR><CR>
-
-" press F5 for MundoToggle which is the vim undo tree
-nnoremap <F5> :MundoToggle<CR>
-
-" press F6 for NERDTreeToggle which is vim file explorer
-nnoremap <F6> :NERDTreeToggle<CR>
+" nnoremap <f5> :w <CR>:!clear <CR>:!python3 % <CR>
 
 " press F8 to highlight occurrence of the current word(s)
-nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+" nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
-" press CTRL + J instead of ESC to switch to NORMAL mode from INSERT mode
-inoremap <C-j> <esc>
+" yank from cursor to the end of line.
+" nnoremap Y y$
 
-" press CTRL + J instead of 'i' to switch to INSERT mode from NORMAL mode
-" nnoremap <C-j> i
-
-" mapping for vim-smooth-scroll plugin
-" smooth_scroll(distance, duration, speed)
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-
-" press SPACE to disable highlight search
-noremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-
-" map tab for auto-completion for coc.nvim
-" MAKE SURE YOU DO NOT HAVE ANY MAPS FOR TAB
-" run 'verbose imap <tab>' to check beforehand
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" use ENTER to auto-select the first completion item
-" MAKE SURE YOU DO NOT HAVE ANY MAPS FOR <CR>
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" use CTRL + space to trigger completion
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" use `[g` and `]g` to navigate diagnostics
-" use `:CocDiagnostics` to get all diagnostics of current buffer in location
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" code navigation with GoTo
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
-
-" formatting selected code
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " setup formatexpr specified filetypes
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" applying codeAction to the selected region
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" remap keys for applying codeAction to the current buffer
-nmap <leader>ac  <Plug>(coc-codeaction)
-
-" apply AutoFix to problem on the current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" run the Code Lens action on the current line
-nmap <leader>cl  <Plug>(coc-codelens-action)
-
-" map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" remap CTRL + f and CTRL + b for scroll float windows/popups
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" use CTRL + S for selections ranges
-" requires 'textDocument/selectionRange' support of language server
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" mappings for CoCList
-" show all diagnostics
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" manage extensions
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" show commands
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" find symbol of current document
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" search workspace symbols
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" do default action for next item
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" do default action for previous item
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" resume latest coc list
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-" remap for do codeAction of selection region - coc-spell-checker
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
-
-" }}}
-
-" VIMSCRIPT -------------------------------------------------------------- {{{
-
-" this will enable code folding
-" use the marker method of folding
-" augroup filetype_vim
-"     autocmd!
-"     autocmd FileType vim setlocal foldmethod=marker
-" augroup END
-
-" onehalfdark theme
-set t_Co=256
-set cursorline
-colorscheme onehalfdark
-let g:airline_theme='onehalfdark'
-" lightline
-" let g:lightline = { 'colorscheme': 'onehalfdark' }
-
-" set true colors for theme
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
-" enable persistent undo so that undo history persist across vim sessions
-" Linux default = ~/.vim/undo; Windows default = $HOME/vimfiles/undo
-if version >= 703
-    set undodir=~/.vim/undo
-    set undofile
-    set undoreload=1000
-endif
-
-" enable rainbow brackets
-let g:rainbow_active = 1
-
-" set python environment variable from anaconda to coc.nvim
-if has('nvim') && !empty($CONDA_PREFIX)
-  let g:python3_host_prog = $CONDA_PREFIX . '/bin/python'
-endif
+" press enter twice to turn off highlights after search
+" nnoremap <CR> :nohlsearch<CR><CR>
 
 " press enter to highlight occurrence of the current word(s)
 " let g:highlighting = 0
@@ -455,35 +478,439 @@ endif
 " endfunction
 " nnoremap <silent> <expr> <CR> Highlighting()
 
-" }}}
+" set python environment variable from anaconda to coc.nvim
+" if has('nvim') && !empty($CONDA_PREFIX)
+"   let g:python3_host_prog = $CONDA_PREFIX . '/bin/python'
+" endif
 
-" STATUS BAR -------------------------------------------------------------- {{{
+" press CTRL + J instead of ESC to switch to NORMAL mode from INSERT mode
+" inoremap <C-j> <esc>
+" press CTRL + J instead of 'i' to switch to INSERT mode from NORMAL mode
+" nnoremap <C-j> i
 
-" clear status line when vimrc is reloaded.
-"set statusline=
+""""""""""""""""""
+"Key Mappings End"
+""""""""""""""""""
 
-" status line left side.
-"set statusline+=\ %F\ %M\ %Y\ %R
-" %F = display full path of file
-" %M = display modified flag i.e. show if file is not save
-" %Y = display type of buffer
-" %R = display read-only flag
+"""""""""""""""""""""""
+"Commands and Managers"
+"""""""""""""""""""""""
+:command Ra !ranger
+:command Vi !vifm
+:command Na tabnew file
 
-" use a divider to separate the left side from the right side.
-"set statusline+=%=
+"""""""""""""""
+"Miscellaneous"
+"""""""""""""""
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
-" status line right side.
-"set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
-" %b = display ascii/unicode character under cursor
-" 0x%B = show the hexadecimal character under cursor
-" %l = display the row number
-" %c = display the column number
-" %p%% = show the cursor percentage from the top of the file
+"""""""""""""""""""
+"Beautify Settings"
+"""""""""""""""""""
+map <C-f> :call JsBeautify()<Cr>
 
-" show the status on the second to last line.
-"set laststatus=2
+" for JavaScript
+autocmd FileType javascript noremap <buffer>  <C-f> :call JsBeautify()<Cr>
 
-" using vim-airline for status bar and changing Y output
-"let g:airline_section_y = 'W %{winnr()}'
+" for json
+autocmd FileType json noremap <buffer> <C-f> :call JsonBeautify()<Cr>
 
-" }}}
+" for jsx
+autocmd FileType jsx noremap <buffer> <C-f> :call JsxBeautify()<Cr>
+
+" for HTML
+autocmd FileType html noremap <buffer> <C-f> :call HtmlBeautify()<Cr>
+
+" for css or scss
+autocmd FileType css noremap <buffer> <C-f> :call CSSBeautify()<Cr>
+
+""""""""""""""""""""
+"CamelCase Settings"
+""""""""""""""""""""
+let g:camelcasemotion_key = '<leader>'
+
+"""""""""""""""""""
+"Coc.nvim Settings"
+"""""""""""""""""""
+" declare coc.nvim extensions
+let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-markdownlint', 'coc-snippets', 'coc-word', 'coc-dictionary', 'coc-emoji', 'coc-syntax', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-pyright', 'coc-sh', 'coc-yaml']
+
+" highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" rename all symbols
+nmap <leader>rn <Plug>(coc-rename)
+
+" use 'CTRL + Space' in insert mode to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" make 'enter' auto-select the first completion item
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" use 'K' to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<Cr>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+"""""""""""""""""""
+"Floaterm Settings"
+"""""""""""""""""""
+let g:floaterm_autohide = 0
+let g:floaterm_autoclose = 2
+let g:floaterm_height = 30
+let g:floaterm_width  = 120
+
+""""""""""""""""""""""
+"HTML Indent Settings"
+""""""""""""""""""""""
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+let g:html_indent_attribute = 1
+let g:html_indent_inctags = "html,body,head,tbody,p,ol,ul,li,dl,dt,dd,table,thead,tfoot,tr,th,td,h1,h2,h3,h4,h5,h6,pre,blockquote,form,fieldset,legend,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time"
+
+"""""""""""""""""""""
+"IndentLine Settings"
+"""""""""""""""""""""
+let g:indentLine_setColors = 0
+
+"""""""""""""""""""""""""""
+"Markdown Preview Settings"
+"""""""""""""""""""""""""""
+" path to the chrome or the command to open chrome (or other modern browsers)
+" if set, g:mkdp_browserfunc would be ignore
+let g:mkdp_path_to_chrome = ""
+
+" callback Vim function to open browser, the only parameter is the URL to open
+let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+
+" set to 1, Vim will open the preview window on entering the Markdown buffer
+let g:mkdp_auto_start = 0
+
+" set to 1, Vim will automatically open the preview window when you edit a markdown file
+let g:mkdp_auto_open = 0
+
+" set to 1, Vim will automatically close the current preview window when switching from one Markdown buffer to another
+let g:mkdp_auto_close = 1
+
+" set to 1, Vim will just refresh Markdown when saving the buffer or leaving from insert mode
+" with default 0, it will automatically refresh markdown as you edit or move the cursor
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be used for all files
+" by default it can only be used in Markdown files
+let g:mkdp_command_for_global = 0
+
+" set to 1, the preview server will be available to others in your network
+" by default, the server only listens on localhost (127.0.0.1)
+let g:mkdp_open_to_the_world = 0
+
+""""""""""""""""
+"Netrw Settings"
+""""""""""""""""
+" uncomment to use Netrw instead of NERDTree
+" autocmd filetype Netrw call Netrw_mappings()
+" function! Netrw_mappings()
+"   noremap <buffer>% :call CreateInPreview() <Cr>
+" endfunction
+
+" function! CreateInPreview()
+"   let l:filename = input("enter filename: ")
+"   execute 'pedit ' . b:netrw_curdir.'/'.l:filename
+" endfunction
+
+" function! CreateInPreview()
+"   let l:filename = input("enter filename: ")
+"   execute 'silent !touch ' . b:netrw_curdir.'/'.l:filename
+"   redraw!
+" endfunction
+
+" let g:NetrwIsOpen = 0
+
+" function! ToggleNetrw()
+"   if g:NetrwIsOpen
+"     let i = bufnr("$")
+"     while (i >= 1)
+"       if (getbufvar(i, "&filetype") == "netrw")
+"         silent exe "bwipeout " . i
+"       endif
+"       let i -= 1
+"     endwhile
+"     let g:NetrwIsOpen = 0
+"   else
+"     let g:NetrwIsOpen = 1
+"     silent Vexplore
+"   endif
+" endfunction
+
+" augroup projectdrawer
+"   autocmd!
+"   autocmd vimenter * :Vexplore | wincmd p
+" augroup end
+
+" autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+
+" let ghregex = '\(^\|\s\s\)\zs\.\S\+'
+" let g:netrw_list_hide = ghregex
+" let g:netrw_special_syntax = 3
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 15
+
+"""""""""""""""""""
+"NERDTree Settings"
+"""""""""""""""""""
+" start NERDTree and put cursor in empty buffer or file
+"autocmd VimEnter * NERDTree | wincmd p
+
+" if another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+" exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" set NERDTree width
+let g:NERDTreeWinSize=20
+
+" remove the 'press ? for help' on top of NERDTree
+let NERDTreeMinimalUI=1
+
+" disable 80 extensions of nerdtree for less lag
+let g:NERDTreeLimitedSyntax = 1
+
+" create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+"""""""""""""""""""""""""""""""
+"NERDTree Functions and Colors"
+"""""""""""""""""""""""""""""""
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
+
+" enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFolders = 1
+" highlights the folder name
+let g:NERDTreeHighlightFoldersFullName = 1
+
+" you can add these colors to your .vimrc to help customizing
+let s:brown = "905532"
+let s:aqua =  "3AFFDB"
+let s:blue = "689FB6"
+let s:darkBlue = "44788E"
+let s:purple = "834F79"
+let s:lightPurple = "834F79"
+let s:red = "AE403F"
+let s:beige = "F5C06F"
+let s:yellow = "F09F17"
+let s:orange = "D4843E"
+let s:darkOrange = "F16529"
+let s:pink = "CB6F6F"
+let s:salmon = "EE6E73"
+let s:green = "8FAA54"
+let s:lightGreen = "31B53E"
+let s:white = "FFFFFF"
+let s:rspec_red = "FE405F"
+let s:git_orange = "F54D27"
+
+" this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor = {}
+" sets the color of css files to blue
+let g:NERDTreeExtensionHighlightColor['css'] = s:blue
+
+" this line is needed to avoid error
+let g:NERDTreeExactMatchHighlightColor = {}
+" sets the color for .gitignore files
+let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange
+
+" this line is needed to avoid error
+let g:NERDTreePatternMatchHighlightColor = {}
+" sets the color for files ending with _spec.rb
+let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red
+
+" sets the color for folders that did not match any rule
+let g:WebDevIconsDefaultFolderSymbolColor = s:beige
+" sets the color for files that did not match any rule
+let g:WebDevIconsDefaultFileSymbolColor = s:blue
+
+""""""""""""""""""
+"Rainbow Settings"
+""""""""""""""""""
+let g:rainbow_active = 1
+
+"""""""""""""""""""
+"Snippets Settings"
+"""""""""""""""""""
+" use END key to trigger the snippets, default was tab but that conflicts with the Completion trigger
+" see ':h keycodes' to change this to something else 
+let g:UltiSnipsExpandTrigger='<END>'
+
+" use CTRL + PgDn to list the available snippets
+let g:UltiSnipsListSnippets='<C-PageDown>'
+
+" use CTRL j and k to move visually within the snippets
+let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+
+"""""""""""""""""""
+"Startify Settings"
+"""""""""""""""""""
+ " create a custom header
+ let g:startify_custom_header =
+       \ startify#pad(split(system('figlet -w 100 Vim'), '\n'))
+
+" in case you are insane and want to open a new tab with Goyo enabled
+ autocmd BufEnter *
+       \ if !exists('t:startify_new_tab') && empty(expand('%')) && !exists('t:goyo_master') |
+       \   let t:startify_new_tab = 1 |
+       \   Startify |
+       \ endif
+
+" bookmarks - syntax is clear; add your own
+let g:startify_bookmarks = [ {'I': '~/i3/i3/config'},{'L': '~/.blerc'},{'Z': '~/.zshrc'},{'B': '~/.bashrc'},{'V': '~/.vimrc'}]
+    let g:startify_lists = [
+          \ { 'type': 'bookmarks' , 'header': ['   Bookmarks']      } ,
+          \ { 'type': 'files'     , 'header': ['   Recent'   ]      } ,
+          \ { 'type': 'sessions'  , 'header': ['   Sessions' ]      } ,
+          \ { 'type': 'commands'  , 'header': ['   Commands' ]      } ,
+          \ ]
+
+hi StartifyBracket ctermfg=240
+hi StartifyFile    ctermfg=147
+hi StartifyFooter  ctermfg=240
+hi StartifyHeader  ctermfg=114
+hi StartifyNumber  ctermfg=215
+hi StartifyPath    ctermfg=245
+hi StartifySlash   ctermfg=240
+hi StartifySpecial ctermfg=240
+
+""""""""""""""""""""
+"Syntastic Settings"
+""""""""""""""""""""
+" 0 off
+" 1 the error window will be automatically opened when errors are detected and closed when none
+" 2 the error window will be automatically closed when no errors are detected but not open automatically
+" 3 the error window will be automatically opened when errors are detected but not closed automatically
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" 0 off
+" 1 the cursor will always jump to the first issue detected
+" 2 the cursor will jump to the first issue detected but only if the issue is an error
+" 3 the cursor will jump to the first error detected if any
+let g:syntastic_auto_jump = 3
+
+" Colors for the error signs and line highlight
+highlight SyntasticErrorSign ctermfg=red ctermbg=yellow
+highlight SyntasticErrorLine ctermbg=black
+
+"""""""""""""""""""""""""
+"Vim-SpellCheck Settings"
+"""""""""""""""""""""""""
+let g:SpellCheck_OnNospell = function('SpellCheck#AutoEnableSpell')
+
+""""""""""""""""""
+"VimWiki Settings"
+""""""""""""""""""
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
+""""""""""""""""""""""""""""""
+"WhichKey Dictionary Settings"
+""""""""""""""""""""""""""""""
+let g:which_key_hspace = 5
+let g:which_key_centered = 1
+let g:which_key_flatten = 1
+let g:which_key_max_size = 1
+let g:which_key_disable_default_offset = 1
+
+let g:dict= {
+      \ 'h'          : ['WhichKey'                     , 'Show Keybindings']                ,
+      \ 'n'          : ['NERDTree'                     , 'NERDTree Toggle']                 ,
+      \ 'e'          : ['NETRW'                        , 'NETRW Toggle']                    ,
+      \ 'i'          : ['Startify'                     , 'Startify Toggle']                 ,
+      \ 'v'          : ['Vifm'                         , 'Vifm']                            ,
+      \ 'r'          : ['Ranger'                       , 'Ranger']                          ,
+      \ 't'          : ['Terminal'                     , 'Terminal']                        ,
+      \ 'T'          : ['NewTab'                       , 'New Tab']                         ,
+      \ 'd'          : ['Clean Duplicate'              , 'Delete Duplicate Lines']          ,
+      \ 'mr'         : ['MRU'                          , 'View File History']               ,
+      \ '1-9'        : ['Go To Tab By Number'          , 'Go to Tab by Number']             ,
+      \ '0'          : ['Close Last Tab'               , 'Close Last Tab']                  ,
+      \ 'x'          : ['Close Current Tab'            , 'Close Current Tab']               ,
+      \ 'tm'         : ['Move Tab'                     , 'Move Tab']                        ,
+      \ 'F2'         : ['Bracey Start'                 , 'Web Server Start']                ,
+      \ 'F3'         : ['Bracey Reload'                , 'Web Server Reload']               ,
+      \ 'F4'         : ['Bracey Stop'                  , 'Web Server Stop']                 ,
+      \ 'F5'         : ['Mundo'                        , 'View Undo History']               ,
+      \ 'F6'         : ['Spellcheck'                   , 'Spellcheck Toggle']                      ,
+      \ 'F8'         : ['Markdown Start'               , 'MD Server Start']                 ,
+      \ 'F9'         : ['Markdown Stop'                , 'MD Server Stop']                  ,
+      \ 'C-arrows'   : ['Move Between Buffers'         , 'Move Between Buffers']            ,
+      \ 'S-arrows'   : ['Resize Buffers'               , 'Resize Buffers']                  ,
+      \ 'Alt-arrows' : ['Tab Right or Left'            , 'Tab Right or Left']               ,
+      \ 'c'          : ['Colors'                       , 'Colors']                          ,
+      \ 'bf'         : ['Buffers'                      , 'Buffers']                         ,
+      \ 's'          : ['Files'                        , 'Files']                           ,
+      \ 'W'          : ['Windows'                      , 'Windows']                         ,
+      \ 'H'          : ['History'                      , 'History']                         ,
+      \ 'Hc'         : ['CMD History'                  , 'CMD History']                     ,
+      \ 'M'          : ['Maps'                         , 'Maps']                            ,
+      \ 'END'        : ['Trigger Snippets'             , 'Trigger Snippets']                ,
+      \ 'C-j'        : ['Move Within Snippet'          , 'Move Within Snippet']             ,
+      \ 'C-k'        : ['Move Within Snippet'          , 'Move Within Snippet']             ,
+      \ 'C-PgDn'     : ['List Snippets'                , 'List Snipets']                    ,
+      \ 'C-u'        : ['Scroll Up'                    , 'Scroll Up']                       ,
+      \ 'C-d'        : ['Scroll Down'                  , 'Scroll Down']                     ,
+      \ 'C-b'        : ['Scroll Page Up'               , 'Scroll Page Up']                  ,
+      \ 'C-f'        : ['Scroll Page Down'             , 'Scroll Page Down']                ,
+      \ 'C-a'        : ['Increment Alphanumeric'       , 'Increment Alphanumeric']          ,
+      \ 'C-x'        : ['Decrement Alphanumeric'       , 'Decrement Alphanumeric']          ,
+      \ 'K'          : ['Show Documentation'           , 'Show Documentation']              ,
+      \ 'rn'         : ['Rename Symbols'               , 'Rename Symbols']                  ,
+      \ 'op'         : ['Source Vimrc'                 , 'Source Vimrc']                    ,
+      \ }
+
+" change WhichKey menu colors
+highlight WhichKey ctermfg=blue
+highlight WhichKeySeperator ctermfg=green
+highlight WhichKeyDesc ctermfg=red
+highlight WhichKeyFloating ctermfg=grey
