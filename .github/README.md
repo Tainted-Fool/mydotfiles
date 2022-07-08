@@ -15,6 +15,21 @@ Check the other branch `windows` for that operating system
 
 [Guide](https://www.atlassian.com/git/tutorials/dotfiles) for reference
 
+## Dependencies
+
+- vim 8.2+
+- vimplug (auto-installs)
+- nodejs and npm for coc.nvim
+- xsel for shared clipboard
+- FZF for fuzzy search files/folders
+- Figlet for ascii art
+- A Nerd Font (see optional)
+
+```Bash
+sudo apt update && sudo apt upgrade
+sudo apt install nodejs npm figlet fzf vifm xsel
+```
+
 ## Starting From Zero
 
 On a fresh new computer, make sure to install `git` then run these commands
