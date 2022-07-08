@@ -16,7 +16,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 " Linux default = ~/.vim/plugged; Windows default = $HOME/vimfiles/plugged
 call plug#begin('~/.vim/plugged')
 
-Plug 'ackyshake/VimCompletesMe' " tab completion for vim
 Plug 'ap/vim-css-color' " displays css colors in vim
 Plug 'christoomey/vim-system-copy' " copy to OS clipboard - use 'cp' to copy and 'cv' to paste
 Plug 'chun-yang/auto-pairs' " inserts/deletes brackets, parens, and quotes in pairs
@@ -65,6 +64,7 @@ Plug 'yegappan/mru' " to open a file from the recently used list use 'MRU:'
 Plug 'Yggdroot/indentline' " adds thin vertical lines at each indentation level for code
 
 " old plugins no longer in use
+"Plug 'ackyshake/VimCompletesMe' " tab completion for vim
 "Plug 'ludovicchabant/vim-gutentags' " generate tags
 "Plug 'mhinz/vim-signify' " adds VCS status
 "Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
@@ -96,6 +96,20 @@ autocmd VimLeave * silent exec "! echo -ne '\e[3 q'"
 let &t_SI = "\e[3 q" 
 " set cursor for everything else
 let &t_EI = "\e[1 q" 
+
+"""""""""""""""""""""""
+"Commands and Managers"
+"""""""""""""""""""""""
+:command Ra !ranger
+:command Vi !vifm
+:command Na tabnew file
+
+"""""""""""""""
+"Miscellaneous"
+"""""""""""""""
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 """"""""""
 "Settings"
@@ -252,7 +266,7 @@ set laststatus=2
 set noshowmode
 
 " set status bar themes and views
-let g:lightline = {'colorscheme': 'onehalfdark', 'active': {'left': [['mode'], ['readonly', 'absolutepath', 'modified']], 'right': [['lineinfo'], ['percent'], ['filetype']]}, 'component': {'charvaluehex': '0x%B'}}
+let g:lightline = {'colorscheme': 'onehalfdark', 'active': {'left': [['mode'], ['gitbranch', 'readonly', 'absolutepath', 'modified']], 'right': [['lineinfo'], ['percent'], ['fileencoding', 'filetype', 'charvaluehex']]}, 'component': {'charvaluehex': '0x%B'}, 'component_function': {'gitbranch': 'FugitiveHead'}}
 
 """""""
 "Theme"
@@ -272,7 +286,7 @@ endif
 set background=dark
 
 """"""""""""""""""""
-"Key Mappings Begin"
+"KEY MAPPINGS BEGIN"
 """"""""""""""""""""
 " set leader key to space
 "let mapleader = " "
@@ -362,75 +376,6 @@ map <leader>tm :tabmove<Cr>
 " make new tab
 nnoremap <leader>T :tabnew file<Cr>
 
-"""""""""""""""
-"Bracey Plugin"
-"""""""""""""""
-" Bracey won't do anything until it is explicitly called
-map <F2> :Bracey<Cr>
-map <F3> :BraceyReload<Cr>
-map <F4> :BraceyStop<Cr>
-
-"""""""""""""""""
-"Floaterm Plugin"
-"""""""""""""""""
-nnoremap <leader>v :FloatermNew vifm<Cr>
-nnoremap <leader>r :FloatermNew ranger<Cr>
-nnoremap <leader>t :FloatermToggle<Cr>
-
-"""""""""""""""""""""""""
-"Markdown Preview Plugin"
-"""""""""""""""""""""""""
-" toggle preview in normal mode
-nmap <silent> <F8> <Plug>MarkdownPreview
-
-" toggle preview in insert mode
-imap <silent> <F8> <Plug>MarkdownPreview
-
-" stop preview in normal mode
-nmap <silent> <F9> <Plug>StopMarkdownPreview
-
-" stop preview in insert mode
-imap <silent> <F9> <Plug>StopMarkdownPreview
-
-""""""""""""
-"MRU Plugin"
-""""""""""""
-nnoremap <leader>mr :MRU<Cr>
-
-""""""""""""""
-"Mundo Plugin"
-""""""""""""""
-map <F5> :MundoToggle<CR>
-
-"""""""""""""""""
-"NERDTree Plugin"
-"""""""""""""""""
-nnoremap <leader>n :NERDTreeToggle<Cr>
-
-""""""""""""""
-"Netrw Plugin"
-""""""""""""""
-nnoremap <leader>e :call ToggleNetrw()<Cr>
-
-""""""""""""""""""""""
-"Smooth Scroll Plugin"
-""""""""""""""""""""""
-" smooth_scroll(distance, duration, speed)
-noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<Cr>
-noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<Cr>
-noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 0, 4)<Cr>
-noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 0, 4)<Cr>
-
-"""""""""""""""""
-"Startify Plugin"
-"""""""""""""""""
-nnoremap <leader>i :Startify<Cr>
-
-"""""""""""""""""
-"WhichKey Plugin"
-"""""""""""""""""
-map <leader>h :WhichKey! g:dict<Cr>
-
 """"""""""""""""
 "Spell Checking"
 """"""""""""""""
@@ -454,7 +399,7 @@ endfunction
 " <CR> (carriage return) is like pressing the enter key.
 " !clear runs the external clear screen command.
 " !python3 % executes the current file with Python.
-" nnoremap <f5> :w <CR>:!clear <CR>:!python3 % <CR>
+" nnoremap <F5> :w <CR>:!clear <CR>:!python3 % <CR>
 
 " press F8 to highlight occurrence of the current word(s)
 " nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -489,22 +434,12 @@ endfunction
 " nnoremap <C-j> i
 
 """"""""""""""""""
-"Key Mappings End"
+"KEY MAPPINGS END"
 """"""""""""""""""
 
 """""""""""""""""""""""
-"Commands and Managers"
+"PLUGIN SETTINGS BEGIN"
 """""""""""""""""""""""
-:command Ra !ranger
-:command Vi !vifm
-:command Na tabnew file
-
-"""""""""""""""
-"Miscellaneous"
-"""""""""""""""
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
 
 """""""""""""""""""
 "Beautify Settings"
@@ -526,6 +461,14 @@ autocmd FileType html noremap <buffer> <C-f> :call HtmlBeautify()<Cr>
 " for css or scss
 autocmd FileType css noremap <buffer> <C-f> :call CSSBeautify()<Cr>
 
+"""""""""""""""""
+"Bracey Settings"
+"""""""""""""""""
+" Bracey won't do anything until it is explicitly called
+map <F2> :Bracey<Cr>
+map <F3> :BraceyReload<Cr>
+map <F4> :BraceyStop<Cr>
+
 """"""""""""""""""""
 "CamelCase Settings"
 """"""""""""""""""""
@@ -534,7 +477,7 @@ let g:camelcasemotion_key = '<leader>'
 """""""""""""""""""
 "Coc.nvim Settings"
 """""""""""""""""""
-" declare coc.nvim extensions
+" declare Coc.nvim extensions
 let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-markdownlint', 'coc-snippets', 'coc-word', 'coc-dictionary', 'coc-emoji', 'coc-syntax', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-pyright', 'coc-sh', 'coc-yaml']
 
 " highlight the symbol and its references when holding the cursor
@@ -542,6 +485,10 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " rename all symbols
 nmap <leader>rn <Plug>(coc-rename)
+
+" use 'tab' to trigger completion with characters ahead and navigate
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : CheckBackspace() ? "\<TAB>" : coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " use 'CTRL + Space' in insert mode to trigger completion
 if has('nvim')
@@ -565,6 +512,11 @@ function! ShowDocumentation()
   endif
 endfunction
 
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
 """""""""""""""""""
 "Floaterm Settings"
 """""""""""""""""""
@@ -572,6 +524,10 @@ let g:floaterm_autohide = 0
 let g:floaterm_autoclose = 2
 let g:floaterm_height = 30
 let g:floaterm_width  = 120
+
+nnoremap <leader>v :FloatermNew vifm<Cr>
+nnoremap <leader>r :FloatermNew ranger<Cr>
+nnoremap <leader>t :FloatermToggle<Cr>
 
 """"""""""""""""""""""
 "HTML Indent Settings"
@@ -589,6 +545,18 @@ let g:indentLine_setColors = 0
 """""""""""""""""""""""""""
 "Markdown Preview Settings"
 """""""""""""""""""""""""""
+" toggle preview in normal mode
+nmap <silent> <F8> <Plug>MarkdownPreview
+
+" toggle preview in insert mode
+imap <silent> <F8> <Plug>MarkdownPreview
+
+" stop preview in normal mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview
+
+" stop preview in insert mode
+imap <silent> <F9> <Plug>StopMarkdownPreview
+
 " path to the chrome or the command to open chrome (or other modern browsers)
 " if set, g:mkdp_browserfunc would be ignore
 let g:mkdp_path_to_chrome = ""
@@ -617,63 +585,21 @@ let g:mkdp_command_for_global = 0
 " by default, the server only listens on localhost (127.0.0.1)
 let g:mkdp_open_to_the_world = 0
 
+""""""""""""""
+"MRU Settings"
+""""""""""""""
+nnoremap <leader>mr :MRU<Cr>
+
 """"""""""""""""
-"Netrw Settings"
+"Mundo Settings"
 """"""""""""""""
-" uncomment to use Netrw instead of NERDTree
-" autocmd filetype Netrw call Netrw_mappings()
-" function! Netrw_mappings()
-"   noremap <buffer>% :call CreateInPreview() <Cr>
-" endfunction
-
-" function! CreateInPreview()
-"   let l:filename = input("enter filename: ")
-"   execute 'pedit ' . b:netrw_curdir.'/'.l:filename
-" endfunction
-
-" function! CreateInPreview()
-"   let l:filename = input("enter filename: ")
-"   execute 'silent !touch ' . b:netrw_curdir.'/'.l:filename
-"   redraw!
-" endfunction
-
-" let g:NetrwIsOpen = 0
-
-" function! ToggleNetrw()
-"   if g:NetrwIsOpen
-"     let i = bufnr("$")
-"     while (i >= 1)
-"       if (getbufvar(i, "&filetype") == "netrw")
-"         silent exe "bwipeout " . i
-"       endif
-"       let i -= 1
-"     endwhile
-"     let g:NetrwIsOpen = 0
-"   else
-"     let g:NetrwIsOpen = 1
-"     silent Vexplore
-"   endif
-" endfunction
-
-" augroup projectdrawer
-"   autocmd!
-"   autocmd vimenter * :Vexplore | wincmd p
-" augroup end
-
-" autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
-
-" let ghregex = '\(^\|\s\s\)\zs\.\S\+'
-" let g:netrw_list_hide = ghregex
-" let g:netrw_special_syntax = 3
-" let g:netrw_banner = 0
-" let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-" let g:netrw_altv = 1
-" let g:netrw_winsize = 15
+map <F5> :MundoToggle<CR>
 
 """""""""""""""""""
 "NERDTree Settings"
 """""""""""""""""""
+nnoremap <leader>n :NERDTreeToggle<Cr>
+
 " start NERDTree and put cursor in empty buffer or file
 "autocmd VimEnter * NERDTree | wincmd p
 
@@ -770,10 +696,70 @@ let g:WebDevIconsDefaultFolderSymbolColor = s:beige
 " sets the color for files that did not match any rule
 let g:WebDevIconsDefaultFileSymbolColor = s:blue
 
-""""""""""""""""""
-"Rainbow Settings"
-""""""""""""""""""
-let g:rainbow_active = 1
+""""""""""""""""
+"Netrw Settings"
+""""""""""""""""
+" uncomment to use Netrw instead of NERDTree
+nnoremap <leader>e :call ToggleNetrw()<Cr>
+
+" autocmd filetype Netrw call Netrw_mappings()
+" function! Netrw_mappings()
+"   noremap <buffer>% :call CreateInPreview() <Cr>
+" endfunction
+
+" function! CreateInPreview()
+"   let l:filename = input("enter filename: ")
+"   execute 'pedit ' . b:netrw_curdir.'/'.l:filename
+" endfunction
+
+" function! CreateInPreview()
+"   let l:filename = input("enter filename: ")
+"   execute 'silent !touch ' . b:netrw_curdir.'/'.l:filename
+"   redraw!
+" endfunction
+
+" let g:NetrwIsOpen = 0
+
+" function! ToggleNetrw()
+"   if g:NetrwIsOpen
+"     let i = bufnr("$")
+"     while (i >= 1)
+"       if (getbufvar(i, "&filetype") == "netrw")
+"         silent exe "bwipeout " . i
+"       endif
+"       let i -= 1
+"     endwhile
+"     let g:NetrwIsOpen = 0
+"   else
+"     let g:NetrwIsOpen = 1
+"     silent Vexplore
+"   endif
+" endfunction
+
+" augroup projectdrawer
+"   autocmd!
+"   autocmd vimenter * :Vexplore | wincmd p
+" augroup end
+
+" autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+
+" let ghregex = '\(^\|\s\s\)\zs\.\S\+'
+" let g:netrw_list_hide = ghregex
+" let g:netrw_special_syntax = 3
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 15
+
+""""""""""""""""""""""""
+"Smooth Scroll Settings"
+""""""""""""""""""""""""
+" smooth_scroll(distance, duration, speed)
+noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<Cr>
+noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<Cr>
+noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 0, 4)<Cr>
+noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 0, 4)<Cr>
 
 """""""""""""""""""
 "Snippets Settings"
@@ -792,6 +778,8 @@ let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 """""""""""""""""""
 "Startify Settings"
 """""""""""""""""""
+nnoremap <leader>i :Startify<Cr>
+
  " create a custom header
  let g:startify_custom_header =
        \ startify#pad(split(system('figlet -w 100 Vim'), '\n'))
@@ -843,6 +831,11 @@ let g:syntastic_auto_jump = 3
 highlight SyntasticErrorSign ctermfg=red ctermbg=yellow
 highlight SyntasticErrorLine ctermbg=black
 
+""""""""""""""""""""""
+"Vim-Rainbow Settings"
+""""""""""""""""""""""
+let g:rainbow_active = 1
+
 """""""""""""""""""""""""
 "Vim-SpellCheck Settings"
 """""""""""""""""""""""""
@@ -853,9 +846,11 @@ let g:SpellCheck_OnNospell = function('SpellCheck#AutoEnableSpell')
 """"""""""""""""""
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
-""""""""""""""""""""""""""""""
-"WhichKey Dictionary Settings"
-""""""""""""""""""""""""""""""
+"""""""""""""""""""
+"WhichKey Settings"
+"""""""""""""""""""
+map <leader>h :WhichKey! g:dict<Cr>
+
 let g:which_key_hspace = 5
 let g:which_key_centered = 1
 let g:which_key_flatten = 1
@@ -914,3 +909,8 @@ highlight WhichKey ctermfg=blue
 highlight WhichKeySeperator ctermfg=green
 highlight WhichKeyDesc ctermfg=red
 highlight WhichKeyFloating ctermfg=grey
+
+"""""""""""""""""""""
+"PLUGIN SETTINGS END"
+"""""""""""""""""""""
+
