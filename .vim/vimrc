@@ -49,6 +49,7 @@ Plug 'preservim/vim-markdown' " syntax highlighting, matching rule and mapping
 Plug 'qpkorr/vim-renamer' " create a buffer with a list of directories to rename with :Renamer
 Plug 'rafi/awesome-vim-colorschemes' " a collection of color schemes - has onehalf and more
 Plug 'ryanoasis/vim-devicons' " adds icons to vim and NERDTree
+Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
 Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree
 Plug 'SirVer/ultisnips' " snippets documentation for programming languages
 Plug 'terryma/vim-smooth-scroll' " smooth scrolling
@@ -67,12 +68,12 @@ Plug 'Yggdroot/indentline' " adds thin vertical lines at each indentation level 
 
 " old plugins no longer in use
 "Plug 'ackyshake/VimCompletesMe' " tab completion for vim
+"Plug 'gabrielelana/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
 "Plug 'ludovicchabant/vim-gutentags' " generate tags
 "Plug 'mhinz/vim-signify' " adds VCS status
-"Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
 "Plug 'psliwka/vim-dirtytalk, { 'do': 'DirtytalkUpdate' } " spellcheck dictionary for programmers
-"Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
 "Plug 'sonph/onehalf', { 'rtp': 'vim' } " color scheme for vim layout
+"Plug 'tpope/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
 "Plug 'vim-airline/vim-airline' " another status bar
 "Plug 'vim-airline/vim-airline-themes' " themes for the status bar - use ':AirlineTheme <theme>'
 
@@ -100,8 +101,8 @@ let &t_SI = "\e[3 q"
 " set cursor for everything else
 let &t_EI = "\e[1 q" 
 
-" set the timeout len for cursor to change faster
-"set timeoutlen=300
+" set the timeout length for cursor to change faster
+set timeoutlen=200
 
 """""""""""""""
 "Miscellaneous"
@@ -153,6 +154,9 @@ filetype plugin indent on
 
 " set encoding and font
 set encoding=utf-8
+
+" set no compatiable for vi
+set nocompatible
 
 " allows you to copy/paste text from system clipboard
 set clipboard=unnamedplus
@@ -628,6 +632,7 @@ let g:html_indent_inctags = "html,body,head,tbody,p,ol,ul,li,dl,dt,dd,table,thea
 """""""""""""""""""""
 "IndentLine Settings"
 """""""""""""""""""""
+" set indentLine color to white instead of grey
 let g:indentLine_setColors = 0
 
 """""""""""""""""""""""""""
@@ -871,11 +876,22 @@ highlight SyntasticErrorLine ctermbg=black
 """""""""""""""""""""""
 "Vim-Markdown Settings"
 """""""""""""""""""""""
+" disable folding for markdown files
 let g:vim_markdown_folding_disabled = 1
+
+" disable markdown conceal for code blocks
+let g:vim_markdown_conceal_code_blocks = 0
+
+" add syntax highlight for code blocks
+let g:vim_markdown_fenced_languages = ['bash=sh', 'css', 'html', 'javascript', 'js=javascript', 'python', 'xml', 'yaml', 'pwsh=powershell']
+
+" disable json conceal with quotation marks
+let g:vim_json_conceal = 0
 
 """"""""""""""""""""""
 "Vim-Rainbow Settings"
 """"""""""""""""""""""
+" enable the rainbow bracket plugin
 let g:rainbow_active = 1
 
 """""""""""""""""""""""""
@@ -886,8 +902,11 @@ let g:SpellCheck_OnNospell = function('SpellCheck#AutoEnableSpell')
 """"""""""""""""""
 "VimWiki Settings"
 """"""""""""""""""
-let g:vimwiki_ext2syntax = {}
-"let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" use markdown syntax for vimwiki files
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
+" do not set `.md` files as vimwikifiles
+let g:vimwiki_global_ext = 0
 
 """""""""""""""""""
 "WhichKey Settings"

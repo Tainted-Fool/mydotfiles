@@ -1,4 +1,4 @@
-# Table of Contents.
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
   - [Intro](#intro)
@@ -29,7 +29,7 @@ Check the other branch `windows` for that operating system
 - wslu for WSL utilities (see optional)
 - wsl-open for opening files with WSL (see optional)
 
-```Bash
+```bash
 sudo apt update && sudo apt upgrade
 sudo apt install nodejs npm figlet fzf vifm xsel ranger ueberzug
 ```
@@ -38,7 +38,7 @@ sudo apt install nodejs npm figlet fzf vifm xsel ranger ueberzug
 
 On a fresh new computer, make sure to install `git` then run these commands
 
-```Bash
+```bash
 git init --bare $HOME/.dotfiles
 echo "alias dit='/usr/bin/git --git-dir=$HOME/.dotfiles/ \
 --work-tree=$HOME'" >> $HOME/.zshrc
@@ -52,7 +52,7 @@ dit config --local status.showuntrackedfiles no
 
 Now we can version the files we want with `dit` i.e. same commands as `git`
 
-```Bash
+```bash
 dit status
 dit add .vimrc
 dit commit -m "add vimrc"
@@ -61,14 +61,14 @@ dit push
 
 We have to add username and email to `git` if we want to commit/push
 
-```Bash
+```bash
 dit config --global user.email "your@email.com"
 dit config --global user.name "yourUserName"
 ```
 
 Don't forget to declare the remote repository to push
 
-```Bash
+```bash
 dit remote add origin https://github.com/Tainted-Fool/mydotfiles
 dit push -u origin <localBranchName>
 ```
@@ -77,7 +77,7 @@ dit push -u origin <localBranchName>
 
 Once the repo is up, we can clone it to a new system and pull the files
 
-```Bash
+```bash
 # git clone --bare --branch <repoBranchName> <repoURL> $HOME/.dotfiles 
 git clone --bare --branch linux https://github.com/Tainted-Fool/mydotfiles \
 $HOME/.dotfiles 
@@ -92,7 +92,7 @@ dit config --local status.showuntrackedfiles no
 
 Now we can checkout the repo to acquire the neccessary files
 
-```Bash
+```bash
 dit checkout
 ```
 
@@ -104,25 +104,25 @@ Finally, we need to install [Oh-My-Zsh](https://ohmyz.sh/)
 
 First, make sure you have `zsh` installed
 
-```Bash
+```bash
 sudo apt install zsh
 ```
 
 Run it one time with `zsh` to setup the configs, then install the oh-my-zsh framework
 
-```Bash
+```bash
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 Next, add a theme for `zsh` like [Typewritten](https://github.com/reobin/typewritten)
 
-```Bash
+```bash
 git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
 ```
 
 Add more plugins to `zsh`
 
-```Bash
+```bash
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone https://github.com/softmoth/zsh-vim-mode $ZSH_CUSTOM/plugins/zsh-vim-mode
@@ -168,7 +168,7 @@ sudo apt install bat
 
 Usful for doing a lot of Azure stuff
 
-```Bash
+```bash
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py --silent
 python3 get-pip.py
 pip install azure-cli
@@ -178,7 +178,7 @@ pip install azure-cli
 
 A python environmental variable manager
 
-```Bash
+```bash
 curl -sL https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh | sudo bash
 ```
 
@@ -200,6 +200,7 @@ echo "deb https://pkg.wslutiliti.es/debian bullseye main" | sudo tee -a /etc/apt
 sudo apt update
 sudo apt install wslu
 ```
+
 > Run these commands on Kali distros
 
 ```bash
