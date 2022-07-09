@@ -227,4 +227,7 @@ curl https://raw.githubusercontent.com/4U6U57/wsl-open/master/wsl-open.sh -o wsl
 # OR
 sudo apt install -yqq npm
 sudo npm install -g wsl-open
+# link wsl-open to xdg-open
+sudo rm $(which xdg-open)
+sudo ln -s $(which wsl-open) /usr/local/bin/xdg-open
 ```

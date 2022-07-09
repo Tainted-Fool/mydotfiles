@@ -24,7 +24,6 @@ Plug 'bkad/CamelCaseMotion' " move between camel case words - use <Leader><actio
 Plug 'dkarter/bullets.vim' " automate bullet lists and numbering
 Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
 Plug 'frazrepo/vim-rainbow' " adds color to brackets and parenthesis
-Plug 'francoiscabrol/ranger.vim' " file manager similar to NERDTree
 Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
 Plug 'honza/vim-snippets' " snippets engine
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " markdown preview
@@ -102,7 +101,7 @@ let &t_SI = "\e[3 q"
 let &t_EI = "\e[1 q" 
 
 " set the timeout length for cursor to change faster
-set timeoutlen=200
+set timeoutlen=1000 ttimeoutlen=0
 
 """""""""""""""
 "Miscellaneous"
@@ -154,6 +153,9 @@ filetype plugin indent on
 
 " set encoding and font
 set encoding=utf-8
+
+" set what shell vim to use
+set shell=zsh
 
 " set no compatiable for vi
 set nocompatible
@@ -387,7 +389,13 @@ noremap <silent> <Space> :nohlsearch<Bar>:echo<Cr>
 nnoremap <leader>d :g/^\(.*\)$\n\1/d<Cr>
 
 " source vimrc file
-nnoremap <leader>op :source %<Cr>
+nnoremap <leader>rc :source %<Cr>
+
+" add line below and above
+nnoremap <leader>o o<esc>O
+
+" add line above and below
+nnoremap <leader>O O<esc>o
 
 """"""""""""""""
 "Tab Navigation"
@@ -511,8 +519,8 @@ autocmd FileType css noremap <buffer> <C-f> :call CSSBeautify()<Cr>
 """"""""""""""""""""""""
 "Better Escape Settings"
 """"""""""""""""""""""""
-" press 'jj' or 'ff' instead of ESC to switch from INSERT mode to NORMAL mode
-let g:better_escape_shortcut = ['jj', 'ff']
+" press these commands instead of ESC to switch from INSERT mode to NORMAL mode
+let g:better_escape_shortcut = ['jj', 'ff', 'fj', 'jf']
 
 """""""""""""""""
 "Bracey Settings"
@@ -672,7 +680,7 @@ let g:mkdp_command_for_global = 0
 
 " set to 1, the preview server will be available to others in your network
 " by default, the server only listens on localhost (127.0.0.1)
-let g:mkdp_open_to_the_world = 0
+let g:mkdp_open_to_the_world = 1
 
 """"""""""""""
 "MRU Settings"
@@ -784,15 +792,6 @@ let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red
 let g:WebDevIconsDefaultFolderSymbolColor = s:beige
 " sets the color for files that did not match any rule
 let g:WebDevIconsDefaultFileSymbolColor = s:blue
-
-"""""""""""""""""
-"Ranger Settings"
-"""""""""""""""""
-" disable ranger default key mapping of `<leader>f`
-let g:ranger_map_keys = 0
-
-" set new mapping to '<leader>r'
-nnoremap <leader>r :Ranger<Cr>
 
 """"""""""""""""""""""""
 "Smooth Scroll Settings"
@@ -923,7 +922,6 @@ let g:dict= {
       \ '<leader>h'   : ['WhichKey'               , 'Show Keybindings']       ,
       \ '<leader>n'   : ['NERDTree'               , 'NERDTree Toggle']        ,
       \ '<leader>i'   : ['Startify'               , 'Startify Toggle']        ,
-      \ '<leader>r'   : ['Ranger'                 , 'Ranger']                 ,
       \ '<leader>t'   : ['Terminal'               , 'Terminal']               ,
       \ '<leader>T'   : ['NewTab'                 , 'New Tab']                ,
       \ '<leader>d'   : ['Clean Duplicate'        , 'Delete Duplicate Lines'] ,
@@ -961,7 +959,7 @@ let g:dict= {
       \ 'C-x'         : ['Decrement Alphanumeric' , 'Decrement Alphanumeric'] ,
       \ 'K'           : ['Show Documentation'     , 'Show Documentation']     ,
       \ '<leader>rn'  : ['Rename Symbols'         , 'Rename Symbols']         ,
-      \ '<leader>op'  : ['Source Vimrc'           , 'Source Vimrc']           ,
+      \ '<leader>rc'  : ['Source Vimrc'           , 'Source Vimrc']           ,
       \ '[g'          : ['Previous Lint Error'    , 'Previous Lint Error']    ,
       \ ']g'          : ['Next Lint Error'        , 'Next Lint Error']        ,
       \ 'gd'          : ['Code Definition'        , 'Code Definition']        ,

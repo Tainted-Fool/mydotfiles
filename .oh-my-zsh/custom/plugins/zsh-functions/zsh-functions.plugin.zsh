@@ -82,3 +82,7 @@ function notes() {
 
     code $DIR
 }
+
+function fuzz() {
+    find . -type f | fzy
+}

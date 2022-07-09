@@ -45,8 +45,8 @@ export TYPEWRITTEN_COLOR_MAPPINGS="primary:#81A1C1;secondary:#B48EAD;accent:yell
 # Key bindings
 
 # Add to .zshrc, beofre this plugin in loaded:
-# Use CTRL + J instead of ESC to switch to NORMAL mode from INSERT mode for the VIM-MODE plugin
-VIM_MODE_VICMD_KEY='^J'
+# Use `jj` instead of ESC to switch from INSERT mode to NORMAL mode - for the VIM-MODE plugin
+VIM_MODE_VICMD_KEY='fj'
 
 # Edit VIM-MODE plugin to swtich to INSERT mode from NORMAL mode
 #bindkey -M vicmd '^J' vi-insert
