@@ -1,19 +1,19 @@
 """""""""
 "Plugins"
 """""""""
-" Automatic installation of vim-plug and missing plugins
+" automatic installation of vim-plug and missing plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-" Run PlugInstall if there are missing plugins
+" run `PlugInstall` if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
       \| PlugInstall --sync | source $MYVIMRC
       \| endif
 
 " will need to change the folder location below if using something else
-" Linux default = ~/.vim/plugged; Windows default = $HOME/vimfiles/plugged
+" linux default = ~/.vim/plugged; windows default = $HOME/vimfiles/plugged
 call plug#begin('~/.vim/plugged')
 
 Plug 'ap/vim-css-color' " displays css colors in vim
@@ -24,7 +24,6 @@ Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><
 Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
 Plug 'honza/vim-snippets' " snippets engine
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " markdown preview
-Plug 'iggredible/totitle-vim' " title case text - use 'gt'
 Plug 'inkarkat/vim-visualrepeat' " like vim-repeat but for VISUAL mode
 Plug 'jayli/vim-easycomplete' " code auto completion written in vimscript - run :InstallLspServer
 Plug 'junegunn/fzf.vim' " command-line fuzzy finder
@@ -46,6 +45,7 @@ Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree
 Plug 'sirver/ultisnips' " snippets documentation for programming languages
 Plug 'terryma/vim-smooth-scroll' " smooth scrolling
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " adds color to file extensions
+Plug 'tpope/vim-abolish' " camel, Mixed, snake_, title, upper case with `crc/m/s/t/u` and `:Subvert`
 Plug 'tpope/vim-commentary' " comments stuff out - use 'gcc' or 'gc' in visual mode
 Plug 'tpope/vim-fugitive' " git commands - call with :Git
 Plug 'tpope/vim-repeat' " repeat last `.` command as a whole
@@ -53,9 +53,10 @@ Plug 'tpope/vim-surround' " surround text - use cs, ds, ys
 Plug 'tpope/vim-unimpaired' " useful mapings like ']<space>' to insert lines and many more
 Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'} " live HTML, css, and JavaScript preview
 Plug 'vim-airline/vim-airline' " status bar
-Plug 'Vimjas/vim-python-pep8-indent' "PEP8 indentation aesthetic preferences
+Plug 'Vimjas/vim-python-pep8-indent' " PEP8 indentation aesthetic preferences
 Plug 'vimwiki/vimwiki' " organize notes and ideas
 Plug 'voldikss/vim-floaterm' " adds a popup for the terminal
+Plug 'wsdjeg/vim-fetch' " allows you to process line and column jump with vim file:<line>:<col>
 Plug 'yegappan/mru' " to open a file from the recently used list use 'MRU:'
 Plug 'yggdroot/indentline' " adds thin vertical lines at each indentation level for code
 Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
@@ -69,6 +70,7 @@ Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
 "Plug 'ervandew/supertab' " tab for all insert completion - good combo for vim-litecorrect
 "Plug 'frazrepo/vim-rainbow' " adds color to brackets and parenthesis
 "Plug 'gabrielelana/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
+"Plug 'iggredible/totitle-vim' " title case text - use 'gt'
 "Plug 'inkarkat/vim-SpellCheck' " adds a better spell checker
 "Plug 'inkarkat/vim-ingo-library' " dependency for vim-spellcheck
 "Plug 'itchyny/lightline.vim' " a lightweight status bar
@@ -416,7 +418,7 @@ noremap <silent> <leader><Cr> :nohlsearch<Bar>:echo<Cr>
 nnoremap <silent> <leader>u :source $MYVIMRC<Cr>
 
 " run current python script
-nnoremap <silent> <leader>p :w<Cr>:!clear<Cr>:!python3 %<Cr>
+nnoremap <silent> <leader>p :w<Cr>:!clear<Cr>:!python %<Cr>
 
 """"""""""""""
 "Old Mappings"
@@ -1031,7 +1033,7 @@ let g:vimwiki_global_ext = 0
 """""""""""""""""""
 "WhichKey Settings"
 """""""""""""""""""
-map <leader>h :WhichKey! g:dict<Cr>
+map <silent> <leader>h :WhichKey! g:dict<Cr>
 
 let g:which_key_hspace = 5
 let g:which_key_centered = 1

@@ -15,6 +15,8 @@
     - [Install WSL Utilities](#install-wsl-utilities)
     - [Install WSL-Open](#install-wsl-open)
     - [Install Python Styling Utilities](#install-python-styling-utilities)
+    - Install Universal-Ctags
+    - Install diff-so-fancy
 
 ## Intro
 
@@ -29,18 +31,18 @@ Check the other branch `windows` for that operating system
 - vim 8.2+
 - vimplug (auto-installs)
 - nodejs and npm for coc.nvim
-- xsel for shared clipboard
 - FZF for fuzzy search files/folders
-- Figlet for ascii art
-- Ranger for file management
-- ueberzug to draw image files
+- xsel for shared clipboard - not needed
+- Figlet for ascii art - not needed
+- Ranger for file management - not needed
+- ueberzug to draw image files - not needed
 - A Nerd Font (see optional)
 - wslu for WSL utilities (see optional)
 - wsl-open for opening files with WSL (see optional)
 
 ```sh
 sudo apt update && sudo apt upgrade
-sudo apt install nodejs npm figlet fzf vifm xsel ranger ueberzug
+sudo apt install nodejs npm fzf vifm xsel figlet ranger ueberzug
 ```
 
 ## Starting From Zero
@@ -251,4 +253,41 @@ pip install flake8 # lint
 pip install pylint # lint
 pip install mypy # lint
 pip install vulture # finds unused code
+```
+
+### Install Universal-Ctags
+
+Allows you to tag many built-in functions, methods, and properties
+
+```sh
+sudo apt install \
+    gcc make \
+    pkg-config autoconf automake \
+    python3-docutils \
+    libseccomp-dev \
+    libjansson-dev \
+    libyaml-dev \
+    libxml2-dev
+
+git clone https://github.com/universal-ctags/ctags
+cd ctags
+./autogen.sh
+./configure --prefix=/where/to/store/file
+make
+make install
+#OR
+sudo apt install Universal-ctags
+```
+
+### Fix iamcco/markdown-preview
+
+Keept getting error getting this to work
+
+```sh
+# comment out the plugin
+# run this command inside vim `:PlugClean`
+# run this command outside vim
+sudo npm install tslib && sudo npm install -g yarn; sudo yarn add tslib
+# un-comment the plugin
+# run this command inside vim `:PlugInstall`
 ```
