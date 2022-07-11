@@ -162,6 +162,9 @@ set modifiable
 " auto re-read files if unmodified inside vim
 set autoread
 
+" show vim commands
+set showcmd
+
 " set number of screen lines to use for the command line
 set cmdheight=1
 
@@ -386,11 +389,14 @@ nnoremap <silent> <leader>x :bdelete %<Cr>
 nnoremap <silent> <C-Left> :bprevious<Cr>
 nnoremap <silent> <C-Right> :bnext<Cr>
 
-" make a new buffer
+" make a new buffer - adds to a new 'tab'
 nnoremap <leader>t :edit newfile<Cr>
 
-" split buffer veritcal
-nnoremap <leader>t :edit newfile<Cr>
+" create a new vertical window
+"nnoremap <leader>| :vsplit<Cr>
+
+" create a new horizontal window
+"nnoremap <leader>- :split<Cr>
 
 """""""""""""""""
 "Custom Bindings"
@@ -472,15 +478,15 @@ nnoremap <silent> <leader>L :ALELint<Cr>
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 
-" do not start linting
+" only lint on save
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
+let g:ale_lint_on_save = 1
 
 " set hover over feature
 let g:ale_set_balloons = 1
 
-" do not highlight words
+" do not highlight errors
 let g:ale_set_highlights = 0
 
 " set airline bar to show error
