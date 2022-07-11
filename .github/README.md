@@ -1,14 +1,20 @@
-- [Intro](#intro)
-- [Starting From Zero](#starting-from-zero)
-- [Starting On A New System](#starting-on-a-new-system)
-  - [Installing Oh-My-Posh](#installing-oh-my-posh)
-- [Optional](#optional)
+# Table of Contents
 
-- [Intro](#intro)
-- [Starting From Zero](#starting-from-zero)
-- [Starting On A New System](#starting-on-a-new-system)
-  - [Installing Oh-My-Posh](#installing-oh-my-posh)
-- [Optional](#optional)
+- [Table of Contents](#table-of-contents)
+  - [Intro](#intro)
+  - [Starting From Zero](#starting-from-zero)
+  - [Starting On A New System](#starting-on-a-new-system)
+    - [Installing Oh-My-Posh](#installing-oh-my-posh)
+  - [Optional](#optional)
+    - [Install NerdFont](#install-nerdfont)
+    - [Install Choco](#install-choco)
+    - [Install GSudo](#install-gsudo)
+    - [Install Batcat](#install-batcat)
+    - [Install Clink](#install-clink)
+    - [Install Azure CLI](#install-azure-cli)
+    - [Install Anaconda](#install-anaconda)
+    - [Install Universal-Ctags](#install-universal-ctags)
+    - [Set WSL Variables](#set-wsl-variables)
 
 ## Intro
 
@@ -119,9 +125,13 @@ winget upgrade oh-my-posh # update/upgrade command
 
 ## Optional
 
-Add a font to vim/terminal like [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/font-downloads)
+### Install NerdFont
 
-Install [Choco](https://chocolatey.org/install)
+A font with glyphs(icons) [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/font-downloads)
+
+### Install Choco
+
+[Choco](https://chocolatey.org/install) is a app package manager for Windows
 
 ```PowerShell
 Set-ExecutionPolicy Bypass -Scope Process -Force;
@@ -129,25 +139,33 @@ Set-ExecutionPolicy Bypass -Scope Process -Force;
 iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
 
-Install `sudo` command for administrative tasks
+### Install GSudo
+
+Install `gsudo` which gives the `sudo` command for administrative tasks
 
 ```PowerShell
 choco install gsudo -y
 ```
 
-Install `bat` command for better output
+### Install Batcat
+
+An alternative to `cat` with syntax highlight
 
 ```PowerShell
 choco install bat -y
 ```
 
-Install `clink` to make `cmd.exe` more bash-like
+### Install Clink
+
+`clink` makes `cmd.exe` more bash-like with tab completion and many other features
 
 ```PowerShell
 choco install clink -y
 ```
 
-Install Azure CLI
+### Install Azure CLI
+
+Useful for doing a lot of Azure stuff
 
 ```PowerShell
 $ProgressPreference = 'SilentlyContinue';
@@ -155,20 +173,30 @@ Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI
 Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
 ```
 
-Install Anaconda
+### Install Anaconda
+
+A Python environmental variable manager
 
 ```PowerShell
 Invoke-WebRequest -Uri https://repo.anaconda.com/archive/Anaconda3-2022.05-Windows-x86_64.exe -OutFile .\Anaconda.exe;
 .\Anaconda.exe
 ```
 
-Make sure to insall this as well. Fixed weird issue with Vim and Anaconda
+Make sure to insall this as well. Fixs weird issue with Vim and Anaconda
 
 ```PowerShell
 conda install -c conda-forge vim
 ```
 
-Set WSL environment variables
+### Install Universal-Ctags
+
+Allows you to tag many built-in functions, methods, and properties
+
+Download from [here](https://github.com/universal-ctags/ctags) and put it in `Program Files` and add to system path
+
+### Set WSL Variables
+
+Set WSL environment variables to call between machines
 
 ```PowerShell
 setx WSLENV USERPROFILE/p
