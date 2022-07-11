@@ -2,10 +2,19 @@
 
 - [Table of Contents](#table-of-contents)
   - [Intro](#intro)
+  - [Dependencies](#dependencies)
   - [Starting From Zero](#starting-from-zero)
   - [Starting On A New System](#starting-on-a-new-system)
     - [Installing Oh-My-Zsh](#installing-oh-my-zsh)
   - [Optional](#optional)
+    - [Install NerdFont](#install-nerdfont)
+    - [Install Colorls](#install-colorls)
+    - [Install Batcat](#install-batcat)
+    - [Install Azure CLI](#install-azure-cli)
+    - [Install Anaconda](#install-anaconda)
+    - [Install WSL Utilities](#install-wsl-utilities)
+    - [Install WSL-Open](#install-wsl-open)
+    - [Install Python Styling Utilities](#install-python-styling-utilities)
 
 ## Intro
 
@@ -29,7 +38,7 @@ Check the other branch `windows` for that operating system
 - wslu for WSL utilities (see optional)
 - wsl-open for opening files with WSL (see optional)
 
-```bash
+```sh
 sudo apt update && sudo apt upgrade
 sudo apt install nodejs npm figlet fzf vifm xsel ranger ueberzug
 ```
@@ -38,7 +47,7 @@ sudo apt install nodejs npm figlet fzf vifm xsel ranger ueberzug
 
 On a fresh new computer, make sure to install `git` then run these commands
 
-```bash
+```sh
 git init --bare $HOME/.dotfiles
 echo "alias dit='/usr/bin/git --git-dir=$HOME/.dotfiles/ \
 --work-tree=$HOME'" >> $HOME/.zshrc
@@ -52,7 +61,7 @@ dit config --local status.showuntrackedfiles no
 
 Now we can version the files we want with `dit` i.e. same commands as `git`
 
-```bash
+```sh
 dit status
 dit add .vimrc
 dit commit -m "add vimrc"
@@ -61,14 +70,14 @@ dit push
 
 We have to add username and email to `git` if we want to commit/push
 
-```bash
+```sh
 dit config --global user.email "your@email.com"
 dit config --global user.name "yourUserName"
 ```
 
 Don't forget to declare the remote repository to push
 
-```bash
+```sh
 dit remote add origin https://github.com/Tainted-Fool/mydotfiles
 dit push -u origin <localBranchName>
 ```
@@ -77,7 +86,7 @@ dit push -u origin <localBranchName>
 
 Once the repo is up, we can clone it to a new system and pull the files
 
-```bash
+```sh
 # git clone --bare --branch <repoBranchName> <repoURL> $HOME/.dotfiles 
 git clone --bare --branch linux https://github.com/Tainted-Fool/mydotfiles \
 $HOME/.dotfiles 
@@ -92,7 +101,7 @@ dit config --local status.showuntrackedfiles no
 
 Now we can checkout the repo to acquire the neccessary files
 
-```bash
+```sh
 dit checkout
 ```
 
@@ -104,25 +113,25 @@ Finally, we need to install [Oh-My-Zsh](https://ohmyz.sh/)
 
 First, make sure you have `zsh` installed
 
-```bash
+```sh
 sudo apt install zsh
 ```
 
 Run it one time with `zsh` to setup the configs, then install the oh-my-zsh framework
 
-```bash
+```sh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 Next, add a theme for `zsh` like [Typewritten](https://github.com/reobin/typewritten)
 
-```bash
+```sh
 git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
 ```
 
 Add more plugins to `zsh`
 
-```bash
+```sh
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone https://github.com/softmoth/zsh-vim-mode $ZSH_CUSTOM/plugins/zsh-vim-mode
@@ -148,7 +157,7 @@ A font with glyphs(icons) [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/f
 
 Add color to the `ls` command
 
-```Bash
+```sh
 sudo gem install colorls
 sudo apt install ruby-full
 
@@ -160,7 +169,7 @@ sudo apt install exa
 
 An alternative to `cat` with syntax highlight
 
-```Bash
+```sh
 sudo apt install bat
 ```
 
@@ -168,7 +177,7 @@ sudo apt install bat
 
 Usful for doing a lot of Azure stuff
 
-```bash
+```sh
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py --silent
 python3 get-pip.py
 pip install azure-cli
@@ -176,19 +185,19 @@ pip install azure-cli
 
 ### Install Anaconda
 
-A python environmental variable manager
+A Python environmental variable manager
 
-```bash
-curl -sL https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh | sudo bash
+```sh
+curl -sL https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh | sudo sh
 ```
 
 ### Install WSL Utilities
 
-A collection of utilities for WSL [repo](https://github.com/wslutilities/wslu)
+A collection of utilities for WSL [repo here](https://github.com/wslutilities/wslu)
 
 > Run these commands on Debian distros
 
-```bash
+```sh
 sudo apt install gnupg2 apt-transport-https
 wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
 
@@ -203,7 +212,7 @@ sudo apt install wslu
 
 > Run these commands on Kali distros
 
-```bash
+```sh
 sudo apt install gnupg2 apt-transport-https
 wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
 echo "deb https://pkg.wslutiliti.es/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
@@ -213,7 +222,7 @@ sudo apt install wslu
 
 > Run these commands on Ubuntu distros
 
-```bash
+```sh
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
@@ -222,7 +231,7 @@ sudo apt install ubuntu-wsl
 
 Allows you to open WSL files using Windows GUI applications [repo here](https://github.com/4U6U57/wsl-open)
 
-```bash
+```sh
 curl https://raw.githubusercontent.com/4U6U57/wsl-open/master/wsl-open.sh -o wsl-open
 # OR
 sudo apt install -yqq npm
@@ -230,4 +239,16 @@ sudo npm install -g wsl-open
 # link wsl-open to xdg-open
 sudo rm $(which xdg-open)
 sudo ln -s $(which wsl-open) /usr/local/bin/xdg-open
+```
+
+### Install Python Styling Utilities
+
+If you want linting for python then here are some handy tools
+
+```python
+pip install autopep8 # python style guide checker
+pip install flake8 # lint
+pip install pylint # lint
+pip install mypy # lint
+pip install vulture # finds unused code
 ```

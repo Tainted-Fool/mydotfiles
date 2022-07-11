@@ -24,7 +24,7 @@ export HOMEC="/mnt/c/"
 export HOMED="/mnt/d/"
 
 # Declare Google drive
-export HOMEG="/mnt/g/"
+export HOMEG="/mnt/g/My Drive/"
 
 # Declare Anaconda path
 # export ANACONDA="/opt/anaconda3"
