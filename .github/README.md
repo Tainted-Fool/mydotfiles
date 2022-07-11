@@ -86,7 +86,6 @@ Install these PowerShell modules
 
 ```PowerShell
 Install-Module -Name DockerCompletion
-1
 Install-Module -Name Posh-Git
 Install-Module -Name PSReadLine
 Install-Module -Name PackageManagement
@@ -161,6 +160,12 @@ Install Anaconda
 ```PowerShell
 Invoke-WebRequest -Uri https://repo.anaconda.com/archive/Anaconda3-2022.05-Windows-x86_64.exe -OutFile .\Anaconda.exe;
 .\Anaconda.exe
+```
+
+Make sure to insall this as well. Fixed weird issue with Vim and Anaconda
+
+```PowerShell
+conda install -c conda-forge vim
 ```
 
 Set WSL environment variables
