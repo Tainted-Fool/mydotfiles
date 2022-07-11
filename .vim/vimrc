@@ -27,7 +27,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " markdo
 Plug 'iggredible/totitle-vim' " title case text - use 'gt'
 Plug 'inkarkat/vim-visualrepeat' " like vim-repeat but for VISUAL mode
 Plug 'jayli/vim-easycomplete' " code auto completion written in vimscript - run :InstallLspServer
-Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
 Plug 'junegunn/fzf.vim' " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " command-line fuzzy finder
 Plug 'junegunn/vim-peekaboo' " see contents of registries with '@' or double quotes
@@ -59,6 +58,7 @@ Plug 'vimwiki/vimwiki' " organize notes and ideas
 Plug 'voldikss/vim-floaterm' " adds a popup for the terminal
 Plug 'yegappan/mru' " to open a file from the recently used list use 'MRU:'
 Plug 'yggdroot/indentline' " adds thin vertical lines at each indentation level for code
+Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
 
 " old plugins - no longer in use
 "Plug 'ackyshake/VimCompletesMe' " tab completion for vim
@@ -389,6 +389,9 @@ nnoremap <silent> <C-Right> :bnext<Cr>
 " make a new buffer
 nnoremap <leader>t :edit newfile<Cr>
 
+" split buffer veritcal
+nnoremap <leader>t :edit newfile<Cr>
+
 """""""""""""""""
 "Custom Bindings"
 """""""""""""""""
@@ -465,11 +468,14 @@ nnoremap <silent> <leader>p :w<Cr>:!clear<Cr>:!python3 %<Cr>
 "ALE Settings"
 """"""""""""""
 nnoremap <silent> <leader>l :ALEToggle<Cr>
+nnoremap <silent> <leader>L :ALELint<Cr>
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 
-" do not start linting on file startup
+" do not start linting
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 0
 
 " set hover over feature
 let g:ale_set_balloons = 1
@@ -877,16 +883,16 @@ nnoremap gb :BackToOriginalBuffer<Cr>
 "let g:easycomplete_tab_trigger = "<C-Space>"
 
 let g:easycomplete_scheme = "rider"
-let g:easycomplete_cursor_word_hl = 1
+let g:easycomplete_cursor_word_hl = 0
 let g:easycomplete_diagnostics_enable = 1
 let g:easycomplete_lsp_checking = 1
 let g:easycomplete_signature_enable = 1
-let g:easycomplete_tabnine_enable = 1
+let g:easycomplete_tabnine_enable = 0
 
-let g:easycomplete_tabnine_config = {
-  \ "line_limiit": 800,
-  \ "max_num_result": 10
-  \ }
+" let g:easycomplete_tabnine_config = {
+"   \ "line_limiit": 800,
+"   \ "max_num_result": 10
+"   \ }
 
 let g:easycomplete_menu_skin = {
   \   "buf": {
@@ -1046,6 +1052,7 @@ let g:dict= {
       \ '<leader>u': [':source%', 'Source Vimrc'],
       \ '<leader>x': [':bdelete', 'Close Current Buffer'],
       \ '<leader>H': ['FZF', 'History'],
+      \ '<leader>L': ['ALE', 'Run Linting'],
       \ '<leader>M': ['FZF', 'Search Keybindings'],
       \ '<leader>T': ['FloatTerm', 'Open Terminal'],
       \ '<leader>W': ['FZF', 'Windows'],
@@ -1083,5 +1090,6 @@ highlight WhichKeyFloating ctermfg=grey
 """"""""""""""""""""
 "Load Vim Help Files"
 """""""""""""""""""""
-packloadall
-silent! helptags ALL
+" load vim help files
+" packloadall
+" silent! helptags ALL
