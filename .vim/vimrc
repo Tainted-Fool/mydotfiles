@@ -18,32 +18,36 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'ap/vim-css-color' " displays css colors in vim
 Plug 'chun-yang/auto-pairs' " inserts/deletes brackets, parens, and quotes in pairs
+Plug 'dense-analysis/ale' " asynchronous lint engine
 Plug 'conradirwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
-Plug 'dmerejkowsky/vim-ale' " asynchronous lint engine
 Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
 Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
 Plug 'honza/vim-snippets' " snippets engine
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " markdown preview
 Plug 'inkarkat/vim-visualrepeat' " like vim-repeat but for VISUAL mode
-Plug 'jayli/vim-easycomplete' " code auto completion written in vimscript - run :InstallLspServer
 Plug 'junegunn/fzf.vim' " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " command-line fuzzy finder
 Plug 'junegunn/vim-peekaboo' " see contents of registries with '@' or double quotes
 Plug 'liuchengxu/vim-which-key' " adds a popup that displays available keybindings
 Plug 'luochen1990/rainbow' " adds color to brackets and parenthesis
-Plug 'maksimr/vim-jsbeautify' " use jsbeautifier for JavaScript code - useful for one-liners
+Plug 'mattn/vim-lsp-settings' " lsp auto-configs
 Plug 'mhinz/vim-startify' " a start screen for Vim
+Plug 'prabirshrestha/vim-lsp' " allows vim language server protocol
+Plug 'prabirshrestha/asyncomplete.vim' " async completion
+Plug 'prabirshrestha/asyncomplete-lsp.vim' " async completion source
 Plug 'preservim/vim-markdown' " syntax highlighting, matching rule and mapping
 Plug 'preservim/nerdtree' " file explorer for vim - use ':NERDTree'
 Plug 'preservim/vim-lexical' " better spell checker
 Plug 'preservim/vim-litecorrect' " auto correct common mis-spelled words like 'teh' to 'the'
 Plug 'qpkorr/vim-renamer' " create a buffer with a list of directories to rename with :Renamer
 Plug 'rafi/awesome-vim-colorschemes' " a collection of color schemes - has onehalf and more
+Plug 'rhysd/vim-lsp-ale' " allows the combination of vim-lsp and ale
 Plug 'ryanoasis/vim-devicons' " adds icons to vim and NERDTree
 Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
 Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree
 Plug 'sirver/ultisnips' " snippets documentation for programming languages
 Plug 'terryma/vim-smooth-scroll' " smooth scrolling
+Plug 'thomasfaingnaert/vim-lsp-ultisnips' " integrates ultisnips plugin into vim-ls
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " adds color to file extensions
 Plug 'tpope/vim-abolish' " camel, Mixed, snake_, title, upper case with `crc/m/s/t/u` and `:Subvert`
 Plug 'tpope/vim-commentary' " comments stuff out - use 'gcc' or 'gc' in visual mode
@@ -51,9 +55,7 @@ Plug 'tpope/vim-fugitive' " git commands - call with :Git
 Plug 'tpope/vim-repeat' " repeat last `.` command as a whole
 Plug 'tpope/vim-surround' " surround text - use cs, ds, ys
 Plug 'tpope/vim-unimpaired' " useful mapings like ']<space>' to insert lines and many more
-Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'} " live HTML, css, and JavaScript preview
 Plug 'vim-airline/vim-airline' " status bar
-Plug 'Vimjas/vim-python-pep8-indent' " PEP8 indentation aesthetic preferences
 Plug 'vimwiki/vimwiki' " organize notes and ideas
 Plug 'voldikss/vim-floaterm' " adds a popup for the terminal
 Plug 'wsdjeg/vim-fetch' " allows you to process line and column jump with vim file:<line>:<col>
@@ -74,21 +76,24 @@ Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
 "Plug 'inkarkat/vim-SpellCheck' " adds a better spell checker
 "Plug 'inkarkat/vim-ingo-library' " dependency for vim-spellcheck
 "Plug 'itchyny/lightline.vim' " a lightweight status bar
+"Plug 'jayli/vim-easycomplete' " code auto completion written in vimscript - run :InstallLspServer
 "Plug 'jeetsukumaran/vim-python' " python text objects and motions for navigation
 "Plug 'justinmk/vim-sneak' " jump to any located specified by two characters - use 's<char><char>
 "Plug 'ludovicchabant/vim-gutentags' " generate tags
+"Plug 'maksimr/vim-jsbeautify' " use jsbeautifier for JavaScript code - useful for one-liners
 "Plug 'mg979/vim-visual-multi' " adds multiple cursors with CTRL + up/down
 "Plug 'mhinz/vim-signify' " adds VCS status
 "Plug 'michaeljsmith/vim-indent-object' " adds auto indent for objects
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} " auto completion for code
 "Plug 'raimondi/delimitMate' " automatic closing of quotes, brackets, and parentheses
-"Plug 'prabirshrestha/vim-lsp' " vim language server protocol
 "Plug 'psliwka/vim-dirtytalk, { 'do': 'DirtytalkUpdate' } " spellcheck dictionary for programmers
 "Plug 'solvedbiscuit71/vim-autopair' " inserts/deletes brackets, parens, and quotes in pairs
 "Plug 'sonph/onehalf', { 'rtp': 'vim' } " color scheme for vim layout
 "Plug 'tpope/vim-markdown' " syntax highlighting, matching rules and mapping for Markdown
+"Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'} " live HTML, css, and JavaScript preview
 "Plug 'vim-airline/vim-airline-themes' " themes for the status bar - use ':AirlineTheme <theme>'
 "Plug 'vim-syntastic/syntastic' " syntax checker and linter for various languages
+"Plug 'vimjas/vim-python-pep8-indent' " PEP8 indentation aesthetic preferences
 "Plug 'ycm-core/YouCompleteMe' " code auto completion for vim - to many dependencies
 
 call plug#end()
@@ -172,6 +177,9 @@ set cmdheight=1
 
 " set all folds to close
 set foldenable
+
+" set hidden buffers
+set hidden
 
 " set the kind of folding to be used for the current window
 set foldmethod=manual
@@ -358,7 +366,7 @@ let mapleader = " "
 "Buffer Navigation"
 """""""""""""""""""
 " splitting on a window will put the new window below/right of current one
-set splitbelow splitright
+"set splitbelow splitright
 
 " ALT + arrowkeys allows us to navigate between windows
 map <A-Left> <C-w>h
@@ -395,10 +403,10 @@ nnoremap <silent> <C-Right> :bnext<Cr>
 nnoremap <leader>t :edit newfile<Cr>
 
 " create a new vertical window
-"nnoremap <leader>| :vsplit<Cr>
+nnoremap <leader>\ :vsplit<Cr>
 
 " create a new horizontal window
-"nnoremap <leader>- :split<Cr>
+nnoremap <leader>- :split<Cr>
 
 """""""""""""""""
 "Custom Bindings"
@@ -412,7 +420,7 @@ map <silent> <leader>cm :History:<Cr>
 map <silent> <leader>M :Maps<Cr>
 
 " press <leader> ENTER to disable highlight search
-noremap <silent> <leader><Cr> :nohlsearch<Bar>:echo<Cr>
+nnoremap <silent> <leader><Cr> :set hlsearch!<Cr>
 
 " source vimrc file
 nnoremap <silent> <leader>u :source $MYVIMRC<Cr>
@@ -472,47 +480,25 @@ nnoremap <silent> <leader>p :w<Cr>:!clear<Cr>:!python %<Cr>
 "PLUGIN SETTINGS BEGIN"
 """""""""""""""""""""""
 
-""""""""""""""
-"ALE Settings"
-""""""""""""""
-nnoremap <silent> <leader>l :ALEToggle<Cr>
-nnoremap <silent> <leader>L :ALELint<Cr>
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-nmap <silent> <C-p> <Plug>(ale_previous_wrap)
-
-" only lint on save
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 1
-
-" set hover over feature
-let g:ale_set_balloons = 1
-
-" do not highlight errors
-let g:ale_set_highlights = 0
-
-" set airline bar to show error
-let g:airline#extensions#ale#enabled = 1
-
 """""""""""""""""""
 "Beautify Settings"
 """""""""""""""""""
-map <C-f> :call JsBeautify()<Cr>
+" map <C-f> :call JsBeautify()<Cr>
 
 " for JavaScript
-autocmd FileType javascript noremap <buffer>  <C-f> :call JsBeautify()<Cr>
+" autocmd FileType javascript noremap <buffer>  <C-f> :call JsBeautify()<Cr>
 
 " for json
-autocmd FileType json noremap <buffer> <C-f> :call JsonBeautify()<Cr>
+" autocmd FileType json noremap <buffer> <C-f> :call JsonBeautify()<Cr>
 
 " for jsx
-autocmd FileType jsx noremap <buffer> <C-f> :call JsxBeautify()<Cr>
+" autocmd FileType jsx noremap <buffer> <C-f> :call JsxBeautify()<Cr>
 
 " for HTML
-autocmd FileType html noremap <buffer> <C-f> :call HtmlBeautify()<Cr>
+" autocmd FileType html noremap <buffer> <C-f> :call HtmlBeautify()<Cr>
 
 " for css or scss
-autocmd FileType css noremap <buffer> <C-f> :call CSSBeautify()<Cr>
+" autocmd FileType css noremap <buffer> <C-f> :call CSSBeautify()<Cr>
 
 """"""""""""""""""""""""
 "Better Escape Settings"
@@ -524,9 +510,9 @@ let g:better_escape_shortcut = ['jj', 'ff', 'fj', 'jf']
 "Bracey Settings"
 """""""""""""""""
 " Bracey won't do anything until it is explicitly called
-map <F2> :Bracey<Cr>
-map <F3> :BraceyReload<Cr>
-map <F4> :BraceyStop<Cr>
+"  map <F2> :Bracey<Cr>
+"  map <F3> :BraceyReload<Cr>
+"  map <F4> :BraceyStop<Cr>
 
 """"""""""""""""""""
 "CamelCase Settings"
@@ -874,10 +860,10 @@ hi StartifySpecial ctermfg=240
 """""""""""""""""""""""""""
 "Vim-EasyComplete Settings"
 """""""""""""""""""""""""""
-nnoremap gr :EasyCompleteReference<Cr>
-nnoremap gd :EasyCompleteGotoDefinition<Cr>
-nnoremap rn :EasyCompleteRename<Cr>
-nnoremap gb :BackToOriginalBuffer<Cr>
+" nnoremap gr :EasyCompleteReference<Cr>
+" nnoremap gd :EasyCompleteGotoDefinition<Cr>
+" nnoremap rn :EasyCompleteRename<Cr>
+" nnoremap gb :BackToOriginalBuffer<Cr>
 
 " move down suggestions with CTRL + n/p - alternative to TAB
 " imap <<silent><<expr> <C-n> pumvisible() ? "\<down>" : "\<c-n>"
@@ -890,63 +876,63 @@ nnoremap gb :BackToOriginalBuffer<Cr>
 " change tab completion to something other than tab
 "let g:easycomplete_tab_trigger = "<C-Space>"
 
-let g:easycomplete_scheme = "rider"
-let g:easycomplete_cursor_word_hl = 0
-let g:easycomplete_diagnostics_enable = 1
-let g:easycomplete_lsp_checking = 1
-let g:easycomplete_signature_enable = 1
-let g:easycomplete_tabnine_enable = 0
+" let g:easycomplete_scheme = "rider"
+" let g:easycomplete_cursor_word_hl = 0
+" let g:easycomplete_diagnostics_enable = 1
+" let g:easycomplete_lsp_checking = 1
+" let g:easycomplete_signature_enable = 1
+" let g:easycomplete_tabnine_enable = 0
 
 " let g:easycomplete_tabnine_config = {
 "   \ "line_limiit": 800,
 "   \ "max_num_result": 10
 "   \ }
 
-let g:easycomplete_menu_skin = {
-  \   "buf": {
-  \      "kind":"羅",
-  \      "menu":"[B]",
-  \    },
-  \   "snip": {
-  \      "kind":"",
-  \      "menu":"[S]",
-  \    },
-  \   "dict": {
-  \      "kind":"",
-  \      "menu":"[D]",
-  \    },
-  \   "tabnine": {
-  \      "kind":"",
-  \    },
-  \ }
+" let g:easycomplete_menu_skin = {
+"   \   "buf": {
+"   \      "kind":"羅",
+"   \      "menu":"[B]",
+"   \    },
+"   \   "snip": {
+"   \      "kind":"",
+"   \      "menu":"[S]",
+"   \    },
+"   \   "dict": {
+"   \      "kind":"",
+"   \      "menu":"[D]",
+"   \    },
+"   \   "tabnine": {
+"   \      "kind":"",
+"   \    },
+"   \ }
 
-let g:easycomplete_sign_text = {
-  \ "error": "",
-  \ "warning": "",
-  \ "information": "",
-  \ "hint": ""
-  \ }
+" let g:easycomplete_sign_text = {
+"   \ "error": "",
+"   \ "warning": "",
+"   \ "information": "",
+"   \ "hint": ""
+"   \ }
 
-let g:easycomplete_lsp_type_font = {
-  \ "class": "", "color": "",
-  \ "constant": "", "constructor": "",
-  \ "enum": "", "enummember": "",
-  \ "field": "料", "file": "",
-  \ "folder": "", "function": "ƒ",
-  \ "interface": "", "keyword": "",
-  \ "snippet": "", "struct": "פּ",
-  \ "text": "", "typeparameter": "",
-  \ "variable": "", "module":"",
-  \ "event": "",
-  \ "r":"", "t":"",
-  \ "f":"", "c":"",
-  \ "u":"𝘶", "e":"𝘦",
-  \ "s":"פּ", "v":"",
-  \ "i":"𝘪", "m":"",
-  \ "p":"", "k":"𝘬",
-  \ "o":"𝘰", "d":"𝘥",
-  \ "l":"𝘭", "a":"𝘢"
-  \ }
+" let g:easycomplete_lsp_type_font = {
+"   \ "class": "", "color": "",
+"   \ "constant": "", "constructor": "",
+"   \ "enum": "", "enummember": "",
+"   \ "field": "料", "file": "",
+"   \ "folder": "", "function": "ƒ",
+"   \ "interface": "", "keyword": "",
+"   \ "snippet": "", "struct": "פּ",
+"   \ "text": "", "typeparameter": "",
+"   \ "variable": "", "module":"",
+"   \ "event": "",
+"   \ "r":"", "t":"",
+"   \ "f":"", "c":"",
+"   \ "u":"𝘶", "e":"𝘦",
+"   \ "s":"פּ", "v":"",
+"   \ "i":"𝘪", "m":"",
+"   \ "p":"", "k":"𝘬",
+"   \ "o":"𝘰", "d":"𝘥",
+"   \ "l":"𝘭", "a":"𝘢"
+"   \ }
 
 """"""""""""""""""""""
 "Vim-Indent-HTML Settings"
@@ -980,13 +966,13 @@ augroup END
 let g:lexical#thesaurus = ['~/.vim/thesaurus/mobythesaurus.txt']
 
 " pop-up list of suggestions
-let g:lexical#spell_key = '<leader>s'
+"let g:lexical#spell_key = '<leader>s'
 
 " pop-up thesaurus lookup
-let g:lexical#thesaurus_key = '<leader>r'
+"let g:lexical#thesaurus_key = '<leader>r'
 
 " pop-up dictionary lookup
-let g:lexical#dictionary_key = '<leader>d'
+"let g:lexical#dictionary_key = '<leader>d'
 
 """"""""""""""""""""""""""
 "Vim-LiteCorrect Settings"
@@ -997,6 +983,42 @@ augroup litecorrect
   autocmd FileType markdown,mkd call litecorrect#init()
   autocmd FileType textile call litecorrect#init()
 augroup END
+
+"""""""""""""
+"Vim-Lsp-Ale"
+"""""""""""""
+
+""""""""""""""
+"ALE Settings"
+""""""""""""""
+nnoremap <leader>l <Plug>(ale_toggle)
+nnoremap <silent> <leader>L :ALELint<Cr>
+nnoremap <silent> <leader>f :ALEFix<Cr>
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+
+" always run lint
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_enter = 1
+"let g:ale_lint_on_save = 0
+
+" set hover over feature
+"let g:ale_set_balloons = 1
+
+" do not highlight errors
+let g:ale_set_highlights = 0
+
+" set airline bar to show error
+let g:airline#extensions#ale#enabled = 1
+
+""""""""""""""
+"LSP Settings"
+""""""""""""""
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Cr> pumvisible() ? asyncomplete#close_popup() : "\<Cr>"
+imap <C-@> <Plug>(asyncomplete_force_refresh)
+nnoremap <silent> <leader>d :LspHover<Cr>
 
 """""""""""""""""""""""
 "Vim-Markdown Settings"
@@ -1047,29 +1069,25 @@ let g:dict= {
       \ '<leader>b': ['FZF', 'Buffers'],
       \ '<leader>cm': ['FZF', 'CMD History'],
       \ '<leader>co': ['FZF', 'Colors'],
-      \ '<leader>d': ['Vim-Lexical', 'Dictionary Lookup'],
+      \ '<leader>d': ['Vim-LSP', 'Documentation Lookup'],
       \ '<leader>h': ['WhichKey', 'Show Keybindings'],
+      \ '<leader>H': ['FZF', 'History'],
       \ '<leader>i': ['Startify', 'Startify Toggle'],
       \ '<leader>l': ['ALE', 'ALE Toggle'],
+      \ '<leader>L': ['ALE', 'Run Linting'],
       \ '<leader>m': ['MRU', 'View Most Recent Files'],
+      \ '<leader>M': ['FZF', 'Search Keybindings'],
       \ '<leader>n': ['NERDTree', 'NERDTree Toggle'],
       \ '<leader>p': ['Python', 'Run Python Script'],
-      \ '<leader>r': ['Vim-Lexical', 'Thesaurus Lookup'],
-      \ '<leader>s': ['Vim-Lexical', 'Spell Check Popup'],
       \ '<leader>t': [':edit', 'New Buffer'],
+      \ '<leader>T': ['FloatTerm', 'Open Terminal'],
       \ '<leader>u': [':source%', 'Source Vimrc'],
       \ '<leader>x': [':bdelete', 'Close Current Buffer'],
-      \ '<leader>H': ['FZF', 'History'],
-      \ '<leader>L': ['ALE', 'Run Linting'],
-      \ '<leader>M': ['FZF', 'Search Keybindings'],
-      \ '<leader>T': ['FloatTerm', 'Open Terminal'],
       \ '<leader>W': ['FZF', 'Windows'],
       \ 'C-a': [':nrformats', 'Increment Alphanumeric'],
       \ 'C-b': ['Smooth-Scroll', 'Page Up'],
       \ 'C-d': ['Smooth-Scroll', 'Scroll Down'],
       \ 'C-f': ['Smooth-Scroll', 'Page Down'],
-      \ 'C-j': ['Vim-EasyComplete', 'Move to Next Diagnostic'],
-      \ 'C-k': ['Vim-EasyComplete', 'Move to Previous Diagnostic'],
       \ 'C-n': ['ALE', 'Next Lint Error'],
       \ 'C-p': ['ALE', 'Previous Lint Error'],
       \ 'C-u': ['Smooth-Scroll', 'Scroll Up'],
@@ -1077,9 +1095,6 @@ let g:dict= {
       \ 'A-arrows': ['Move Between Windows', 'Move Between Windows'],
       \ 'C-arrows': [':bnext/previous', 'Move Between Buffers'],
       \ 'S-arrows': ['Resize Buffers', 'Resize Buffers'],
-      \ 'F2': ['Bracey', 'Web Server Start'],
-      \ 'F3': ['Bracey', 'Web Server Reload'],
-      \ 'F4': ['Bracey', 'Web Server Stop'],
       \ 'F5': ['Mundo', 'View Undo History'],
       \ 'F6': [':spell!', 'Spellcheck Toggle'],
       \ 'F8': ['Markdown Preview', 'MD Server Start'],

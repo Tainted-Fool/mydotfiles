@@ -15,8 +15,8 @@
     - [Install WSL Utilities](#install-wsl-utilities)
     - [Install WSL-Open](#install-wsl-open)
     - [Install Python Styling Utilities](#install-python-styling-utilities)
-    - Install Universal-Ctags
-    - Install diff-so-fancy
+    - [Install Universal-Ctags](#install-universal-ctags)
+    - [Fix iamcco/markdown-preview](#fix-iamccomarkdown-preview)
 
 ## Intro
 
