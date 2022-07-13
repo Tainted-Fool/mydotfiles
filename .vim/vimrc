@@ -25,6 +25,7 @@ Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
 Plug 'honza/vim-snippets' " snippets engine
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " markdown preview
 Plug 'inkarkat/vim-visualrepeat' " like vim-repeat but for VISUAL mode
+Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
 Plug 'junegunn/fzf.vim' " command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " command-line fuzzy finder
 Plug 'junegunn/vim-peekaboo' " see contents of registries with '@' or double quotes
@@ -32,6 +33,7 @@ Plug 'liuchengxu/vim-which-key' " adds a popup that displays available keybindin
 Plug 'luochen1990/rainbow' " adds color to brackets and parenthesis
 Plug 'mattn/vim-lsp-settings' " lsp auto-configs
 Plug 'mhinz/vim-startify' " a start screen for Vim
+Plug 'omnisharp/omnisharp-vim' " c# lsp server
 Plug 'prabirshrestha/vim-lsp' " allows vim language server protocol
 Plug 'prabirshrestha/asyncomplete.vim' " async completion
 Plug 'prabirshrestha/asyncomplete-lsp.vim' " async completion source
@@ -61,7 +63,6 @@ Plug 'voldikss/vim-floaterm' " adds a popup for the terminal
 Plug 'wsdjeg/vim-fetch' " allows you to process line and column jump with vim file:<line>:<col>
 Plug 'yegappan/mru' " to open a file from the recently used list use 'MRU:'
 Plug 'yggdroot/indentline' " adds thin vertical lines at each indentation level for code
-Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
 
 " old plugins - no longer in use
 "Plug 'ackyshake/VimCompletesMe' " tab completion for vim
@@ -85,7 +86,6 @@ Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
 "Plug 'mhinz/vim-signify' " adds VCS status
 "Plug 'michaeljsmith/vim-indent-object' " adds auto indent for objects
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} " auto completion for code
-Plug 'omnisharp/omnisharp-vim' " c# lsp server
 "Plug 'raimondi/delimitMate' " automatic closing of quotes, brackets, and parentheses
 "Plug 'psliwka/vim-dirtytalk, { 'do': 'DirtytalkUpdate' } " spellcheck dictionary for programmers
 "Plug 'solvedbiscuit71/vim-autopair' " inserts/deletes brackets, parens, and quotes in pairs
@@ -408,6 +408,9 @@ nnoremap <leader>\ :vsplit<Cr>
 
 " create a new horizontal window
 nnoremap <leader>- :split<Cr>
+
+" press 'fj' instead of ESC to switch to NORMAL mode from INSERT mode
+"inoremap fj <Esc>
 
 """""""""""""""""
 "Custom Bindings"
@@ -956,15 +959,15 @@ let g:lexical#spell = 0
 hi SpellBad ctermfg=red guifg=red
 
 " enable spell-check, thesaurus, etc. only on these file types
-augroup lexical
-  autocmd!
-  autocmd FileType markdown,mkd call lexical#init()
-  autocmd FileType textile call lexical#init()
-  autocmd FileType text call lexical#init({ 'spell': 0 })
-augroup END
+" augroup lexical
+"   autocmd!
+"   autocmd FileType markdown,mkd call lexical#init()
+"   autocmd FileType textile call lexical#init()
+"   autocmd FileType text call lexical#init({ 'spell': 0 })
+" augroup END
 
 " enable thesaurus
-let g:lexical#thesaurus = ['~/.vim/thesaurus/mobythesaurus.txt']
+"let g:lexical#thesaurus = ['~/.vim/thesaurus/mobythesaurus.txt']
 
 " pop-up list of suggestions
 "let g:lexical#spell_key = '<leader>s'
@@ -1006,7 +1009,8 @@ let g:ale_fixers = {
 
 " set linters to use
 let g:ale_linters = {
-  \   'go': ['golint'], 
+  \ 'go': ['golint'],
+  \ 'markdown': [],
   \ }
 
 " only enable lint on save
@@ -1054,15 +1058,16 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+"let g:OmniSharp_server_path = '$HOME/.local/share/vim-lsp-settings/servers/omnisharp-roslyn/run'
 let g:lsp_settings_filetype_cs = 'omnisharp-roslyn'
 
 " debugging
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
-let g:asyncomplete_log_file = expand('~/vim-asyncomplete.log')
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
+" let g:asyncomplete_log_file = expand('~/vim-asyncomplete.log')
 
+" set this if you are using WSL
 "let g:OmniSharp_translate_cygwin_wsl = 1
-"https://gist.github.com/nidev/e63d5e2afda1a30e92dc44d02e6b531a
 
 """""""""""""""""""""""
 "Vim-Markdown Settings"

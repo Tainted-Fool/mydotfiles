@@ -17,6 +17,7 @@
     - [Install Python Styling Utilities](#install-python-styling-utilities)
     - [Install Universal-Ctags](#install-universal-ctags)
     - [Fix iamcco/markdown-preview](#fix-iamccomarkdown-preview)
+    - [Install C Sharp Dependencies](#install-c-sharp-dependencies)
 
 ## Intro
 
@@ -149,6 +150,13 @@ vim-mode-bindkey viins vicmd -- down-line-or-history               '^N'
 vim-mode-bindkey       vicmd -- vi-insert                          '^J'
 ```
 
+> Switch from zsh-vi-mode, zsh-syntax-highlight to zsh-vim-mode, and fast-syntax-highlight
+
+```sh
+git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_CUSTOM/plugins/fast-syntax-highlighting
+```
+
 ## Optional
 
 ### Install NerdFont
@@ -252,7 +260,7 @@ pip install mypy # lint
 pip install vulture # finds unused code
 ```
 
-> New plugin now install mostly everything with `LspInstallServer pylsp-all`
+> New plugin installs mostly everything with `LspInstallServer pylsp-all`
 
 ### Install Universal-Ctags
 
@@ -286,7 +294,23 @@ Keept getting error getting this to work
 # comment out the plugin
 # run this command inside vim `:PlugClean`
 # run this command outside vim
-sudo npm install tslib && sudo npm install -g yarn; sudo yarn add tslib
+sudo npm install tslib
+sudo npm install -g yarn
+sudo yarn add tslib
 # un-comment the plugin
 # run this command inside vim `:PlugInstall`
+```
+
+### Install C Sharp Dependencies
+
+Allows you to develop code in c sharp `c#` for debian 10 `buster`
+
+> Install mono-project on [Windows](https://www.mono-project.com/download/stable/#download-win) for WSL
+
+```sh
+sudo apt install apt-transport-https dirmngr gnupg ca-certificates
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/debian stable-buster main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+sudo apt install mono-complete
 ```

@@ -42,21 +42,11 @@ export HOMEG="/mnt/g/My Drive/"
 # name=info_special 	section=The git status renamed and unmerged symbols. default=cyan
 export TYPEWRITTEN_COLOR_MAPPINGS="primary:#81A1C1;secondary:#B48EAD;accent:yellow;info_neutral_1:#BF616A"
 
-# Key bindings
-
-# Add to .zshrc, beofre this plugin in loaded:
-# Use `jj` instead of ESC to switch from INSERT mode to NORMAL mode - for the VIM-MODE plugin
-VIM_MODE_VICMD_KEY='fj'
-
-# Edit VIM-MODE plugin to swtich to INSERT mode from NORMAL mode
-#bindkey -M vicmd '^J' vi-insert
-#vim-mode-bindkey       vicmd -- vi-insert                          '^J'
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/kali/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # X11 forwarding
 if tasklist.exe | grep -q vcxsrv.exe; then
@@ -147,12 +137,12 @@ plugins=(
 
 # added extra plugins - these have to be downloaded from github and added to $ZSH_CUSTOM/plugins/
 plugins+=(
+	fast-syntax-highlighting 
 	zsh-aliases
-  zsh-autopair
+    zsh-autopair
 	zsh-autosuggestions 
 	zsh-functions
-	zsh-syntax-highlighting 
-	zsh-vim-mode 
+	zsh-vi-mode 
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -162,6 +152,18 @@ autopair-init
 
 # User configuration
 
+# Add to .zshrc, beofre this plugin in loaded - softmoth/zsh-vim-mode
+# Use `fj` instead of ESC to switch from INSERT mode to NORMAL mode - for the VIM-MODE plugin
+#VIM_MODE_VICMD_KEY='fj'
+
+ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BLOCK
+ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
+ZVM_VI_INSERT_ESCAPE_BINDKEY=fj
+zvm_after_init_commands+=("bindkey '^[[A' up-line-or-search" "bindkey '^[[B' down-line-or-search")
+
+# Edit VIM-MODE plugin to swtich to INSERT mode from NORMAL mode
+#bindkey -M vicmd '^J' vi-insert
+#vim-mode-bindkey       vicmd -- vi-insert                          '^J'
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
