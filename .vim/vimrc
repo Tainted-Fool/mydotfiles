@@ -85,6 +85,7 @@ Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
 "Plug 'mhinz/vim-signify' " adds VCS status
 "Plug 'michaeljsmith/vim-indent-object' " adds auto indent for objects
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} " auto completion for code
+Plug 'omnisharp/omnisharp-vim' " c# lsp server
 "Plug 'raimondi/delimitMate' " automatic closing of quotes, brackets, and parentheses
 "Plug 'psliwka/vim-dirtytalk, { 'do': 'DirtytalkUpdate' } " spellcheck dictionary for programmers
 "Plug 'solvedbiscuit71/vim-autopair' " inserts/deletes brackets, parens, and quotes in pairs
@@ -111,9 +112,9 @@ call plug#end()
 " 6 = steady bar (xterm)
 
 " set cursor for insert mode
-let &t_SI = "\e[3 q" 
+let &t_SI = "\e[3 q"
 " set cursor for everything else
-let &t_EI = "\e[1 q" 
+let &t_EI = "\e[1 q"
 
 " reset cursor on startup
 augroup ResetCursorShape
@@ -122,9 +123,9 @@ autocmd VimEnter * :normal :startinsert :stopinsert
 augroup END
 
 " set cursor on vim startup - command status bar has weird entries when this is set
-" autocmd VimEnter * silent exec "!echo -ne '\e[1 q'" 
+" autocmd VimEnter * silent exec "!echo -ne '\e[1 q'"
 " set cursor on vim exit
-" autocmd VimLeave * silent exec "!echo -ne '\e[3 q'" 
+" autocmd VimLeave * silent exec "!echo -ne '\e[3 q'"
 
 " set the timeout length for cursor to change faster
 set timeoutlen=1000 ttimeoutlen=0
@@ -320,16 +321,16 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 "  " set status bar themes and views
 "  let g:lightline = {
-"              \ 'colorscheme': 'onehalfdark', 
+"              \ 'colorscheme': 'onehalfdark',
 "              \ 'active': {
 "                  \ 'left': [['mode'],
-"                      \ ['gitbranch', 'readonly', 'absolutepath', 'modified']], 
-"                  \ 'right': [['lineinfo'], 
+"                      \ ['gitbranch', 'readonly', 'absolutepath', 'modified']],
+"                  \ 'right': [['lineinfo'],
 "                      \ ['percent'], ['fileencoding', 'filetype', 'charvaluehex']]
 "                  \ },
 "              \'component': {
 "                  \ 'charvaluehex': '0x%B'
-"                  \ }, 
+"                  \ },
 "              \ 'component_function': {
 "                  \ 'gitbranch': 'FugitiveHead', 'cocstatus': 'coc#status'
 "                  \ }
@@ -381,16 +382,16 @@ map <silent> <S-Up> :resize +5<Cr>
 map <silent> <S-Down> :resize -5<Cr>
 
 " go to tab by number
-noremap <silent> <leader>1 :bfirst<Cr>
-noremap <silent> <leader>2 :b2<Cr>
-noremap <silent> <leader>3 :b3<Cr>
-noremap <silent> <leader>4 :b4<Cr>
-noremap <silent> <leader>5 :b5<Cr>
-noremap <silent> <leader>6 :b6<Cr>
-noremap <silent> <leader>7 :b7<Cr>
-noremap <silent> <leader>8 :b8<Cr>
-noremap <silent> <leader>9 :b9<Cr>
-noremap <silent> <leader>0 :blast<Cr>
+" noremap <silent> <leader>1 :bfirst<Cr>
+" noremap <silent> <leader>2 :b2<Cr>
+" noremap <silent> <leader>3 :b3<Cr>
+" noremap <silent> <leader>4 :b4<Cr>
+" noremap <silent> <leader>5 :b5<Cr>
+" noremap <silent> <leader>6 :b6<Cr>
+" noremap <silent> <leader>7 :b7<Cr>
+" noremap <silent> <leader>8 :b8<Cr>
+" noremap <silent> <leader>9 :b9<Cr>
+" noremap <silent> <leader>0 :blast<Cr>
 
 " close current buffer
 nnoremap <silent> <leader>x :bdelete %<Cr>
@@ -412,7 +413,7 @@ nnoremap <leader>- :split<Cr>
 "Custom Bindings"
 """""""""""""""""
 " FZF commands
-map <silent> <leader>co :Colors<Cr>
+map <silent> <leader>C :Colors<Cr>
 map <silent> <leader>b :Buffers<Cr>
 map <silent> <leader>W :Windows<Cr>
 map <silent> <leader>H :History<Cr>
@@ -510,9 +511,9 @@ let g:better_escape_shortcut = ['jj', 'ff', 'fj', 'jf']
 "Bracey Settings"
 """""""""""""""""
 " Bracey won't do anything until it is explicitly called
-"  map <F2> :Bracey<Cr>
-"  map <F3> :BraceyReload<Cr>
-"  map <F4> :BraceyStop<Cr>
+" map <F2> :Bracey<Cr>
+" map <F3> :BraceyReload<Cr>
+" map <F4> :BraceyStop<Cr>
 
 """"""""""""""""""""
 "CamelCase Settings"
@@ -523,7 +524,7 @@ let g:better_escape_shortcut = ['jj', 'ff', 'fj', 'jf']
 """""""""""""""""""
 "Coc.nvim Settings"
 """""""""""""""""""
-"  " textedit fails if hidden is not set 
+"  " textedit fails if hidden is not set
 "  set hidden
 
 "  " some servers have issues with backup files
@@ -724,7 +725,7 @@ let g:NERDCommentEmptyLines = 1
 " enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" enable NERDCommenterToggle to check all selected lines is commented or not 
+" enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 """""""""""""""""""""""""""""""
@@ -797,7 +798,7 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 0, 4)<Cr>
 "Snippets Settings"
 """""""""""""""""""
 " use END key to trigger the snippets, default was tab but that conflicts with the Completion trigger
-" see ':h keycodes' to change this to something else 
+" see ':h keycodes' to change this to something else
 " let g:UltiSnipsExpandTrigger='<END>'
 
 " use CTRL + PgDn to list the available snippets
@@ -866,8 +867,8 @@ hi StartifySpecial ctermfg=240
 " nnoremap gb :BackToOriginalBuffer<Cr>
 
 " move down suggestions with CTRL + n/p - alternative to TAB
-" imap <<silent><<expr> <C-n> pumvisible() ? "\<down>" : "\<c-n>"
-" imap <<silent><<expr> <C-p> pumvisible() ? "\<up>" : "\<c-p>"
+" imap <silent><<expr> <C-n> pumvisible() ? "\<down>" : "\<c-n>"
+" imap <silent><<expr> <C-p> pumvisible() ? "\<up>" : "\<c-p>"
 
 " these are the default key bindings for Diagnostic navigation
 " nnoremap <silent> <C-k> :EasyCompleteNextDiagnostic<Cr>
@@ -992,18 +993,29 @@ augroup END
 "ALE Settings"
 """"""""""""""
 nnoremap <leader>l <Plug>(ale_toggle)
-nnoremap <silent> <leader>L :ALELint<Cr>
-nnoremap <silent> <leader>f :ALEFix<Cr>
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nnoremap <silent> <leader>L <Plug>(ale_lint)
+nnoremap <silent> <leader>f <Plug>(ale_fix)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 
-" always run lint
+" set fixers to use
+let g:ale_fixers = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'javascript' : ['prettier'],
+  \ }
+
+" set linters to use
+let g:ale_linters = {
+  \   'go': ['golint'], 
+  \ }
+
+" only enable lint on save
 "let g:ale_lint_on_text_changed = 'never'
-"let g:ale_lint_on_enter = 1
-"let g:ale_lint_on_save = 0
+"let g:ale_lint_on_enter = 0
+"let g:ale_lint_on_save = 1
 
 " set hover over feature
-"let g:ale_set_balloons = 1
+let g:ale_set_balloons = 1
 
 " do not highlight errors
 let g:ale_set_highlights = 0
@@ -1014,11 +1026,43 @@ let g:airline#extensions#ale#enabled = 1
 """"""""""""""
 "LSP Settings"
 """"""""""""""
+" set auto-completion
+let g:UltiSnipsExpandTrigger='<END>'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Cr> pumvisible() ? asyncomplete#close_popup() : "\<Cr>"
-imap <C-@> <Plug>(asyncomplete_force_refresh)
-nnoremap <silent> <leader>d :LspHover<Cr>
+
+" mappings to common code navigation
+nnoremap gd <Plug>(lsp-definition)
+nnoremap gr <Plug>(lsp-references)
+nnoremap gi <Plug>(lsp-references)
+nnoremap gt <Plug>(lsp-type-definition)
+nnoremap [g <Plug>(lsp-previous-diagnostic)
+nnoremap ]g <Plug>(lsp-next-diagnostic)
+nnoremap K <Plug>(lsp-hover)
+
+" set CTRL + space or tab to trigger completion
+inoremap <C-@> <Plug>(asyncomplete_force_refresh)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+let g:lsp_settings_filetype_cs = 'omnisharp-roslyn'
+
+" debugging
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+let g:asyncomplete_log_file = expand('~/vim-asyncomplete.log')
+
+"let g:OmniSharp_translate_cygwin_wsl = 1
+"https://gist.github.com/nidev/e63d5e2afda1a30e92dc44d02e6b531a
 
 """""""""""""""""""""""
 "Vim-Markdown Settings"
@@ -1064,12 +1108,11 @@ let g:which_key_max_size = 1
 let g:which_key_disable_default_offset = 1
 
 let g:dict= {
-      \ '<leader>0': [':blast', 'Goto Last Buffer'],
-      \ '<leader>1-9': [':b<num>', 'Go to Buffer by Number'],
       \ '<leader>b': ['FZF', 'Buffers'],
       \ '<leader>cm': ['FZF', 'CMD History'],
-      \ '<leader>co': ['FZF', 'Colors'],
+      \ '<leader>C': ['FZF', 'Colors'],
       \ '<leader>d': ['Vim-LSP', 'Documentation Lookup'],
+      \ '<leader>f': ['ALE', 'Lint Fix'],
       \ '<leader>h': ['WhichKey', 'Show Keybindings'],
       \ '<leader>H': ['FZF', 'History'],
       \ '<leader>i': ['Startify', 'Startify Toggle'],
@@ -1088,8 +1131,8 @@ let g:dict= {
       \ 'C-b': ['Smooth-Scroll', 'Page Up'],
       \ 'C-d': ['Smooth-Scroll', 'Scroll Down'],
       \ 'C-f': ['Smooth-Scroll', 'Page Down'],
-      \ 'C-n': ['ALE', 'Next Lint Error'],
-      \ 'C-p': ['ALE', 'Previous Lint Error'],
+      \ 'C-j': ['ALE', 'Next Lint Error'],
+      \ 'C-k': ['ALE', 'Previous Lint Error'],
       \ 'C-u': ['Smooth-Scroll', 'Scroll Up'],
       \ 'C-x': ['Nrformats', 'Decrement Alphanumeric'],
       \ 'A-arrows': ['Move Between Windows', 'Move Between Windows'],
@@ -1101,9 +1144,9 @@ let g:dict= {
       \ }
 
 " change WhichKey menu colors
-highlight WhichKey ctermfg=blue
-highlight WhichKeySeperator ctermfg=green
-highlight WhichKeyDesc ctermfg=red
+"highlight WhichKey ctermfg=blue
+"highlight WhichKeySeperator ctermfg=green
+"highlight WhichKeyDesc ctermfg=red
 highlight WhichKeyFloating ctermfg=grey
 
 """""""""""""""""""""

@@ -248,12 +248,11 @@ sudo ln -s $(which wsl-open) /usr/local/bin/xdg-open
 If you want linting for python then here are some handy tools
 
 ```python
-pip install autopep8 # python style guide checker
-pip install flake8 # lint
-pip install pylint # lint
 pip install mypy # lint
 pip install vulture # finds unused code
 ```
+
+> New plugin now install mostly everything with `LspInstallServer pylsp-all`
 
 ### Install Universal-Ctags
 
