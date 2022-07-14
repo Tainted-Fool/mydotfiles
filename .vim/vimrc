@@ -33,6 +33,7 @@ Plug 'liuchengxu/vim-which-key' " adds a popup that displays available keybindin
 Plug 'luochen1990/rainbow' " adds color to brackets and parenthesis
 Plug 'mattn/vim-lsp-settings' " lsp auto-configs
 Plug 'mhinz/vim-startify' " a start screen for Vim
+Plug 'nickspoons/vim-sharpenup' " mappings, code actions, and statusline for c#
 Plug 'omnisharp/omnisharp-vim' " c# lsp server
 Plug 'prabirshrestha/vim-lsp' " allows vim language server protocol
 Plug 'prabirshrestha/asyncomplete.vim' " async completion
@@ -47,7 +48,7 @@ Plug 'rhysd/vim-lsp-ale' " allows the combination of vim-lsp and ale
 Plug 'ryanoasis/vim-devicons' " adds icons to vim and NERDTree
 Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
 Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree
-Plug 'sirver/ultisnips' " snippets documentation for programming languages
+Plug 'sirver/ultisnips' " snippets for various programming languages
 Plug 'terryma/vim-smooth-scroll' " smooth scrolling
 Plug 'thomasfaingnaert/vim-lsp-ultisnips' " integrates ultisnips plugin into vim-ls
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " adds color to file extensions
@@ -149,6 +150,7 @@ filetype plugin indent on
 
 " set encoding and font
 set encoding=utf-8
+scriptencoding utf-8
 
 " set what shell vim to use
 set shell=zsh
@@ -179,7 +181,7 @@ set cmdheight=1
 " set all folds to close
 set foldenable
 
-" set hidden buffers
+" hide buffer when abandon
 set hidden
 
 " set the kind of folding to be used for the current window
@@ -223,7 +225,7 @@ set expandtab
 " set auto indent - copy indent from current line when starting a new line
 set autoindent
 
-" set the number of spaces to use for each step of autoindent
+" set the number of spaces to use for each step of autoindent `>>` or `<<`
 set shiftwidth=4
 
 " set the number of spaces that a tab in the file counts for
@@ -251,13 +253,27 @@ set mouse=a
 set guicursor+=a:blinkon0
 
 " shorter updatetime for less delay
-set updatetime=300
+set updatetime=1000
 
 " set spell checking language
 set spelllang=en_us
 
 " remove annoying message with switching between buffers
 set hidden
+
+" set completion options in insert mode
+set completeopt=menuone,noinsert,noselect,popuphidden
+set completepopup=highlight:Pmenu,border:off
+
+" when splitting a window, it will move it below or right or current
+set splitbelow
+set splitright
+
+" set statusline on all windows
+set laststatus=2
+
+" set title as filename
+set title
 
 " set ripgrep as search
 " set grepprg=rg\ --vimgrep\ --smart-case\ --follow
@@ -366,9 +382,6 @@ let mapleader = " "
 """""""""""""""""""
 "Buffer Navigation"
 """""""""""""""""""
-" splitting on a window will put the new window below/right of current one
-"set splitbelow splitright
-
 " ALT + arrowkeys allows us to navigate between windows
 map <A-Left> <C-w>h
 map <A-Down> <C-w>j
@@ -823,12 +836,13 @@ nnoremap <leader>i :Startify<Cr>
 
 " bookmarks - syntax is clear; add your own
 let g:startify_bookmarks = [ {'I': '~/i3/i3/config'},{'L': '~/.blerc'},{'Z': '~/.zshrc'},{'B': '~/.bashrc'},{'V': '~/.vimrc'}]
-    let g:startify_lists = [
-          \ { 'type': 'bookmarks' , 'header': ['   Bookmarks']      } ,
-          \ { 'type': 'files'     , 'header': ['   Recent'   ]      } ,
-          \ { 'type': 'sessions'  , 'header': ['   Sessions' ]      } ,
-          \ { 'type': 'commands'  , 'header': ['   Commands' ]      } ,
-          \ ]
+
+let g:startify_lists = [
+\ { 'type': 'bookmarks' , 'header': ['   Bookmarks']      } ,
+\ { 'type': 'files'     , 'header': ['   Recent'   ]      } ,
+\ { 'type': 'sessions'  , 'header': ['   Sessions' ]      } ,
+\ { 'type': 'commands'  , 'header': ['   Commands' ]      } ,
+\ ]
 
 hi StartifyBracket ctermfg=240
 hi StartifyFile    ctermfg=147
@@ -996,22 +1010,30 @@ augroup END
 "ALE Settings"
 """"""""""""""
 nnoremap <leader>l <Plug>(ale_toggle)
-nnoremap <silent> <leader>L <Plug>(ale_lint)
-nnoremap <silent> <leader>f <Plug>(ale_fix)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nnoremap <leader>L <Plug>(ale_lint)
+nnoremap <leader>f <Plug>(ale_fix)
+nnoremap ]m <Plug>(ale_next_wrap)
+nnoremap [m <Plug>(ale_previous_wrap)
 
 " set fixers to use
 let g:ale_fixers = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'javascript' : ['prettier'],
-  \ }
+\ '*': ['remove_trailing_lines', 'trim_whitespace'],
+\ 'javascript' : ['prettier'],
+\ }
 
 " set linters to use
 let g:ale_linters = {
-  \ 'go': ['golint'],
-  \ 'markdown': [],
-  \ }
+\ 'cs': ['OmniSharp'],
+\ 'go': ['golint'],
+\ 'markdown': [],
+\ }
+
+" set symbols for all the ale warnings
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
+let g:ale_sign_info = ''
+let g:ale_sign_style_error = '·'
+let g:ale_sign_style_warning = '·'
 
 " only enable lint on save
 "let g:ale_lint_on_text_changed = 'never'
@@ -1019,7 +1041,7 @@ let g:ale_linters = {
 "let g:ale_lint_on_save = 1
 
 " set hover over feature
-let g:ale_set_balloons = 1
+"let g:ale_set_balloons = 1
 
 " do not highlight errors
 let g:ale_set_highlights = 0
@@ -1030,14 +1052,22 @@ let g:airline#extensions#ale#enabled = 1
 """"""""""""""
 "LSP Settings"
 """"""""""""""
-" set auto-completion
-let g:UltiSnipsExpandTrigger='<END>'
+let g:UltiSnipsExpandTrigger=']S'
+let g:UltiSnipsListSnippets='<C-Tab>'
+let g:UltiSnipsJumpForwardTrigger=']s'
+let g:UltiSnipsJumpBackwardTrigger='[s'
+
+" set auto complete to allow popups
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 0
+
+" set auto-completion - ultisnips conflicted with TAB
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Cr> pumvisible() ? asyncomplete#close_popup() : "\<Cr>"
 
 " mappings to common code navigation
-nnoremap gd <Plug>(lsp-definition)
+nnoremap gD <Plug>(lsp-definition)
 nnoremap gr <Plug>(lsp-references)
 nnoremap gi <Plug>(lsp-references)
 nnoremap gt <Plug>(lsp-type-definition)
@@ -1045,7 +1075,7 @@ nnoremap [g <Plug>(lsp-previous-diagnostic)
 nnoremap ]g <Plug>(lsp-next-diagnostic)
 nnoremap K <Plug>(lsp-hover)
 
-" set CTRL + space or tab to trigger completion
+" set CTRL + SPACE or tab to trigger completion
 inoremap <C-@> <Plug>(asyncomplete_force_refresh)
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -1058,16 +1088,52 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-"let g:OmniSharp_server_path = '$HOME/.local/share/vim-lsp-settings/servers/omnisharp-roslyn/run'
-let g:lsp_settings_filetype_cs = 'omnisharp-roslyn'
-
-" debugging
+" enable for debugging
 " let g:lsp_log_verbose = 1
 " let g:lsp_log_file = expand('~/vim-lsp.log')
 " let g:asyncomplete_log_file = expand('~/vim-asyncomplete.log')
 
+"""""""""""""""""""
+"OmniSharp Setting"
+"""""""""""""""""""
+" set c sharp server
+"let g:OmniSharp_server_path = '$HOME/.local/share/vim-lsp-settings/servers/omnisharp-roslyn/run'
+let g:lsp_settings_filetype_cs = 'omnisharp-roslyn'
+
+" set 'fzf' to find stuff
+let g:OmniSharp_selector_ui = 'fzf'
+let g:OmniSharp_selector_findusages = 'fzf'
+
+" allow peek for popup window
+let g:OmniSharp_popup_position = 'peek'
+
 " set this if you are using WSL
 "let g:OmniSharp_translate_cygwin_wsl = 1
+
+" keep sharpen-up default key mappings
+let g:sharpenup_map_prefix = '<leader>os'
+
+" set statusline for omnisharp sharpen-up
+let g:sharpenup_statusline_opts = {'Text': '%s (%p/%p)'}
+let g:sharpenup_statusline_opts.Highlight = 0
+
+let g:OmniSharp_popup_options = {
+\ 'highlight': 'Normal',
+\ 'padding': [0],
+\ 'border': [1],
+\ 'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
+\ 'borderhighlight': ['ModeMsg']
+\}
+
+let g:OmniSharp_popup_mappings = {
+\ 'sigNext': '<C-j>',
+\ 'sigPrev': '<C-k>',
+\ 'sigParamNext': '<C-l>',
+\ 'sigParamPrev': '<C-h>'
+\ }
+
+let g:OmniSharp_popup = 1
+let g:OmniSharp_want_snippet = 1
 
 """""""""""""""""""""""
 "Vim-Markdown Settings"
@@ -1113,40 +1179,40 @@ let g:which_key_max_size = 1
 let g:which_key_disable_default_offset = 1
 
 let g:dict= {
-      \ '<leader>b': ['FZF', 'Buffers'],
-      \ '<leader>cm': ['FZF', 'CMD History'],
-      \ '<leader>C': ['FZF', 'Colors'],
-      \ '<leader>d': ['Vim-LSP', 'Documentation Lookup'],
-      \ '<leader>f': ['ALE', 'Lint Fix'],
-      \ '<leader>h': ['WhichKey', 'Show Keybindings'],
-      \ '<leader>H': ['FZF', 'History'],
-      \ '<leader>i': ['Startify', 'Startify Toggle'],
-      \ '<leader>l': ['ALE', 'ALE Toggle'],
-      \ '<leader>L': ['ALE', 'Run Linting'],
-      \ '<leader>m': ['MRU', 'View Most Recent Files'],
-      \ '<leader>M': ['FZF', 'Search Keybindings'],
-      \ '<leader>n': ['NERDTree', 'NERDTree Toggle'],
-      \ '<leader>p': ['Python', 'Run Python Script'],
-      \ '<leader>t': [':edit', 'New Buffer'],
-      \ '<leader>T': ['FloatTerm', 'Open Terminal'],
-      \ '<leader>u': [':source%', 'Source Vimrc'],
-      \ '<leader>x': [':bdelete', 'Close Current Buffer'],
-      \ '<leader>W': ['FZF', 'Windows'],
-      \ 'C-a': [':nrformats', 'Increment Alphanumeric'],
-      \ 'C-b': ['Smooth-Scroll', 'Page Up'],
-      \ 'C-d': ['Smooth-Scroll', 'Scroll Down'],
-      \ 'C-f': ['Smooth-Scroll', 'Page Down'],
-      \ 'C-j': ['ALE', 'Next Lint Error'],
-      \ 'C-k': ['ALE', 'Previous Lint Error'],
-      \ 'C-u': ['Smooth-Scroll', 'Scroll Up'],
-      \ 'C-x': ['Nrformats', 'Decrement Alphanumeric'],
-      \ 'A-arrows': ['Move Between Windows', 'Move Between Windows'],
-      \ 'C-arrows': [':bnext/previous', 'Move Between Buffers'],
-      \ 'S-arrows': ['Resize Buffers', 'Resize Buffers'],
-      \ 'F5': ['Mundo', 'View Undo History'],
-      \ 'F6': [':spell!', 'Spellcheck Toggle'],
-      \ 'F8': ['Markdown Preview', 'MD Server Start'],
-      \ }
+\ '<leader>b': ['FZF', 'Buffers'],
+\ '<leader>cm': ['FZF', 'CMD History'],
+\ '<leader>C': ['FZF', 'Colors'],
+\ '<leader>d': ['Vim-LSP', 'Documentation Lookup'],
+\ '<leader>f': ['ALE', 'Lint Fix'],
+\ '<leader>h': ['WhichKey', 'Show Keybindings'],
+\ '<leader>H': ['FZF', 'History'],
+\ '<leader>i': ['Startify', 'Startify Toggle'],
+\ '<leader>l': ['ALE', 'ALE Toggle'],
+\ '<leader>L': ['ALE', 'Run Linting'],
+\ '<leader>m': ['MRU', 'View Most Recent Files'],
+\ '<leader>M': ['FZF', 'Search Keybindings'],
+\ '<leader>n': ['NERDTree', 'NERDTree Toggle'],
+\ '<leader>p': ['Python', 'Run Python Script'],
+\ '<leader>t': [':edit', 'New Buffer'],
+\ '<leader>T': ['FloatTerm', 'Open Terminal'],
+\ '<leader>u': [':source%', 'Source Vimrc'],
+\ '<leader>x': [':bdelete', 'Close Current Buffer'],
+\ '<leader>W': ['FZF', 'Windows'],
+\ 'C-a': [':nrformats', 'Increment Alphanumeric'],
+\ 'C-b': ['Smooth-Scroll', 'Page Up'],
+\ 'C-d': ['Smooth-Scroll', 'Scroll Down'],
+\ 'C-f': ['Smooth-Scroll', 'Page Down'],
+\ 'C-j': ['ALE', 'Next Lint Error'],
+\ 'C-k': ['ALE', 'Previous Lint Error'],
+\ 'C-u': ['Smooth-Scroll', 'Scroll Up'],
+\ 'C-x': ['Nrformats', 'Decrement Alphanumeric'],
+\ 'A-arrows': ['Move Between Windows', 'Move Between Windows'],
+\ 'C-arrows': [':bnext/previous', 'Move Between Buffers'],
+\ 'S-arrows': ['Resize Buffers', 'Resize Buffers'],
+\ 'F5': ['Mundo', 'View Undo History'],
+\ 'F6': [':spell!', 'Spellcheck Toggle'],
+\ 'F8': ['Markdown Preview', 'MD Server Start'],
+\ }
 
 " change WhichKey menu colors
 "highlight WhichKey ctermfg=blue

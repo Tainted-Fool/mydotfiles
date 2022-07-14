@@ -136,23 +136,7 @@ Add more plugins to `zsh`
 
 ```sh
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-git clone https://github.com/softmoth/zsh-vim-mode $ZSH_CUSTOM/plugins/zsh-vim-mode
 git clone https://github.com/hlissner/zsh-autopair $ZSH_CUSTOM/plugins/zsh-autopair
-```
-
-Modify the `zsh-vim-mode` plugin. Add 3 new lines after line 176(see below) and
-delete lines 197-210 from the plugin
-
-```vim
-vim-mode-bindkey viins vicmd -- up-line-or-history                 '^P'
-vim-mode-bindkey viins vicmd -- down-line-or-history               '^N'
-vim-mode-bindkey       vicmd -- vi-insert                          '^J'
-```
-
-> Switch from zsh-vi-mode, zsh-syntax-highlight to zsh-vim-mode, and fast-syntax-highlight
-
-```sh
 git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_CUSTOM/plugins/fast-syntax-highlighting
 ```

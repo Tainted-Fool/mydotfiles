@@ -137,9 +137,9 @@ plugins=(
 
 # added extra plugins - these have to be downloaded from github and added to $ZSH_CUSTOM/plugins/
 plugins+=(
+    zsh-autopair
 	fast-syntax-highlighting 
 	zsh-aliases
-    zsh-autopair
 	zsh-autosuggestions 
 	zsh-functions
 	zsh-vi-mode 
