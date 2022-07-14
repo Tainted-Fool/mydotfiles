@@ -298,8 +298,10 @@ rm packages-microsoft-prod.deb
 sudo apt update
 sudo apt install -y apt-transport-https
 sudo apt-get install -y dotnet-sdk-6.0
+sudo apt-get install -y dotnet-sdk-5.0
 sudo apt-get install -y dotnet-sdk-3.1
 
+# mono installation - this is only if using dotnet-sdk-3.1
 sudo apt install apt-transport-https dirmngr gnupg ca-certificates
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 echo "deb https://download.mono-project.com/repo/debian stable-buster main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list

@@ -50,8 +50,8 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # X11 forwarding
 if tasklist.exe | grep -q vcxsrv.exe; then
-  export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-  export LIBGL_ALWAYS_INDIRECT=1
+    export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+    export LIBGL_ALWAYS_INDIRECT=1
 fi
 
 # Set name of the theme to load --- if set to "random", it will
@@ -122,33 +122,30 @@ ZSH_THEME="typewritten/typewritten"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	colored-man-pages
-	compleat 
-	copybuffer 
-	copyfile 
-	copypath 
-	encode64 
-	extract 
-	history 
-	git 
-	urltools 
-	web-search 
-	z
+    compleat
+    copybuffer
+    copyfile
+    copypath
+    encode64
+    extract
+    history
+    git
+    urltools
+    web-search
+    z
 )
 
 # added extra plugins - these have to be downloaded from github and added to $ZSH_CUSTOM/plugins/
 plugins+=(
+    fast-syntax-highlighting
+    zsh-aliases
+    zsh-autosuggestions
+    zsh-functions
+    zsh-vi-mode
     zsh-autopair
-	fast-syntax-highlighting 
-	zsh-aliases
-	zsh-autosuggestions 
-	zsh-functions
-	zsh-vi-mode 
 )
 
 source $ZSH/oh-my-zsh.sh
-
-# Activate `zsh-autopair`
-autopair-init
 
 # User configuration
 
@@ -205,4 +202,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Activate `zsh-autopair`
+autopair-init
 
