@@ -14,10 +14,11 @@
     - [Install Anaconda](#install-anaconda)
     - [Install WSL Utilities](#install-wsl-utilities)
     - [Install WSL-Open](#install-wsl-open)
-    - [Install Python Styling Utilities](#install-python-styling-utilities)
     - [Install Universal-Ctags](#install-universal-ctags)
     - [Fix iamcco/markdown-preview](#fix-iamccomarkdown-preview)
     - [Install C Sharp Dependencies](#install-c-sharp-dependencies)
+    - [Install Python Dependencies](#install-python-dependencies)
+    - [Install Lunar Nvim](#install-lunar-nvim)
 
 ## Intro
 
@@ -235,17 +236,6 @@ sudo rm $(which xdg-open)
 sudo ln -s $(which wsl-open) /usr/local/bin/xdg-open
 ```
 
-### Install Python Styling Utilities
-
-If you want linting for python then here are some handy tools
-
-```python
-pip install mypy # lint
-pip install vulture # finds unused code
-```
-
-> New plugin installs mostly everything with `LspInstallServer pylsp-all`
-
 ### Install Universal-Ctags
 
 Allows you to tag many built-in functions, methods, and properties
@@ -307,4 +297,26 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328
 echo "deb https://download.mono-project.com/repo/debian stable-buster main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 sudo apt update
 sudo apt install mono-complete
+```
+
+### Install Python Dependencies
+
+If you want linting for python then here are some handy tools
+
+```sh
+pip install mypy # lint
+pip install vulture # finds unused code
+```
+
+> New plugins install mostly everything with `:LspInstallServer`
+
+### Install Lunar Nvim
+
+IDE for Vim. Need [Nvim 0.7.2+](https://github.com/neovim/neovim/releases)
+
+> Make sure you have `git`, `make`, `pip`, `npm`, `node`, and `cargo` installed
+
+```sh
+sudo apt install git make pip npm node cargo
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```

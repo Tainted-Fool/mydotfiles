@@ -20,6 +20,7 @@ Plug 'ap/vim-css-color' " displays css colors in vim
 Plug 'chun-yang/auto-pairs' " inserts/deletes brackets, parens, and quotes in pairs
 Plug 'dense-analysis/ale' " asynchronous lint engine
 Plug 'conradirwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
+Plug 'davidhalter/jedi-vim' " python auto-completion and vim key bindings
 Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
 Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
 "Plug 'honza/vim-snippets' " snippets engine
@@ -834,7 +835,6 @@ nnoremap <leader>i :Startify<Cr>
  let g:startify_custom_header =
        \ startify#pad(split(system('figlet -w 100 Vim'), '\n'))
 
-
 " bookmarks - syntax is clear; add your own
 let g:startify_bookmarks = [ {'I': '~/i3/i3/config'},{'L': '~/.blerc'},{'Z': '~/.zshrc'},{'B': '~/.bashrc'},{'V': '~/.vimrc'}]
 
@@ -1013,8 +1013,8 @@ augroup END
 nnoremap <leader>l <Plug>(ale_toggle)
 nnoremap <leader>L <Plug>(ale_lint)
 nnoremap <leader>f <Plug>(ale_fix)
-nnoremap ]m <Plug>(ale_next_wrap)
-nnoremap [m <Plug>(ale_previous_wrap)
+nnoremap gn <Plug>(ale_next_wrap)
+nnoremap gN <Plug>(ale_previous_wrap)
 
 " set fixers to use
 let g:ale_fixers = {
@@ -1053,16 +1053,50 @@ let g:airline#extensions#ale#enabled = 1
 """""""""""""""""""""""
 "Asyncomplete Settings"
 """""""""""""""""""""""
-" set auto complete to allow popups
+" set auto complete to allow popups and define out options below
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 0
 
 " set completion options in insert mode - switch `popuphidden` to `preview` to not show a popup
-set completeopt=menuone,noinsert,noselect,popuphidden
-set completepopup=highlight:Pmenu,border:off
+if has('patch-8.1.1880')
+    set completeopt=menuone,noinsert,noselect,popuphidden
+    set completepopup=highlight:Pmenu,border:off
+else
+    set completeopt=menuone,noinsert,noselect
+endif
 
 " auto close preview windows when completion is done
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+"""""""""""""""""""
+"Jedi-Vim Settings"
+"""""""""""""""""""
+" do not start the completion when you type a dot
+"let g:jedi#popup_on_dot = 0
+
+" do not select the first line in the completion popup
+"let g:jedi#popup_select_first = 0
+
+" do not auto complete
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_enabled = 0
+
+" enable smart mapping
+let g:jedi#smart_auto_mappings = 1
+
+" set these keybindings
+let g:jedi#usages_command = 'gu'
+let g:jedi#documentation_command = 'K'
+
+" do not display function signatures when typing
+let g:jedi#show_call_signatures = 0
+
+"  autocmd FileType python,py call Pyremaps()
+"  fu! Pyremaps()
+"    nnoremap <silent><buffer> gh :call jedi#show_documentation()<Cr>
+"    nnoremap <silent><buffer> <C-\> :call jedi#show_call_signatures()<Cr>
+"    nnoremap <silent><buffer> <leader>rn :call jedi#rename()<Cr>
+"  endfu
 
 """"""""""""""
 "LSP Settings"
@@ -1100,7 +1134,7 @@ endfunction
 
 " set which lsp server to use
 let g:lsp_settings_filetype_cs = 'omnisharp-roslyn'
-"let g:lsp_settings_filetype_python = 'jedi-language-server'
+let g:lsp_settings_filetype_python = 'jedi-language-server'
 
 " set semantic highlighting
 let g:lsp_semantic_enabled = 1
