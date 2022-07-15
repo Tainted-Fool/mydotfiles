@@ -22,7 +22,7 @@ Plug 'dense-analysis/ale' " asynchronous lint engine
 Plug 'conradirwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
 Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
 Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
-Plug 'honza/vim-snippets' " snippets engine
+"Plug 'honza/vim-snippets' " snippets engine
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " markdown preview
 Plug 'inkarkat/vim-visualrepeat' " like vim-repeat but for VISUAL mode
 Plug 'jdhao/better-escape.vim' " no lag when pressing ESC or keybindings to ESC
@@ -36,6 +36,7 @@ Plug 'mhinz/vim-startify' " a start screen for Vim
 Plug 'nickspoons/vim-sharpenup' " mappings, code actions, and statusline for c#
 Plug 'omnisharp/omnisharp-vim' " c# lsp server
 Plug 'prabirshrestha/vim-lsp' " allows vim language server protocol
+"Plug 'prabirshrestha/async.vim' " allows for asynchronous features like snippets
 Plug 'prabirshrestha/asyncomplete.vim' " async completion
 Plug 'prabirshrestha/asyncomplete-lsp.vim' " async completion source
 Plug 'preservim/vim-markdown' " syntax highlighting, matching rule and mapping
@@ -48,9 +49,10 @@ Plug 'rhysd/vim-lsp-ale' " allows the combination of vim-lsp and ale
 Plug 'ryanoasis/vim-devicons' " adds icons to vim and NERDTree
 Plug 'sheerun/vim-polyglot' " syntax highlighting for various languages
 Plug 'simnalamburt/vim-mundo' " visualize the vim undo tree
-Plug 'sirver/ultisnips' " snippets for various programming languages
+"Plug 'sirver/ultisnips' " snippets for various programming languages
 Plug 'terryma/vim-smooth-scroll' " smooth scrolling
-Plug 'thomasfaingnaert/vim-lsp-ultisnips' " integrates ultisnips plugin into vim-ls
+"Plug 'thomasfaingnaert/vim-lsp-ultisnips' " integrates ultisnips plugin into vim-lsp
+"Plug 'thomasfaingnaert/vim-lsp-snippets' " integrates snippets plugin into vim-lsp
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " adds color to file extensions
 Plug 'tpope/vim-abolish' " camel, Mixed, snake_, title, upper case with `crc/m/s/t/u` and `:Subvert`
 Plug 'tpope/vim-commentary' " comments stuff out - use 'gcc' or 'gc' in visual mode
@@ -261,10 +263,6 @@ set spelllang=en_us
 " remove annoying message with switching between buffers
 set hidden
 
-" set completion options in insert mode
-set completeopt=menuone,noinsert,noselect,popuphidden
-set completepopup=highlight:Pmenu,border:off
-
 " when splitting a window, it will move it below or right or current
 set splitbelow
 set splitright
@@ -274,6 +272,9 @@ set laststatus=2
 
 " set title as filename
 set title
+
+" set side column to always appear
+set signcolumn=yes
 
 " set ripgrep as search
 " set grepprg=rg\ --vimgrep\ --smart-case\ --follow
@@ -433,7 +434,7 @@ map <silent> <leader>C :Colors<Cr>
 map <silent> <leader>b :Buffers<Cr>
 map <silent> <leader>W :Windows<Cr>
 map <silent> <leader>H :History<Cr>
-map <silent> <leader>cm :History:<Cr>
+map <silent> <leader>c :History:<Cr>
 map <silent> <leader>M :Maps<Cr>
 
 " press <leader> ENTER to disable highlight search
@@ -1002,9 +1003,9 @@ augroup litecorrect
   autocmd FileType textile call litecorrect#init()
 augroup END
 
-"""""""""""""
-"Vim-Lsp-Ale"
-"""""""""""""
+""""""""""""""""""""""""
+"Vim Lsp Settings Begin"
+""""""""""""""""""""""""
 
 """"""""""""""
 "ALE Settings"
@@ -1029,9 +1030,9 @@ let g:ale_linters = {
 \ }
 
 " set symbols for all the ale warnings
-let g:ale_sign_error = ''
-let g:ale_sign_warning = ''
-let g:ale_sign_info = ''
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
+let g:ale_sign_info = '·'
 let g:ale_sign_style_error = '·'
 let g:ale_sign_style_warning = '·'
 
@@ -1049,31 +1050,40 @@ let g:ale_set_highlights = 0
 " set airline bar to show error
 let g:airline#extensions#ale#enabled = 1
 
-""""""""""""""
-"LSP Settings"
-""""""""""""""
-let g:UltiSnipsExpandTrigger=']S'
-let g:UltiSnipsListSnippets='<C-Tab>'
-let g:UltiSnipsJumpForwardTrigger=']s'
-let g:UltiSnipsJumpBackwardTrigger='[s'
-
+"""""""""""""""""""""""
+"Asyncomplete Settings"
+"""""""""""""""""""""""
 " set auto complete to allow popups
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 0
 
+" set completion options in insert mode - switch `popuphidden` to `preview` to not show a popup
+set completeopt=menuone,noinsert,noselect,popuphidden
+set completepopup=highlight:Pmenu,border:off
+
+" auto close preview windows when completion is done
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+""""""""""""""
+"LSP Settings"
+""""""""""""""
 " set auto-completion - ultisnips conflicted with TAB
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Cr> pumvisible() ? asyncomplete#close_popup() : "\<Cr>"
 
 " mappings to common code navigation
-nnoremap gD <Plug>(lsp-definition)
-nnoremap gr <Plug>(lsp-references)
-nnoremap gi <Plug>(lsp-references)
-nnoremap gt <Plug>(lsp-type-definition)
-nnoremap [g <Plug>(lsp-previous-diagnostic)
-nnoremap ]g <Plug>(lsp-next-diagnostic)
-nnoremap K <Plug>(lsp-hover)
+nmap <buffer> gd <Plug>(lsp-definition)
+nmap <buffer> gr <Plug>(lsp-references)
+nmap <buffer> gs <Plug>(lsp-document-symbol-search)
+nmap <buffer> gS <Plug>(lsp-workspace-symbol-search)
+nmap <buffer> gi <Plug>(lsp-implementation)
+nmap <buffer> gt <Plug>(lsp-type-definition)
+nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+nmap <buffer> gh <Plug>(lsp-hover)
+nmap <buffer> <leader>rn <Plug>(lsp-rename)
+nmap <buffer> <C-\> <Plug>(lsp-signature-help) 
 
 " set CTRL + SPACE or tab to trigger completion
 inoremap <C-@> <Plug>(asyncomplete_force_refresh)
@@ -1088,34 +1098,67 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+" set which lsp server to use
+let g:lsp_settings_filetype_cs = 'omnisharp-roslyn'
+"let g:lsp_settings_filetype_python = 'jedi-language-server'
+
+" set semantic highlighting
+let g:lsp_semantic_enabled = 1
+
 " enable for debugging
-" let g:lsp_log_verbose = 1
-" let g:lsp_log_file = expand('~/vim-lsp.log')
-" let g:asyncomplete_log_file = expand('~/vim-asyncomplete.log')
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+"let g:asyncomplete_log_file = expand('~/vim-asyncomplete.log')
 
 """""""""""""""""""
 "OmniSharp Setting"
 """""""""""""""""""
-" set c sharp server
-"let g:OmniSharp_server_path = '$HOME/.local/share/vim-lsp-settings/servers/omnisharp-roslyn/run'
-let g:lsp_settings_filetype_cs = 'omnisharp-roslyn'
+" keep sharpen-up default key mappings
+"let g:sharpenup_map_prefix = '<leader>os'
+
+" do not use default key bindings instead use the ones below
+let g:sharpenup_create_mappings = 0
+
+" show type information when cursor stops moving - will echo to cmd line
+autocmd CursorHold *.cs OmniSharpTypeLookup
+
+" only apply these mappings to cs files
+autocmd FileType cs call Csremaps()
+fu! Csremaps()
+  nmap <silent><buffer> gd <Plug>(omnisharp_go_to_definition)
+  nmap <silent><buffer> gu <Plug>(omnisharp_find_usages)
+  nmap <silent><buffer> gi <Plug>(omnisharp_find_implementations)
+  nmap <silent><buffer> gpd <Plug>(omnisharp_preview_definition)
+  nmap <silent><buffer> gpi <Plug>(omnisharp_preview_implementations)
+  nmap <silent><buffer> gT <Plug>(omnisharp_type_lookup)
+  nmap <silent><buffer> gh <Plug>(omnisharp_documentation)
+  nmap <silent><buffer> gs <Plug>(omnisharp_find_symbol)
+  nmap <silent><buffer> gt <Plug>(omnisharp_find_type)
+  nmap <silent><buffer> gx <Plug>(omnisharp_fix_using)
+  nmap <silent><buffer> gC <Plug>(omnisharp_global_code_check)
+  nmap <silent><buffer> gc <Plug>(omnisharp_code_actions)
+  nmap <silent><buffer> g. <Plug>(omnisharp_code_actions_repeat)
+  nmap <silent><buffer> g= <Plug>(omnisharp_code_format)
+  nmap <silent><buffer> [[ <Plug>(omnisharp_navigate_up)
+  nmap <silent><buffer> ]] <Plug>(omnisharp_navigate_down)
+  nmap <silent><buffer> <leadr>rn <Plug>(omnisharp_rename)
+  nmap <silent><buffer> <C-\> <Plug>(omnisharp_signature_help)
+  imap <silent><buffer> <C-\> <Plug>(omnisharp_signature_help)
+endfu
+
+" set statusline for omnisharp sharpen-up
+let g:sharpenup_statusline_opts = {'Text': '%s (%p/%p)'}
+let g:sharpenup_statusline_opts.Highlight = 0
 
 " set 'fzf' to find stuff
 let g:OmniSharp_selector_ui = 'fzf'
 let g:OmniSharp_selector_findusages = 'fzf'
 
-" allow peek for popup window
+" allow popups
+let g:OmniSharp_popup = 1
+
+" set popup position - peek opens below or above cursor
 let g:OmniSharp_popup_position = 'peek'
-
-" set this if you are using WSL
-"let g:OmniSharp_translate_cygwin_wsl = 1
-
-" keep sharpen-up default key mappings
-let g:sharpenup_map_prefix = '<leader>os'
-
-" set statusline for omnisharp sharpen-up
-let g:sharpenup_statusline_opts = {'Text': '%s (%p/%p)'}
-let g:sharpenup_statusline_opts.Highlight = 0
 
 let g:OmniSharp_popup_options = {
 \ 'highlight': 'Normal',
@@ -1132,9 +1175,27 @@ let g:OmniSharp_popup_mappings = {
 \ 'sigParamPrev': '<C-h>'
 \ }
 
-let g:OmniSharp_popup = 1
-let g:OmniSharp_want_snippet = 1
+" use omnisharp-roslyn net6 server - new and improved
 let g:OmniSharp_server_use_net6 = 1
+
+" do not allow the use of snippets from UltiSnips
+let g:OmniSharp_want_snippet = 0
+
+" set this if you are using WSL - server is saved on `%LocalAppData%\omnisharp-vim\`
+let g:OmniSharp_translate_cygwin_wsl = 0
+
+""""""""""""""""""""
+"Ultisnips Settings"
+""""""""""""""""""""
+" set key mappings for ultisnips - had to change TAB
+let g:UltiSnipsExpandTrigger=',S'
+let g:UltiSnipsListSnippets='<C-,>'
+let g:UltiSnipsJumpForwardTrigger=',s'
+let g:UltiSnipsJumpBackwardTrigger=',s'
+
+""""""""""""""""""""""
+"Vim Lsp Settings End"
+""""""""""""""""""""""
 
 """""""""""""""""""""""
 "Vim-Markdown Settings"
@@ -1181,15 +1242,14 @@ let g:which_key_disable_default_offset = 1
 
 let g:dict= {
 \ '<leader>b': ['FZF', 'Buffers'],
-\ '<leader>cm': ['FZF', 'CMD History'],
+\ '<leader>c': ['FZF', 'CMD History'],
 \ '<leader>C': ['FZF', 'Colors'],
-\ '<leader>d': ['Vim-LSP', 'Documentation Lookup'],
 \ '<leader>f': ['ALE', 'Lint Fix'],
 \ '<leader>h': ['WhichKey', 'Show Keybindings'],
 \ '<leader>H': ['FZF', 'History'],
 \ '<leader>i': ['Startify', 'Startify Toggle'],
 \ '<leader>l': ['ALE', 'ALE Toggle'],
-\ '<leader>L': ['ALE', 'Run Linting'],
+\ '<leader>L': ['ALE', 'Run Lint'],
 \ '<leader>m': ['MRU', 'View Most Recent Files'],
 \ '<leader>M': ['FZF', 'Search Keybindings'],
 \ '<leader>n': ['NERDTree', 'NERDTree Toggle'],
@@ -1199,12 +1259,12 @@ let g:dict= {
 \ '<leader>u': [':source%', 'Source Vimrc'],
 \ '<leader>x': [':bdelete', 'Close Current Buffer'],
 \ '<leader>W': ['FZF', 'Windows'],
+\ ']m': ['ALE', 'Next Lint Error'],
+\ '[m': ['ALE', 'Previous Lint Error'],
 \ 'C-a': [':nrformats', 'Increment Alphanumeric'],
 \ 'C-b': ['Smooth-Scroll', 'Page Up'],
 \ 'C-d': ['Smooth-Scroll', 'Scroll Down'],
 \ 'C-f': ['Smooth-Scroll', 'Page Down'],
-\ 'C-j': ['ALE', 'Next Lint Error'],
-\ 'C-k': ['ALE', 'Previous Lint Error'],
 \ 'C-u': ['Smooth-Scroll', 'Scroll Up'],
 \ 'C-x': ['Nrformats', 'Decrement Alphanumeric'],
 \ 'A-arrows': ['Move Between Windows', 'Move Between Windows'],
