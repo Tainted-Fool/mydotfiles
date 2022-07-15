@@ -1083,7 +1083,7 @@ nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
 nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
 nmap <buffer> gh <Plug>(lsp-hover)
 nmap <buffer> <leader>rn <Plug>(lsp-rename)
-nmap <buffer> <C-\> <Plug>(lsp-signature-help) 
+nmap <silent><buffer> <C-\> :LspSignatureHelp<Cr>
 
 " set CTRL + SPACE or tab to trigger completion
 inoremap <C-@> <Plug>(asyncomplete_force_refresh)
@@ -1188,10 +1188,10 @@ let g:OmniSharp_translate_cygwin_wsl = 0
 "Ultisnips Settings"
 """"""""""""""""""""
 " set key mappings for ultisnips - had to change TAB
-let g:UltiSnipsExpandTrigger=',S'
-let g:UltiSnipsListSnippets='<C-,>'
-let g:UltiSnipsJumpForwardTrigger=',s'
-let g:UltiSnipsJumpBackwardTrigger=',s'
+"let g:UltiSnipsExpandTrigger='>S'
+"let g:UltiSnipsListSnippets='<C-,>'
+"let g:UltiSnipsJumpForwardTrigger='>s'
+"let g:UltiSnipsJumpBackwardTrigger='<s'
 
 """"""""""""""""""""""
 "Vim Lsp Settings End"
