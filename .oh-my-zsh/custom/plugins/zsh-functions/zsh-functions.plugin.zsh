@@ -83,3 +83,8 @@ function notes() {
     code $DIR
 }
 
+function sha256() {
+    printf "%s %s\n" "$1" "$2" | sha256sum --check
+
+}
+

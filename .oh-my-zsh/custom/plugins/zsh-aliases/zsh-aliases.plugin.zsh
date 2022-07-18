@@ -103,6 +103,9 @@ alias vimzsh="vim ~/.zshrc"
 # edit vimrc file
 alias vimrc="vim ~/.vim/vimrc"
 
+# edit nvim file
+alias vimn="vim ~/.config/nvim/init.lua"
+
 # source zsh file
 alias src="source ~/.zshrc"
 

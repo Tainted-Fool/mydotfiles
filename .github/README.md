@@ -148,6 +148,11 @@ git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_CUS
 
 A font with glyphs(icons) [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/font-downloads)
 
+```sh
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts && curl -fLo "Caskaydia Cover Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete.otf
+```
+
 ### Install Colorls
 
 Add color to the `ls` command
@@ -317,6 +322,13 @@ IDE for Vim. Need [Nvim 0.7.2+](https://github.com/neovim/neovim/releases)
 > Make sure you have `git`, `make`, `pip`, `npm`, `node`, and `cargo` installed
 
 ```sh
+#install nvim
+curl -sL <URL> -o nvim.deb
+sudo apt install ./nvim.deb
+
+#install dependencies
 sudo apt install git make pip npm node cargo
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
+
+Follow this tutortial for [reference](https://github.com/LunarVim/Neovim-from-scratch)
