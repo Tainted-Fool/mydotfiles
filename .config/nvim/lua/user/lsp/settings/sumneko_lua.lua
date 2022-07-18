@@ -1,8 +1,8 @@
 -- Allow LSP server to recognize the "vim" global variable
 return {
     settings = {
-        lua = {
-            diagnostic = {
+        Lua = {
+            diagnostics = {
                 globals = {"vim"},
             },
             workspace = {

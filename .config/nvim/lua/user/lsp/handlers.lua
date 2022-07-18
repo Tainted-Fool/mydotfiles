@@ -24,13 +24,13 @@ local function lsp_keymaps(bufnr)
     bufkeymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     
     -- Create a 'Format' command for formatting files
-    vim.cmd([[command! Format execute 'lua vim.lsp.buf.format{async=true}']])
+    vim.cmd([[command! Format execute 'lua vim.lsp.buf.formatting{async=true}']])
 end
 
 local function lsp_highlight_document(client)
     local status_ok, illuminate = pcall(require, "illuminate")
     if not status_ok then
-        vim.notify("illuminate was not found!")
+        vim.notify("vim-illuminate was not found!")
         return
     end
     illuminate.on_attach(client)
@@ -58,7 +58,7 @@ M.setup = function()
 
     local config = {
         -- Disable virtual text/diagnostic errors
-        virtual_text = false,
+        virtual_text = true,
 
         -- Show signs
         signs = {

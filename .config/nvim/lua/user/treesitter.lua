@@ -18,5 +18,9 @@ treesitter.setup({
     indent = {
         enable = true,
         disable = {"css"}
+    },
+    rainbow = {
+        enable = true,
+        extended_more = true
     }
 })

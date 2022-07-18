@@ -45,8 +45,9 @@ return packer.startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
 
-    -- Useful lua functions
-    use "nvim-lua/plenary.nvim"
+    -- Must have
+    use "nvim-lua/plenary.nvim"           -- useful lua functions
+    use "lewis6991/impatient.nvim"       -- speed up loading lua modules
 
     -- Colorschemes
     use "rafi/awesome-vim-colorschemes"
@@ -69,17 +70,28 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig"           -- enable lsp
     use "williamboman/nvim-lsp-installer" -- easy install lsp servers
     use "jose-elias-alvarez/null-ls.nvim" -- formatting and linters
+    use "RRethy/vim-illuminate"           -- highlight same words in different lines
+    -- use "ixru/nvim-markdown"              -- markdown support
 
     -- Fuzzy finder
     use "nvim-telescope/telescope.nvim"    -- find files
 
     -- Treesitter
     use "nvim-treesitter/nvim-treesitter" -- syntax highlighting
+    use "p00f/nvim-ts-rainbow"            -- rainbow pairs for treesitter
 
     -- Utilities
     use "windwp/nvim-autopairs"           -- auto pairs
     use "numToStr/Comment.nvim"           -- comment/uncomment
     use "JoosepAlviste/nvim-ts-context-commentstring"
+    use "kyazdani42/nvim-tree.lua"        -- tree view
+    use "kyazdani42/nvim-web-devicons"    -- icons for tree view
+    use "moll/vim-bbye"                   -- close/delete buffers easier
+    use "akinsho/bufferline.nvim"         -- buffer lines
+    use "akinsho/toggleterm.nvim"         -- toggle terminal
+
+    -- Git
+    use "lewis6991/gitsigns.nvim"         -- git symbols
 
     -- Automatically set up configurations after cloning packer repo
     if PACKER_BOOTSTRAP then

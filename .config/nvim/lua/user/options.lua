@@ -44,6 +44,12 @@ vim.opt.shortmess:append "c"               -- append to the short messasge list
 vim.cmd "set whichwrap+=<,>,[,],h,l"       -- allows specific characters to move to new line when at end/start
 vim.cmd [[set iskeyword+=-]]               -- treat 'some-word' as one word
 
+-- Default cursor settings
+-- vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20]]
+
+-- Change the default cursor settings
+vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]]
+
 -- Go through the lua table as a key value pair
 for k, v in pairs(options) do
     vim.opt[k] = v

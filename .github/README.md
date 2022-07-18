@@ -18,7 +18,7 @@
     - [Fix iamcco/markdown-preview](#fix-iamccomarkdown-preview)
     - [Install C Sharp Dependencies](#install-c-sharp-dependencies)
     - [Install Python Dependencies](#install-python-dependencies)
-    - [Install Lunar Nvim](#install-lunar-nvim)
+    - [Install Nvim](#install-nvim)
 
 ## Intro
 
@@ -315,20 +315,32 @@ pip install vulture # finds unused code
 
 > New plugins install mostly everything with `:LspInstallServer`
 
-### Install Lunar Nvim
+### Install Nvim
 
-IDE for Vim. Need [Nvim 0.7.2+](https://github.com/neovim/neovim/releases)
+Vim with LUA. Download [Nvim 0.7.2+](https://github.com/neovim/neovim/releases)
 
 > Make sure you have `git`, `make`, `pip`, `npm`, `node`, and `cargo` installed
 
 ```sh
-#install nvim
-curl -sL <URL> -o nvim.deb
+# install nvim
+curl -sL https://github.com/neovim/neovim/releases/download/v0.7.2/nvim-linux64.deb -o nvim.deb
 sudo apt install ./nvim.deb
 
-#install dependencies
+# install dependencies
 sudo apt install git make pip npm node cargo
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
-Follow this tutortial for [reference](https://github.com/LunarVim/Neovim-from-scratch)
+Follow this tutorial for [reference](https://github.com/LunarVim/Neovim-from-scratch)
+
+### Formatters and Linters
+
+Installed these binaraies
+
+```sh
+cargo install stylua
+npm install -g markdownlint-cli
+npm install prettier
+pip install black
+pip install flake8
+```
