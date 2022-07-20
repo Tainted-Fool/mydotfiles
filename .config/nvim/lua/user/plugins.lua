@@ -1,6 +1,6 @@
 local fn = vim.fn
 
--- Automatically install packer
+-- Automatically install Packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP = fn.system({
@@ -26,12 +26,12 @@ vim.cmd([[
 -- Use protected call so we know where error is coming from
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-    -- print("Something went wrong with packer")
+    -- print("Something went wrong with Packer")
     vim.notify("packer plugin was not found!")
     return
 end
 
--- Have packer use a popup window
+-- Have Packer use a popup window
 packer.init({
     display = {
         open_fn = function()
@@ -42,12 +42,11 @@ packer.init({
 
 -- Install plugins here
 return packer.startup(function(use)
-    -- Packer can manage itself
-    use "wbthomason/packer.nvim"
+    -- Speed up Loading
+    use "lewis6991/impatient.nvim"        -- speed up loading lua modules
 
-    -- Must have
-    use "nvim-lua/plenary.nvim"           -- useful lua functions
-    use "lewis6991/impatient.nvim"       -- speed up loading lua modules
+    -- Packer can manage itself
+    use "wbthomason/packer.nvim"          -- plugin manager
 
     -- Colorschemes
     use "rafi/awesome-vim-colorschemes"
@@ -71,16 +70,16 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer" -- easy install lsp servers
     use "jose-elias-alvarez/null-ls.nvim" -- formatting and linters
     use "RRethy/vim-illuminate"           -- highlight same words in different lines
-    -- use "ixru/nvim-markdown"              -- markdown support
 
-    -- Fuzzy finder
-    use "nvim-telescope/telescope.nvim"    -- find files
+    -- Fuzzy Search
+    use "nvim-telescope/telescope.nvim"   -- find files
 
     -- Treesitter
     use "nvim-treesitter/nvim-treesitter" -- syntax highlighting
     use "p00f/nvim-ts-rainbow"            -- rainbow pairs for treesitter
 
     -- Utilities
+    use "nvim-lua/plenary.nvim"           -- useful lua functions
     use "windwp/nvim-autopairs"           -- auto pairs
     use "numToStr/Comment.nvim"           -- comment/uncomment
     use "JoosepAlviste/nvim-ts-context-commentstring"
@@ -89,9 +88,19 @@ return packer.startup(function(use)
     use "moll/vim-bbye"                   -- close/delete buffers easier
     use "akinsho/bufferline.nvim"         -- buffer lines
     use "akinsho/toggleterm.nvim"         -- toggle terminal
+    use "nvim-lualine/lualine.nvim"       -- status bar/line
+    use "ahmedkhalf/project.nvim"         -- project manager
+    use "lukas-reineke/indent-blankline.nvim"
+    use "goolord/alpha-nvim"              -- dashboard
+    use "folke/which-key.nvim"            -- show leader key bindings
 
     -- Git
     use "lewis6991/gitsigns.nvim"         -- git symbols
+
+    -- Debug
+    use "mfussenegger/nvim-dap"           -- debugger
+    use "rcarriga/nvim-dap-ui"            -- debugger ui
+    use "ravenxrz/DAPInstall.nvim"        -- debugger installer
 
     -- Automatically set up configurations after cloning packer repo
     if PACKER_BOOTSTRAP then

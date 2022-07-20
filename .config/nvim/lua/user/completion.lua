@@ -24,19 +24,19 @@ end
 --   פּ ﯟ   some other good icons
 local kind_icons = {
     Text = "",
-    Method = "m",
+    Method = "",
     Function = "",
     Constructor = "",
     Field = "",
-    Variable = "",
+    Variable = "",
     Class = "",
     Interface = "",
-    Module = "",
+    Module = "",
     Property = "",
     Unit = "",
     Value = "",
     Enum = "",
-    Keyword = "",
+    Keyword = "",
     Snippet = "",
     Color = "",
     File = "",
@@ -47,7 +47,7 @@ local kind_icons = {
     Struct = "",
     Event = "",
     Operator = "",
-    TypeParameter = "",
+    TypeParameter = ""
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
@@ -57,16 +57,16 @@ cmp.setup {
             luasnip.lsp_expand(args.body) -- For `luasnip` users
         end,
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-        ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        -- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping
         ["<C-e>"] = cmp.mapping {
             i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
+            c = cmp.mapping.close()
         },
         -- Accept currently selected item. If none selected, `select` first item
         -- Set `select` to `false` to only confirm explicitly selected items
@@ -87,7 +87,7 @@ cmp.setup {
             end
         end, {
             "i",
-            "s",
+            "s"
         }),
 
         -- Same as TAB but backwards
@@ -101,9 +101,9 @@ cmp.setup {
             end
         end, {
             "i",
-            "s",
-        }),
-    },
+            "s"
+        })
+    }),
     
     -- Menu popup configuration
     formatting = {
@@ -118,10 +118,10 @@ cmp.setup {
                 luasnip = "[Snippet]",
                 cmdline = "[Cmdline]",
                 buffer = "[Buffer]",
-                path = "[Path]",
+                path = "[Path]"
             })[entry.source.name]
             return vim_item
-        end,
+        end
     },
 
     -- Order of source completion providers
@@ -131,19 +131,21 @@ cmp.setup {
         {name = "luasnip"},
         {name = "cmdline"},
         {name = "buffer"},
-        {name = "path"},
+        {name = "path"}
     },
     confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
+        select = false
     },
     window = {
-        documentation = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        },
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered()
+        -- documentation = {
+        --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        -- }
     },
     experimental = {
-        ghost_text = false,
-        native_menu = false,
-    },
+        ghost_text = true, -- Show ghost text of first item in completion menu
+        native_menu = false
+    }
 }

@@ -343,4 +343,5 @@ npm install -g markdownlint-cli
 npm install prettier
 pip install black
 pip install flake8
+sudo apt install fortune-mod
 ```

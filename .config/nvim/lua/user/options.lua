@@ -18,7 +18,7 @@ local options = {
     scrolloff = 8,                         -- amount of lines to keep above and below cursor
     shiftwidth = 2,                        -- the number of spaces inserted for each indentation
     showmode = false,                      -- show mode like 'normal', 'insert', etc.
-    showtabline = 2,                       -- always show tabs
+    showtabline = 0,                       -- show tabs - 0 is never, 2 is always
     sidescrolloff = 8,                     -- amount of screen columns to keep left and right
     signcolumn = "yes",                    -- always show the sign column
     smartcase = true,                      -- override ignorecase if serach pattern contains uppercase
@@ -26,9 +26,9 @@ local options = {
     splitbelow = true,                     -- force horizontal splits to below of current window
     splitright = true,                     -- force vertical splits to go right of current window
     swapfile = false,                      -- create a swapfile
-    tabstop = 2,                           -- insert 2 spaces for a tab
+    tabstop = 2,                           -- insert X spaces for a tab
     termguicolors = true,                  -- set terminal colors
-    timeoutlen = 1000,                     -- time to wait for mapped sequence
+    timeoutlen = 100,                      -- time to wait for mapped sequence
     ttimeoutlen = 50,                      -- time to wait for key code sequence to complete
     undofile = true,                       -- create a undo file for persistent undo
     updatetime = 300,                      -- faster completion
@@ -42,6 +42,7 @@ vim.opt.shortmess:append "c"               -- append to the short messasge list
 
 -- Set options by passing vimscript commands
 vim.cmd "set whichwrap+=<,>,[,],h,l"       -- allows specific characters to move to new line when at end/start
+
 vim.cmd [[set iskeyword+=-]]               -- treat 'some-word' as one word
 
 -- Default cursor settings

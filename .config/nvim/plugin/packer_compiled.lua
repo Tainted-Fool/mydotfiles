@@ -74,10 +74,20 @@ _G.packer_plugins = {
     path = "/home/laz/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  ["DAPInstall.nvim"] = {
+    loaded = true,
+    path = "/home/laz/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
+    url = "https://github.com/ravenxrz/DAPInstall.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/laz/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["alpha-nvim"] = {
+    loaded = true,
+    path = "/home/laz/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+    url = "https://github.com/goolord/alpha-nvim"
   },
   ["awesome-vim-colorschemes"] = {
     loaded = true,
@@ -134,6 +144,16 @@ _G.packer_plugins = {
     path = "/home/laz/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/laz/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/home/laz/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/home/laz/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -148,6 +168,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/laz/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/laz/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/home/laz/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
   },
   ["nvim-lsp-installer"] = {
     loaded = true,
@@ -194,6 +224,11 @@ _G.packer_plugins = {
     path = "/home/laz/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["project.nvim"] = {
+    loaded = true,
+    path = "/home/laz/.local/share/nvim/site/pack/packer/start/project.nvim",
+    url = "https://github.com/ahmedkhalf/project.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/laz/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -218,6 +253,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/laz/.local/share/nvim/site/pack/packer/start/vim-illuminate",
     url = "https://github.com/RRethy/vim-illuminate"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/home/laz/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 
