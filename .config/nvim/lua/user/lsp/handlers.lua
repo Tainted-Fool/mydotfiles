@@ -7,21 +7,26 @@ if not status_ok then
     return
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+
 local function lsp_keymaps(bufnr)
     local opts = {noremap = true, silent = true}
-    local bufkeymap = vim.api.nvim_buf_set_keymap
+    local keymap = vim.api.nvim_buf_set_keymap
 
     -- Set keymaps for buffers
-    bufkeymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    bufkeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    bufkeymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    bufkeymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    bufkeymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    bufkeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    bufkeymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<CR>', opts)
-    bufkeymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<CR>', opts)
-    bufkeymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<CR>', opts)
-    bufkeymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+    keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+    keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+    keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+    keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+    keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+    keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+    keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+    keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<cr>', opts)
+    keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<cr>', opts)
+    keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', opts)
+    keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
     
     -- Create a 'Format' command for formatting files
     vim.cmd([[command! Format execute 'lua vim.lsp.buf.formatting{async=true}']])
@@ -36,8 +41,6 @@ local function lsp_highlight_document(client)
     illuminate.on_attach(client)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
 M.setup = function()
     -- Set diagnostic signs
     local signs = {
@@ -50,15 +53,15 @@ M.setup = function()
     -- Define the signs
     for _, sign in ipairs(signs) do
         vim.fn.sign_define(sign.name, {
-            text = sign.text,
             texthl = sign.name,
+            text = sign.text,
             numhl = ""
         })
     end
 
     local config = {
         -- Disable virtual text/diagnostic errors
-        virtual_text = true,
+        virtual_text = false,
 
         -- Show signs
         signs = {
@@ -70,7 +73,7 @@ M.setup = function()
         
         -- Set our popup options for diagnostic errors
         float = {
-            focusable = false,
+            focusable = true,
             style = "minimal",
             border = "rounded",
             source = "always",
@@ -103,8 +106,14 @@ M.on_attach = function(client, bufnr)
     -- Set keymaps and document highlights
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)
+    require "lsp_signature".on_attach({
+        bind = true,
+        floating_window_above_cur_line = false,
+        hint_enable = false,
+        zindex = 50,
+        toggle_key = "<C-\\>",
+        select_signature_key = "<C-]>"
+    })
 end
-
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 return M

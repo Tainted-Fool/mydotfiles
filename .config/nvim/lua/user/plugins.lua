@@ -70,6 +70,8 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer" -- easy install lsp servers
     use "jose-elias-alvarez/null-ls.nvim" -- formatting and linters
     use "RRethy/vim-illuminate"           -- highlight same words in different lines
+    use "folke/lua-dev.nvim"              -- nvim lua API
+    use "arkav/lualine-lsp-progress"      -- indicator that shows when lsp is ready
 
     -- Fuzzy Search
     use "nvim-telescope/telescope.nvim"   -- find files
@@ -80,6 +82,8 @@ return packer.startup(function(use)
 
     -- Utilities
     use "nvim-lua/plenary.nvim"           -- useful lua functions
+    use "nvim-lua/popup.nvim"             -- useful lua functions
+    use "antoinemadec/FixCursorHold.nvim" -- fix cursor hold
     use "windwp/nvim-autopairs"           -- auto pairs
     use "numToStr/Comment.nvim"           -- comment/uncomment
     use "JoosepAlviste/nvim-ts-context-commentstring"
@@ -93,6 +97,16 @@ return packer.startup(function(use)
     use "lukas-reineke/indent-blankline.nvim"
     use "goolord/alpha-nvim"              -- dashboard
     use "folke/which-key.nvim"            -- show leader key bindings
+    use "folke/trouble.nvim"              -- better quickfix for diagnostics
+    use "karb94/neoscroll.nvim"           -- better scrolling
+    use "rcarriga/nvim-notify"            -- better notifications
+    use "ray-x/lsp_signature.nvim"        -- better signature help
+    use "tpope/vim-repeat"                -- repeat last command
+    use "tpope/vim-surround"              -- change or add surroundings
+    use "tpope/vim-unimpaired"            -- useful mappings like ]space
+    use "tpope/vim-abolish"               -- convert words to camel, mix, with 'crc'
+    use "justinmk/vim-sneak"              -- faster motion with 's'
+    -- use "easymotion/vim-easymotion"       -- faster motion with '<leader><leader>'
 
     -- Git
     use "lewis6991/gitsigns.nvim"         -- git symbols
@@ -100,7 +114,7 @@ return packer.startup(function(use)
     -- Debug
     use "mfussenegger/nvim-dap"           -- debugger
     use "rcarriga/nvim-dap-ui"            -- debugger ui
-    use "ravenxrz/DAPInstall.nvim"        -- debugger installer
+    use "Pocco81/dap-buddy.nvim"          -- debugger installer
 
     -- Automatically set up configurations after cloning packer repo
     if PACKER_BOOTSTRAP then

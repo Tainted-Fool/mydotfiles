@@ -36,9 +36,13 @@ require "user.project"
 require "user.indentline"
 require "user.alpha"
 require "user.whichkey"
+require "user.scroll"
 
 -- Git
 require "user.gitsigns"
 
 -- Debug
 require "user.dap"
+
+-- Autocommands
+require "user.autocommands"

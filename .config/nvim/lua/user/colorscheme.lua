@@ -1,4 +1,5 @@
 -- Declare colorscheme to use
+-- local colorscheme = "onehalfdark"
 local colorscheme = "tokyonight"
 
 -- Use protected call so we know where error is coming from

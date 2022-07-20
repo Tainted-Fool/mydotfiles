@@ -79,7 +79,7 @@ local opts = {
 }
 
 local mappings = {
-    ["a"] = {"<cmd>Alpha<cr>", "Alpha"},
+    ["a"] = {"<cmd>Alpha<cr>", "Alpha Dashboard"},
     ["b"] = {
         "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
         "Buffers"
@@ -108,6 +108,16 @@ local mappings = {
         r = {"<cmd>lua require('dap').repl.toggle()<cr>", "REPL Toggle"},
         t = {"<cmd>lua require('dap').terminate()<cr>", "Terminate"},
         u = {"<cmd>lua require('dapui').toggle()<cr>", "UI Toggle"}
+    },
+
+    D = {
+        name = "Diagnostics",
+        t = {"<cmd>TroubleToggle<cr>", "Trouble Toggle"},
+        w = {"<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Workspace"},
+        d = {"<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Document"},
+        q = {"<cmd>TroubleToggle quickfix<cr>", "Quickfix"},
+        l = {"<cmd>TroubleToggle loclist<cr>", "Loclist"},
+        r = {"<cmd>TroubleToggle lsp_references<cr>", "References"}
     },
     
     g = {
@@ -204,3 +214,6 @@ local mappings = {
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
+
+-- Change default background color
+vim.cmd([[hi WhichKeyFloat ctermfg=grey]])

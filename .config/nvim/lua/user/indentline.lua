@@ -62,6 +62,7 @@ indent_blankline.setup({
 		"packer",
 		"neogitstatus",
 		"NvimTree",
-		"Trouble"
+		"Trouble",
+		"terminal"
 	}
 })

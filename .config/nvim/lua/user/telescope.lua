@@ -88,11 +88,13 @@ telescope.setup {
         -- }
     },
     extensions = {
-        -- Exttension configuration
-        -- extension_name = {
-            -- some code
-            -- extension_config_key = value,
-            -- ...
+        -- fzf = {
+        --     fuzzy = true,
+        --     override_generic_sorter = true,
+        --     override_file_sorter = true,
+        --     case_mode = "smart_case"
         -- }
     }
 }
+
+-- telescope.load_extension("fzf")

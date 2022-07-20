@@ -8,7 +8,16 @@ end
 local lspconfig = require("lspconfig")
 
 -- Declare LSP servers to install
-local servers = {"omnisharp", "pyright", "jsonls", "sumneko_lua", "tsserver"}
+local servers = {
+    "omnisharp", -- C Sharp
+    "pyright", -- Python
+    "jsonls", -- JSON
+    "sumneko_lua", -- Lua
+    "tsserver", -- TypeScript
+    "cssls", -- CSS
+    "html", -- HTML
+    "bashls" -- Bash
+}
 
 lsp_installer.setup({
     ensure_installed = servers,
