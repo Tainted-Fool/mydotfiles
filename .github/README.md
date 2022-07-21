@@ -201,3 +201,20 @@ Set WSL environment variables to call between machines
 ```PowerShell
 setx WSLENV USERPROFILE/p
 ```
+
+### Install Dotnet
+
+[dotnet](https://docs.microsoft.com/en-us/dotnet/core/install/windows) can be installed via these methods but we will use `winget` instead. Install [dotnet-core-uninstall](https://github.com/dotnet/cli-lab/releases) tool to uninstall all the various SDK's and runtimes on machine
+
+```PowerShell
+# uninstall dotnet
+dotnet-core-uninstall --list
+dotnet-core-uninstall -all --sdk
+dotnet-core-uninstall -all --aspnet-runtime
+dotnet-core-uninstall -all --runtime
+
+# install dotnet
+winget search dotnet
+winget install Microsoft.Dotnet.SDK.6
+winget install Microsoft.Dotnet.SDK.3_1
+```
