@@ -159,26 +159,28 @@ Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-# Press `fg` instead of ESC to switch from INSERT mode to NORMAL mode
+# Press `fj` instead of ESC to switch from INSERT mode to NORMAL mode
 $f_timer = New-Object System.Diagnostics.Stopwatch
+
 Set-PSReadLineKeyHandler -Key f -ViMode Insert -ScriptBlock {
-  [Microsoft.PowerShell.PSConsoleReadLine]::Insert("f")
-  $f_timer.Reset()
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert("f")
+    $f_timer.Restart()
 }
+
 Set-PSReadLineKeyHandler -Key j -ViMode Insert -ScriptBlock {
-  if (!$f_timer.IsRunning -or $f_timer.ElapsedMilliseconds -gt 1000) {
-    [Microsoft.PowerShell.PSConsoleReadLine]::Insert("j")
-  } else {
-    [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
-    $line = $null
-    $cursor = $null
-    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
-    [Microsoft.PowerShell.PSConsoleReadLine]::Delete($cursor, 1)
-    [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor-1)
-  }
+    if (!$f_timer.IsRunning -or $f_timer.ElapsedMilliseconds -gt 1000) {
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("j")
+    } else {
+        [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+        $line = $null
+        $cursor = $null
+        [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+        [Microsoft.PowerShell.PSConsoleReadLine]::Delete($cursor, 1)
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor-1)
+    }
 }
 # Press `CTRL+j` instead of ESC to switch from INSERT mode to NORMAL mode
-Set-PSReadLineKeyHandler -Key Ctrl+j -Function ViCommandMode
+#Set-PSReadLineKeyHandler -Key Ctrl+j -Function ViCommandMode
 
 # Press F2 to toggle between prediction view
 Set-PSReadLineKeyHandler -Key F2 -Function SwitchPredictionView
