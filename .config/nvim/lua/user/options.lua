@@ -55,3 +55,6 @@ vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]]
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
+
+-- Set all vim.notify to the plugin one
+vim.notify = require("notify")

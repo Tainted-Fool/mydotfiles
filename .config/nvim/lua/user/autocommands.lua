@@ -52,3 +52,24 @@ vim.api.nvim_create_autocmd({"BufReadPost"}, {
 })
 
 vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
+
+-- Show Diagnostics on mouse hover
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function ()
+    local opts = {
+      foscusable = false,
+      close_events = {
+        "BufLeave",
+        "CursorMoved",
+        "InsertEnter",
+        "FocusLost"
+      },
+      border = "rounded",
+      source = "always",
+      prefix = " ",
+      scope = "cursor"
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})

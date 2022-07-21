@@ -8,16 +8,17 @@ end
 treesitter.setup({
     ensure_installed = "all", -- list of language syntax to install
     ignore_installed = {""},  -- list of language syntax to ignore
+    sync_install = false,
     highlight = {
         enable = true,
-        disable = {"css"}     -- list of language syntax to disable
+        -- disable = {"css"}     -- list of language syntax to disable
     },
     autopairs = {
         enable = true
     },
     indent = {
         enable = true,
-        disable = {"css"}
+        -- disable = {"css"}
     },
     rainbow = {
         enable = true,

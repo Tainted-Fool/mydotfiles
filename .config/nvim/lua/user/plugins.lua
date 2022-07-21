@@ -114,7 +114,8 @@ return packer.startup(function(use)
     -- Debug
     use "mfussenegger/nvim-dap"           -- debugger
     use "rcarriga/nvim-dap-ui"            -- debugger ui
-    use "Pocco81/dap-buddy.nvim"          -- debugger installer
+    use "ravenxrz/DAPInstall.nvim"        -- debugger installer
+    -- use "Pocco81/dap-buddy.nvim"          -- debugger installer
 
     -- Automatically set up configurations after cloning packer repo
     if PACKER_BOOTSTRAP then
