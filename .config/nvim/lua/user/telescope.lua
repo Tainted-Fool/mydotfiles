@@ -13,6 +13,16 @@ telescope.setup {
         selection_caret = " ",
         path_display = {"smart"},
         file_ignore_patterns = {".git/", "node_modules"},
+        -- vimgrep_arguments = { -- for live_grep
+        --     "rg",
+        --     "--hidden",
+        --     "--color=never",
+        --     "--no-heading",
+        --     "--with-filename",
+        --     "--line-number",
+        --     "--column",
+        --     "--smart-case"
+        -- },
 
         mappings = {
             i = {
@@ -80,12 +90,9 @@ telescope.setup {
         }
     },
     pickers = {
-        -- Default configuration for builtin pickers
-        -- picker_name = {
-            -- some code
-            -- picker_config_key = value,
-            -- ...
-        -- }
+        find_files = {
+            hidden = true
+        }
     },
     extensions = {
         -- fzf = {
@@ -98,3 +105,4 @@ telescope.setup {
 }
 
 -- telescope.load_extension("fzf")
+telescope.load_extension("projects")

@@ -58,3 +58,6 @@ end
 
 -- Set all vim.notify to the plugin one
 vim.notify = require("notify")
+
+vim.cmd [[map - <Plug>(easymotion-prefix)]]
+vim.cmd [[let g:EasyMotion_disable_two_key_combo = 1]]

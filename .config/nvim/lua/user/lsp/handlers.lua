@@ -73,7 +73,7 @@ M.setup = function()
         
         -- Set our popup options for diagnostic errors
         float = {
-            focusable = true,
+            focusable = false,
             style = "minimal",
             border = "rounded",
             source = "always",

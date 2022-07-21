@@ -106,7 +106,7 @@ return packer.startup(function(use)
     use "tpope/vim-unimpaired"            -- useful mappings like ]space
     use "tpope/vim-abolish"               -- convert words to camel, mix, with 'crc'
     use "justinmk/vim-sneak"              -- faster motion with 's'
-    -- use "easymotion/vim-easymotion"       -- faster motion with '<leader><leader>'
+    use "easymotion/vim-easymotion"       -- faster motion with '<leader><leader>'
 
     -- Git
     use "lewis6991/gitsigns.nvim"         -- git symbols

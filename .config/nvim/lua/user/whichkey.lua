@@ -190,7 +190,7 @@ local mappings = {
         B = {"<cmd>Telescope buffers<cr>", "Buffers"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
         C = {"<cmd>Telescope commands<cr>", "Commands"},
-        f = {"<cmd>Telescope find_files<cr>", "Find Files"},
+        f = {"<cmd>Telescope find_files hidden=true<cr>", "Find Files"},
         h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
         k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
         M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
