@@ -13,10 +13,39 @@ require("packer").startup(function(use)
     use "tpope/vim-surround"
 	use "tpope/vim-unimpaired"
 	use "tpope/vim-abolish"
+	use "justinmk/vim-sneak"
+	use "easymotion/vim-easymotion"
 	use {
 			"numToStr/Comment.nvim",
 			config = function()
 				require("Comment").setup()
+			end
+		}
+	use {
+			"karb94/neoscroll.nvim",
+			event = "WinScrolled",
+			config = function()
+				require("neoscroll").setup({
+					mappings = { 
+						"<C-u>",
+						"<C-d>",
+						"<C-b>",
+						"<C-f>",
+						"<C-y>",
+						"<C-e>",
+						"zt",
+						"zz",
+						"zb"
+					},
+					hide_cursor = true,
+					stop_eof = true,
+					use_local_scrolloff = false,
+					respect_Scrolloff = false,
+					cursor_scrolls_alone = true,
+					easing_function = nil,
+					pre_hook = nil,
+					post_hook = nil
+				})
 			end
 		}
 	
@@ -25,14 +54,21 @@ require("packer").startup(function(use)
     if packer_bootstrap then
         require("packer").sync()
     end
-end
-)
+end)
 
-vim.opt.clipboard:append("unnamedplus")
+-- Options
+vim.opt.clipboard:append("unnamedplus") -- setup this way
+vim.opt.shortmess:append("c")
+vim.cmd("set whichwrap+=<,>[,],h,l") -- or this way
+vim.cmd("set iskeyword+=-")
+
+-- Plugin settings - EasyMotion
+vim.cmd("map - <Plug>(easymotion-prefix)")
+vim.cmd("let g:EasyMotion_disable_two_key_combo = 1")
 
 -- vscode settings
 if (vim.g.vscode) then
-	-- VSCode extensions
+	require "user.vskeymaps"
 else
 	-- ordinary neovim
 end
