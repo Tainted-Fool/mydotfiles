@@ -9,7 +9,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
          "--depth",
          "1",
          "https://github.com/wbthomason/packer.nvim",
-         install_path,
+         install_path
      })
     print("Installing packer close and reopen Neovim...")
     vim.cmd([[packadd packer.nvim]])
@@ -36,8 +36,8 @@ packer.init({
     display = {
         open_fn = function()
             return require("packer.util").float({ border = "rounded" })
-        end,
-    },
+        end
+    }
 })
 
 -- Install plugins here
@@ -106,7 +106,7 @@ return packer.startup(function(use)
     use "tpope/vim-unimpaired"            -- useful mappings like ]space
     use "tpope/vim-abolish"               -- convert words to camel, mix, with 'crc'
     use "justinmk/vim-sneak"              -- faster motion with 's'
-    use "easymotion/vim-easymotion"       -- faster motion with '<leader><leader>'
+    use "easymotion/vim-easymotion"       -- faster motion with dash '-' '<motion>'
 
     -- Git
     use "lewis6991/gitsigns.nvim"         -- git symbols
