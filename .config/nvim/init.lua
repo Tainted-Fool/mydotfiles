@@ -1,7 +1,5 @@
 -- Init.lua is the entry point for nvim
 
---vim.cmd [[if exists('g:vscode') source $HOME/.config/nvim/vscode/settings.vim endif]]
-
 -- Speed up LUA modules loading
 require "user.impatient"
 

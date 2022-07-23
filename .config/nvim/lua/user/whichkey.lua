@@ -119,7 +119,7 @@ local mappings = {
         l = {"<cmd>TroubleToggle loclist<cr>", "Loclist"},
         r = {"<cmd>TroubleToggle lsp_references<cr>", "References"}
     },
-    
+
     g = {
         name = "Git",
         b = {"<cmd>Telescope git_branches<cr>", "Checkout Branch"},

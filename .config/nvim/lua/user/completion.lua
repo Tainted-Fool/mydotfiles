@@ -104,7 +104,7 @@ cmp.setup {
             "s"
         })
     }),
-    
+
     -- Menu popup configuration
     formatting = {
         fields = {"kind", "abbr", "menu"},

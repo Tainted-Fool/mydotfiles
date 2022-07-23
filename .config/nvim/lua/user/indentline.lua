@@ -54,7 +54,6 @@ indent_blankline.setup({
 	use_treesitter = true,
 	show_current_context = true,
 	buftype_exclude = {"terminal", "nofile"},
-    show_current_context = true,
 	filetype_exclude = {
 		"help",
 		"startify",
