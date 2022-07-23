@@ -19,6 +19,10 @@ vim.g.maplocalleader = " "
 -- Better paste
 keymap("v", "p", '"_dP', opts)
 
+-- Add a space below or above
+keymap("n", "o", "o<esc>k", opts)
+keymap("n", "O", "O<esc>j", opts)
+
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)

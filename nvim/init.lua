@@ -1,74 +1,54 @@
--- global settings
-
-local fn = vim.fn
-local install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
-end
-
--- configure plugins
-require("packer").startup(function(use)
-	use "wbthomason/packer.nvim"
-	use "tpope/vim-repeat"
-    use "tpope/vim-surround"
-	use "tpope/vim-unimpaired"
-	use "tpope/vim-abolish"
-	use "justinmk/vim-sneak"
-	use "easymotion/vim-easymotion"
-	use {
-			"numToStr/Comment.nvim",
-			config = function()
-				require("Comment").setup()
-			end
-		}
-	use {
-			"karb94/neoscroll.nvim",
-			event = "WinScrolled",
-			config = function()
-				require("neoscroll").setup({
-					mappings = { 
-						"<C-u>",
-						"<C-d>",
-						"<C-b>",
-						"<C-f>",
-						"<C-y>",
-						"<C-e>",
-						"zt",
-						"zz",
-						"zb"
-					},
-					hide_cursor = true,
-					stop_eof = true,
-					use_local_scrolloff = false,
-					respect_Scrolloff = false,
-					cursor_scrolls_alone = true,
-					easing_function = nil,
-					pre_hook = nil,
-					post_hook = nil
-				})
-			end
-		}
-	
-	-- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-        require("packer").sync()
-    end
-end)
-
--- Options
-vim.opt.clipboard:append("unnamedplus") -- setup this way
-vim.opt.shortmess:append("c")
-vim.cmd("set whichwrap+=<,>[,],h,l") -- or this way
-vim.cmd("set iskeyword+=-")
-
--- Plugin settings - EasyMotion
-vim.cmd("map - <Plug>(easymotion-prefix)")
-vim.cmd("let g:EasyMotion_disable_two_key_combo = 1")
-
 -- vscode settings
 if (vim.g.vscode) then
 	require "user.vskeymaps"
+	require "user.vsplugins"
+	require "user.vsoptions"
 else
-	-- ordinary neovim
+	-- Speed up LUA modules loading
+	require "user.impatient"
+
+	-- Plugin Manager
+	require "user.plugins"
+
+	-- User Settings
+	require "user.options"
+	require "user.keymaps"
+	require "user.colorscheme"
+
+	-- Autocompletion
+	require "user.completion"
+
+	-- LSP
+	require "user.lsp"
+	require "user.illuminate"
+	-- require "user.markdown"
+
+	-- Fuzzy Finder
+	require "user.telescope"
+
+	-- Treesitter
+	require "user.treesitter"
+
+	-- Utilities
+	require "user.autopairs"
+	require "user.comment"
+	require "user.nvim-tree"
+	require "user.bufferline"
+	require "user.toggleterm"
+	require "user.lualine"
+	require "user.project"
+	require "user.indentline"
+	require "user.alpha"
+	require "user.whichkey"
+	require "user.scroll"
+
+	-- Git
+	require "user.gitsigns"
+
+	-- Debug
+	require "user.dap"
+
+	-- Autocommands
+	require "user.autocommands"
+	-- require "user.impatient"
 end
