@@ -1,4 +1,7 @@
--- vscode settings
+-- Must have
+	require "user.comment"
+
+-- VSCode settings
 if (vim.g.vscode) then
 	require "user.vskeymaps"
 	require "user.vsplugins"
@@ -31,7 +34,6 @@ else
 
 	-- Utilities
 	require "user.autopairs"
-	require "user.comment"
 	require "user.nvim-tree"
 	require "user.bufferline"
 	require "user.toggleterm"
