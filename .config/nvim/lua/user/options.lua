@@ -61,3 +61,7 @@ vim.notify = require("notify")
 
 vim.cmd [[map - <Plug>(easymotion-prefix)]]
 vim.cmd [[let g:EasyMotion_disable_two_key_combo = 1]]
+
+-- set tab and space characters
+vim.cmd [[set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:·]]
+vim.cmd [[set list]]
