@@ -128,9 +128,9 @@ call plug#end()
 " 6 = steady bar (xterm)
 
 " set cursor for insert mode
-let &t_SI = "\e[3 q" 
+let &t_SI = "\e[3 q"
 " set cursor for everything else
-let &t_EI = "\e[1 q" 
+let &t_EI = "\e[1 q"
 
 " reset cursor on startup
 augroup ResetCursorShape
@@ -139,9 +139,9 @@ autocmd VimEnter * :normal :startinsert :stopinsert
 augroup END
 
 " set cursor on vim startup - command status bar has weird entries when this is set
-" autocmd VimEnter * silent exec "!echo -ne '\e[1 q'" 
+" autocmd VimEnter * silent exec "!echo -ne '\e[1 q'"
 " set cursor on vim exit
-" autocmd VimLeave * silent exec "!echo -ne '\e[3 q'" 
+" autocmd VimLeave * silent exec "!echo -ne '\e[3 q'"
 
 " set the timeout length for cursor to change faster
 set timeoutlen=1000 ttimeoutlen=0
@@ -281,6 +281,10 @@ set title
 " set side column to always appear
 set signcolumn=yes
 
+" set tab and space characters
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:·
+set list
+
 " set ripgrep as search
 " set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
@@ -343,16 +347,16 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 "  " set status bar themes and views
 "  let g:lightline = {
-"              \ 'colorscheme': 'onehalfdark', 
+"              \ 'colorscheme': 'onehalfdark',
 "              \ 'active': {
 "                  \ 'left': [['mode'],
-"                      \ ['gitbranch', 'readonly', 'absolutepath', 'modified']], 
-"                  \ 'right': [['lineinfo'], 
+"                      \ ['gitbranch', 'readonly', 'absolutepath', 'modified']],
+"                  \ 'right': [['lineinfo'],
 "                      \ ['percent'], ['fileencoding', 'filetype', 'charvaluehex']]
 "                  \ },
 "              \'component': {
 "                  \ 'charvaluehex': '0x%B'
-"                  \ }, 
+"                  \ },
 "              \ 'component_function': {
 "                  \ 'gitbranch': 'FugitiveHead', 'cocstatus': 'coc#status'
 "                  \ }
@@ -543,7 +547,7 @@ let g:better_escape_shortcut = ['jj', 'ff', 'fj', 'jf']
 """""""""""""""""""
 "Coc.nvim Settings"
 """""""""""""""""""
-"  " textedit fails if hidden is not set 
+"  " textedit fails if hidden is not set
 "  set hidden
 
 "  " some servers have issues with backup files
@@ -744,7 +748,7 @@ let g:NERDCommentEmptyLines = 1
 " enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" enable NERDCommenterToggle to check all selected lines is commented or not 
+" enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 """""""""""""""""""""""""""""""
@@ -817,7 +821,7 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 0, 4)<Cr>
 "Snippets Settings"
 """""""""""""""""""
 " use END key to trigger the snippets, default was tab but that conflicts with the Completion trigger
-" see ':h keycodes' to change this to something else 
+" see ':h keycodes' to change this to something else
 " let g:UltiSnipsExpandTrigger='<END>'
 
 " use CTRL + PgDn to list the available snippets
