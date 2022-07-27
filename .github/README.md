@@ -218,3 +218,19 @@ winget search dotnet
 winget install Microsoft.Dotnet.SDK.6
 winget install Microsoft.Dotnet.SDK.3_1
 ```
+
+### Install C Compiler
+
+Go to this [website](https://www.msys2.org) and download `msys2` which is a collection of tools and libraries for Windows. Install it and run it using these commands. Don't forget to add `C:\msys64\mingw64\bin` to system `$PATH`
+
+```PowerShell
+pacman -Syu
+pacman -S --needed base-devel mingw-w64-x86_64-toolchain
+```
+
+Alternativly you can download [Visual Studio build tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019). Another way is to download `mingw` by choco. Reference guide [here](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support)
+
+```PowerShell
+# chocolately install
+choco install mingw
+```
