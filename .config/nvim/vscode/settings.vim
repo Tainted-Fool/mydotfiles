@@ -1,4 +1,4 @@
-" TODO there is a more contemporary version of this file VSCode
+" No longer being used - switched to LUA configs
 
 function! s:split(...) abort
     let direction = a:1

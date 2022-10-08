@@ -6,26 +6,5 @@ if not status_ok then
 end
 
 comment.setup({
-	pre_hook = function(ctx)
-		local U = require("Comment.utils")
-
-		-- Use protected call so we know where error is coming from
-		local status_utils_ok, utils = pcall(require, "ts_context_commentstring.utils")
-		if not status_utils_ok then
-			vim.notify("nvim-ts-context-commentstring plugin was not found!")
-			return
-		end
-
-		local location = nil
-		if ctx.ctype == U.ctype.block then
-			location = utils.get_cursor_location()
-		elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-			location = utils.get_visual_start_location()
-		end
-
-		return utils.calculate_commentstring({
-			key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
-			location = location,
-		})
-	end,
+	pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 })
