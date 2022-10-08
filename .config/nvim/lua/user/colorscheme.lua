@@ -1,13 +1,13 @@
 -- Declare colorscheme to use
 -- local colorscheme = "onehalfdark"
-local colorscheme = "tokyonight"
+local colorscheme = "tokyonight-night"
 
 -- Use protected call so we know where error is coming from
-local status_ok, theme = pcall(vim.cmd, "colorscheme " .. colorscheme)
+local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
-    -- print("Something went wrong with colorscheme")
-    vim.notify("colorscheme " .. colorscheme .. " not found!")
-    return
+	-- print("Something went wrong with colorscheme")
+	vim.notify("colorscheme " .. colorscheme .. " not found!")
+	return
 end
 
 -- This is our old vimrc value

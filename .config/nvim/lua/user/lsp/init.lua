@@ -1,10 +1,10 @@
 -- Use protected call so we know where error is coming from
-local status_ok, lspconfig = pcall(require, "lspconfig")
+local status_ok, _ = pcall(require, "lspconfig")
 if not status_ok then
-    vim.notify("nvim-lspconfig plugin was not found!")
-    return
+	vim.notify("mason-lspconfig.nvim plugin was not found!")
+	return
 end
 
-require "user.lsp.configs"
+require("user.lsp.configs")
 require("user.lsp.handlers").setup()
-require "user.lsp.null-ls"
+require("user.lsp.null-ls")

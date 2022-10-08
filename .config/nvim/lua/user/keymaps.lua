@@ -1,5 +1,5 @@
 -- Declare variables
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 -- Set leader key
@@ -37,7 +37,7 @@ keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Insert mode
--- Press fj fast to exit insert mode 
+-- Press fj fast to exit insert mode
 keymap("i", "fj", "<ESC>", opts)
 
 -- Visual mode

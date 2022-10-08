@@ -17,8 +17,9 @@
     - [Install Universal-Ctags](#install-universal-ctags)
     - [Fix iamcco/markdown-preview](#fix-iamccomarkdown-preview)
     - [Install C Sharp Dependencies](#install-c-sharp-dependencies)
-    - [Install Python Dependencies](#install-python-dependencies)
     - [Install Nvim](#install-nvim)
+    - [Build Nvim From Source](#build-nvim-from-source)
+    - [Formatters and Linters](#formatters-and-linters)
 
 ## Intro
 
@@ -151,6 +152,14 @@ A font with glyphs(icons) [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/f
 ```sh
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLo "Caskaydia Cover Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete.otf
+```
+
+A better way to install NerdFonts is with this repo. Then running `getnf`
+
+```sh
+git clone https://github.com/ronniedroid/getnf.git
+cd getnf
+./install.sh
 ```
 
 ### Install Colorls
@@ -304,26 +313,15 @@ sudo apt update
 sudo apt install mono-complete
 ```
 
-### Install Python Dependencies
-
-If you want linting for python then here are some handy tools
-
-```sh
-pip install mypy # lint
-pip install vulture # finds unused code
-```
-
-> New plugins install mostly everything with `:LspInstallServer`
-
 ### Install Nvim
 
-Vim with LUA. Download [Nvim 0.7.2+](https://github.com/neovim/neovim/releases)
+Vim with LUA. Download [Nvim 0.8.0](https://github.com/neovim/neovim/releases)
 
 > Make sure you have `git`, `make`, `pip`, `npm`, `node`, and `cargo` installed
 
 ```sh
 # install nvim
-curl -sL https://github.com/neovim/neovim/releases/download/v0.7.2/nvim-linux64.deb -o nvim.deb
+curl -sL https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb -o nvim.deb
 sudo apt install ./nvim.deb
 
 # install dependencies
@@ -333,15 +331,38 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 
 Follow this tutorial for [reference](https://github.com/LunarVim/Neovim-from-scratch)
 
+### Build Nvim From Source
+
+First, install dependencies. NOTE: This is for Ubuntu/Debian platforms
+
+```sh
+sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+```
+
+Then clone repo and run these commands:
+
+```sh
+git clone https://github.com/neovim/neovim
+cd neovim
+git checkout release-0.8
+#git checkout stable
+make distclean && make CMAKE_BUILD_TYPE=Release
+#make distclean && make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+nvim -v
+```
+
 ### Formatters and Linters
 
-Installed these binaraies
+Use `Mason` to instlal formatters and linters or run these commands
 
 ```sh
 cargo install stylua
-npm install -g markdownlint-cli
+npm install -location=global markdownlint-cli
 npm install prettier
 pip install black
 pip install flake8
+pip install mypy # lint
+pip install vulture # finds unused code
 sudo apt install fortune-mod
 ```

@@ -1,8 +1,8 @@
 -- Use protected call so we know where error is coming from
 local status_ok, alpha = pcall(require, "alpha")
 if not status_ok then
-    vim.notify("alpha plugin was not found!")
-    return
+	vim.notify("alpha plugin was not found!")
+	return
 end
 
 local dashboard = require("alpha.themes.dashboard")
@@ -25,22 +25,22 @@ local dashboard = require("alpha.themes.dashboard")
 -- }
 
 dashboard.section.header.val = {
-    [[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
-    [[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
-    [[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
-    [[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
-    [[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
-    [[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]]
+	[[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
+	[[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
+	[[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
+	[[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
+	[[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
+	[[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]],
 }
 
 dashboard.section.buttons.val = {
-    dashboard.button("f", " " .. " Find File", ":Telescope find_files hidden=true<CR>"),
-    dashboard.button("e", " " .. " New File", ":ene <BAR> <CR>"),
-    dashboard.button("p", " " .. " Find Project", ":lua require('telescope').extensions.projects.projects()<CR>"),
-    dashboard.button("r", " " .. " Recent Files", ":Telescope oldfiles <CR>"),
-    dashboard.button("t", " " .. " Find Text", ":Telescope live_grep <CR>"),
-    dashboard.button("c", " " .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
-    dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+	dashboard.button("f", " " .. " Find File", ":Telescope find_files hidden=true<CR>"),
+	dashboard.button("e", " " .. " New File", ":ene <BAR> <CR>"),
+	dashboard.button("p", " " .. " Find Project", ":lua require('telescope').extensions.projects.projects()<CR>"),
+	dashboard.button("r", " " .. " Recent Files", ":Telescope oldfiles <CR>"),
+	dashboard.button("t", " " .. " Find Text", ":Telescope live_grep <CR>"),
+	dashboard.button("c", " " .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
+	dashboard.button("q", " " .. " Quit", ":qa<CR>"),
 }
 
 -- local function footer()
@@ -48,11 +48,17 @@ dashboard.section.buttons.val = {
 -- end
 
 local function footer()
-    -- need fortune-mod -> sudo apt install fortune-mod
-    local handle = io.popen("fortune")
-    local fortune = handle:read("*a")
-    handle:close()
-    return fortune
+	-- need fortune-mod -> sudo apt install fortune-mod
+	local handle = io.popen("fortune")
+	if not handle then
+		vim.norify("Fortune-mod not installed")
+		vim.notify("Run `sudo apt install fortune-mod`")
+		return
+	end
+
+	local fortune = handle:read("*a")
+	handle:close()
+	return fortune
 end
 
 dashboard.section.footer.val = footer()
