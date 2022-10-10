@@ -45,7 +45,7 @@ return packer.startup(function(use)
 	-- Speed up Loading
 	use("lewis6991/impatient.nvim") -- speed up loading lua modules
 
-	-- Packer can manage itself
+	-- Packer
 	use("wbthomason/packer.nvim") -- plugin manager
 
 	-- Colorschemes
@@ -63,31 +63,43 @@ return packer.startup(function(use)
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip") -- snippet engine
-	use("rafamadriz/friendly-snippets") -- snippets to use
+	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable lsp
 	use("williamboman/mason.nvim") -- easy install lsp servers
 	use("williamboman/mason-lspconfig.nvim") -- lsp configurations
 	use("jose-elias-alvarez/null-ls.nvim") -- formatting and linters
-	use("RRethy/vim-illuminate") -- highlight same words in different lines
+	use("RRethy/vim-illuminate") -- highlight same symbols under cursor
 	use("arkav/lualine-lsp-progress") -- indicator that shows when lsp is ready
+	use("ray-x/lsp_signature.nvim") -- better signature help
+	use("lvimuser/lsp-inlayhints.nvim") -- shows data type for certain languages
+	use("b0o/SchemaStore.nvim") -- access to the SchemaStore catalog - large collection of JSON schemas
+	use("SmiteshP/nvim-navic") -- show current code context in winbar or statusline
+	use("simrat39/symbols-outline.nvim") -- show document symbols in right window
+	use("j-hui/fidget.nvim") -- show lsp progress handler
+
+	-- LUA Development
+	use("nvim-lua/plenary.nvim") -- useful lua functions
+	use("nvim-lua/popup.nvim") -- useful lua functions
+	use("folke/lua-dev.nvim") -- nvim lua API docs and completion
 
 	-- Fuzzy Search
 	use("nvim-telescope/telescope.nvim") -- find files
 
 	-- Treesitter
 	use("nvim-treesitter/nvim-treesitter") -- syntax highlighting
+	use("nvim-treesitter/nvim-treesitter-textobjects") -- syntax aware text-objects
 	use("p00f/nvim-ts-rainbow") -- rainbow pairs for treesitter
+  use("windwp/nvim-ts-autotag") -- autoclose/autorename html tags
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 
 	-- Utilities
-	use("nvim-lua/plenary.nvim") -- useful lua functions
-	use("nvim-lua/popup.nvim") -- useful lua functions
 	use("antoinemadec/FixCursorHold.nvim") -- fix cursor hold
+  use("kylechui/nvim-surround") -- add/change/delete surrounding pairs
 	use("windwp/nvim-autopairs") -- auto pairs
 	use("numToStr/Comment.nvim") -- comment/uncomment
-	use("kyazdani42/nvim-tree.lua") -- tree view
+	use("kyazdani42/nvim-tree.lua") -- file explorer
 	use("kyazdani42/nvim-web-devicons") -- icons for tree view
 	use("moll/vim-bbye") -- close/delete buffers easier
 	use("akinsho/bufferline.nvim") -- buffer lines
@@ -96,14 +108,11 @@ return packer.startup(function(use)
 	use("ahmedkhalf/project.nvim") -- project manager
 	use("lukas-reineke/indent-blankline.nvim")
 	use("goolord/alpha-nvim") -- dashboard
-	use("folke/lua-dev.nvim") -- nvim lua API docs and completion
 	use("folke/trouble.nvim") -- better quickfix for diagnostics
 	use("folke/which-key.nvim") -- show leader key bindings
 	use("karb94/neoscroll.nvim") -- better scrolling
 	use("rcarriga/nvim-notify") -- better notifications
-	use("ray-x/lsp_signature.nvim") -- better signature help
 	use("tpope/vim-repeat") -- repeat last command
-	use("tpope/vim-surround") -- change or add surroundings
 	use("tpope/vim-unimpaired") -- useful mappings like ]space
 	use("tpope/vim-abolish") -- convert words to camel, mix, with 'crc'
 	use("justinmk/vim-sneak") -- faster motion with 's'

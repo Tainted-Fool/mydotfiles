@@ -43,7 +43,7 @@ Check the other branch `windows` for that operating system
 - wslu for WSL utilities (see optional)
 - wsl-open for opening files with WSL (see optional)
 
-```sh
+```bash
 sudo apt update && sudo apt upgrade
 sudo apt install nodejs npm fzf vifm xsel figlet ranger ueberzug
 ```
@@ -52,7 +52,7 @@ sudo apt install nodejs npm fzf vifm xsel figlet ranger ueberzug
 
 On a fresh new computer, make sure to install `git` then run these commands
 
-```sh
+```bash
 git init --bare $HOME/.dotfiles
 echo "alias dit='/usr/bin/git --git-dir=$HOME/.dotfiles/ \
 --work-tree=$HOME'" >> $HOME/.zshrc
@@ -66,7 +66,7 @@ dit config --local status.showuntrackedfiles no
 
 Now we can version the files we want with `dit` i.e. same commands as `git`
 
-```sh
+```bash
 dit status
 dit add .vimrc
 dit commit -m "add vimrc"
@@ -75,14 +75,14 @@ dit push
 
 We have to add username and email to `git` if we want to commit/push
 
-```sh
+```bash
 dit config --global user.email "your@email.com"
 dit config --global user.name "yourUserName"
 ```
 
 Don't forget to declare the remote repository to push
 
-```sh
+```bash
 dit remote add origin https://github.com/Tainted-Fool/mydotfiles
 dit push -u origin <localBranchName>
 ```
@@ -91,7 +91,7 @@ dit push -u origin <localBranchName>
 
 Once the repo is up, we can clone it to a new system and pull the files
 
-```sh
+```bash
 # git clone --bare --branch <repoBranchName> <repoURL> $HOME/.dotfiles 
 git clone --bare --branch linux https://github.com/Tainted-Fool/mydotfiles \
 $HOME/.dotfiles 
@@ -106,7 +106,7 @@ dit config --local status.showuntrackedfiles no
 
 Now we can checkout the repo to acquire the neccessary files
 
-```sh
+```bash
 dit checkout
 ```
 
@@ -118,25 +118,25 @@ Finally, we need to install [Oh-My-Zsh](https://ohmyz.sh/)
 
 First, make sure you have `zsh` installed
 
-```sh
+```bash
 sudo apt install zsh
 ```
 
 Run it one time with `zsh` to setup the configs, then install the oh-my-zsh framework
 
-```sh
+```bash
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 Next, add a theme for `zsh` like [Typewritten](https://github.com/reobin/typewritten)
 
-```sh
+```bash
 git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
 ```
 
 Add more plugins to `zsh`
 
-```sh
+```bash
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/hlissner/zsh-autopair $ZSH_CUSTOM/plugins/zsh-autopair
 git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
@@ -149,14 +149,14 @@ git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_CUS
 
 A font with glyphs(icons) [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/font-downloads)
 
-```sh
+```bash
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLo "Caskaydia Cover Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete.otf
 ```
 
 A better way to install NerdFonts is with this repo. Then running `getnf`
 
-```sh
+```bash
 git clone https://github.com/ronniedroid/getnf.git
 cd getnf
 ./install.sh
@@ -166,7 +166,7 @@ cd getnf
 
 Add color to the `ls` command
 
-```sh
+```bash
 sudo gem install colorls
 sudo apt install ruby-full
 
@@ -178,7 +178,7 @@ sudo apt install exa
 
 An alternative to `cat` with syntax highlight
 
-```sh
+```bash
 sudo apt install bat
 ```
 
@@ -186,7 +186,7 @@ sudo apt install bat
 
 Usful for doing a lot of Azure stuff
 
-```sh
+```bash
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py --silent
 python3 get-pip.py
 pip install azure-cli
@@ -196,7 +196,7 @@ pip install azure-cli
 
 A Python environmental variable manager
 
-```sh
+```bash
 curl -sL https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh | sudo sh
 ```
 
@@ -206,7 +206,7 @@ A collection of utilities for WSL [repo here](https://github.com/wslutilities/ws
 
 > Run these commands on Debian distros
 
-```sh
+```bash
 sudo apt install gnupg2 apt-transport-https
 wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
 
@@ -221,7 +221,7 @@ sudo apt install wslu
 
 > Run these commands on Kali distros
 
-```sh
+```bash
 sudo apt install gnupg2 apt-transport-https
 wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
 echo "deb https://pkg.wslutiliti.es/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
@@ -231,7 +231,7 @@ sudo apt install wslu
 
 > Run these commands on Ubuntu distros
 
-```sh
+```bash
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
@@ -240,7 +240,7 @@ sudo apt install ubuntu-wsl
 
 Allows you to open WSL files using Windows GUI applications [repo here](https://github.com/4U6U57/wsl-open)
 
-```sh
+```bash
 curl https://raw.githubusercontent.com/4U6U57/wsl-open/master/wsl-open.sh -o wsl-open
 # OR
 sudo apt install -yqq npm
@@ -254,7 +254,7 @@ sudo ln -s $(which wsl-open) /usr/local/bin/xdg-open
 
 Allows you to tag many built-in functions, methods, and properties
 
-```sh
+```bash
 sudo apt install \
     gcc make \
     pkg-config autoconf automake \
@@ -278,7 +278,7 @@ sudo apt install Universal-ctags
 
 Keept getting error getting this to work
 
-```sh
+```bash
 # comment out the plugin
 # run this command inside vim `:PlugClean`
 # run this command outside vim
@@ -295,7 +295,7 @@ Allows you to develop code in c sharp `c#` for debian 10 `buster`
 
 > Install [mono-project](https://www.mono-project.com/download/stable/#download-win) and [dotnet](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian) - can also install on Windows for WSL integration
 
-```sh
+```bash
 wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
@@ -319,7 +319,7 @@ Vim with LUA. Download [Nvim 0.8.0](https://github.com/neovim/neovim/releases)
 
 > Make sure you have `git`, `make`, `pip`, `npm`, `node`, and `cargo` installed
 
-```sh
+```bash
 # install nvim
 curl -sL https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb -o nvim.deb
 sudo apt install ./nvim.deb
@@ -335,13 +335,13 @@ Follow this tutorial for [reference](https://github.com/LunarVim/Neovim-from-scr
 
 First, install dependencies. NOTE: This is for Ubuntu/Debian platforms
 
-```sh
+```bash
 sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
 ```
 
 Then clone repo and run these commands:
 
-```sh
+```bash
 git clone https://github.com/neovim/neovim
 cd neovim
 git checkout release-0.8
@@ -356,7 +356,7 @@ nvim -v
 
 Use `Mason` to instlal formatters and linters or run these commands
 
-```sh
+```bash
 cargo install stylua
 npm install -location=global markdownlint-cli
 npm install prettier

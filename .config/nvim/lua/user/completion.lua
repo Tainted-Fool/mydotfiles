@@ -15,7 +15,7 @@ end
 -- Load snippets from VSCode
 require("luasnip/loaders/from_vscode").lazy_load()
 
--- Tab completion when backspace is press
+-- Completion function when backspace is press
 local check_backspace = function()
 	local col = vim.fn.col(".") - 1
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -57,10 +57,11 @@ cmp.setup({
 			luasnip.lsp_expand(args.body) -- For `luasnip` users
 		end,
 	},
+	-- Completition mapping when in insert mode
 	mapping = cmp.mapping.preset.insert({
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
-		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }), -- insert and command mode
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 		-- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping
@@ -146,7 +147,7 @@ cmp.setup({
 		-- }
 	},
 	experimental = {
-		ghost_text = true, -- Show ghost text of first item in completion menu
+		ghost_text = true, -- show ghost text of first item in completion menu
 		native_menu = false,
 	},
 })

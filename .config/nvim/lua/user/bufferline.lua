@@ -14,8 +14,8 @@ bufferline.setup({
 		left_mouse_command = "buffer %d",
 		middle_mouse_command = nil,
 		indicator = {
-			icon = "▎",
 			style = "icon",
+			icon = "▎",
 		},
 		buffer_close_icon = "",
 		modified_icon = "●",
@@ -133,7 +133,7 @@ bufferline.setup({
 				attribute = "bg",
 				highlight = "TabLineSel",
 			},
-			italic = true,
+			underline = true,
 		},
 		duplicate_visible = {
 			fg = {
@@ -144,7 +144,7 @@ bufferline.setup({
 				attribute = "bg",
 				highlight = "TabLine",
 			},
-			italic = true,
+			underline = true,
 		},
 		duplicate = {
 			fg = {
@@ -155,7 +155,7 @@ bufferline.setup({
 				attribute = "bg",
 				highlight = "TabLine",
 			},
-			italic = true,
+			underline = true,
 		},
 		modified = {
 			fg = {

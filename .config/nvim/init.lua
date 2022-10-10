@@ -17,15 +17,19 @@ require("user.completion")
 -- LSP
 require("user.lsp")
 require("user.illuminate")
--- require "user.markdown"
+require("user.lsp-inlayhints")
+require("user.navic")
+require("user.symbol-outline")
+require("user.fidget")
 
 -- Fuzzy Finder
 require("user.telescope")
 
--- Treesitter
+-- Treesitter/Syntax Highlighting
 require("user.treesitter")
 
 -- Utilities
+require("user.surround")
 require("user.autopairs")
 require("user.comment")
 require("user.nvim-tree")

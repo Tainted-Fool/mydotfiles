@@ -5,7 +5,10 @@ if not status_ok then
 	return
 end
 
+-- Do not highlight in these filetypes
 vim.g.Illuminate_ftblacklist = { "alpha", "NvimTree" }
+
+-- Set keymaps to navigate to next/previous highlighted word
 vim.api.nvim_set_keymap(
 	"n",
 	"<a-n>",

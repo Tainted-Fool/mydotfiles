@@ -90,6 +90,7 @@ local mappings = {
 		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		"Find Files",
 	},
+  ["m"] = { "<cmd>Mason<cr>", "Mason" },
 	["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
 	["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
 	["q"] = { "<cmd>q!<cr>", "Quit" },
@@ -163,6 +164,7 @@ local mappings = {
 		-- 	"Prev Diagnostic",
 		-- },
 		l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+		o = { "<cmd>SymbolsOutline<cr>", "Symbols Outline Toggle" },
 		-- q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
@@ -170,6 +172,7 @@ local mappings = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 			"Workspace Symbols",
 		},
+    t = {"<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Inlayhints Toggle"}
 		-- w = {
 		-- 	"<cmd>Telescope lsp_workspace_diagnostics<cr>",
 		-- 	"Workspace Diagnostics",
@@ -191,7 +194,7 @@ local mappings = {
 		B = { "<cmd>Telescope buffers<cr>", "Buffers" },
 		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
-		f = { "<cmd>Telescope find_files hidden=true<cr>", "Find Files" },
+		f = { "<cmd>Telescope find_files<cr>", "Find Files" },
 		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },

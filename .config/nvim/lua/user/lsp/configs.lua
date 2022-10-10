@@ -21,24 +21,24 @@ end
 
 -- Declare LSP servers to install
 local servers = {
-	"omnisharp", -- C Sharp
-	"pyright", -- Python
-	"jsonls", -- JSON
-	"sumneko_lua", -- Lua
-	"tsserver", -- TypeScript
+	"bashls", -- Bash
 	"cssls", -- CSS
 	"html", -- HTML
-	"bashls", -- Bash
+	"jsonls", -- JSON
 	"marksman", -- Markdown
+	"omnisharp", -- C Sharp
+	"pyright", -- Python
+	"sumneko_lua", -- Lua
+	"tsserver", -- TypeScript
 }
 
 local settings = {
 	ui = {
-		border = "none",
+		border = "rounded",
 		icons = {
-			package_installed = "◍",
-			package_pending = "◍",
-			package_uninstalled = "◍",
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
 		},
 	},
 	log_level = vim.log.levels.INFO,
@@ -61,7 +61,8 @@ for _, server in pairs(servers) do
 
 	server = vim.split(server, "@")[1]
 
-	-- Declare LSP server config file to use
+	-- Declare variable for LSP server config file to use
+  -- conf_opts = require("user.lsp.setting.<server>")
 	local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
 
 	-- If LSP server config file exists, then use those options

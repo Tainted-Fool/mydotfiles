@@ -12,10 +12,9 @@ npairs.setup({
 		javascript = { "string", "template_string" },
 		java = false,
 	},
-	-- Disable autopairs for these filetypes
-	disable_filetype = { "TelescopePrompt", "spectre_panel" },
+	disable_filetype = { "TelescopePrompt", "spectre_panel" }, -- disable autopairs for these filetypes
 	fast_wrap = {
-		map = "<M-e>", -- Alt+e to move to end
+		map = "<M-e>", -- Alt+e then `$` to move to end
 		chars = { "{", "[", "(", '"', "'" },
 		pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
 		offset = 0, -- Offset from pattern match
@@ -37,4 +36,4 @@ if not cmp_status_ok then
 end
 
 -- Add autopairs to atuo-completion
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({}))
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))

@@ -1,3 +1,4 @@
+-- Declare variable
 local M = {}
 
 -- Use protected call so we know where error is coming from
@@ -11,33 +12,61 @@ M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
 
+-- Declare keymaps when LSP is running
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
 
 	-- Set keymaps for buffers
-	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+	keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+	keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<cr>", opts)
 	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 	keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-	keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+	keymap(bufnr, "n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
+	keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
 	keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<cr>', opts)
 	keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<cr>', opts)
 	keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', opts)
 	keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+	keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 
 	-- Create a 'Format' command for formatting files
 	vim.cmd([[command! Format execute 'lua vim.lsp.buf.format{async=true}']])
 end
 
-local function lsp_highlight_document(client)
-	local illuminate_ok, illuminate = pcall(require, "illuminate")
-	if not illuminate_ok then
-		vim.notify("vim-illuminate was not found!")
+-- Declare LSP signature
+local function lsp_signature(bufnr)
+	-- Use protected call so we know where error is coming from
+	local signature_ok, signature = pcall(require, "lsp_signature")
+	if not signature_ok then
+		vim.notify("lsp_signature.nvim plugin was not found!")
 		return
 	end
-	illuminate.on_attach(client)
+
+	-- Setup signature configurations
+	local signature_cfg = {
+		doc_lines = 0, -- show lines of comment/docs
+		floating_window = false,
+		floating_window_above_cur_line = false,
+		hint_enable = true,
+		hint_prefix = "💀 ", -- 
+		toggle_key = "<C-\\>",
+		select_signature_key = "<C-]>",
+	}
+	signature.on_attach(signature_cfg, bufnr)
+end
+
+-- Declare code context
+local function lsp_navic(client, bufnr)
+	vim.g.navic_silence = false -- supress error messages thrown by nvim-navic
+
+	-- Use protected call so we know where error is coming from
+	local navic_status, navic = pcall(require, "nvim-navic")
+	if not navic_status then
+		vim.notify("nvim-navic plugin was not found!")
+		return
+	end
+	navic.attach(client, bufnr)
 end
 
 M.setup = function()
@@ -58,9 +87,11 @@ M.setup = function()
 		})
 	end
 
+	-- Declare configurations when LSP is running
 	local config = {
 		-- Disable virtual text/diagnostic errors
 		virtual_text = false,
+		virtual_lines = false,
 
 		-- Show signs
 		signs = {
@@ -80,39 +111,36 @@ M.setup = function()
 			prefix = "",
 		},
 	}
-
 	vim.diagnostic.config(config)
 
-	-- Set our popup options for hover window
+	-- Set popup options for hover window
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
-		width = 60,
+		-- width = 60,
 	})
 
-	-- Set our popup options for signature help window
+	-- Set popup options for signature help window
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 		border = "rounded",
-		width = 60,
+		-- width = 60,
 	})
 end
 
 M.on_attach = function(client, bufnr)
 	-- Turn off formatting for typescript
 	if client.name == "tsserver" then
-		client.resolved_capabilities.document_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
 	end
 
-	-- Set keymaps and document highlights
+	-- Turn off formatting for lua
+	if client.name == "sumneko_lua" then
+		client.server_capabilities.documentFormattingProvider = false
+	end
+
+	-- Use functions that we declared above
 	lsp_keymaps(bufnr)
-	lsp_highlight_document(client)
-	require("lsp_signature").on_attach({
-		bind = true,
-		floating_window_above_cur_line = false,
-		hint_enable = false,
-		zindex = 50,
-		toggle_key = "<C-\\>",
-		select_signature_key = "<C-]>",
-	})
+	lsp_signature(bufnr)
+	lsp_navic(client, bufnr)
 end
 
 return M

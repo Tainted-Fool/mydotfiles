@@ -5,6 +5,13 @@ if not status_ok then
 	return
 end
 
+-- Use protected call so we know where error is coming from
+local status_ok, navic = pcall(require, "nvim-navic")
+if not status_ok then
+	vim.notify("nvim-navic plugin was not found!")
+	return
+end
+
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
 end
@@ -51,9 +58,9 @@ local hex = function()
 end
 
 -- Shows how many spaces a tab is in current file
-local spaces = function()
-	return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
-end
+-- local spaces = function()
+-- 	return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+-- end
 
 lualine.setup({
 	options = {
@@ -68,8 +75,8 @@ lualine.setup({
 	sections = {
 		lualine_a = { "mode" }, -- can use the `mode` function to get -- <mode> --
 		lualine_b = { "branch" },
-		lualine_c = { diagnostics, "lsp_progress" },
-		lualine_x = { diff, "encoding", fileformat, filetype, hex, spaces },
+		lualine_c = { diagnostics, navic.get_location },
+		lualine_x = { diff, "encoding", fileformat, filetype, hex, --[[ spaces  ]]},
 		lualine_y = { location },
 		lualine_z = { "progress" }, -- same goes for progress -- displays % instead of declared function above
 	},
