@@ -54,26 +54,26 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 
 -- Execute cmd in each tab page or if range is given
-vim.api.nvim_create_autocmd({ "VimResized" }, {
-	callback = function()
-		vim.cmd("tabdo wincmd =")
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "VimResized" }, {
+-- 	callback = function()
+-- 		vim.cmd("tabdo wincmd =")
+-- 	end,
+-- })
 
 -- Quit cmd on enter
-vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
-	callback = function()
-		vim.cmd("quit")
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
+-- 	callback = function()
+-- 		vim.cmd("quit")
+-- 	end,
+-- })
 
 -- Refresh code lens on file type
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	pattern = { "*.java", "*.py" },
-	callback = function()
-		vim.lsp.codelens.refresh()
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- 	pattern = { "*.java", "*.py" },
+-- 	callback = function()
+-- 		vim.lsp.codelens.refresh()
+-- 	end,
+-- })
 
 -- Show Diagnostics on mouse hover
 --vim.api.nvim_create_autocmd("CursorHold", {

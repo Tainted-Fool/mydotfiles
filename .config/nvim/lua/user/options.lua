@@ -59,10 +59,6 @@ vim.cmd([[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]])
 -- Set all vim.notify to the plugin one
 vim.notify = require("notify")
 
--- Map `-` as the easymotion key
-vim.cmd([[map - <Plug>(easymotion-prefix)]])
-vim.cmd([[let g:EasyMotion_disable_two_key_combo = 1]])
-
--- Set tab and space characters
-vim.cmd([[set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:·]])
-vim.cmd([[set list]])
+-- Map `-` as the Easymotion key
+-- vim.cmd([[map - <Plug>(easymotion-prefix)]])
+-- vim.cmd([[let g:EasyMotion_disable_two_key_combo = 1]])

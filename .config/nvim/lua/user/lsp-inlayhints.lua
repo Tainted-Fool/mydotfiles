@@ -23,7 +23,7 @@ inlayhints.setup({
 	inlay_hints = {
 		parameter_hints = {
 			show = false,
-			prefix = "<- ",
+			prefix = "← ",
 			separator = ", ",
 			remove_colon_start = false,
 			remove_colon_end = true,

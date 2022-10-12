@@ -90,11 +90,11 @@ local mappings = {
 		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		"Find Files",
 	},
-  ["m"] = { "<cmd>Mason<cr>", "Mason" },
 	["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
 	["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
-	["q"] = { "<cmd>q!<cr>", "Quit" },
+	["m"] = { "<cmd>Mason<cr>", "Mason" },
 	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+	["q"] = { "<cmd>q!<cr>", "Quit" },
 	["w"] = { "<cmd>w!<cr>", "Save" },
 	["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", "Comment Toggle" },
 
@@ -113,12 +113,12 @@ local mappings = {
 
 	D = {
 		name = "Diagnostics",
+		d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Document" },
+		l = { "<cmd>TroubleToggle loclist<cr>", "Loclist" },
+		q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
+		r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
 		t = { "<cmd>TroubleToggle<cr>", "Trouble Toggle" },
 		w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Workspace" },
-		d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Document" },
-		q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
-		l = { "<cmd>TroubleToggle loclist<cr>", "Loclist" },
-		r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
 	},
 
 	g = {
@@ -172,7 +172,7 @@ local mappings = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 			"Workspace Symbols",
 		},
-    t = {"<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Inlayhints Toggle"}
+		t = { "<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Inlayhints Toggle" },
 		-- w = {
 		-- 	"<cmd>Telescope lsp_workspace_diagnostics<cr>",
 		-- 	"Workspace Diagnostics",
@@ -188,6 +188,14 @@ local mappings = {
 		u = { "<cmd>PackerUpdate<cr>", "Update" },
 	},
 
+	r = {
+		name = "Run",
+		m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview" },
+		p = { "<cmd>Lab code run<cr>", "Code Preview" },
+		r = { "<cmd>Jaq<cr>", "Run" },
+		s = { "<cmd>Lab code stop<cr>", "Code Preview Stop" },
+	},
+
 	s = {
 		name = "Search",
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
@@ -197,10 +205,12 @@ local mappings = {
 		f = { "<cmd>Telescope find_files<cr>", "Find Files" },
 		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+		m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
 		p = { "<cmd>Telescope projects<cr>", "Projects" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 		R = { "<cmd>Telescope registers<cr>", "Registers" },
+		s = { "<cmd>Telescope session-lens search_session<cr>", "Search Sessions" },
+		S = { "<cmd>SaveSession<cr>", "Save Sessions" },
 		t = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
 	},
 

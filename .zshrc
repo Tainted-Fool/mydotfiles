@@ -19,6 +19,10 @@ if [ -d "$HOME/.local/bin" ]; then
 	PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Set PATH to include cargo's bin if found
+if [ -d "$HOME/.cargo/bin" ]; then
+	PATH="$HOME/.cargo/bin:$PATH"
+fi
 # Declare Windows C and D directories
 export HOMEC="/mnt/c/"
 export HOMED="/mnt/d/"
@@ -204,5 +208,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # Activate `zsh-autopair`
+# This confilcts with zsh-vi-mode; only one can be active at a time
 autopair-init
 

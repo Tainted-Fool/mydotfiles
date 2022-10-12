@@ -62,7 +62,7 @@ for _, server in pairs(servers) do
 	server = vim.split(server, "@")[1]
 
 	-- Declare variable for LSP server config file to use
-  -- conf_opts = require("user.lsp.setting.<server>")
+	-- conf_opts = require("user.lsp.setting.<server>")
 	local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
 
 	-- If LSP server config file exists, then use those options

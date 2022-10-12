@@ -10,10 +10,12 @@ vim.g.maplocalleader = " "
 -- Modes:
 -- n = normal_mode
 -- i = insert_mode
--- v = visual_mode
+-- v = visual_mode and select_mode
+-- s = select_mode
 -- x = visual_block_mode
 -- t = term_mode
 -- c = command_mode
+-- o = operator_mode
 
 -- Normal mode
 -- Better window navigation

@@ -6,8 +6,8 @@ if not status_ok then
 end
 
 -- Use protected call so we know where error is coming from
-local status_ok, navic = pcall(require, "nvim-navic")
-if not status_ok then
+local navic_ok, navic = pcall(require, "nvim-navic")
+if not navic_ok then
 	vim.notify("nvim-navic plugin was not found!")
 	return
 end
@@ -76,7 +76,13 @@ lualine.setup({
 		lualine_a = { "mode" }, -- can use the `mode` function to get -- <mode> --
 		lualine_b = { "branch" },
 		lualine_c = { diagnostics, navic.get_location },
-		lualine_x = { diff, "encoding", fileformat, filetype, hex, --[[ spaces  ]]},
+		lualine_x = {
+			diff,
+			"encoding",
+			fileformat,
+			filetype,
+			hex, --[[ spaces  ]]
+		},
 		lualine_y = { location },
 		lualine_z = { "progress" }, -- same goes for progress -- displays % instead of declared function above
 	},

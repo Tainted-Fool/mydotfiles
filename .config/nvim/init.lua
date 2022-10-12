@@ -28,19 +28,41 @@ require("user.telescope")
 -- Treesitter/Syntax Highlighting
 require("user.treesitter")
 
--- Utilities
+-- QOL
 require("user.surround")
 require("user.autopairs")
 require("user.comment")
-require("user.nvim-tree")
-require("user.bufferline")
-require("user.toggleterm")
-require("user.lualine")
-require("user.project")
 require("user.indentline")
+require("user.scroll")
+require("user.colorizer")
+require("user.dressing")
+require("user.dial")
+require("user.hop")
+
+-- File Explorer
+require("user.nvim-tree")
+
+-- Buffers
+require("user.bufferline")
+require("user.numb")
+
+-- Terminal
+require("user.toggleterm")
+
+-- Status Bar
+require("user.lualine")
+
+-- Dashboard
 require("user.alpha")
 require("user.whichkey")
-require("user.scroll")
+
+-- Sessions
+require("user.project")
+require("user.auto-session")
+
+-- Code Runner
+require("user.jaq")
+require("user.lab")
 
 -- Git
 require("user.gitsigns")

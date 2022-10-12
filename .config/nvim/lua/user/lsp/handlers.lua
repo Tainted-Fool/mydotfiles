@@ -49,7 +49,7 @@ local function lsp_signature(bufnr)
 		floating_window = false,
 		floating_window_above_cur_line = false,
 		hint_enable = true,
-		hint_prefix = "💀 ", -- 
+		hint_prefix = "💀 ", --
 		toggle_key = "<C-\\>",
 		select_signature_key = "<C-]>",
 	}
@@ -67,6 +67,17 @@ local function lsp_navic(client, bufnr)
 		return
 	end
 	navic.attach(client, bufnr)
+end
+
+-- Declare document highlighting
+local function lsp_highlight_document(client)
+	-- Use protected call so we know where error is coming from
+	local illuminate_ok, illuminate = pcall(require, "illuminate")
+	if not illuminate_ok then
+		vim.notify("vim-illuminate was not found!")
+		return
+	end
+	illuminate.on_attach(client)
 end
 
 M.setup = function()
@@ -141,6 +152,7 @@ M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
 	lsp_signature(bufnr)
 	lsp_navic(client, bufnr)
+	lsp_highlight_document(client)
 end
 
 return M

@@ -278,8 +278,8 @@ set title
 set signcolumn=yes
 
 " set tab and space characters
-set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:·
-set list
+" set list
+" set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:·
 
 " set ripgrep as search
 " set grepprg=rg\ --vimgrep\ --smart-case\ --follow

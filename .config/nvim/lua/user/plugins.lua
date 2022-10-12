@@ -78,11 +78,15 @@ return packer.startup(function(use)
 	use("SmiteshP/nvim-navic") -- show current code context in winbar or statusline
 	use("simrat39/symbols-outline.nvim") -- show document symbols in right window
 	use("j-hui/fidget.nvim") -- show lsp progress handler
+	use("folke/trouble.nvim") -- better quickfix and diagnostics
 
-	-- LUA Development
+	-- LUA
 	use("nvim-lua/plenary.nvim") -- useful lua functions
 	use("nvim-lua/popup.nvim") -- useful lua functions
 	use("folke/lua-dev.nvim") -- nvim lua API docs and completion
+	use("rcarriga/nvim-notify") -- better notifications
+	use("stevearc/dressing.nvim") -- UI hook for vim.ui.select/input
+	use("antoinemadec/FixCursorHold.nvim") -- fix cursor hold
 
 	-- Fuzzy Search
 	use("nvim-telescope/telescope.nvim") -- find files
@@ -91,32 +95,61 @@ return packer.startup(function(use)
 	use("nvim-treesitter/nvim-treesitter") -- syntax highlighting
 	use("nvim-treesitter/nvim-treesitter-textobjects") -- syntax aware text-objects
 	use("p00f/nvim-ts-rainbow") -- rainbow pairs for treesitter
-  use("windwp/nvim-ts-autotag") -- autoclose/autorename html tags
+	use("windwp/nvim-ts-autotag") -- autoclose/autorename html tags
 	use("JoosepAlviste/nvim-ts-context-commentstring")
+	use("vimjas/vim-python-pep8-indent") -- Fix treesitter auto-indent for python
 
-	-- Utilities
-	use("antoinemadec/FixCursorHold.nvim") -- fix cursor hold
-  use("kylechui/nvim-surround") -- add/change/delete surrounding pairs
+	-- QOL
+	use("kylechui/nvim-surround") -- add/change/delete surrounding pairs
 	use("windwp/nvim-autopairs") -- auto pairs
 	use("numToStr/Comment.nvim") -- comment/uncomment
-	use("kyazdani42/nvim-tree.lua") -- file explorer
-	use("kyazdani42/nvim-web-devicons") -- icons for tree view
-	use("moll/vim-bbye") -- close/delete buffers easier
-	use("akinsho/bufferline.nvim") -- buffer lines
-	use("akinsho/toggleterm.nvim") -- toggle terminal
-	use("nvim-lualine/lualine.nvim") -- status bar/line
-	use("ahmedkhalf/project.nvim") -- project manager
-	use("lukas-reineke/indent-blankline.nvim")
-	use("goolord/alpha-nvim") -- dashboard
-	use("folke/trouble.nvim") -- better quickfix for diagnostics
-	use("folke/which-key.nvim") -- show leader key bindings
+	use("lukas-reineke/indent-blankline.nvim") -- adds `|` as indentation guides
 	use("karb94/neoscroll.nvim") -- better scrolling
-	use("rcarriga/nvim-notify") -- better notifications
 	use("tpope/vim-repeat") -- repeat last command
-	use("tpope/vim-unimpaired") -- useful mappings like ]space
+	use("tpope/vim-unimpaired") -- useful mappings like ]space and ]b
 	use("tpope/vim-abolish") -- convert words to camel, mix, with 'crc'
 	use("justinmk/vim-sneak") -- faster motion with 's'
-	use("easymotion/vim-easymotion") -- faster motion with dash '-' '<motion>'
+	-- use("easymotion/vim-easymotion") -- faster motion with dash '-' '<motion>'
+	use("phaazon/hop.nvim") -- better navigation with f and t
+	use("NvChad/nvim-colorizer.lua") -- displays the hexvalue color
+	use("monaqa/dial.nvim") -- increment/decrement/interate various elements
+	use("andymass/vim-matchup") -- better % navigate and highlight matching words
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		ft = "markdown",
+	})
+
+	-- File Explorer
+	use("kyazdani42/nvim-tree.lua") -- tree viewer
+	use("kyazdani42/nvim-web-devicons") -- icons for tree view
+
+	-- Buffers
+	use("moll/vim-bbye") -- close/delete buffers easier
+	use("akinsho/bufferline.nvim") -- buffer lines
+	use("nacro90/numb.nvim") -- peek lines of the buffer
+
+	-- Terminal
+	use("akinsho/toggleterm.nvim") -- toggle terminal
+
+	-- Status Bar
+	use("nvim-lualine/lualine.nvim") -- status bar/line
+
+	-- Dashboard
+	use("goolord/alpha-nvim") -- home page
+	use("folke/which-key.nvim") -- show leader key bindings
+
+	-- Sessions
+	use("ahmedkhalf/project.nvim") -- project manager
+	use("rmagatti/auto-session") -- save/restore sessions
+	use("rmagatti/session-lens") -- use telescope to view sessions
+
+	-- Code Runner
+	use("is0n/jaq-nvim") -- run code of any language with `:`
+	use({
+		"0x100101/lab.nvim",
+		run = "cd js && npm ci",
+	}) -- prototype for js, ts, lua, and python
 
 	-- Git
 	use("lewis6991/gitsigns.nvim") -- git symbols

@@ -18,7 +18,7 @@ configs.setup({
 	},
 	indent = {
 		enable = true,
-		-- disable = {"css"}
+		disable = { "python" },
 	},
 	rainbow = {
 		enable = true,
@@ -31,6 +31,10 @@ configs.setup({
 	autotag = {
 		enable = true,
 		-- disable = { "xml", "markdown" },
+	},
+	matchup = {
+		enable = true,
+		-- disable = { "c", "ruby" },
 	},
 	textobjects = {
 		select = {
