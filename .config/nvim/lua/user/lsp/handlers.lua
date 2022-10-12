@@ -49,7 +49,7 @@ local function lsp_signature(bufnr)
 		floating_window = false,
 		floating_window_above_cur_line = false,
 		hint_enable = true,
-		hint_prefix = "💀 ", --
+		hint_prefix = "💀 ",
 		toggle_key = "<C-\\>",
 		select_signature_key = "<C-]>",
 	}
