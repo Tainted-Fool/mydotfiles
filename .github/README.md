@@ -354,7 +354,7 @@ nvim -v
 
 ### Formatters and Linters
 
-Use `Mason` to instlal formatters and linters or run these commands
+Use `Mason` to install formatters and linters or run these commands
 
 ```bash
 cargo install stylua
