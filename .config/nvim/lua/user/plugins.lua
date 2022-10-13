@@ -158,6 +158,7 @@ return packer.startup(function(use)
 	-- Debug
 	use("mfussenegger/nvim-dap") -- debugger
 	use("rcarriga/nvim-dap-ui") -- debugger ui
+  use("mfussenegger/nvim-dap-python") -- dap for python
 	-- use("ravenxrz/DAPInstall.nvim") -- debugger installer - use Mason
 
 	-- Automatically set up configurations after cloning packer repo

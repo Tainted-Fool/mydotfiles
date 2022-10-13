@@ -12,6 +12,13 @@ if not dap_ui_status_ok then
 	return
 end
 
+-- Use protected call so we know where error is coming from
+local dap_py_status_ok, dap_python = pcall(require, "dap-python")
+if not dap_py_status_ok then
+	vim.notify("nvim-dap-python plugin was not found!")
+	return
+end
+
 dapui.setup({
 	expand_lines = true,
 	icons = { expanded = "", collapsed = "", circular = "" },
@@ -59,6 +66,10 @@ vim.fn.sign_define("DapBreakpoint", {
 	linehl = "",
 	numhl = "",
 })
+
+-- DAP settings for python
+dap_python.setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+-- dap_python.setup()
 
 -- Open dapui when dap in initialized
 dap.listeners.after.event_initialized["dapui_config"] = function()

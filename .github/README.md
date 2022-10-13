@@ -354,15 +354,14 @@ nvim -v
 
 ### Formatters and Linters
 
-Use `Mason` to install formatters and linters or run these commands
+Run these commands to install formatters and linters or use `:Mason`
 
 ```bash
-cargo install stylua
-npm install -location=global markdownlint-cli
-npm install prettier
-pip install black
-pip install flake8
-pip install mypy # lint
-pip install vulture # finds unused code
+cargo install stylua # lua formatter
+npm install -location=global markdownlint-cli # markdown linter and formatter
+npm install prettier # multi-language formatter
+pip install black # python formatter
+pip install flake8 # python linter
+pip install vulture # useful in python to find unused code
 sudo apt install fortune-mod
 ```
