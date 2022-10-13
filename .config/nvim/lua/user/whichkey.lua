@@ -192,6 +192,7 @@ local mappings = {
 	r = {
 		name = "Run",
 		m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview" },
+    o = { "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<cr>", "Source Snippets"},
 		p = { "<cmd>Lab code run<cr>", "Code Preview" },
 		r = { "<cmd>Jaq<cr>", "Run" },
 		s = { "<cmd>Lab code stop<cr>", "Code Preview Stop" },

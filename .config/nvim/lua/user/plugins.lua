@@ -80,6 +80,7 @@ return packer.startup(function(use)
 	use("j-hui/fidget.nvim") -- show lsp progress handler
 	-- use("folke/trouble.nvim") -- better lsp diagnostics and quickfix list
 	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- multiline diagnostics
+  use("onsails/lspkind.nvim") -- lsp completion icons
 
 	-- LUA
 	use("nvim-lua/plenary.nvim") -- useful lua functions
