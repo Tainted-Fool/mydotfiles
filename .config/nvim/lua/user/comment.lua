@@ -37,29 +37,28 @@ comment.setup({
 		require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
 
 		-- Only calculate commentstring for javascript, typescript, and tsx filetypes
-		-- if
-		-- 	vim.bo.filetype == "javascript"
-		-- 	or vim.bo.filetype == "typescript"
-		-- 	or vim.bo.filetype == "typescriptreact"
-		-- then
+		if
+			vim.bo.filetype == "javascript"
+			or vim.bo.filetype == "typescript"
+			or vim.bo.filetype == "typescriptreact"
+		then
+			-- Declare variable
+			local U = require("Comment.utils")
 
-		-- Declare variable
-		local U = require("Comment.utils")
+			-- Determine the location where to calculate commentstring from
+			local location = nil
+			if ctx.ctype == U.ctype.blockwise then
+				location = utils.get_cursor_location()
+			elseif ctx.motion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+				location = utils.get_visual_start_location()
+			end
 
-		-- Determine the location where to calculate commentstring from
-		local location = nil
-		if ctx.ctype == U.ctype.blockwise then
-			location = utils.get_cursor_location()
-		elseif ctx.motion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-			location = utils.get_visual_start_location()
+			-- Determine whether to use linewise or blockwise commentstring
+			local type = ctx.type == U.ctype.linewise and "__default" or "__multiline"
+			return internal.calculate_commentstring({
+				key = type,
+				location = location,
+			})
 		end
-
-		-- Determine whether to use linewise or blockwise commentstring
-		local type = ctx.type == U.ctype.linewise and "__default" or "__multiline"
-		return internal.calculate_commentstring({
-			key = type,
-			location = location,
-		})
-		-- end
 	end,
 })

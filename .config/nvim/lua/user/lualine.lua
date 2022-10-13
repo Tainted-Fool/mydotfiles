@@ -75,13 +75,17 @@ lualine.setup({
 	sections = {
 		lualine_a = { "mode" }, -- can use the `mode` function to get -- <mode> --
 		lualine_b = { "branch" },
-		lualine_c = { diagnostics, navic.get_location },
+		lualine_c = {
+			-- diagnostics,
+			navic.get_location,
+		},
 		lualine_x = {
 			diff,
 			"encoding",
 			fileformat,
 			filetype,
-			hex, --[[ spaces  ]]
+			hex,
+			-- spaces,
 		},
 		lualine_y = { location },
 		lualine_z = { "progress" }, -- same goes for progress -- displays % instead of declared function above

@@ -113,12 +113,12 @@ local mappings = {
 
 	D = {
 		name = "Diagnostics",
-		d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Document" },
+		d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
 		l = { "<cmd>TroubleToggle loclist<cr>", "Loclist" },
 		q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
 		r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
 		t = { "<cmd>TroubleToggle<cr>", "Trouble Toggle" },
-		w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Workspace" },
+		w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 	},
 
 	g = {
@@ -151,6 +151,7 @@ local mappings = {
 		-- 	"<cmd>Telescope lsp_document_diagnostics<cr>",
 		-- 	"Document Diagnostics",
 		-- },
+		d = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Diagnostics Toggle" },
 		f = { "<cmd>lua vim.lsp.buf.format({async=true})<cr>", "Format" },
 		h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 		i = { "<cmd>LspInfo<cr>", "Info" },

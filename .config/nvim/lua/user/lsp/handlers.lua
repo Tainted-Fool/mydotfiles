@@ -98,11 +98,12 @@ M.setup = function()
 		})
 	end
 
-	-- Declare configurations when LSP is running
+	-- Declare configurations for Diagnostics when LSP is running
 	local config = {
 		-- Disable virtual text/diagnostic errors
-		virtual_text = false,
-		virtual_lines = false,
+		virtual_text = false, -- enable/disable diagnostic text for plugin trouble
+    virtual_lines = { only_current_line = true },
+		-- virtual_lines = false, -- enable/disable diagnostic for plugin lsp_lines
 
 		-- Show signs
 		signs = {

@@ -78,7 +78,8 @@ return packer.startup(function(use)
 	use("SmiteshP/nvim-navic") -- show current code context in winbar or statusline
 	use("simrat39/symbols-outline.nvim") -- show document symbols in right window
 	use("j-hui/fidget.nvim") -- show lsp progress handler
-	use("folke/trouble.nvim") -- better quickfix and diagnostics
+	-- use("folke/trouble.nvim") -- better lsp diagnostics and quickfix list
+	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- multiline diagnostics
 
 	-- LUA
 	use("nvim-lua/plenary.nvim") -- useful lua functions
@@ -157,7 +158,7 @@ return packer.startup(function(use)
 	-- Debug
 	use("mfussenegger/nvim-dap") -- debugger
 	use("rcarriga/nvim-dap-ui") -- debugger ui
-	use("ravenxrz/DAPInstall.nvim") -- debugger installer
+	-- use("ravenxrz/DAPInstall.nvim") -- debugger installer - use Mason
 
 	-- Automatically set up configurations after cloning packer repo
 	if PACKER_BOOTSTRAP then

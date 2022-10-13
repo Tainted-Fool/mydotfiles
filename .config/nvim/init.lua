@@ -21,6 +21,8 @@ require("user.lsp-inlayhints")
 require("user.navic")
 require("user.symbol-outline")
 require("user.fidget")
+require("user.lsp-lines")
+-- require("user.trouble")
 
 -- Fuzzy Finder
 require("user.telescope")

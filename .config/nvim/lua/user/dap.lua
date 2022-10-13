@@ -12,36 +12,43 @@ if not dap_ui_status_ok then
 	return
 end
 
--- Use protected call so we know where error is coming from
-local dap_install_status_ok, dap_install = pcall(require, "dap-install")
-if not dap_install_status_ok then
-	vim.notify("dap-install plugin was not found!")
-	return
-end
-
-dap_install.setup({})
-
-dap_install.config("python", {})
-
 dapui.setup({
+	expand_lines = true,
+	icons = { expanded = "", collapsed = "", circular = "" },
+	mappings = {
+		expand = { "<CR>", "<2-LeftMouse>" },
+		open = "o",
+		remove = "d",
+		edit = "e",
+		repl = "r",
+		toggle = "t",
+	},
 	layouts = {
 		{
 			elements = {
-				"scopes",
-				"breakpoints",
-				"stacks",
-				"watches",
+				{ id = "scopes", size = 0.33 },
+				{ id = "breakpoints", size = 0.17 },
+				{ id = "stacks", size = 0.25 },
+				{ id = "watches", size = 0.25 },
 			},
-			size = 40,
+			size = 0.33,
 			position = "left",
 		},
 		{
 			elements = {
-				"repl",
-				"console",
+				{ id = "repl", size = 0.45 },
+				{ id = "console", size = 0.55 },
 			},
-			size = 10,
+			size = 0.27,
 			position = "bottom",
+		},
+	},
+	floating = {
+		max_height = 0.9,
+		max_width = 0.5,
+		border = "rounded",
+		mappings = {
+			close = { "q", "<Esc>" },
 		},
 	},
 })
