@@ -362,6 +362,7 @@ npm install -location=global markdownlint-cli # markdown linter and formatter
 npm install prettier # multi-language formatter
 pip install black # python formatter
 pip install flake8 # python linter
+pip install pylint # python linter - alternative
 pip install vulture # useful in python to find unused code
 sudo apt install fortune-mod
 ```

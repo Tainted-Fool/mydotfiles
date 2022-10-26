@@ -30,6 +30,7 @@ local servers = {
 	"pyright", -- Python
 	"sumneko_lua", -- Lua
 	"tsserver", -- TypeScript
+  "clangd", -- C
 }
 
 local settings = {
