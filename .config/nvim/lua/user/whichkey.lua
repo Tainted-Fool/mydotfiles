@@ -152,6 +152,7 @@ local mappings = {
 		-- 	"Document Diagnostics",
 		-- },
 		d = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Diagnostics Toggle" },
+    D = { "<cmd>DocsViewToggle <cr>", "Documentation toggle" },
 		f = { "<cmd>lua vim.lsp.buf.format({async=true})<cr>", "Format" },
 		h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 		i = { "<cmd>LspInfo<cr>", "Info" },

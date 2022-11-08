@@ -81,6 +81,7 @@ return packer.startup(function(use)
 	-- use("folke/trouble.nvim") -- better lsp diagnostics and quickfix list
 	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- multiline diagnostics
   use("onsails/lspkind.nvim") -- lsp completion icons
+  use("amrbashir/nvim-docs-view") -- lsp hover documentation in a side panel
 
 	-- LUA
 	use("nvim-lua/plenary.nvim") -- useful lua functions
@@ -121,6 +122,7 @@ return packer.startup(function(use)
 		run = "cd app && npm install",
 		ft = "markdown",
 	})
+  use("abecodes/tabout.nvim")
 
 	-- File Explorer
 	use("kyazdani42/nvim-tree.lua") -- tree viewer

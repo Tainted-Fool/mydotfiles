@@ -27,7 +27,8 @@ local servers = {
 	"jsonls", -- JSON
 	"marksman", -- Markdown
 	"omnisharp", -- C Sharp
-	"pyright", -- Python
+	-- "pyright", -- Python
+  "jedi_language_server", -- Python
 	"sumneko_lua", -- Lua
 	"tsserver", -- TypeScript
   "clangd", -- C

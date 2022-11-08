@@ -22,6 +22,7 @@ require("user.navic")
 require("user.symbol-outline")
 require("user.fidget")
 require("user.lsp-lines")
+require("user.nvim-docs-view")
 -- require("user.trouble")
 
 -- Fuzzy Finder
@@ -41,6 +42,7 @@ require("user.colorizer")
 require("user.dressing")
 require("user.dial")
 require("user.hop")
+require("user.tabout")
 
 -- File Explorer
 require("user.nvim-tree")
