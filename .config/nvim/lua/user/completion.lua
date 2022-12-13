@@ -49,7 +49,7 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = false }), -- set to false to only confirm explicitly selected items
 		-- ["<Right>"] = cmp.mapping.confirm({ select = true }),
 		-- ["<C-y>"] = cmp.mapping.confirm({
-		-- 	behavior = cmp.ConfirmBehavior.Insert,
+		-- 	behavior = cmp.ConfirmBehavior.Insert, -- or Replace
 		-- 	select = true, -- accept currently selected item
 		-- }),
 

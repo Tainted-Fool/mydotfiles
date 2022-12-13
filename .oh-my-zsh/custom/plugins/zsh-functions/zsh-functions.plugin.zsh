@@ -40,6 +40,10 @@ function sha256() {
     echo -n $1 | sha256sum | awk '{print $1}'
 }
 
+# function sha256() {
+#     printf "%s %s\n" "$1" "$2" | sha256sum --check
+# }
+
 # Create sha1sum of a string
 function sha1() {
     echo -n $1 | sha1sum | awk '{print $1}'
@@ -82,9 +86,3 @@ function notes() {
 
     code $DIR
 }
-
-function sha256() {
-    printf "%s %s\n" "$1" "$2" | sha256sum --check
-
-}
-

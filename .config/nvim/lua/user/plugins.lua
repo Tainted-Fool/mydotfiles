@@ -108,6 +108,7 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim") -- comment/uncomment
 	use("lukas-reineke/indent-blankline.nvim") -- adds `|` as indentation guides
 	use("karb94/neoscroll.nvim") -- better scrolling
+	use("tpope/vim-fugitive") -- git wrapper :Git <tab>
 	use("tpope/vim-repeat") -- repeat last command
 	use("tpope/vim-unimpaired") -- useful mappings like ]space and ]b
 	use("tpope/vim-abolish") -- convert words to camel, mix, with 'crc'

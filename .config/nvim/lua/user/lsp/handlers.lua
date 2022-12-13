@@ -1,4 +1,4 @@
--- Declare variable
+-- Declare module
 local M = {}
 
 -- Use protected call so we know where error is coming from
@@ -8,6 +8,7 @@ if not status_ok then
 	return
 end
 
+--- Add new property to language server
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
@@ -20,7 +21,8 @@ local function lsp_keymaps(bufnr)
 
 	-- Set keymaps for buffers
 	keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
-	keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<cr>", opts)
+	-- keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<cr>", opts)
+	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
 	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 	keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 	keymap(bufnr, "n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
@@ -30,6 +32,9 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', opts)
 	keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 	keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+	keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+	keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+	keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
 
 	-- Create a 'Format' command for formatting files
 	vim.cmd([[command! Format execute 'lua vim.lsp.buf.format{async=true}']])
@@ -139,6 +144,7 @@ M.setup = function()
 	})
 end
 
+--- Do things when LS attacbes to buffer
 M.on_attach = function(client, bufnr)
 	-- Turn off formatting for typescript
 	if client.name == "tsserver" then
