@@ -2,6 +2,7 @@
 
 - [Table of Contents](#table-of-contents)
   - [Intro](#intro)
+  - [Using Stow](#using-stow)
   - [Dependencies](#dependencies)
   - [Starting From Zero](#starting-from-zero)
   - [Starting On A New System](#starting-on-a-new-system)
@@ -29,9 +30,20 @@ Check the other branch `windows` for that operating system
 
 [Guide](https://www.atlassian.com/git/tutorials/dotfiles) for reference
 
+## Using Stow
+
+Switched to `stow` for dotfiles management. It's a lot easier to manage and update. The only downside is that it doesn't work with `git` so we have to manually update the files.
+
+```bash
+sudo apt install stow
+cd mydotfiles
+stow */ -t ~
+```
+
 ## Dependencies
 
 - vim 8.2+
+- stow
 - vimplug (auto-installs)
 - nodejs and npm for coc.nvim
 - FZF for fuzzy search files/folders
@@ -62,7 +74,6 @@ dit config --local status.showuntrackedfiles no
 - The first line creates a hidden folder called `.dotfiles`
 - The second line creates an alias `dit` to used instead of `git`
 - The third line creates a flag to hide files we are not tracking yet
-- The last line adds the alias to `.zshrc` for convenience
 
 Now we can version the files we want with `dit` i.e. same commands as `git`
 

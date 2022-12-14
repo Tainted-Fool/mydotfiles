@@ -1,4 +1,5 @@
 # Set name of the theme to load
+#PROMPT='%(!.%{%F{yellow}%}.)$USER @ %{$fg[white]%}%M %{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 ZSH_THEME="typewritten/typewritten"
 
 # Customize prompt layout
@@ -27,7 +28,7 @@ export HOMEG="/mnt/g/My Drive/"
 export ZSH="$HOME/.oh-my-zsh"
 
 # X11 forwarding
-if tasklist.exe | grep -q vcxsrv.exe; then
+if [ -x "$(command -v tasklist.exe)" ] && (tasklist.exe | grep -q vcxsrv.exe); then
     export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
     export LIBGL_ALWAYS_INDIRECT=1
 fi
