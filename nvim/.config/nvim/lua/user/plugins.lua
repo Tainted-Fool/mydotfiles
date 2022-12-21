@@ -80,8 +80,8 @@ return packer.startup(function(use)
 	use("j-hui/fidget.nvim") -- show lsp progress handler
 	-- use("folke/trouble.nvim") -- better lsp diagnostics and quickfix list
 	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- multiline diagnostics
-  use("onsails/lspkind.nvim") -- lsp completion icons
-  use("amrbashir/nvim-docs-view") -- lsp hover documentation in a side panel
+	use("onsails/lspkind.nvim") -- lsp completion icons
+	use("amrbashir/nvim-docs-view") -- lsp hover documentation in a side panel
 
 	-- LUA
 	use("nvim-lua/plenary.nvim") -- useful lua functions
@@ -112,6 +112,7 @@ return packer.startup(function(use)
 	use("tpope/vim-repeat") -- repeat last command
 	use("tpope/vim-unimpaired") -- useful mappings like ]space and ]b
 	use("tpope/vim-abolish") -- convert words to camel, mix, with 'crc'
+	use("tpope/vim-sleuth") -- Automatically adjusts 'shiftwidth' and 'expandtab'
 	use("justinmk/vim-sneak") -- faster motion with 's'
 	-- use("easymotion/vim-easymotion") -- faster motion with dash '-' '<motion>'
 	use("phaazon/hop.nvim") -- better navigation with f and t
@@ -123,7 +124,8 @@ return packer.startup(function(use)
 		run = "cd app && npm install",
 		ft = "markdown",
 	})
-  use("abecodes/tabout.nvim")
+	use("abecodes/tabout.nvim") -- use tab to exit quotation marks and other characters
+	use("ThePrimeagen/harpoon") -- mark and get file
 
 	-- File Explorer
 	use("kyazdani42/nvim-tree.lua") -- tree viewer
@@ -162,7 +164,7 @@ return packer.startup(function(use)
 	-- Debug
 	use("mfussenegger/nvim-dap") -- debugger
 	use("rcarriga/nvim-dap-ui") -- debugger ui
-  use("mfussenegger/nvim-dap-python") -- dap for python
+	use("mfussenegger/nvim-dap-python") -- dap for python
 	-- use("ravenxrz/DAPInstall.nvim") -- debugger installer - use Mason
 
 	-- Automatically set up configurations after cloning packer repo

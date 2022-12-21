@@ -43,6 +43,7 @@ require("user.dressing")
 require("user.dial")
 require("user.hop")
 require("user.tabout")
+require("user.harpoon")
 
 -- File Explorer
 require("user.nvim-tree")

@@ -9,7 +9,9 @@ local options = {
 	expandtab = true, -- convert tab to spaces
 	fileencoding = "utf-8", -- set encoding for file
 	guifont = "monospace:h17", -- font to use
+	hlsearch = false, -- highlight search
 	ignorecase = true, -- ignore case in search patterns
+	incsearch = true, -- incremental search
 	mouse = "a", -- allow the mouse to be used
 	number = true, -- set numbered lines
 	numberwidth = 4, -- set number column width
@@ -47,6 +49,7 @@ vim.opt.shortmess:append("c") -- append to the short messasge list
 
 -- Set options by passing vimscript commands
 vim.cmd("set whichwrap+=<,>,[,],h,l") -- allows specific characters to move to new line when at end/start
+
 -- Set options by passing vimscript commands - another way to write it
 vim.cmd([[set iskeyword+=-]]) -- treat 'some-word' as one word
 

@@ -90,12 +90,13 @@ local mappings = {
 		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		"Find Files",
 	},
-	["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-	["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
+	-- ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
+	["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
 	["m"] = { "<cmd>Mason<cr>", "Mason" },
 	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 	["q"] = { "<cmd>q!<cr>", "Quit" },
 	["w"] = { "<cmd>w!<cr>", "Save" },
+	["x"] = { "<cmd>!chmod +x %<cr>", "Execute" },
 	["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", "Comment Toggle" },
 
 	d = {
@@ -125,9 +126,10 @@ local mappings = {
 		name = "Git",
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
 		c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
-		d = {
-			"<cmd>Gitsigns diffthis HEAD<cr>",
-			"Diff",
+		d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
+		f = {
+			"<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+			"Find Git Files",
 		},
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
 		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
@@ -137,11 +139,9 @@ local mappings = {
 		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
 		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
 		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-		u = {
-			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-			"Undo Stage Hunk",
-		},
+		s = { "<cmd>Git<cr>", "Git Status" },
+		S = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+		u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
 	},
 
 	l = {
@@ -152,7 +152,7 @@ local mappings = {
 		-- 	"Document Diagnostics",
 		-- },
 		d = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Diagnostics Toggle" },
-    D = { "<cmd>DocsViewToggle <cr>", "Documentation toggle" },
+		D = { "<cmd>DocsViewToggle <cr>", "Documentation toggle" },
 		f = { "<cmd>lua vim.lsp.buf.format({async=true})<cr>", "Format" },
 		h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
@@ -193,7 +193,7 @@ local mappings = {
 	r = {
 		name = "Run",
 		m = { "<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview" },
-    o = { "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<cr>", "Source Snippets"},
+		o = { "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<cr>", "Source Snippets" },
 		p = { "<cmd>Lab code run<cr>", "Code Preview" },
 		r = { "<cmd>w | Jaq<cr>", "Run" },
 		s = { "<cmd>Lab code stop<cr>", "Code Preview Stop" },
@@ -201,20 +201,24 @@ local mappings = {
 
 	s = {
 		name = "Search",
+		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Harpoon Add" },
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
 		B = { "<cmd>Telescope buffers<cr>", "Buffers" },
 		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
-		f = { "<cmd>Telescope find_files<cr>", "Find Files" },
+		f = { ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", "Search and Replace" },
+		F = { "<cmd>Telescope find_files<cr>", "Find Files" },
+		g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
 		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+		m = { "<cmd>Telescope harpoon marks<cr>", "Harpoon Marks" },
+		-- m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Menu" },
+		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
 		p = { "<cmd>Telescope projects<cr>", "Projects" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 		R = { "<cmd>Telescope registers<cr>", "Registers" },
 		s = { "<cmd>Telescope session-lens search_session<cr>", "Search Sessions" },
 		S = { "<cmd>SaveSession<cr>", "Save Sessions" },
-		t = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
 	},
 
 	t = {

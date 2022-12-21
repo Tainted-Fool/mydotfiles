@@ -1,6 +1,7 @@
 -- Declare variables
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
+-- local keymap = vim.keymap.set
 
 -- Set leader key
 keymap("", "<space>", "<Nop>", opts)
@@ -35,8 +36,12 @@ keymap("n", "<A-l>", ":bnext<CR>", opts)
 keymap("n", "<A-h>", ":bprevious<CR>", opts)
 
 -- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+keymap("n", "<A-j>", "mz<Esc>:m .+1<CR>==`z", opts)
+keymap("n", "<A-k>", "mz<Esc>:m .-2<CR>==`z", opts)
+
+-- Search cursor is centered
+keymap("n", "n", "nzzzv", opts)
+keymap("n", "N", "Nzzzv", opts)
 
 -- Insert mode
 -- Press fj fast to exit insert mode

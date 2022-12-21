@@ -28,10 +28,10 @@ local servers = {
 	"marksman", -- Markdown
 	"omnisharp", -- C Sharp
 	-- "pyright", -- Python
-  "jedi_language_server", -- Python
+	"jedi_language_server", -- Python
 	"sumneko_lua", -- Lua
 	"tsserver", -- TypeScript
-  "clangd", -- C
+	"clangd", -- C
 }
 
 local settings = {

@@ -18,6 +18,7 @@ M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
+	-- local keymap = vim.keymap.set
 
 	-- Set keymaps for buffers
 	keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
@@ -108,7 +109,7 @@ M.setup = function()
 	local config = {
 		-- Disable virtual text/diagnostic errors
 		virtual_text = false, -- enable/disable diagnostic text for plugin trouble
-    virtual_lines = { only_current_line = true },
+		virtual_lines = { only_current_line = true },
 		-- virtual_lines = false, -- enable/disable diagnostic for plugin lsp_lines
 
 		-- Show signs

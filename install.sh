@@ -24,7 +24,7 @@ git clone https://github.com/zdharma-continuum/fast-syntax-highlighting "$ZSH_CU
 
 # install nerd fonts
 mkdir -p ~/.local/share/fonts
-curl -fLo "$HOME/local/share/fonts/Caskaydia Cover Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Nerd%20Font%20Complete%20Regular.otf
+curl -fLo "$HOME/.local/share/fonts/Caskaydia Cover Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Nerd%20Font%20Complete%20Regular.otf
 # git clone https://github.com/ronniedroid/getnf.git
 # cd getnf
 # bash ./install.sh
@@ -47,15 +47,15 @@ sudo apt install stow -y
 mv ~/.condarc ~/.condarc.bak
 stow conda
 
-stow git
 mv ~/.gitconfig ~/.gitconfig.bak
+stow git
 
-stow nvim
 mv ~/.config/nvim ~/.config/nvim.bak
+stow nvim
 
-stow oh-my-zsh
 mv ~/.oh-my-zsh/custom/plugins/zsh-aliases/zsh-aliases.plugin.zsh ~/.oh-my-zsh/custom/plugins/zsh-aliases/zsh-aliases.plugin.zsh.bak
 mv ~/.oh-my-zsh/custom/plugins/zsh-functions/zsh-functions.plugin.zsh ~/.oh-my-zsh/custom/plugins/zsh-functions/zsh-functions.plugin.zsh.bak
+stow oh-my-zsh
 
 mv ~/.vim/vimrc ~/.vim/.vimrc.bak
 stow vim
@@ -70,3 +70,5 @@ stow zsh
 
 # user zsh as default shell
 # sudo chsh -s "$(which zsh)" "$USER"
+
+echo "Exit and re-open shell to see changes"

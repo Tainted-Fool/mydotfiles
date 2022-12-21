@@ -9,8 +9,10 @@ configs.setup({
 	ensure_installed = "all", -- list of language syntax to install
 	ignore_installed = { "" }, -- list of language syntax to ignore
 	sync_install = false,
+	auto_install = true,
 	highlight = {
 		enable = true,
+		additional_vim_regex_highlighting = false,
 		-- disable = {"css"}     -- list of language syntax to disable
 	},
 	autopairs = {
