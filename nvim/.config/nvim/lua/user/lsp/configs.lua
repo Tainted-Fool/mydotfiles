@@ -30,6 +30,7 @@ local servers = {
 	-- "pyright", -- Python
 	"jedi_language_server", -- Python
 	"sumneko_lua", -- Lua
+	-- "lua_ls", -- Lua
 	"tsserver", -- TypeScript
 	"clangd", -- C
 }

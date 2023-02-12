@@ -23,7 +23,7 @@ require("user.symbol-outline")
 require("user.fidget")
 require("user.lsp-lines")
 require("user.nvim-docs-view")
--- require("user.trouble")
+require("user.trouble")
 
 -- Fuzzy Finder
 require("user.telescope")
