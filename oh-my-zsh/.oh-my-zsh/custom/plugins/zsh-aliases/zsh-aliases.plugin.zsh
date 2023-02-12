@@ -74,7 +74,8 @@ alias ssh2john="python /usr/share/john/ssh2john.py "
 #alias vmshared='cd /mnt/hgfs/VM_Shared/'
 
 # interact with our dotfile repository
-alias dit="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dit="cd ~/.dotfiles && git $@"
+# alias dit="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # allows you to do a recursive git pull
 alias multipull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
@@ -92,19 +93,19 @@ alias cat="batcat -pp --paging=never --style='plain' --theme=TwoDark "
 alias rdp="remmina"
 
 # edit alias file
-alias vima="vim ~/.oh-my-zsh/custom/plugins/zsh-aliases/zsh-aliases.plugin.zsh"
+alias edita="nvim ~/.oh-my-zsh/custom/plugins/zsh-aliases/zsh-aliases.plugin.zsh"
 
 # edit functions file
-alias vimf="vim ~/.oh-my-zsh/custom/plugins/zsh-functions/zsh-functions.plugin.zsh"
+alias editf="nvim ~/.oh-my-zsh/custom/plugins/zsh-functions/zsh-functions.plugin.zsh"
 
 # edit zshrc file
-alias vimzsh="vim ~/.zshrc"
+alias editzsh="nvim ~/.zshrc"
 
 # edit vimrc file
-alias vimrc="vim ~/.vim/vimrc"
+alias editvim="nvim ~/.vim/vimrc"
 
 # edit nvim file
-alias vimn="vim ~/.config/nvim/init.lua"
+alias editn="nvim ~/.config/nvim/init.lua"
 
 # source zsh file
 alias src="source ~/.zshrc"
@@ -122,3 +123,4 @@ if [ -x "$(command -v exa)" ]; then
   alias ls="exa"
 	alias la="exa --long --all --group"
 fi
+

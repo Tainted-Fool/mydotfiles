@@ -35,18 +35,29 @@ function md5() {
     echo -n $1 | md5sum | awk '{print $1}'
 }
 
+# Check md5sum agianst a string
+function md5check() {
+  printf '%s %s\n' "$1" "$2" | md5sum --check
+}
+
 # Create sha256sum of a string
 function sha256() {
     echo -n $1 | sha256sum | awk '{print $1}'
 }
 
-# function sha256() {
-#     printf "%s %s\n" "$1" "$2" | sha256sum --check
-# }
+# Check sha256 agianst a string
+function sha256check() {
+  printf '%s %s\n' "$1" "$2" | sha256sum --check
+}
 
 # Create sha1sum of a string
 function sha1() {
     echo -n $1 | sha1sum | awk '{print $1}'
+}
+
+# Check sha1 agianst a string
+function sha1check() {
+  printf '%s %s\n' "$1" "$2" | sha1sum --check
 }
 
 # Decode base64 of a string
@@ -86,3 +97,4 @@ function notes() {
 
     code $DIR
 }
+
