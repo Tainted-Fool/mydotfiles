@@ -25,7 +25,7 @@ function cl() {
 }
 
 # Make directory and move into it
-function mcd { # Make directory and move into it
+function mcd {
     mkdir -p $1
     cd $1
 }

@@ -1,0 +1,12 @@
+[submodule "pwndbg/.pwndbg"]
+	path = pwndbg/.pwndbg
+	url = https://github.com/pwndbg/pwndbg
+[submodule "peda/.peda"]
+	path = peda/.peda
+	url = https://github.com/longld/peda
+[submodule "peda-arm/.peda-arm"]
+	path = peda-arm/.peda-arm
+	url = https://github.com/alset0326/peda-arm
+[submodule "gef/.gef"]
+	path = gef/.gef
+	url = https://github.com/hugsy/gef
