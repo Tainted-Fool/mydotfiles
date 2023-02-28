@@ -90,6 +90,7 @@ return packer.startup(function(use)
 	use("rcarriga/nvim-notify") -- better notifications
 	use("stevearc/dressing.nvim") -- UI hook for vim.ui.select/input
 	use("antoinemadec/FixCursorHold.nvim") -- fix cursor hold
+	use("MunifTanjim/nui.nvim") -- UI component library for nvim
 
 	-- Fuzzy Search
 	use("nvim-telescope/telescope.nvim") -- find files
@@ -126,6 +127,8 @@ return packer.startup(function(use)
 	})
 	use("abecodes/tabout.nvim") -- use tab to exit quotation marks and other characters
 	use("ThePrimeagen/harpoon") -- mark and get file
+	use("folke/noice.nvim") -- replace UI for messages, cmdline, and popupmenu
+	use("gelguy/wilder.nvim") -- adds new features and capabilities to wildmenu
 
 	-- File Explorer
 	use("kyazdani42/nvim-tree.lua") -- tree viewer

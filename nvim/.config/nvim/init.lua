@@ -44,6 +44,8 @@ require("user.dial")
 require("user.hop")
 require("user.tabout")
 require("user.harpoon")
+require("user.noice")
+require("user.wilder")
 
 -- File Explorer
 require("user.nvim-tree")
