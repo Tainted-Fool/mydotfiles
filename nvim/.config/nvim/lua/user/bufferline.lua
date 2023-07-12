@@ -47,7 +47,7 @@ bufferline.setup({
 		fill = {
 			fg = {
 				attribute = "fg",
-				highlight = "#ff0000",
+				highlight = "TabLine",
 			},
 			bg = {
 				attribute = "bg",
