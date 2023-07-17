@@ -72,6 +72,10 @@ ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
 ZVM_VI_INSERT_ESCAPE_BINDKEY=fj
 zvm_after_init_commands+=("bindkey '^[[A' up-line-or-search" "bindkey '^[[B' down-line-or-search")
 
+# Fix autopair plugin
+zvm_after_init_commands+=(autopair-init)
+AUTOPAIR_INIT_INHIBIT=1
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
