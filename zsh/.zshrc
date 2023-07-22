@@ -89,8 +89,3 @@ else
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
-
-# Activate `zsh-autopair`
-# This confilcts with zsh-vi-mode; only one can be active at a time
-autopair-init

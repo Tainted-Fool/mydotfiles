@@ -51,6 +51,15 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 	end,
 })
 
+-- Clear all notifications when entering insert mode
+vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+	group = vim.api.nvim_create_augroup("NotifyClearGrp", {}),
+	pattern = "*",
+	callback = function()
+		require("notify").dismiss({ silent = true })
+	end
+})
+
 vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 
 -- Execute cmd in each tab page or if range is given

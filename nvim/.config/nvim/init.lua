@@ -63,6 +63,7 @@ require("user.lualine")
 -- Dashboard
 require("user.alpha")
 require("user.whichkey")
+require("user.nvim-notify")
 
 -- Sessions
 require("user.project")

@@ -77,7 +77,7 @@ return packer.startup(function(use)
 	use("b0o/SchemaStore.nvim") -- access to the SchemaStore catalog - large collection of JSON schemas
 	use("SmiteshP/nvim-navic") -- show current code context in winbar or statusline
 	use("simrat39/symbols-outline.nvim") -- show document symbols in right window
-	use("j-hui/fidget.nvim") -- show lsp progress handler
+	use({"j-hui/fidget.nvim", tag = "legacy"}) -- show lsp progress handler
 	use("folke/trouble.nvim") -- better lsp diagnostics and quickfix list
 	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- multiline diagnostics
 	use("onsails/lspkind.nvim") -- lsp completion icons
