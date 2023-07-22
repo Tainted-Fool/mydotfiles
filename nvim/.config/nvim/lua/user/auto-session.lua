@@ -19,8 +19,20 @@ if not lens_ok then
 	return
 end
 
-local opts = {
-	log_level = "info",
+-- Recommended session options configurations
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+
+telescope.load_extension("session-lens")
+
+lens.setup({
+	path_display = { "shorten" },
+	theme_conf = { border = false },
+	previewer = false,
+	prompt_title = "Sessions",
+})
+
+session.setup({
+	log_level = "error",
 	auto_session_enable_last_session = false,
 	auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
 	auto_session_enabled = true,
@@ -31,18 +43,4 @@ local opts = {
 	},
 	auto_session_use_git_branch = nil,
 	bypass_session_save_file_types = { "alpha" },
-}
-
--- Recommended sessionoptions config
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
-
-telescope.load_extension("session-lens")
-
-lens.setup = {
-	path_display = { "shorten" },
-	theme_conf = { border = false },
-	previewer = false,
-	prompt_title = "Sessions",
-}
-
-session.setup(opts)
+})
