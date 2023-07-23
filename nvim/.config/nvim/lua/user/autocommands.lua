@@ -60,7 +60,16 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 	end
 })
 
-vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
+-- Automatically close tab when nvim-tree is the last window in tab
+-- vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
+vim.api.nvim_create_autocmd("BufEnter", {
+	nested = true,
+	callback = function()
+		if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+			vim.cmd("quit")
+		end
+	end,
+})
 
 -- Execute cmd in each tab page or if range is given
 -- vim.api.nvim_create_autocmd({ "VimResized" }, {
@@ -81,6 +90,16 @@ vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTre
 -- 	pattern = { "*.java", "*.py" },
 -- 	callback = function()
 -- 		vim.lsp.codelens.refresh()
+-- 	end,
+-- })
+
+-- Pause highlight after 5000 lines
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+-- 	callback = function()
+-- 		local line_count = vim.api.nvim_buf_line_count(0)
+-- 		if line_count >= 5000 then
+-- 			vim.cmd("IlluminatePauseBuf")
+-- 		end
 -- 	end,
 -- })
 
