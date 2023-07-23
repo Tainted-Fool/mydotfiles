@@ -336,7 +336,9 @@ curl -sL https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.
 sudo apt install ./nvim.deb
 
 # install dependencies
-sudo apt install git make pip npm node cargo
+sudo apt install git make pip npm node cargo ruby fd-find
+gem install neovim
+pip3 install pynvim
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 ```
 
