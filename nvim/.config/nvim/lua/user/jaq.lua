@@ -19,6 +19,11 @@ jaq.setup({
 			python = "python3 %",
 			go = "go run %",
 			sh = "sh %",
+			php = "php %",
+			c = "gcc % -o $fileBase && ./$fileBase",
+			cpp = "g++ % -o $fileBase && ./$fileBase",
+			cs = "dotnet run %",
+			ps1 = "powershell %",
 		},
 	},
 

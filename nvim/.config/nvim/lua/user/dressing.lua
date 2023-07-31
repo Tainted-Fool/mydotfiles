@@ -23,7 +23,7 @@ dressing.setup({
 		start_in_insert = true,
 
 		-- These are passed to nvim_open_win
-		anchor = "SW",
+		--anchor = "SW",
 		border = "rounded",
 		-- 'editor' and 'win' will default to being centered
 		relative = "cursor",
@@ -36,7 +36,9 @@ dressing.setup({
 		max_width = { 140, 0.9 },
 		min_width = { 20, 0.2 },
 
-		--- Windows option
+		-- Buffer option
+		buf_options = {},
+		-- Windows option
 		win_options = {
 			-- Window transparency (0-100)
 			winblend = 10,
@@ -111,7 +113,15 @@ dressing.setup({
 				filetype = "DressingSelect",
 			},
 			win_options = {
+				-- Windows transparency (0-100)
 				winblend = 10,
+				-- Disable line wrapping
+				wrap = false,
+				-- Indicator for when text exceeds window
+				list = true,
+				listchars = "precedes:…,extends:…",
+				-- Increase this for more context when text scrolls off the window
+				sidescrolloff = 0,
 			},
 			max_width = 80,
 			max_height = 40,
@@ -122,16 +132,19 @@ dressing.setup({
 		-- Options for built-in selector
 		builtin = {
 			-- These are passed to nvim_open_win
-			anchor = "NW",
+			-- anchor = "NW",
 			border = "rounded",
 			-- 'editor' and 'win' will default to being centered
 			relative = "editor",
 
+			buf_options = {},
 			win_options = {
 				-- Window transparency (0-100)
 				winblend = 10,
 				-- Change default highlight groups (see :help winhl)
-				winhighlight = "",
+				-- winhighlight = "",
+				cursorline = true,
+				cursorlineopt = "both",
 			},
 
 			-- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)

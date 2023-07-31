@@ -74,7 +74,7 @@ alias ssh2john="python /usr/share/john/ssh2john.py "
 #alias vmshared='cd /mnt/hgfs/VM_Shared/'
 
 # interact with our dotfile repository
-# alias dit="cd ~/.dotfiles && git $@"
+alias dit="cd ~/.dotfiles && git $@"
 # alias dit="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # allows you to do a recursive git pull
