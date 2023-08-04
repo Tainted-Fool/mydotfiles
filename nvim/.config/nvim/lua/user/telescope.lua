@@ -6,6 +6,7 @@ if not status_ok then
 end
 
 local actions = require("telescope.actions")
+local fb_actions = telescope.extensions.file_browser.actions
 
 telescope.setup({
 	defaults = {
@@ -104,6 +105,8 @@ telescope.setup({
 		    --case_mode = "smart_case"
 		--},
 		file_browser = {
+			initial_mode = "normal",
+			auto_depth = true,
 			theme = "ivy",
 			hijack_netrw = true,
 			mappings = {
@@ -112,6 +115,7 @@ telescope.setup({
 				},
 				["n"] = {
 					-- own custom normal mode mappings
+					["a"] = fb_actions.create
 				}
 			}
 		}

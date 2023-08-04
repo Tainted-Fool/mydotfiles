@@ -92,7 +92,7 @@ local mappings = {
 		"Find Files",
 	},
 	-- ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
-	["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
+	-- ["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
 	["m"] = { "<cmd>Mason<cr>", "Mason" },
 	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 	["q"] = { "<cmd>q!<cr>", "Quit" },
@@ -143,6 +143,13 @@ local mappings = {
 		s = { "<cmd>Git<cr>", "Git Status" },
 		S = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
 		u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+	},
+
+h = {
+		name = "Harpoon",
+		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Harpoon Add" },
+		m = { "<cmd>Telescope harpoon marks<cr>", "Harpoon Marks" },
+		-- m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Menu" },
 	},
 
 	l = {
@@ -202,7 +209,6 @@ local mappings = {
 
 	s = {
 		name = "Search",
-		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Harpoon Add" },
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
 		B = { "<cmd>Telescope buffers<cr>", "Buffers" },
 		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
@@ -212,8 +218,6 @@ local mappings = {
 		g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
 		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		m = { "<cmd>Telescope harpoon marks<cr>", "Harpoon Marks" },
-		-- m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Menu" },
 		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
 		p = { "<cmd>Telescope projects<cr>", "Projects" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
