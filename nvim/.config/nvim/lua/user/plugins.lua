@@ -45,6 +45,8 @@ return packer.startup(function(use)
 	-- Speed up Loading
 	use("lewis6991/impatient.nvim") -- speed up loading lua modules
 
+	-- Startuptime Breakdown
+
 	-- Packer
 	use("wbthomason/packer.nvim") -- plugin manager
 
@@ -94,6 +96,7 @@ return packer.startup(function(use)
 
 	-- Fuzzy Search
 	use("nvim-telescope/telescope.nvim") -- find files
+	use("nvim-telescope/telescope-file-browser.nvim") -- preview of file
 
 	-- Treesitter
 	use("nvim-treesitter/nvim-treesitter") -- syntax highlighting
@@ -129,6 +132,8 @@ return packer.startup(function(use)
 	use("ThePrimeagen/harpoon") -- mark and get file
 	use("folke/noice.nvim") -- replace UI for messages, cmdline, and popupmenu
 	use("gelguy/wilder.nvim") -- adds new features and capabilities to wildmenu
+	use('dstein64/vim-startuptime') -- :Startuptime or nvim --startuptime
+	use('EtiamNullam/deferred-clipboard.nvim') -- use system clipboard
 
 	-- File Explorer
 	use("kyazdani42/nvim-tree.lua") -- tree viewer

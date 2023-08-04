@@ -23,7 +23,7 @@ jaq.setup({
 			c = "gcc % -o $fileBase && ./$fileBase",
 			cpp = "g++ % -o $fileBase && ./$fileBase",
 			cs = "dotnet run %",
-			ps1 = "powershell %",
+			ps1 = "pwsh %",
 		},
 	},
 

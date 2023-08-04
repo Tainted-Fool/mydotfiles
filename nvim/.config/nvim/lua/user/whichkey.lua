@@ -80,10 +80,11 @@ local opts = {
 
 local mappings = {
 	["a"] = { "<cmd>Alpha<cr>", "Alpha Dashboard" },
-	["b"] = {
-		"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-		"Buffers",
-	},
+	-- ["b"] = {
+	-- 	"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+	-- 	"Buffers",
+	-- },
+	["b"] = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File Browser"},
 	["c"] = { "<cmd>Bdelete!<cr>", "Close Buffer" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["f"] = {

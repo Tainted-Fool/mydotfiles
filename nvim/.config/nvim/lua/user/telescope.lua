@@ -97,15 +97,28 @@ telescope.setup({
 	},
 	-- Your extensions configurations goes here
 	extensions = {
-		-- fzf = {
-		--     fuzzy = true,
-		--     override_generic_sorter = true,
-		--     override_file_sorter = true,
-		--     case_mode = "smart_case"
-		-- }
+		--fzf = {
+		    --fuzzy = true,
+		    --override_generic_sorter = true,
+		    --override_file_sorter = true,
+		    --case_mode = "smart_case"
+		--},
+		file_browser = {
+			theme = "ivy",
+			hijack_netrw = true,
+			mappings = {
+				["i"] = {
+					-- own custom insert mode mappings
+				},
+				["n"] = {
+					-- own custom normal mode mappings
+				}
+			}
+		}
 	},
 })
 
 -- telescope.load_extension("fzf")
 -- telescope.load_extension("projects")
 telescope.load_extension("harpoon")
+telescope.load_extension("file_browser")
