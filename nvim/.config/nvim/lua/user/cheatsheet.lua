@@ -6,9 +6,19 @@ if not status_ok then
 end
 
 cheatsheet.setup({
+	-- Whether to show bundled cheatsheets
 	bundled_cheatsheets = true,
+	-- Can be tables like so
+	-- bundled_cheatsheets = {
+	-- enabled = {"gitsigns.nvim"},
+	-- disabled = {"gitsigns.nvim"},
+	-- }
+	-- For plugin specific cheatsheets
 	bundled_plugin_cheatsheets = true,
+	-- For bundled plugin cheatsheets
+	-- Do not show a sheet if you don't have the plugin installed
 	include_only_installed_plugins = true,
+	-- Key mapping bound inside the telescope window
 	telescope_mappings = {
 		['<CR>'] = require('cheatsheet.telescope.actions').select_or_fill_commandline,
 		['<A-CR>'] = require('cheatsheet.telescope.actions').select_or_execute,
