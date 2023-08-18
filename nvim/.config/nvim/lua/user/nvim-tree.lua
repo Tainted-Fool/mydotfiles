@@ -6,11 +6,11 @@ if not status_ok then
 end
 
 -- Use protected call so we know where error is coming from
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-	vim.notify("nvim-tree.config plugin was not found!")
-	return
-end
+-- local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+-- if not config_status_ok then
+-- 	vim.notify("nvim-tree.config plugin was not found!")
+-- 	return
+-- end
 
 local function on_attach(bufnr)
 	local api = require('nvim-tree.api')

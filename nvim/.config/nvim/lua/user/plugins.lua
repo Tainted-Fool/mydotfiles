@@ -134,6 +134,7 @@ return packer.startup(function(use)
 	use("gelguy/wilder.nvim") -- adds new features and capabilities to wildmenu
 	use('dstein64/vim-startuptime') -- :Startuptime or nvim --startuptime
 	use('EtiamNullam/deferred-clipboard.nvim') -- use system clipboard
+	use('sudormrfbin/cheatsheet.nvim') -- cheatsheet buffer
 
 	-- File Explorer
 	use("kyazdani42/nvim-tree.lua") -- tree viewer

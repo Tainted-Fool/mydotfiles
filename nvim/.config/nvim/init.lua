@@ -47,6 +47,7 @@ require("user.harpoon")
 require("user.noice")
 require("user.wilder")
 require("user.clipboard")
+require("user.cheatsheet")
 
 -- File Explorer
 require("user.nvim-tree")

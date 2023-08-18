@@ -99,6 +99,7 @@ local mappings = {
 	["w"] = { "<cmd>w!<cr>", "Save" },
 	["x"] = { "<cmd>!chmod +x %<cr>", "Execute" },
 	["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", "Comment Toggle" },
+	["?"] = { "<cmd>Cheatsheet<cr>", "Cheatsheet" },
 
 	d = {
 		name = "Debug",
