@@ -50,7 +50,6 @@ stow */ -t ~
 - xsel for shared clipboard - not needed
 - Figlet for ascii art - not needed
 - Ranger for file management - not needed
-- ueberzug to draw image files - not needed
 - A Nerd Font (see optional)
 - wslu for WSL utilities (see optional)
 - wsl-open for opening files with WSL (see optional)
@@ -59,6 +58,15 @@ stow */ -t ~
 sudo apt update && sudo apt upgrade
 sudo apt install nodejs npm fzf vifm xsel figlet ranger ueberzug
 ```
+
+### Optional Dependencies
+
+- fd-find(fd) for better `find` utility
+- ripgrep(rg) for better `grep` utility
+- bat for better `cat` utility
+- delta for better `git` pager utility
+- chafa for terminal image previewer
+- ueberzug for X11 image previewer - not needed
 
 ## Starting From Zero
 

@@ -34,6 +34,10 @@ navic.setup({
 		Operator = " ",
 		TypeParameter = " ",
 	},
+	lsp = {
+		auto_attach = false,
+		preference = nil,
+	},
 	highlight = true,
 	separator = " > ",
 	depth_limit = 0,

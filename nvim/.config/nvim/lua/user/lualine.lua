@@ -16,15 +16,15 @@ local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
 end
 
-local diagnostics = {
-	"diagnostics",
-	sources = { "nvim_diagnostic" },
-	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " },
-	colored = true,
-	update_in_insert = false,
-	always_visible = true,
-}
+-- local diagnostics = {
+-- 	"diagnostics",
+-- 	sources = { "nvim_diagnostic" },
+-- 	sections = { "error", "warn" },
+-- 	symbols = { error = " ", warn = " " },
+-- 	colored = true,
+-- 	update_in_insert = false,
+-- 	always_visible = true,
+-- }
 
 local diff = {
 	"diff",
@@ -77,7 +77,8 @@ lualine.setup({
 		lualine_b = { "branch" },
 		lualine_c = {
 			-- diagnostics,
-			navic.get_location,
+			-- navic.get_location,
+			{ function() return navic.get_location() end, cond = navic.is_available },
 		},
 		lualine_x = {
 			diff,

@@ -75,10 +75,10 @@ local function on_attach(bufnr)
 	-- keymap('n', '<2-LeftMouse>',  api.node.open.edit,           opts('Open'))
 	-- keymap('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
 	-- END_DEFAULT_ON_ATTACH
-	
+
 	-- Loads the defaults above
 	api.config.mappings.default_on_attach(bufnr)
-  
+
 	-- BEGIN_CUSTOM_ON_ATTACH
 	keymap('n', 'l', api.node.open.no_window_picker, opts('Open'))
 	keymap('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))

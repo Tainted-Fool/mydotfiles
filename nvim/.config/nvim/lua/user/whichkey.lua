@@ -87,10 +87,6 @@ local mappings = {
 	["b"] = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File Browser"},
 	["c"] = { "<cmd>Bdelete!<cr>", "Close Buffer" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-	["f"] = {
-		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-		"Find Files",
-	},
 	-- ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
 	-- ["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
 	["m"] = { "<cmd>Mason<cr>", "Mason" },
@@ -122,6 +118,24 @@ local mappings = {
 		r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
 		t = { "<cmd>TroubleToggle<cr>", "Trouble Toggle" },
 		w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
+	},
+
+	f = {
+		name = "Fuzzy Find",
+	-- 	f = {
+	-- 	"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+	-- 	"Find Files",
+	-- },
+		-- f = { "<cmd>lua require('fzf-lua').files()
+		-- c = { "<cmd>lua require('fzf-lua').files({cwd= '~/.config'}), "Find Files in .config" },
+		c = { "<cmd>FzfLua files cwd=~/.config<cr>", "Find Files in .config" },
+		C = { "<cmd>FzfLua colorschemes<cr>", "Find Colorschemes" },
+		f = { "<cmd>FzfLua files<cr>", "Find Files", },
+		g = { "<cmd>FzfLua git_files<cr>", "Find Git Files" },
+		h = { "<cmd>FzfLua command_history<cr>", "Find Command History" },
+		H = { "<cmd>FzfLua search_history<cr>", "Find Search History" },
+		m = { "<cmd>FzfLua man_pages<cr>", "Find Man Pages" },
+		s = { "<cmd>FzfLua spell_suggest<cr>", "Spell Suggestions" },
 	},
 
 	g = {

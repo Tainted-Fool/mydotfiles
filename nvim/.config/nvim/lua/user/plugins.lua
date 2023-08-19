@@ -97,6 +97,7 @@ return packer.startup(function(use)
 	-- Fuzzy Search
 	use("nvim-telescope/telescope.nvim") -- find files
 	use("nvim-telescope/telescope-file-browser.nvim") -- preview of file
+	use("ibhagwan/fzf-lua") -- fzf made in lua
 
 	-- Treesitter
 	use("nvim-treesitter/nvim-treesitter") -- syntax highlighting

@@ -1,0 +1,5 @@
+# This is a normal comment
+# Below is a metadata comment: section-name @tag1 @tag2
+## my-cheatsheet @custom @cheatsheet
+Go to next word under cursor | *
+Go to previous word under cursor | #
