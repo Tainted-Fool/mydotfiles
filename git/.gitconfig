@@ -2,21 +2,31 @@
 	email = lazaro1herrera@gmail.com
 	name = Tainted-Fool
 	username = Tainted-Fool
+
 [core]
 	editor = "code --wait"
-	pager = cat
+	pager = delta
+
 [credential]
 	helper = store
+
 [color]
 	ui = auto
+
 [diff]
 	tool = vscode
+	colorMoved = default
+
 [difftool "vscode"]
 	cmd = "code --wait --diff $LOCAL $REMOTE"
+
 [merge]
 	tool = vscode
+	conflictstyle = diff3
+
 [mergetool "vscode"]
 	cmd = "code --wait $MERGED"
+
 [alias]
 	alias = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
 	cm = commit
@@ -30,3 +40,10 @@
 	st = status
 	uncommit = reset --soft HEAD~1 # Undo last commit but keep files in stage area
 	untrack = rm --cache --	# Remove files from Git but not from disk
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true # Use n and N to move between diff sections
+	light = false # set to true if you're in a terminal with a light background color
