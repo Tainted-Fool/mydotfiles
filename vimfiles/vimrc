@@ -528,7 +528,7 @@ nnoremap <silent> <leader>p :w<Cr>:!clear<Cr>:!python %<Cr>
 "Better Escape Settings"
 """"""""""""""""""""""""
 " press these commands instead of ESC to switch from INSERT mode to NORMAL mode
-let g:better_escape_shortcut = ['jj', 'ff', 'fj', 'jf']
+let g:better_escape_shortcut = ['fj', 'jf']
 
 """""""""""""""""
 "Bracey Settings"

@@ -24,6 +24,26 @@ Check the other branch `linux` for that operating system
 
 [Guide](https://www.atlassian.com/git/tutorials/dotfiles) for reference
 
+## Using Stow
+
+Switched to `stow` for dotfile management, more specificly `dploy stow`. It's a lot easier to manage and update dotfiles by symbolic links. The only downside is we must navigate to our `.dotfiles` directory and run `git` commands.
+
+```PowerShell
+pip install dploy
+dploy stow <source_dir> <dest_dir>
+dploy unstow <source_dir> <dest_dir>
+
+# examples
+cd ~\.dotfiles
+dploy stow .\conda C:\Users\laz
+dploy stow .\git C:\Users\laz
+dploy stow .\nvim C:\Users\laz\AppData\Local\nvim
+dploy stow .\PowerShellProfile C:\Users\laz\Documents\PowerShell
+dploy stow .\vimfiles $HOME\vimfiles
+```
+
+> Below is obsolete but kept for history stake. Simply clone the repo into `.dotfiles` and run `stow`
+
 ## Starting From Zero
 
 On a fresh new computer, make sure to install `git` then run these commands:

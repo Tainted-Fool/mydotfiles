@@ -4,17 +4,24 @@
 	username = Tainted-Fool
 [core]
 	editor = "code --wait"
-	pager = cat
+	pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true # use n and N to move between diff sections
+    light = false # set to true if you're in a terminal with a light backgroundff
 [credential]
 	helper = store
 [color]
 	ui = auto
 [diff]
-	tool = vscode
+    tool = vscode
+    colorMoved = default
 [difftool "vscode"]
 	cmd = "code --wait --diff $LOCAL $REMOTE"
 [merge]
-	tool = vscode
+    tool = vscode
+    conflictstyle = diff3
 [mergetool "vscode"]
 	cmd = "code --wait $MERGED"
 [alias]
