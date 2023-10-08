@@ -5,24 +5,35 @@ if not status_ok then
     return
 end
 
+-- Use protected call so we know where error is coming from
+local navic_ok, navic = pcall(require, "nvim-navic")
+if not navic_ok then
+    vim.notify("nvim-navic plugin was not found!")
+    return
+end
+
 local hide_in_width = function()
     return vim.fn.winwidth(0) > 80
 end
 
-local diagnostics = {
-    "diagnostics",
-    sources = {"nvim_diagnostic"},
-    sections = {"error", "warn"},
-    symbols = {error = " ", warn = " "},
-    colored = false,
-    update_in_insert = false,
-    always_visible = true
-}
+--[[ local diagnostics = { ]]
+--[[     "diagnostics", ]]
+--[[     sources = {"nvim_diagnostic"}, ]]
+--[[     sections = {"error", "warn"}, ]]
+--[[     symbols = {error = " ", warn = " "}, ]]
+--[[     colored = false, ]]
+--[[     update_in_insert = false, ]]
+--[[     always_visible = true ]]
+--[[ } ]]
 
 local diff = {
     "diff",
     colored = true,
-    symbols = {added = " ", modified = " ", removed = " "},
+    symbols = {
+        added = " ",
+        modified = " ",
+        removed = " "
+    },
     cond = hide_in_width
 }
 
@@ -36,7 +47,7 @@ local diff = {
 
 local filetype = {
     "filetype",
-    colored = false,
+    colored = true,
     icons_enabled = true,
     icon = nil,
     separator = "|"
@@ -44,7 +55,7 @@ local filetype = {
 
 local fileformat = {
     "fileformat",
-    colored = false,
+    colored = true,
     separator = "|"
 }
 
@@ -83,27 +94,38 @@ lualine.setup({
         globalstatus = true, -- enable to have a single statusline
         icons_enabled = true,
         theme = "auto",
-        component_separators = {left = "", right = ""},
-        section_separators = {left = "", right = ""},
+        component_separators = {
+            left = "",
+            right = ""
+        },
+        section_separators = {
+            left = "",
+            right = ""
+        },
         disabled_filetypes = {"alpha", "dashboard", "NvimTree", "Outline"},
         always_divide_middle = true
     },
     sections = {
         lualine_a = {"mode"}, -- can use the `mode` function to get -- <mode> --
         lualine_b = {branch},
-        lualine_c = {diagnostics, "lsp_progress"},
-        lualine_x = {diff, "encoding", fileformat, filetype, hex, spaces},
+        lualine_c = { --[[ diagnostics, ]] --[[ "lsp_progress", ]] {
+            function()
+                return navic.get_location()
+            end,
+            cond = navic.is_available
+        }},
+        lualine_x = {diff, "encoding", fileformat, filetype, hex --[[ spaces ]] },
         lualine_y = {location},
         lualine_z = {"progress"} -- same goes for progress
-    },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {"filename"},
-        lualine_x = {"location"},
-        lualine_y = {},
-        lualine_z = {}
-    },
-    tabline = {},
-    extensions = {}
+    }
+    --[[ inactive_sections = { ]]
+    --[[     lualine_a = {}, ]]
+    --[[     lualine_b = {}, ]]
+    --[[     lualine_c = {"filename"}, ]]
+    --[[     lualine_x = {"location"}, ]]
+    --[[     lualine_y = {}, ]]
+    --[[     lualine_z = {} ]]
+    --[[ }, ]]
+    --[[ tabline = {}, ]]
+    --[[ extensions = {} ]]
 })

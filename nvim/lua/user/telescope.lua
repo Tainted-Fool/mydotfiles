@@ -6,8 +6,9 @@ if not status_ok then
 end
 
 local actions = require "telescope.actions"
+local fb_actions = telescope.extensions.file_browser.actions
 
-telescope.setup {
+telescope.setup({
     defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
@@ -53,7 +54,7 @@ telescope.setup {
                 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
                 ["<C-l>"] = actions.complete_tag,
-                ["<C-_>"] = actions.which_key, -- keys from pressing <C-_>
+                ["<C-_>"] = actions.which_key -- keys from pressing <C-_>
             },
 
             n = {
@@ -85,24 +86,41 @@ telescope.setup {
                 ["<PageUp>"] = actions.results_scrolling_up,
                 ["<PageDown>"] = actions.results_scrolling_down,
 
-                ["?"] = actions.which_key,
+                ["?"] = actions.which_key
             }
         }
     },
     pickers = {
-        find_files = {
-            hidden = true
-        }
+        -- find_files = {
+        -- hidden = true
+        -- }
     },
     extensions = {
         -- fzf = {
-        --     fuzzy = true,
-        --     override_generic_sorter = true,
-        --     override_file_sorter = true,
-        --     case_mode = "smart_case"
-        -- }
+        -- fuzzy = true,
+        -- override_generic_sorter = true,
+        -- override_file_sorter = true,
+        -- case_mode = "smart_case"
+        -- },
+        file_browser = {
+            initial_mode = "normal",
+            auto_depth = true,
+            theme = "ivy",
+            hijack_netrw = true,
+            mappings = {
+                ["i"] = {
+                    -- own custom insert mode mappings
+                },
+                ["n"] = {
+                    -- own custom normal mode mappings
+                    ["a"] = fb_actions.create
+                }
+            }
+        }
     }
-}
+})
 
 -- telescope.load_extension("fzf")
-telescope.load_extension("projects")
+-- telescope.load_extension("projects")
+telescope.load_extension("harpoon")
+telescope.load_extension("file_browser")

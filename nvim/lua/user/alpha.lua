@@ -24,24 +24,22 @@ local dashboard = require("alpha.themes.dashboard")
 -- 	[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
 -- }
 
-dashboard.section.header.val = {
-    [[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
-    [[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
-    [[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
-    [[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
-    [[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
-    [[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]]
-}
+dashboard.section.header.val =
+    {[[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
+     [[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
+     [[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
+     [[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
+     [[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
+     [[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]]}
 
-dashboard.section.buttons.val = {
-    dashboard.button("f", " " .. " Find File", ":Telescope find_files hidden=true<CR>"),
-    dashboard.button("e", " " .. " New File", ":ene <BAR> <CR>"),
-    dashboard.button("p", " " .. " Find Project", ":lua require('telescope').extensions.projects.projects()<CR>"),
-    dashboard.button("r", " " .. " Recent Files", ":Telescope oldfiles <CR>"),
-    dashboard.button("t", " " .. " Find Text", ":Telescope live_grep <CR>"),
-    dashboard.button("c", " " .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
-    dashboard.button("q", " " .. " Quit", ":qa<CR>"),
-}
+dashboard.section.buttons.val = {dashboard.button("f", " " .. " Find File", ":Telescope find_files hidden=true<CR>"),
+                                 dashboard.button("e", " " .. " New File", ":ene <BAR> <CR>"),
+                                 dashboard.button("p", " " .. " Find Project",
+    ":lua require('telescope').extensions.projects.projects()<CR>"),
+                                 dashboard.button("r", " " .. " Recent Files", ":Telescope oldfiles <CR>"),
+                                 dashboard.button("t", " " .. " Find Text", ":Telescope live_grep <CR>"),
+                                 dashboard.button("c", " " .. " Config", ":e ~\\AppData\\Local\\nvim\\init.lua <CR>"),
+                                 dashboard.button("q", " " .. " Quit", ":qa<CR>")}
 
 -- local function footer()
 --     return os.date("%m-%d-%Y")

@@ -24,13 +24,11 @@ bufferline.setup {
         tab_size = 21,
         diagnostics = false,
         diagnostics_update_in_insert = false,
-        offsets = {
-            {
-                filetype = "NvimTree",
-                text = "",
-                padding = 1
-            }
-        },
+        offsets = {{
+            filetype = "NvimTree",
+            text = "",
+            padding = 1
+        }},
         show_buffer_icons = true,
         show_buffer_close_icons = true,
         show_close_icon = true,
@@ -38,13 +36,13 @@ bufferline.setup {
         persist_buffer_sort = true,
         separator_style = "thin",
         enforce_regular_tabs = true,
-        always_show_bufferline = true,
+        always_show_bufferline = true
     },
     highlights = {
         fill = {
             guifg = {
                 attribute = "fg",
-                highlight = "#ff0000"
+                highlight = "TabLine"
             },
             guibg = {
                 attribute = "bg",

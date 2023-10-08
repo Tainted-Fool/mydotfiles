@@ -39,7 +39,10 @@ vim.api.nvim_create_autocmd({"BufWinEnter"}, {
 -- Highlight yanked text
 vim.api.nvim_create_autocmd({"TextYankPost"}, {
     callback = function()
-        vim.highlight.on_yank {higroup = "Visual", timeout = 200}
+        vim.highlight.on_yank {
+            higroup = "Visual",
+            timeout = 200
+        }
     end
 })
 
@@ -51,25 +54,77 @@ vim.api.nvim_create_autocmd({"BufReadPost"}, {
     end
 })
 
-vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
+-- Clear all notifications when entering insert mode
+vim.api.nvim_create_autocmd({"InsertEnter"}, {
+    group = vim.api.nvim_create_augroup("NotifyClearGrp", {}),
+    pattern = "*",
+    callback = function()
+        require("notify").dismiss({
+            silent = true
+        })
+    end
+})
+
+-- Automatically close tab when nvim-tree is the last window in tab
+-- vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
+vim.api.nvim_create_autocmd("BufEnter", {
+    nested = true,
+    callback = function()
+        if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+            vim.cmd("quit")
+        end
+    end
+})
+
+-- Execute cmd in each tab page or if range is given
+-- vim.api.nvim_create_autocmd({ "VimResized" }, {
+-- 	callback = function()
+-- 		vim.cmd("tabdo wincmd =")
+-- 	end,
+-- })
+
+-- Quit cmd on enter
+-- vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
+-- 	callback = function()
+-- 		vim.cmd("quit")
+-- 	end,
+-- })
+
+-- Refresh code lens on file type
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- 	pattern = { "*.java", "*.py" },
+-- 	callback = function()
+-- 		vim.lsp.codelens.refresh()
+-- 	end,
+-- })
+
+-- Pause highlight after 5000 lines
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+-- 	callback = function()
+-- 		local line_count = vim.api.nvim_buf_line_count(0)
+-- 		if line_count >= 5000 then
+-- 			vim.cmd("IlluminatePauseBuf")
+-- 		end
+-- 	end,
+-- })
 
 -- Show Diagnostics on mouse hover
-vim.api.nvim_create_autocmd("CursorHold", {
-  buffer = bufnr,
-  callback = function ()
-    local opts = {
-      foscusable = false,
-      close_events = {
-        "BufLeave",
-        "CursorMoved",
-        "InsertEnter",
-        "FocusLost"
-      },
-      border = "rounded",
-      source = "always",
-      prefix = " ",
-      scope = "cursor"
-    }
-    vim.diagnostic.open_float(nil, opts)
-  end
-})
+-- vim.api.nvim_create_autocmd("CursorHold", {
+-- buffer = bufnr,
+-- callback = function ()
+-- local opts = {
+-- foscusable = false,
+-- close_events = {
+-- "BufLeave",
+-- "CursorMoved",
+-- "InsertEnter",
+-- "FocusLost"
+-- },
+-- border = "rounded",
+-- source = "always",
+-- prefix = " ",
+-- scope = "cursor"
+-- }
+-- vim.diagnostic.open_float(nil, opts)
+-- end
+-- })

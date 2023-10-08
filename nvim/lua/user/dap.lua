@@ -5,78 +5,82 @@ if not status_ok then
     return
 end
 
+-- Use protected call so we know where error is coming from
 local dap_ui_status_ok, dapui = pcall(require, "dapui")
 if not dap_ui_status_ok then
     vim.notify("dapui plugin was not found!")
     return
 end
 
-local dap_install_status_ok, dap_install = pcall(require, "dap-install")
-if not dap_install_status_ok then
-    vim.notify("dap-install plugin was not found!")
+--[[ local dap_install_status_ok, dap_install = pcall(require, "dap-install") ]]
+--[[ if not dap_install_status_ok then ]]
+--[[     vim.notify("dap-install plugin was not found!") ]]
+--[[     return ]]
+--[[ end ]]
+--[[]]
+--[[ dap_install.setup {} ]]
+--[[]]
+--[[ dap_install.config("python", {}) ]]
+-- Add other configs here
+
+-- Use protected call so we know where error is coming from
+local dap_py_status_ok, dap_python = pcall(require, "dap-python")
+if not dap_py_status_ok then
+    vim.notify("nvim-dap-python plugin was not found!")
     return
 end
 
-dap_install.setup {}
-
-dap_install.config("python", {})
--- Add other configs here
-
-dapui.setup{
-    icons = {expanded = "▾", collapsed = "▸"},
+dapui.setup({
+    expand_lines = true,
+    icons = {
+        expanded = "",
+        collapsed = "",
+        circular = ""
+    },
     mappings = {
-        -- Use a table to apply multiple mappings
-        expand = {
-            "<CR>",
-            "<2-LeftMouse>"
-        },
+        expand = {"<CR>", "<2-LeftMouse>"},
         open = "o",
         remove = "d",
         edit = "e",
         repl = "r",
         toggle = "t"
     },
-    expand_lines = vim.fn.has("nvim-0.7"),
-    layouts = {
-        {
-            elements = {
-                {
-                    id = "scopes",
-                    size = 0.25
-                },
-                "breakpoints",
-                "stacks",
-                "watches"
-            },
-            size = 40, -- 40 columns
-            position = "left"
-        },
-        {
-            elements = {
-                "repl",
-                "console"
-            },
-            size = 0.25, -- 25% of total lines
-            position = "bottom"
-        }
-    },
+    layouts = {{
+        elements = {{
+            id = "scopes",
+            size = 0.33
+        }, {
+            id = "breakpoints",
+            size = 0.17
+        }, {
+            id = "stacks",
+            size = 0.25
+        }, {
+            id = "watches",
+            size = 0.25
+        }},
+        size = 0.33,
+        position = "left"
+    }, {
+        elements = {{
+            id = "repl",
+            size = 0.45
+        }, {
+            id = "console",
+            size = 0.55
+        }},
+        size = 0.27,
+        position = "bottom"
+    }},
     floating = {
-        max_height = nil, -- these can be integers or a float between 0 and 1
-        max_width = nil, -- floats will be treated as percentage of your screen
-        border = "rounded", -- border style. Can be "single", "double" or "rounded"
+        max_height = 0.9,
+        max_width = 0.5,
+        border = "rounded",
         mappings = {
-            close = {
-                "q",
-                "<Esc>"
-            }
+            close = {"q", "<Esc>"}
         }
-    },
-    windows = {indent = 1},
-    render = {
-        max_type_length = nil -- can be integer or nil
     }
-}
-
+})
 
 vim.fn.sign_define("DapBreakpoint", {
     text = "",
@@ -85,14 +89,21 @@ vim.fn.sign_define("DapBreakpoint", {
     numhl = ""
 })
 
+-- DAP settings for python
+dap_python.setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+-- dap_python.setup()
+
+-- Open dapui when dap in initialized
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()
 end
 
+-- Close dapui when dap is terminated
 dap.listeners.before.event_terminated["dapui_config"] = function()
     dapui.close()
 end
 
+-- Close dapui when dap is exited
 dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
 end
