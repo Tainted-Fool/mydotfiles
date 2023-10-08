@@ -1,8 +1,8 @@
 -- Use protected call so we know where error is coming from
 local status_ok, alpha = pcall(require, "alpha")
 if not status_ok then
-	vim.notify("alpha plugin was not found!")
-	return
+    vim.notify("alpha plugin was not found!")
+    return
 end
 
 local dashboard = require("alpha.themes.dashboard")
@@ -24,41 +24,38 @@ local dashboard = require("alpha.themes.dashboard")
 -- 	[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
 -- }
 
-dashboard.section.header.val = {
-	[[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
-	[[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
-	[[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
-	[[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
-	[[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
-	[[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]],
-}
+dashboard.section.header.val =
+    {[[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
+     [[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
+     [[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
+     [[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
+     [[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
+     [[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]]}
 
-dashboard.section.buttons.val = {
-	dashboard.button("f", "  Find File", ":Telescope find_files hidden=true<CR>"),
-	dashboard.button("e", "  New File", ":ene <BAR> <CR>"),
-	dashboard.button("p", "  Find Project", ":Telescope projects <CR>"),
-	dashboard.button("r", "  Recent Files", ":Telescope oldfiles <CR>"),
-	dashboard.button("t", "  Find Text", ":Telescope live_grep <CR>"),
-	dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
-	dashboard.button("q", "  Quit", ":qa<CR>"),
-}
+dashboard.section.buttons.val = {dashboard.button("f", "  Find File", ":Telescope find_files hidden=true<CR>"),
+                                 dashboard.button("e", "  New File", ":ene <BAR> <CR>"),
+                                 dashboard.button("p", "  Find Project", ":Telescope projects <CR>"),
+                                 dashboard.button("r", "  Recent Files", ":Telescope oldfiles <CR>"),
+                                 dashboard.button("t", "  Find Text", ":Telescope live_grep <CR>"),
+                                 dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
+                                 dashboard.button("q", "  Quit", ":qa<CR>")}
 
 -- local function footer()
 --     return os.date("%m-%d-%Y")
 -- end
 
 local function footer()
-	-- need fortune-mod -> sudo apt install fortune-mod
-	local handle = io.popen("fortune")
-	if not handle then
-		vim.norify("Fortune-mod not installed")
-		vim.notify("Run `sudo apt install fortune-mod`")
-		return
-	end
+    -- need fortune-mod -> sudo apt install fortune-mod
+    local handle = io.popen("fortune")
+    if not handle then
+        vim.norify("Fortune-mod not installed")
+        vim.notify("Run `sudo apt install fortune-mod`")
+        return
+    end
 
-	local fortune = handle:read("*a")
-	handle:close()
-	return fortune
+    local fortune = handle:read("*a")
+    handle:close()
+    return fortune
 end
 
 dashboard.section.footer.val = footer()

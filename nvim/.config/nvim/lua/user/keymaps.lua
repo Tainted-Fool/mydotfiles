@@ -1,5 +1,8 @@
 -- Declare variables
-local opts = { noremap = true, silent = true }
+local opts = {
+    noremap = true,
+    silent = true
+}
 local keymap = vim.api.nvim_set_keymap
 -- local keymap = vim.keymap.set
 
