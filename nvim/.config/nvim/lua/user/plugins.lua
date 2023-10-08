@@ -46,6 +46,7 @@ return packer.startup(function(use)
 	use("lewis6991/impatient.nvim") -- speed up loading lua modules
 
 	-- Startuptime Breakdown
+	use("dstein64/vim-startuptime") -- :Startuptime or nvim --startuptime
 
 	-- Packer
 	use("wbthomason/packer.nvim") -- plugin manager
@@ -84,6 +85,8 @@ return packer.startup(function(use)
 	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- multiline diagnostics
 	use("onsails/lspkind.nvim") -- lsp completion icons
 	use("amrbashir/nvim-docs-view") -- lsp hover documentation in a side panel
+	-- use("vonheikemen/lsp-zero.nvim") -- zero lsp configurations
+	-- use("decodetalkers/csharpls-extended-lsp.nvim") -- csharp_ls extended
 
 	-- LUA
 	use("nvim-lua/plenary.nvim") -- useful lua functions
@@ -133,9 +136,8 @@ return packer.startup(function(use)
 	use("ThePrimeagen/harpoon") -- mark and get file
 	use("folke/noice.nvim") -- replace UI for messages, cmdline, and popupmenu
 	use("gelguy/wilder.nvim") -- adds new features and capabilities to wildmenu
-	use('dstein64/vim-startuptime') -- :Startuptime or nvim --startuptime
-	use('EtiamNullam/deferred-clipboard.nvim') -- use system clipboard
-	use('sudormrfbin/cheatsheet.nvim') -- cheatsheet buffer
+	use("EtiamNullam/deferred-clipboard.nvim") -- use system clipboard
+	use("sudormrfbin/cheatsheet.nvim") -- cheatsheet buffer
 
 	-- File Explorer
 	use("kyazdani42/nvim-tree.lua") -- tree viewer
@@ -176,6 +178,9 @@ return packer.startup(function(use)
 	use("rcarriga/nvim-dap-ui") -- debugger ui
 	use("mfussenegger/nvim-dap-python") -- dap for python
 	-- use("ravenxrz/DAPInstall.nvim") -- debugger installer - use Mason
+
+	-- AI
+	use("github/copilot.vim") -- code ai - use :Copilot setup
 
 	-- Automatically set up configurations after cloning packer repo
 	if PACKER_BOOTSTRAP then

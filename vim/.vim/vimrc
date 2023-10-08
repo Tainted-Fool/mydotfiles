@@ -383,7 +383,9 @@ set background=dark
 "KEY MAPPINGS BEGIN"
 """"""""""""""""""""
 " set leader key to space
-let mapleader = " "
+" let mapleader = " "
+nnoremap <Space> <Nop>
+map <Space> <Leader>
 
 """""""""""""""""""
 "Buffer Navigation"
