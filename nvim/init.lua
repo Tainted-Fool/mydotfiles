@@ -1,13 +1,11 @@
--- QOL Must Have
-require "user.surround"
-require "user.comment"
-require "user.hop"
-
 -- VSCode settings
 if (vim.g.vscode) then
     require "user.vskeymaps"
     require "user.vsplugins"
     require "user.vsoptions"
+    require "user.surround"
+    require "user.comment"
+    require "user.hop"
 else
     -- Speed up LUA modules loading
     require "user.impatient"
@@ -42,6 +40,9 @@ else
     require "user.treesitter"
 
     -- QOL
+    require "user.surround"
+    require "user.comment"
+    require "user.hop"
     require "user.autopairs"
     require "user.tabout"
     require "user.indentline"

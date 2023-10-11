@@ -1,3 +1,4 @@
+-- Local Variable
 local fn = vim.fn
 
 -- Automatically install Packer
@@ -60,6 +61,7 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lua" -- lua completion
     use "saadparwaiz1/cmp_luasnip" -- snippet completion
 
+
     -- Snippets
     use "L3MON4D3/LuaSnip" -- snippet engine
     use "rafamadriz/friendly-snippets" -- snippets to use
@@ -77,11 +79,11 @@ return packer.startup(function(use)
     use "b0o/SchemaStore.nvim" -- access to the SchemaStore catalog - large collection of JSON schemas
     use "SmiteshP/nvim-navic" -- show current code context in winbar or statusline
     use "simrat39/symbols-outline.nvim" -- show document symbols in right window
-    --[[ use "j-hui/fidget.nvim"               -- show lsp progress handler ]]
-    use({
-        "j-hui/fidget.nvim",
-        tag = "legacy"
-    }) -- show lsp progress handler
+    use "j-hui/fidget.nvim" -- show lsp progress handler
+    -- use({
+    --     "j-hui/fidget.nvim",
+    --     tag = "legacy"
+    -- }) -- show lsp progress handler
     use "folke/trouble.nvim" -- better lsp diagnostics and quickfix list
     use("erichdongubler/lsp_lines.nvim") -- multiline diagnostics - windows fix
     -- use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- multiline diagnostics
@@ -186,3 +188,4 @@ return packer.startup(function(use)
         require("packer").sync()
     end
 end)
+

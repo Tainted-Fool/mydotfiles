@@ -12,7 +12,7 @@ Oh-My-Posh --init --shell pwsh --config ~/AppData/Local/Programs/oh-my-posh/them
 Import-Module Posh-Git
 Import-Module Terminal-Icons
 Import-module Z
-#Import-Module PSReadLine
+Import-Module PSReadLine
 Import-Module PSWindowsUpdate
 Import-Module DockerCompletion
 #Import-Module AZ.Tools.Predictor
@@ -44,6 +44,9 @@ if (-not(Test-Path -Path Alias:Touch))
 #############
 # Functions #
 #############
+#############
+# Functions #
+#############
 # This ties to the `touch` alias
 function touchfile()
 {
@@ -61,10 +64,10 @@ function touchfile()
     }
 }
 
-# `git` command alternative for Mydotfiles repo
+# Change to dotfiles repo and check status
 function dit()
 {
-  git --git-dir=$HOME\.dotfiles\ --work-tree=$HOME $args
+  cd ~\.dotfiles; git status
 }
 
 # Update `pip`
@@ -85,53 +88,22 @@ function ccat()
   bat.exe --paging=never -pp --style='plain' --theme=TwoDark $args
 }
 
-# Open notebook in VSCode
-function notes()
-{
-  $currentPath = (Get-Location).Path
-  code "G:\My Drive\Documents\Obsidian Notebook\PersonalNotebook"; Set-Location $currentPath
-}
-
-# Open C# notebook in VSCode
-function notescs()
-{
-  code "G:\My Drive\Programming\C#\Notebook"; Set-Location $(Get-Location).Path
-}
-
-# Open Python notebook in VSCode
-function notespy()
-{
-  code "G:\My Drive\Programming\Python\Notebook"; Set-Location $(Get-Location).Path
-}
-
 # Similar to linux's `time` command
 function time 
 { 
   Measure-Command { Invoke-Expression $args 2>&1 | out-default} 
 }
 
-# Edit alias with vim
-function vima()
-{
-  vim ~\PowerShellProfile\Alias.ps1
-}
-
-# Edit functions with vim
-function vimf()
-{
-  vim ~\PowerShellProfile\Functions.ps1
-}
-
-# Edit PowerShellProfile with vim
-function vimpsp()
-{
-  vim ~\PowerShellProfile\Profile.ps1
-}
-
 # Edit vimrc with vim
 function vimrc()
 {
   vim ~\vimfiles\vimrc
+}
+
+# Edit nvimrc with nvim
+function nvimrc()
+{
+  nvim ~\AppData\Local\nvim\init.vim
 }
 
 # Source PowerShellProfile
@@ -141,6 +113,12 @@ function src()
    # you can NOT set an alias for `.`
    # call(&) runs a function or script and NOT added to current scope
    & $PROFILE
+}
+
+# Check open ports
+function openports()
+{
+    nestat -a -b -o
 }
 
 #######################
@@ -609,4 +587,5 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 # region conda initialize
 # !! Contents within this block are managed by 'conda init' !!
 (& "C:\Python\Anaconda39\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
+conda deactivate
 # endregion

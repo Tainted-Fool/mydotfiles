@@ -38,7 +38,7 @@ cd ~\.dotfiles
 dploy stow .\conda C:\Users\laz
 dploy stow .\git C:\Users\laz
 dploy stow .\nvim C:\Users\laz\AppData\Local\nvim
-dploy stow .\PowerShellProfile C:\Users\laz\Documents\PowerShell
+dploy stow .\PowerShellProfile C:\Users\laz\Documents\PowerShell # run `echo $PROFILE` first
 dploy stow .\vimfiles $HOME\vimfiles
 ```
 
