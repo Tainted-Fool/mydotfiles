@@ -17,10 +17,11 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin('~/.vim/plugged')
 
 Plug 'ap/vim-css-color' " displays css colors in vim
+Plug 'christoomey/vim-sort-motion' " sort based on text objects or motion `gs`, `gs2j`, `gsi(`
 Plug 'chun-yang/auto-pairs' " inserts/deletes brackets, parens, and quotes in pairs
-Plug 'dense-analysis/ale' " asynchronous lint engine
 Plug 'conradirwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
 Plug 'davidhalter/jedi-vim' " python auto-completion and vim key bindings
+Plug 'dense-analysis/ale' " asynchronous lint engine
 Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
 Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
 "Plug 'honza/vim-snippets' " snippets engine
@@ -1115,8 +1116,8 @@ inoremap <expr> <Cr> pumvisible() ? asyncomplete#close_popup() : "\<Cr>"
 " mappings to common code navigation
 nmap <buffer> gd <Plug>(lsp-definition)
 nmap <buffer> gr <Plug>(lsp-references)
-nmap <buffer> gs <Plug>(lsp-document-symbol-search)
-nmap <buffer> gS <Plug>(lsp-workspace-symbol-search)
+" nmap <buffer> gs <Plug>(lsp-document-symbol-search)
+" nmap <buffer> gS <Plug>(lsp-workspace-symbol-search)
 nmap <buffer> gi <Plug>(lsp-implementation)
 nmap <buffer> gt <Plug>(lsp-type-definition)
 nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
@@ -1259,6 +1260,14 @@ let g:vim_json_conceal = 0
 "Vim-SpellCheck Settings"
 """""""""""""""""""""""""
 " let g:SpellCheck_OnNospell = function('SpellCheck#AutoEnableSpell')
+
+"""""""""""""""""
+"Vim-Sort-Motion"
+"""""""""""""""""
+
+" pass options to sort command
+" u = unique, i = case-insensitive
+" let g:sort_motion_flags = 'ui'
 
 """"""""""""""""""
 "VimWiki Settings"

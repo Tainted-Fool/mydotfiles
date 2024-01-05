@@ -23,22 +23,22 @@ local function lsp_keymaps(bufnr)
     local keymap = vim.api.nvim_buf_set_keymap
     -- local keymap = vim.keymap.set
 
-    -- Set keymaps for buffers
-    keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
-    -- keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<cr>", opts)
-    keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-    keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-    keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-    keymap(bufnr, "n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
-    keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
-    keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<cr>', opts)
-    keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<cr>', opts)
-    keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', opts)
-    keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-    keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-    keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-    keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-    keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
+	-- Set keymaps for buffers
+	keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+	-- keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<cr>", opts)
+	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+	keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+	keymap(bufnr, "n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
+	keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
+	keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<cr>', opts)
+	keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<cr>', opts)
+	keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', opts)
+	keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+	keymap(bufnr, "n", "gS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+	keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+	keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+	keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
 
     -- Create a 'Format' command for formatting files
     vim.cmd([[command! Format execute 'lua vim.lsp.buf.format{async=true}']])
