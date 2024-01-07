@@ -115,7 +115,7 @@ function src()
 # Check open ports
 function openports()
 {
-    nestat -a -b -o
+    netstat -a -b -o
 }
 
 #######################

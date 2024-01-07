@@ -49,6 +49,7 @@ require("packer").startup(function(use)
     --[[ use "easymotion/vim-easymotion" ]] -- faster motion with dash `-` `<motion>`
     use "phaazon/hop.nvim" -- better navigation with `f` and `t`
     use "numToStr/Comment.nvim" -- comment/uncomment
+    use "christoomey/vim-sort-motion" -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

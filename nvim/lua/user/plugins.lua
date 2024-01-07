@@ -140,6 +140,8 @@ return packer.startup(function(use)
     use "gelguy/wilder.nvim" -- adds new features and capabilities to wildmenu
     use "EtiamNullam/deferred-clipboard.nvim" -- use system clipboard
     use "sudormrfbin/cheatsheet.nvim" -- cheatsheet buffer
+    use "gaoDean/autolist.nvim" -- atuo complete list continuation and formatting
+    use "christoomey/vim-sort-motion" -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     --[[ use "tpope/vim-surround"              -- change or add surroundings ]]
 
     -- File Explorer

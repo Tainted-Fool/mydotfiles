@@ -27,7 +27,7 @@ configs.setup({
         extended_more = true -- highlight non-bracket delimiters like html tags, boolean or table
     },
     context_commentstring = {
-        enable = true,
+        -- enable = true,
         enable_autocmd = false
     },
     autotag = {
