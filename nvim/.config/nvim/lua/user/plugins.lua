@@ -4,8 +4,7 @@ local fn = vim.fn
 -- Automatically install Packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim",
-                                  install_path})
+    PACKER_BOOTSTRAP = fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
     print("Installing packer close and reopen Neovim...")
     vim.cmd([[packadd packer.nvim]])
 end
@@ -109,35 +108,36 @@ return packer.startup(function(use)
     use("JoosepAlviste/nvim-ts-context-commentstring")
     use("vimjas/vim-python-pep8-indent") -- Fix treesitter auto-indent for python
 
-	-- QOL
-	use("kylechui/nvim-surround") -- add/change/delete surrounding pairs
-	use("windwp/nvim-autopairs") -- auto pairs
-	use("numToStr/Comment.nvim") -- comment/uncomment
-	use("lukas-reineke/indent-blankline.nvim") -- adds `|` as indentation guides
-	use("karb94/neoscroll.nvim") -- better scrolling
-	use("tpope/vim-fugitive") -- git wrapper :Git <tab>
-	use("tpope/vim-repeat") -- repeat last command
-	use("tpope/vim-unimpaired") -- useful mappings like ]space and ]b
-	use("tpope/vim-abolish") -- convert words to camel, mix, with 'crc'
-	use("tpope/vim-sleuth") -- Automatically adjusts 'shiftwidth' and 'expandtab'
-	use("justinmk/vim-sneak") -- faster motion with 's'
-	-- use("easymotion/vim-easymotion") -- faster motion with dash '-' '<motion>'
-	use("phaazon/hop.nvim") -- better navigation with f and t
-	use("NvChad/nvim-colorizer.lua") -- displays the hexvalue color
-	use("monaqa/dial.nvim") -- increment/decrement/interate various elements
-	use("andymass/vim-matchup") -- better % navigate and highlight matching words
-	use({
-		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		ft = "markdown",
-	})
-	use("abecodes/tabout.nvim") -- use tab to exit quotation marks and other characters
-	use("ThePrimeagen/harpoon") -- mark and get file
-	use("folke/noice.nvim") -- replace UI for messages, cmdline, and popupmenu
-	use("gelguy/wilder.nvim") -- adds new features and capabilities to wildmenu
-	use('EtiamNullam/deferred-clipboard.nvim') -- use system clipboard
-	use('sudormrfbin/cheatsheet.nvim') -- cheatsheet buffer
-	use('christoomey/vim-sort-motion') -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
+    -- QOL
+    use("kylechui/nvim-surround") -- add/change/delete surrounding pairs
+    use("windwp/nvim-autopairs") -- auto pairs
+    use("numToStr/Comment.nvim") -- comment/uncomment
+    use("lukas-reineke/indent-blankline.nvim") -- adds `|` as indentation guides
+    use("karb94/neoscroll.nvim") -- better scrolling
+    use("tpope/vim-fugitive") -- git wrapper :Git <tab>
+    use("tpope/vim-repeat") -- repeat last command
+    use("tpope/vim-unimpaired") -- useful mappings like ]space and ]b
+    use("tpope/vim-abolish") -- convert words to camel, mix, with 'crc'
+    use("tpope/vim-sleuth") -- Automatically adjusts 'shiftwidth' and 'expandtab'
+    use("justinmk/vim-sneak") -- faster motion with 's'
+    -- use("easymotion/vim-easymotion") -- faster motion with dash '-' '<motion>'
+    use("phaazon/hop.nvim") -- better navigation with f and t
+    use("NvChad/nvim-colorizer.lua") -- displays the hexvalue color
+    use("monaqa/dial.nvim") -- increment/decrement/interate various elements
+    use("andymass/vim-matchup") -- better % navigate and highlight matching words
+    use({
+        "iamcco/markdown-preview.nvim", -- live markdown previewer
+        run = "cd app && npm install",
+        ft = "markdown"
+    })
+    use("abecodes/tabout.nvim") -- use tab to exit quotation marks and other characters
+    use("ThePrimeagen/harpoon") -- mark and get file
+    use("folke/noice.nvim") -- replace UI for messages, cmdline, and popupmenu
+    use("gelguy/wilder.nvim") -- adds new features and capabilities to wildmenu
+    use("EtiamNullam/deferred-clipboard.nvim") -- use system clipboard
+    use("sudormrfbin/cheatsheet.nvim") -- cheatsheet buffer
+    use("gaoDean/autolist.nvim") -- auto complete list continuation and formatting
+    use('christoomey/vim-sort-motion') -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
 
     -- File Explorer
     use("kyazdani42/nvim-tree.lua") -- tree viewer
