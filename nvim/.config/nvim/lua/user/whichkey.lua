@@ -196,12 +196,13 @@ local mappings = {
     },
 
     p = {
-        name = "Packer",
-        c = {"<cmd>PackerCompile<cr>", "Compile"},
-        i = {"<cmd>PackerInstall<cr>", "Install"},
-        s = {"<cmd>PackerSync<cr>", "Sync"},
-        S = {"<cmd>PackerStatus<cr>", "Status"},
-        u = {"<cmd>PackerUpdate<cr>", "Update"}
+        name = "Plugin Manager",
+        -- c = {"<cmd>PackerCompile<cr>", "Compile"},
+        -- i = {"<cmd>PackerInstall<cr>", "Install"},
+        -- s = {"<cmd>PackerSync<cr>", "Sync"},
+        -- S = {"<cmd>PackerStatus<cr>", "Status"},
+        -- u = {"<cmd>PackerUpdate<cr>", "Update"}
+        u = {"<cmd>Lazy<cr>", "Update"}
     },
 
     r = {

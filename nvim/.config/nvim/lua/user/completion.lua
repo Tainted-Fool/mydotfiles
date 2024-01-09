@@ -56,7 +56,31 @@ cmp.setup({
         -- }),
 
         -- Tab autocompletion
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+        --     if cmp.visible() then
+        --         cmp.select_next_item()
+        --     elseif luasnip.expand_or_jumpable() then
+        --         luasnip.expand_or_jump()
+        --     elseif check_backspace() then
+        --         fallback()
+        --     else
+        --         fallback()
+        --     end
+        -- end, {"i", "s"}),
+
+        -- -- Same as TAB but backwards
+        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+        --     if cmp.visible() then
+        --         cmp.select_prev_item()
+        --     elseif luasnip.jumpable(-1) then
+        --         luasnip.jump(-1)
+        --     else
+        --         fallback()
+        --     end
+        -- end, {"i", "s"})
+
+        -- Autocompletion choose next menu item
+        ["<C-n>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -68,8 +92,8 @@ cmp.setup({
             end
         end, {"i", "s"}),
 
-        -- Same as TAB but backwards
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        -- Autocompletion choose previous menu item
+        ["<C-p>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -78,6 +102,7 @@ cmp.setup({
                 fallback()
             end
         end, {"i", "s"})
+
     },
 
     -- Menu popup configuration

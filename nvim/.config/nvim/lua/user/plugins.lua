@@ -1,189 +1,197 @@
--- Declare variable
-local fn = vim.fn
-
 -- Automatically install Packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
-    print("Installing packer close and reopen Neovim...")
-    vim.cmd([[packadd packer.nvim]])
-end
+-- local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+-- if fn.empty(fn.glob(install_path)) > 0 then
+--     PACKER_BOOTSTRAP = fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+--     print("Installing packer close and reopen Neovim...")
+--     vim.cmd([[packadd packer.nvim]])
+-- end
 
 -- Autocommand that runs 'PackerSync' whenever you save the plugins.lua file
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins.lua source <afile> | PackerSync
-    augroup end
-]])
+-- vim.cmd([[
+--     augroup packer_user_config
+--         autocmd!
+--         autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--     augroup end
+-- ]])
 
 -- Use protected call so we know where error is coming from
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-    vim.notify("packer plugin was not found!")
-    return
-end
+-- local status_ok, lazy = pcall(require, "lazy")
+-- if not status_ok then
+--     vim.notify("lazy plugin was not found!")
+--     return
+-- end
 
 -- Have Packer use a popup window
-packer.init({
-    display = {
-        open_fn = function()
-            return require("packer.util").float({
-                border = "rounded"
-            })
-        end
-    }
-})
+-- packer.init({
+--     display = {
+--         open_fn = function()
+--             return require("packer.util").float({
+--                 border = "rounded"
+--             })
+--         end
+--     }
+-- })
+
+-- Declare variable
+-- local fn = vim.fn
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
 -- Install plugins here
-return packer.startup(function(use)
+require("lazy").setup({
     -- Speed up Loading
-    use("lewis6991/impatient.nvim") -- speed up loading lua modules
+    "lewis6991/impatient.nvim", -- speed up loading lua modules
 
     -- Startuptime Breakdown
-    use("dstein64/vim-startuptime") -- :Startuptime or nvim --startuptime
+    -- "dstein64/vim-startuptime", -- :Startuptime or nvim --startuptime
 
     -- Packer
-    use("wbthomason/packer.nvim") -- plugin manager
+    -- "wbthomason/packer.nvim", -- plugin manager
 
     -- Colorschemes
-    use("rafi/awesome-vim-colorschemes")
-    use("folke/tokyonight.nvim")
+    "rafi/awesome-vim-colorschemes",
+    "folke/tokyonight.nvim",
 
     -- Autocompletion
-    use("hrsh7th/nvim-cmp") -- the auto completion plugin
-    use("hrsh7th/cmp-buffer") -- buffer completion
-    use("hrsh7th/cmp-cmdline") -- cmdline completion
-    use("hrsh7th/cmp-path") -- path completion
-    use("hrsh7th/cmp-nvim-lsp") -- lsp completion
-    use("hrsh7th/cmp-nvim-lua") -- lua completion
-    use("saadparwaiz1/cmp_luasnip") -- snippet completion
+    "hrsh7th/nvim-cmp", -- the auto completion plugin
+    "hrsh7th/cmp-buffer", -- buffer completion
+    "hrsh7th/cmp-cmdline", -- cmdline completion
+    "hrsh7th/cmp-path", -- path completion
+    "hrsh7th/cmp-nvim-lsp", -- lsp completion
+    "hrsh7th/cmp-nvim-lua", -- lua completion
+    "saadparwaiz1/cmp_luasnip", -- snippet completion
 
     -- Snippets
-    use("L3MON4D3/LuaSnip") -- snippet engine
-    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+    "L3MON4D3/LuaSnip", -- snippet engine
+    "rafamadriz/friendly-snippets", -- a bunch of snippets to use
 
     -- LSP
-    use("neovim/nvim-lspconfig") -- enable lsp
-    use("williamboman/mason.nvim") -- easy install lsp servers
-    use("williamboman/mason-lspconfig.nvim") -- lsp configurations
-    use("jose-elias-alvarez/null-ls.nvim") -- formatting and linters
-    use("RRethy/vim-illuminate") -- highlight same symbols under cursor
-    use("arkav/lualine-lsp-progress") -- indicator that shows when lsp is ready
-    use("ray-x/lsp_signature.nvim") -- better signature help
-    use("lvimuser/lsp-inlayhints.nvim") -- shows data type for certain languages
-    use("b0o/SchemaStore.nvim") -- access to the SchemaStore catalog - large collection of JSON schemas
-    use("SmiteshP/nvim-navic") -- show current code context in winbar or statusline
-    use("simrat39/symbols-outline.nvim") -- show document symbols in right window
-    use({
+    "neovim/nvim-lspconfig", -- enable lsp
+    "williamboman/mason.nvim", -- easy install lsp servers
+    "williamboman/mason-lspconfig.nvim", -- lsp configurations
+    "jose-elias-alvarez/null-ls.nvim", -- formatting and linters
+    "RRethy/vim-illuminate", -- highlight same symbols under cursor
+    "arkav/lualine-lsp-progress", -- indicator that shows when lsp is ready
+    "ray-x/lsp_signature.nvim", -- better signature help
+    "lvimuser/lsp-inlayhints.nvim", -- shows data type for certain languages
+    "b0o/SchemaStore.nvim", -- access to the SchemaStore catalog - large collection of JSON schemas
+    "SmiteshP/nvim-navic", -- show current code context in winbar or statusline
+    "simrat39/symbols-outline.nvim", -- show document symbols in right window
+    {
         "j-hui/fidget.nvim",
         tag = "legacy"
-    }) -- show lsp progress handler
-    use("folke/trouble.nvim") -- better lsp diagnostics and quickfix list
-    use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- multiline diagnostics
-    use("onsails/lspkind.nvim") -- lsp completion icons
-    use("amrbashir/nvim-docs-view") -- lsp hover documentation in a side panel
-    -- use("vonheikemen/lsp-zero.nvim") -- zero lsp configurations
-    -- use("decodetalkers/csharpls-extended-lsp.nvim") -- csharp_ls extended
+    }, -- show lsp progress handler
+    "folke/trouble.nvim", -- better lsp diagnostics and quickfix list
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim", -- multiline diagnostics
+    "onsails/lspkind.nvim", -- lsp completion icons
+    "amrbashir/nvim-docs-view", -- lsp hover documentation in a side panel
+    -- "vonheikemen/lsp-zero.nvim", -- zero lsp configurations
+    -- "decodetalkers/csharpls-extended-lsp.nvim", -- csharp_ls extended
 
     -- LUA
-    use("nvim-lua/plenary.nvim") -- useful lua functions
-    use("nvim-lua/popup.nvim") -- useful lua functions
-    use("folke/lua-dev.nvim") -- nvim lua API docs and completion
-    use("rcarriga/nvim-notify") -- better notifications
-    use("stevearc/dressing.nvim") -- UI hook for vim.ui.select/input
-    use("antoinemadec/FixCursorHold.nvim") -- fix cursor hold
-    use("MunifTanjim/nui.nvim") -- UI component library for nvim
+    "nvim-lua/plenary.nvim", -- useful lua functions
+    "nvim-lua/popup.nvim", -- useful lua functions
+    "folke/lua-dev.nvim", -- nvim lua API docs and completion
+    "rcarriga/nvim-notify", -- better notifications
+    "stevearc/dressing.nvim", -- UI hook for vim.ui.select/input
+    "antoinemadec/FixCursorHold.nvim", -- fix cursor hold
+    "MunifTanjim/nui.nvim", -- UI component library for nvim
 
     -- Fuzzy Search
-    use("nvim-telescope/telescope.nvim") -- find files
-    use("nvim-telescope/telescope-file-browser.nvim") -- preview of file
-    use("ibhagwan/fzf-lua") -- fzf made in lua
+    "nvim-telescope/telescope.nvim", -- find files
+    "nvim-telescope/telescope-file-browser.nvim", -- preview of file
+    "ibhagwan/fzf-lua", -- fzf made in lua
 
     -- Treesitter
-    use("nvim-treesitter/nvim-treesitter") -- syntax highlighting
-    use("nvim-treesitter/nvim-treesitter-textobjects") -- syntax aware text-objects
-    use("p00f/nvim-ts-rainbow") -- rainbow pairs for treesitter
-    use("windwp/nvim-ts-autotag") -- autoclose/autorename html tags
-    use("JoosepAlviste/nvim-ts-context-commentstring")
-    use("vimjas/vim-python-pep8-indent") -- Fix treesitter auto-indent for python
+    "nvim-treesitter/nvim-treesitter", -- syntax highlighting
+    "nvim-treesitter/nvim-treesitter-textobjects", -- syntax aware text-objects
+    "p00f/nvim-ts-rainbow", -- rainbow pairs for treesitter
+    "windwp/nvim-ts-autotag", -- autoclose/autorename html tags
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    "vimjas/vim-python-pep8-indent", -- Fix treesitter auto-indent for python
 
     -- QOL
-    use("kylechui/nvim-surround") -- add/change/delete surrounding pairs
-    use("windwp/nvim-autopairs") -- auto pairs
-    use("numToStr/Comment.nvim") -- comment/uncomment
-    use("lukas-reineke/indent-blankline.nvim") -- adds `|` as indentation guides
-    use("karb94/neoscroll.nvim") -- better scrolling
-    use("tpope/vim-fugitive") -- git wrapper :Git <tab>
-    use("tpope/vim-repeat") -- repeat last command
-    use("tpope/vim-unimpaired") -- useful mappings like ]space and ]b
-    use("tpope/vim-abolish") -- convert words to camel, mix, with 'crc'
-    use("tpope/vim-sleuth") -- Automatically adjusts 'shiftwidth' and 'expandtab'
-    use("justinmk/vim-sneak") -- faster motion with 's'
-    -- use("easymotion/vim-easymotion") -- faster motion with dash '-' '<motion>'
-    use("phaazon/hop.nvim") -- better navigation with f and t
-    use("NvChad/nvim-colorizer.lua") -- displays the hexvalue color
-    use("monaqa/dial.nvim") -- increment/decrement/interate various elements
-    use("andymass/vim-matchup") -- better % navigate and highlight matching words
-    use({
+    "kylechui/nvim-surround", -- add/change/delete surrounding pairs
+    "windwp/nvim-autopairs", -- auto pairs
+    "numToStr/Comment.nvim", -- comment/uncomment
+    "lukas-reineke/indent-blankline.nvim", -- adds `|` as indentation guides
+    "karb94/neoscroll.nvim", -- better scrolling
+    "tpope/vim-fugitive", -- git wrapper :Git <tab>
+    "tpope/vim-repeat", -- repeat last command
+    "tpope/vim-unimpaired", -- useful mappings like ]space and ]b
+    "tpope/vim-abolish", -- convert words to camel, mix, with 'crc'
+    "tpope/vim-sleuth", -- Automatically adjusts 'shiftwidth' and 'expandtab'
+    "justinmk/vim-sneak", -- faster motion with 's'
+    -- "easymotion/vim-easymotion", -- faster motion with dash '-' '<motion>'
+    "phaazon/hop.nvim", -- better navigation with f and t
+    "NvChad/nvim-colorizer.lua", -- displays the hexvalue color
+    "monaqa/dial.nvim", -- increment/decrement/interate various elements
+    "andymass/vim-matchup", -- better % navigate and highlight matching words
+    {
         "iamcco/markdown-preview.nvim", -- live markdown previewer
-        run = "cd app && npm install",
+        build = "cd app && npm install",
         ft = "markdown"
-    })
-    use("abecodes/tabout.nvim") -- use tab to exit quotation marks and other characters
-    use("ThePrimeagen/harpoon") -- mark and get file
-    use("folke/noice.nvim") -- replace UI for messages, cmdline, and popupmenu
-    use("gelguy/wilder.nvim") -- adds new features and capabilities to wildmenu
-    use("EtiamNullam/deferred-clipboard.nvim") -- use system clipboard
-    use("sudormrfbin/cheatsheet.nvim") -- cheatsheet buffer
-    use("gaoDean/autolist.nvim") -- auto complete list continuation and formatting
-    use('christoomey/vim-sort-motion') -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
+    },
+    "abecodes/tabout.nvim", -- use tab to exit quotation marks and other characters
+    "ThePrimeagen/harpoon", -- mark and get file
+    "folke/noice.nvim", -- replace UI for messages, cmdline, and popupmenu
+    "gelguy/wilder.nvim", -- adds new features and capabilities to wildmenu
+    "EtiamNullam/deferred-clipboard.nvim", -- use system clipboard
+    "sudormrfbin/cheatsheet.nvim", -- cheatsheet buffer
+    "gaoDean/autolist.nvim", -- auto complete list continuation and formatting
+    "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
 
     -- File Explorer
-    use("kyazdani42/nvim-tree.lua") -- tree viewer
-    use("kyazdani42/nvim-web-devicons") -- icons for tree view
+    "kyazdani42/nvim-tree.lua", -- tree viewer
+    "kyazdani42/nvim-web-devicons", -- icons for tree view
 
     -- Buffers
-    use("moll/vim-bbye") -- close/delete buffers easier
-    use("akinsho/bufferline.nvim") -- buffer lines
-    use("nacro90/numb.nvim") -- peek lines of the buffer
+    "moll/vim-bbye", -- close/delete buffers easier
+    "akinsho/bufferline.nvim", -- buffer lines
+    "nacro90/numb.nvim", -- peek lines of the buffer
 
     -- Terminal
-    use("akinsho/toggleterm.nvim") -- toggle terminal
+    "akinsho/toggleterm.nvim", -- toggle terminal
 
     -- Status Bar
-    use("nvim-lualine/lualine.nvim") -- status bar/line
+    "nvim-lualine/lualine.nvim", -- status bar/line
 
     -- Dashboard
-    use("goolord/alpha-nvim") -- home page
-    use("folke/which-key.nvim") -- show leader key bindings
+    "goolord/alpha-nvim", -- home page
+    "folke/which-key.nvim", -- show leader key bindings
 
     -- Sessions
-    use("ahmedkhalf/project.nvim") -- project manager
-    use("rmagatti/auto-session") -- save/restore sessions
-    use("rmagatti/session-lens") -- use telescope to view sessions
+    "ahmedkhalf/project.nvim", -- project manager
+    "rmagatti/auto-session", -- save/restore sessions
+    "rmagatti/session-lens", -- use telescope to view sessions
 
     -- Code Runner
-    use("is0n/jaq-nvim") -- run code of any language with `:`
-    use({
+    "is0n/jaq-nvim", -- run code of any language with `:`
+    {
         "0x100101/lab.nvim",
-        run = "cd js && npm ci"
-    }) -- prototype for js, ts, lua, and python
+        build = "cd js && npm ci"
+    }, -- prototype for js, ts, lua, and python
 
     -- Git
-    use("lewis6991/gitsigns.nvim") -- git symbols
+    "lewis6991/gitsigns.nvim", -- git symbols
 
     -- Debug
-    use("mfussenegger/nvim-dap") -- debugger
-    use("rcarriga/nvim-dap-ui") -- debugger ui
-    use("mfussenegger/nvim-dap-python") -- dap for python
-    -- use("ravenxrz/DAPInstall.nvim") -- debugger installer - use Mason
+    "mfussenegger/nvim-dap", -- debugger
+    "rcarriga/nvim-dap-ui", -- debugger ui
+    "mfussenegger/nvim-dap-python", -- dap for python
+    -- "ravenxrz/DAPInstall.nvim", -- debugger installer - use Mason
 
-    -- AI
-    use("github/copilot.vim") -- code ai - use :Copilot setup
-
-    -- Automatically set up configurations after cloning packer repo
-    if PACKER_BOOTSTRAP then
-        require("packer").sync()
-    end
-end)
+    -- ai
+    "github/copilot.vim", -- code ai - use :copilot setup
+})
