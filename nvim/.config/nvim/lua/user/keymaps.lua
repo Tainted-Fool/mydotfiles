@@ -3,11 +3,11 @@ local opts = {
     noremap = true,
     silent = true
 }
-local keymap = vim.api.nvim_set_keymap
--- local keymap = vim.keymap.set
+-- local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 -- Set leader key
-keymap("", "<space>", "<Nop>", opts)
+keymap("n", "<space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -23,48 +23,76 @@ vim.g.maplocalleader = " "
 
 -- Normal mode
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<C-h>", "<C-w>h", {desc = "Go to left window", noremap = true, silent = true})
+keymap("n", "<C-j>", "<C-w>j", {desc = "Go to lower window", noremap = true, silent = true})
+keymap("n", "<C-k>", "<C-w>k", {desc = "Go to upper window", noremap = true, silent = true})
+keymap("n", "<C-l>", "<C-w>l", {desc = "Go to right window", noremap = true, silent = true})
 
 -- Resize with arrows
-keymap("n", "<S-Up>", ":resize -2<CR>", opts)
-keymap("n", "<S-Down>", ":resize +2<CR>", opts)
-keymap("n", "<S-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<S-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-Up>", ":resize +2<CR>", {desc = "Increase window height", noremap = true, silent = true})
+keymap("n", "<C-Down>", ":resize -2<CR>", {desc = "Decrease window height", noremap = true, silent = true})
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", {desc = "Decrease window width", noremap = true, silent = true})
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", {desc = "Increase window width", noremap = true, silent = true})
 
 -- Navigate buffers
-keymap("n", "<A-l>", ":bnext<CR>", opts)
-keymap("n", "<A-h>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", ":bnext<CR>", {desc = "Next buffer", noremap = true, silent = true})
+keymap("n", "<S-h>", ":bprevious<CR>", {desc = "Previous buffer", noremap = true, silent = true})
 
--- Move text up and down
-keymap("n", "<A-j>", "mz<Esc>:m .+1<CR>==`z", opts)
-keymap("n", "<A-k>", "mz<Esc>:m .-2<CR>==`z", opts)
+-- Move lines up and down
+keymap("n", "<A-j>", ":m .+1<CR>==", {desc = "Move line down", noremap = true, silent = true})
+keymap("n", "<A-k>", ":m .-2<CR>==", {desc = "Move line up", noremap = true, silent = true})
+-- keymap("n", "<A-j>", "mz<Esc>:m .+1<CR>==`z", opts)
+-- keymap("n", "<A-k>", "mz<Esc>:m .-2<CR>==`z", opts)
 
--- Search cursor is centered
-keymap("n", "n", "nzzzv", opts)
-keymap("n", "N", "Nzzzv", opts)
+-- Word search is centered
+keymap("n", "n", "nzz", {desc = "Repeat previous search same direction", noremap = true, silent = true})
+keymap("n", "N", "Nzz", {desc = "Repeat previous search opposite direction", noremap = true, silent = true})
+keymap("n", "*", "*zz", {desc = "Search word under cursor foward", noremap = true, silent = true})
+keymap("n", "#", "#zz", {desc = "Search word under cursor backward", noremap = true, silent = true})
+keymap("n", "g*", "g*zz", {desc = "Search partial word under cursor foward", noremap = true, silent = true})
+keymap("n", "g#", "g#zz", {desc = "Search partial word under cursor backward", noremap = true, silent = true})
+
+-- Clear search with <ESC>
+keymap("n", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
 
 -- Insert mode
--- Press fj fast to exit insert mode
-keymap("i", "fj", "<ESC>", opts)
+-- Press `fj` or `jj` to exit insert mode
+keymap("i", "fj", "<ESC>", {desc = "Exit insert mode", noremap = true, silent = true})
+keymap("i", "jj", "<ESC>", {desc = "Exit insert mode", noremap = true, silent = true})
+
+-- Move lines up and down
+keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", {desc = "Move line down", noremap = true, silent = true})
+keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", {desc = "Move line up", noremap = true, silent = true})
+
+-- Clear search with <ESC>
+keymap("i", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
 
 -- Visual mode
 -- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+keymap("v", "<", "<gv", {desc = "Indent visual selection forward", noremap = true, silent = true})
+keymap("v", ">", ">gv", {desc = "Indent visual selection backward", noremap = true, silent = true})
 
--- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+-- Move lines up and down
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", {desc = "Move line down", noremap = true, silent = true})
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", {desc = "Move line up", noremap = true, silent = true})
+-- keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+-- keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 
 -- Better paste
-keymap("v", "p", '"_dP', opts)
+-- It deletes the selected content and drops it in the black hole register
+-- and puts the content of the default register in place of the selected text
+keymap("v", "p", '"_dP', {desc = "Paste from default register", noremap = true, silent = true})
 
 -- Visual block mode
 -- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "J", ":move '>+1<CR>gv-gv", {desc = "Move line down", noremap = true, silent = true})
+keymap("x", "K", ":move '<-2<CR>gv-gv", {desc = "Move line up", noremap = true, silent = true})
+keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", {desc = "Move line down", noremap = true, silent = true})
+keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", {desc = "Move line up", noremap = true, silent = true})
+
+-- Better paste
+-- It deletes the selected content and drops it in the black hole register
+-- and puts the content of the default register in place of the selected text
+keymap("x", "p", '[["_dP]]', {desc = "Paste from default register", noremap = true, silent = true})
+
+keymap("n", "<leader>ur", ':nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', {desc = "Redraw/clear hlsearch/diff update", noremap = true, silent = true})

@@ -3,3 +3,6 @@ vim/.vim/*
 
 # ignore nvim plugin folder
 nvim/.config/nvim/plugin/*
+
+# ignore lazy plugin json file
+lazy-lock.json
