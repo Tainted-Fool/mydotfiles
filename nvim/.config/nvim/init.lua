@@ -50,6 +50,7 @@ require("user.wilder")
 require("user.clipboard")
 require("user.cheatsheet")
 require("user.autolist")
+require("user.treesj")
 
 -- File Explorer
 require("user.nvim-tree")

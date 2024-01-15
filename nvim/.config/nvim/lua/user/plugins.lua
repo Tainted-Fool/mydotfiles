@@ -151,6 +151,7 @@ require("lazy").setup({
     "sudormrfbin/cheatsheet.nvim", -- cheatsheet buffer
     "gaoDean/autolist.nvim", -- auto complete list continuation and formatting
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
+    "Wansmer/treesj", -- split and join lines
 
     -- File Explorer
     "kyazdani42/nvim-tree.lua", -- tree viewer

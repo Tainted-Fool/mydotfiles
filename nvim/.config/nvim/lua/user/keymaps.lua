@@ -53,7 +53,15 @@ keymap("n", "g*", "g*zz", {desc = "Search partial word under cursor foward", nor
 keymap("n", "g#", "g#zz", {desc = "Search partial word under cursor backward", noremap = true, silent = true})
 
 -- Clear search with <ESC>
-keymap("n", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
+-- keymap("n", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
+
+-- Better n and n
+keymap("n", "n", "'Nn'[v:searchforward].'zv'", {desc = "Next search result", noremap = true, silent = true})
+keymap("x", "n", "'Nn'[v:searchforward]", {desc = "Next search result", noremap = true, silent = true})
+keymap("o", "n", "'Nn'[v:searchforward]", {desc = "Next search result", noremap = true, silent = true})
+keymap("n", "N", "'nN'[v:searchforward].'zv'", {desc = "Prev search result", noremap = true, silent = true})
+keymap("x", "N", "'nN'[v:searchforward]", {desc = "Prev search result", noremap = true, silent = true})
+keymap("o", "N", "'nN'[v:searchforward]", {desc = "Prev search result", noremap = true, silent = true})
 
 -- Insert mode
 -- Press `fj` or `jj` to exit insert mode
@@ -65,7 +73,12 @@ keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", {desc = "Move line down", noremap = 
 keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", {desc = "Move line up", noremap = true, silent = true})
 
 -- Clear search with <ESC>
-keymap("i", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
+-- keymap("i", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
+
+-- Add undo break-points
+keymap("i", ",", ",<C-g>u", {desc = "Add undo breakpoint", noremap = true, silent = true})
+keymap("i", ".", ".<C-g>u", {desc = "Add undo breakpoint", noremap = true, silent = true})
+keymap("i", ";", ";<C-g>u", {desc = "Add undo breakpoint", noremap = true, silent = true})
 
 -- Visual mode
 -- Stay in indent mode
@@ -95,4 +108,4 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", {desc = "Move line up", noremap = tr
 -- and puts the content of the default register in place of the selected text
 keymap("x", "p", '[["_dP]]', {desc = "Paste from default register", noremap = true, silent = true})
 
-keymap("n", "<leader>ur", ':nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', {desc = "Redraw/clear hlsearch/diff update", noremap = true, silent = true})
+-- keymap("n", "<leader>ur", ':nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', {desc = "Redraw/clear hlsearch/diff update", noremap = true, silent = true})

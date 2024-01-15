@@ -161,6 +161,13 @@ local mappings = {
         -- m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Menu" },
     },
 
+    j = {
+        name = "Join/Split",
+        j = {"<cmd>TSJJoin<cr>", "Join Line"},
+        m = {"<cmd>TSJToggle<cr>", "Toggle Node under Cursor"},
+        s = {"<cmd>TSJSplit<cr>", "Split Line"}
+    },
+
     l = {
         name = "LSP",
         a = {"<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action"},

@@ -75,28 +75,29 @@ local keymap = vim.keymap.set
 
 autolist.setup({
   default_config,
-  keymap("i", "<tab>", "<cmd>AutolistTab<cr>"),
-  keymap("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>"),
-  -- keymap("i", "<c-t>", "<c-t><cmd>AutolistRecalculate<cr>") -- an example of using <c-t> to indent
-  keymap("i", "<cr>", "<CR><cmd>AutolistNewBullet<cr>"),
-  keymap("n", "o", "o<cmd>AutolistNewBullet<cr>"),
-  keymap("n", "O", "O<cmd>AutolistNewBulletBefore<cr>"),
-  keymap("n", "<cr>", "<cmd>AutolistToggleCheckbox<cr><cr>"),
-  keymap("n", "<C-r>", "<cmd>AutolistRecalculate<cr>"),
+-- keymap("n", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
+  keymap("i", "<tab>", "<cmd>AutolistTab<cr>", {desc = "AutolistTab", noremap = true, silent = true}),
+  keymap("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>", {desc = "AutolistShiftTab", noremap = true, silent = true}),
+  -- keymap("i", "<c-t>", "<c-t><cmd>AutolistRecalculate<cr>", {desc = "AutolistRecalculate", noremap = true, silent = true}) -- an example of using <c-t> to indent
+  keymap("i", "<cr>", "<CR><cmd>AutolistNewBullet<cr>", {desc = "AutolistNewBullet", noremap = true, silent = true}),
+  keymap("n", "o", "o<cmd>AutolistNewBullet<cr>", {desc = "AutolistNewBullet", noremap = true, silent = true}),
+  keymap("n", "O", "O<cmd>AutolistNewBulletBefore<cr>", {desc = "AutolistNewBulletBefore", noremap = true, silent = true}),
+  keymap("n", "<cr>", "<cmd>AutolistToggleCheckbox<cr><cr>", {desc = "AutolistToggleCheckbox", noremap = true, silent = true}),
+  -- keymap("n", "<c-r>", "<cmd>AutolistRecalculate<cr>", {desc = "AtuolistRecalculate", noremap = true, silent = true}),
 
   -- cycle list types with dot-repeat
-  keymap("n", "<leader>cn", "<cmd>AtuolistCycleNextDr<cr>", { expr = true }),
-  keymap("n", "<leader>cp", "<cmd>AtuolistCyclePrevDr<cr>", { expr = true }),
+  keymap("n", "<leader>cn", "<cmd>AtuolistCycleNextDr<cr>", {desc = "AutolistCycleNextDr", noremap = true, silent = true, expr = true}),
+  keymap("n", "<leader>cp", "<cmd>AtuolistCyclePrevDr<cr>", {desc = "AutolistCyclePrevDr", noremap = true, silent = true, expr = true}),
 
   -- if you don't want dot-repeat
-  -- keymap("n", "<leader>cn", "<cmd>AutolistCycleNext<cr>")
-  -- keymap("n", "<leader>cp", "<cmd>AutolistCycleNext<cr>")
+  -- keymap("n", "<leader>cn", "<cmd>AutolistCycleNext<cr>", {desc = "AutolistCycleNext", noremap = true, silent = true})
+  -- keymap("n", "<leader>cp", "<cmd>AutolistCycleNext<cr>", {desc = "AutolistCycleNext", noremap = true, silent = true})
 
   -- functions to recalculate list on edit
-  keymap("n", ">>", ">><cmd>AutolistRecalculate<cr>"),
-  keymap("n", "<<", "<<<cmd>AutolistRecalculate<cr>"),
-  keymap("n", "dd", "dd<cmd>AutolistRecalculate<cr>"),
-  keymap("v", "d", "d<cmd>AutolistRecalculate<cr>"),
+  keymap("n", ">>", ">><cmd>AutolistRecalculate<cr>", {desc = "AutolistRecalculate", noremap = true, silent = true}),
+  keymap("n", "<<", "<<<cmd>AutolistRecalculate<cr>", {desc = "AutolistRecalculate", noremap = true, silent = true}),
+  keymap("n", "dd", "dd<cmd>AutolistRecalculate<cr>", {desc = "AutolistRecalculate", noremap = true, silent = true}),
+  keymap("v", "d", "d<cmd>AutolistRecalculate<cr>", {desc = "AutolistRecalculate", noremap = true, silent = true}),
 })
 
 local ft = {
