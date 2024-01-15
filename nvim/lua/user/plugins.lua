@@ -142,6 +142,7 @@ return packer.startup(function(use)
     use "sudormrfbin/cheatsheet.nvim" -- cheatsheet buffer
     use "gaoDean/autolist.nvim" -- atuo complete list continuation and formatting
     use "christoomey/vim-sort-motion" -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
+    use "Wansmer/treesj" -- split and join lines
     --[[ use "tpope/vim-surround"              -- change or add surroundings ]]
 
     -- File Explorer

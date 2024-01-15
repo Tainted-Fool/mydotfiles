@@ -82,7 +82,7 @@ autolist.setup({
   keymap("n", "o", "o<cmd>AutolistNewBullet<cr>"),
   keymap("n", "O", "O<cmd>AutolistNewBulletBefore<cr>"),
   keymap("n", "<cr>", "<cmd>AutolistToggleCheckbox<cr><cr>"),
-  keymap("n", "<C-r>", "<cmd>AutolistRecalculate<cr>"),
+  -- keymap("n", "<c-r>", "<cmd>AutolistRecalculate<cr>"),
 
   -- cycle list types with dot-repeat
   keymap("n", "<leader>cn", "<cmd>AtuolistCycleNextDr<cr>", { expr = true }),

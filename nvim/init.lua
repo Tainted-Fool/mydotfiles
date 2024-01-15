@@ -6,6 +6,7 @@ if (vim.g.vscode) then
     require "user.surround"
     require "user.comment"
     require "user.hop"
+    require "user.treesj"
 else
     -- Speed up LUA modules loading
     require "user.impatient"
@@ -56,6 +57,7 @@ else
     require "user.clipboard"
     require "user.cheatsheet"
     require "user.autolist"
+    require "user.treesj"
 
     -- File Explorer
     require "user.nvim-tree"
