@@ -8,7 +8,7 @@ if not status_ok then
     return
 end
 
---- Add new property to language server
+--- Add new property to language server (called from configs.lua)
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
@@ -21,24 +21,23 @@ local function lsp_keymaps(bufnr)
         silent = true
     }
     local keymap = vim.api.nvim_buf_set_keymap
-    -- local keymap = vim.keymap.set
+    -- local keymap = vim.keymap.set -- does not work with bufnr
 
 	-- Set keymaps for buffers
-	keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
-	-- keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<cr>", opts)
-	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-	keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-	keymap(bufnr, "n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
-	keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
-	keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<cr>', opts)
-	keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<cr>', opts)
-	keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', opts)
-	keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-	keymap(bufnr, "n", "gS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-	keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-	keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-	keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
+	keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", {desc = "Go to definition", noremap = true, silent = true})
+	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", {desc = "Go to declaration", noremap = true, silent = true}) -- not supported by all LSPs
+	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {desc = "Show LSP hover", noremap = true, silent = true})
+	keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", {desc = "Show LSP hover", noremap = true, silent = true})
+	keymap(bufnr, "n", "gi", "<cmd>Telescope lsp_implementations<cr>", {desc = "Go to implementation", noremap = true, silent = true}) -- not supported by all LSPs
+	keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<cr>", {desc = "Go to reference", noremap = true, silent = true})
+	keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<cr>', {desc = "Show diagnostic on line", noremap = true, silent = true})
+	keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', {desc = "Go to next diagnostic", noremap = true, silent = true})
+	keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<cr>', {desc = "Go to previous diagnostic", noremap = true, silent = true})
+	keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", {desc = "Show signature help", noremap = true, silent = true})
+	keymap(bufnr, "n", "gS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", {desc = "Show signature help", noremap = true, silent = true})
+	keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", {desc = "Rename variable", noremap = true, silent = true})
+	keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", {desc = "Go to code action", noremap = true, silent = true})
+	keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format()<cr>", {desc = "Format current buffer", noremap = true, silent = true})
 
     -- Create a 'Format' command for formatting files
     vim.cmd([[command! Format execute 'lua vim.lsp.buf.format{async=true}']])
@@ -157,7 +156,7 @@ M.setup = function()
     })
 end
 
---- Do things when LS attacbes to buffer
+--- Do things when LSP attaches to buffer (called from configs.lua)
 M.on_attach = function(client, bufnr)
     -- Turn off formatting for typescript
     if client.name == "tsserver" then

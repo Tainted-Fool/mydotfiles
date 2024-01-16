@@ -29,7 +29,7 @@ local servers = {"bashls", -- Bash
 -- "csharp_ls" -- C Sharp
 -- "pyright", -- Python
 "jedi_language_server", -- Python
--- "sumneko_lua", -- Lua
+-- "sumneko_lua", -- Lua (legacy)
 "lua_ls", -- Lua
 "tsserver", -- TypeScript
 "clangd" -- C

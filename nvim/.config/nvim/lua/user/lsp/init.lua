@@ -5,6 +5,7 @@ if not status_ok then
     return
 end
 
+-- LSP Configurations
 require("user.lsp.configs")
 require("user.lsp.handlers").setup()
 require("user.lsp.null-ls")

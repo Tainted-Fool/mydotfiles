@@ -22,3 +22,6 @@ notify.setup({
     timeout = 5000,
     top_down = true
 })
+
+-- Set all vim.notify to this plugin
+vim.notify = notify
