@@ -80,7 +80,7 @@ require("lazy").setup({
     "neovim/nvim-lspconfig", -- enable lsp
     "williamboman/mason.nvim", -- easy install lsp servers
     "williamboman/mason-lspconfig.nvim", -- lsp configurations
-    "jose-elias-alvarez/null-ls.nvim", -- formatting and linters
+    "nvimtools/none-ls.nvim", -- formatters and linters community driven
     "RRethy/vim-illuminate", -- highlight same symbols under cursor
     "arkav/lualine-lsp-progress", -- indicator that shows when lsp is ready
     "ray-x/lsp_signature.nvim", -- better signature help
@@ -111,6 +111,7 @@ require("lazy").setup({
     -- Fuzzy Search
     "nvim-telescope/telescope.nvim", -- find files
     "nvim-telescope/telescope-file-browser.nvim", -- preview of file
+    "nvim-telescope/telescope-ui-select.nvim", -- UI for telescope
     "ibhagwan/fzf-lua", -- fzf made in lua
 
     -- Treesitter
@@ -193,6 +194,6 @@ require("lazy").setup({
     "mfussenegger/nvim-dap-python", -- dap for python
     -- "ravenxrz/DAPInstall.nvim", -- debugger installer - use Mason
 
-    -- ai
+    -- AI
     "github/copilot.vim", -- code ai - use :copilot setup
 })

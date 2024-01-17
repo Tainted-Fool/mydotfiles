@@ -89,6 +89,7 @@ local function lsp_highlight_document(client)
     illuminate.on_attach(client)
 end
 
+-- Setup handlers
 M.setup = function()
     -- Set diagnostic signs
     local signs = {{

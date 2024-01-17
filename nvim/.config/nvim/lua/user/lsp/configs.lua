@@ -20,19 +20,20 @@ if not mason_lsp_ok then
 end
 
 -- Declare LSP servers to install
-local servers = {"bashls", -- Bash
-"cssls", -- CSS
-"html", -- HTML
-"jsonls", -- JSON
-"marksman", -- Markdown
-"omnisharp", -- C Sharp
--- "csharp_ls" -- C Sharp
--- "pyright", -- Python
-"jedi_language_server", -- Python
--- "sumneko_lua", -- Lua (legacy)
-"lua_ls", -- Lua
-"tsserver", -- TypeScript
-"clangd" -- C
+local servers = {
+    "bashls", -- Bash
+    "cssls", -- CSS
+    "html", -- HTML
+    "jsonls", -- JSON
+    "marksman", -- Markdown
+    "omnisharp", -- C Sharp
+    -- "csharp_ls" -- C Sharp
+    -- "pyright", -- Python
+    "jedi_language_server", -- Python
+    -- "sumneko_lua", -- Lua (legacy)
+    "lua_ls", -- Lua
+    "tsserver", -- TypeScript
+    "clangd" -- C
 }
 
 local settings = {
@@ -48,8 +49,10 @@ local settings = {
     max_concurrent_installers = 4
 }
 
+-- Setup Mason
 mason.setup(settings)
 
+-- Install LSP servers
 mason_lspconfig.setup({
     ensure_installed = servers,
     automatic_installation = true
@@ -62,6 +65,7 @@ for _, server in pairs(servers) do
         capabilities = require("user.lsp.handlers").capabilities
     }
 
+    -- Remove the @<hostname> from the server name
     server = vim.split(server, "@")[1]
 
     -- Declare variable for LSP server config file to use
@@ -73,5 +77,6 @@ for _, server in pairs(servers) do
         opts = vim.tbl_deep_extend("force", conf_opts, opts)
     end
 
+    -- Setup NeoVim to communicate with LSP servers
     lspconfig[server].setup(opts)
 end

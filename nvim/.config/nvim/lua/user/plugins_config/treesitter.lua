@@ -1,15 +1,40 @@
 -- Use protected call so we know where error is coming from
 local config_ok, configs = pcall(require, "nvim-treesitter.configs")
 if not config_ok then
-    vim.notify("nvim-treesitter plugin was not found!")
-    return
+	vim.notify("nvim-treesitter plugin was not found!")
+	return
 end
 
+-- Setup Language Syntax
 configs.setup({
-	ensure_installed = "all", -- list of language syntax to install
+	ensure_installed = {
+		"bash",
+		"c",
+		"c_sharp",
+		"cpp",
+		"css",
+		"csv",
+		"go",
+		"html",
+		"java",
+		"javascript",
+		"json",
+		"lua",
+		"luadoc",
+		"markdown",
+		"php",
+		"python",
+		"regex",
+		"rst",
+		"ruby",
+		"sql",
+		"vim",
+		"vimdoc",
+		"yaml",
+	},
 	ignore_installed = { "" }, -- list of language syntax to ignore
 	sync_install = false,
-	auto_install = true,
+	auto_install = true, -- auto install language syntax that is not installed
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
