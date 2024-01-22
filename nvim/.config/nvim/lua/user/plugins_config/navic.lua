@@ -5,6 +5,13 @@ if not status_ok then
     return
 end
 
+-- Use protected call so we know where error is coming from
+local bread_ok, breadcrumbs = pcall(require, "breadcrumbs")
+if not bread_ok then
+    vim.notify("breadcrumbs plugin was not found!")
+    return
+end
+
 navic.setup({
     icons = {
         File = " ",
@@ -35,11 +42,14 @@ navic.setup({
         TypeParameter = " "
     },
     lsp = {
-        auto_attach = false,
+        auto_attach = true,
         preference = nil
     },
     highlight = true,
     separator = " > ",
     depth_limit = 0,
-    depth_limit_indicator = ".."
+    depth_limit_indicator = "..",
+    click = true
 })
+
+breadcrumbs.setup()

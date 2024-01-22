@@ -5,6 +5,15 @@ if not status_ok then
     return
 end
 
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+-- Use protected call so we know where error is coming from
+local cmp_status_ok, cmp = pcall(require, "cmp")
+if not cmp_status_ok then
+    vim.notify("cmp plugin was not found!")
+    return
+end
+
 npairs.setup({
     check_ts = true, -- treesitting integration
     ts_config = {
@@ -25,15 +34,6 @@ npairs.setup({
         highlight_grey = "LineNr"
     }
 })
-
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
--- Use protected call so we know where error is coming from
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-    vim.notify("cmp plugin was not found!")
-    return
-end
 
 -- Add autopairs to atuo-completion
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({

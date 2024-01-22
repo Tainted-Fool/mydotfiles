@@ -24,21 +24,24 @@ local dashboard = require("alpha.themes.dashboard")
 -- 	[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
 -- }
 
-dashboard.section.header.val =
-    {[[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
-     [[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
-     [[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
-     [[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
-     [[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
-     [[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]]}
+dashboard.section.header.val ={
+    [[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
+    [[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
+    [[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
+    [[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
+    [[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
+    [[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]]
+}
 
-dashboard.section.buttons.val = {dashboard.button("f", "  Find File", ":Telescope find_files hidden=true<CR>"),
-                                 dashboard.button("e", "  New File", ":ene <BAR> <CR>"),
-                                 dashboard.button("p", "  Find Project", ":Telescope projects <CR>"),
-                                 dashboard.button("r", "  Recent Files", ":Telescope oldfiles <CR>"),
-                                 dashboard.button("t", "  Find Text", ":Telescope live_grep <CR>"),
-                                 dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
-                                 dashboard.button("q", "  Quit", ":qa<CR>")}
+dashboard.section.buttons.val = {
+    dashboard.button("f", "  Find File", ":Telescope find_files hidden=true<CR>"),
+    dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
+    dashboard.button("p", "  Find Project", ":Telescope projects <CR>"),
+    dashboard.button("r", "  Recent Files", ":Telescope oldfiles <CR>"),
+    dashboard.button("t", "  Find Text", ":Telescope live_grep <CR>"),
+    dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
+    dashboard.button("q", "  Quit", ":qa<CR>")
+}
 
 -- local function footer()
 --     return os.date("%m-%d-%Y")
@@ -62,8 +65,10 @@ dashboard.section.footer.val = footer()
 -- dashboard.section.footer.opts.hl = "Type"
 dashboard.section.footer.opts.hl = "White"
 dashboard.section.header.opts.hl = "Function"
+-- dashboard.section.header.opts.hl = "Keyword"
 -- dashboard.section.header.opts.hl = "Type"
 dashboard.section.buttons.opts.hl = "Keyword"
+-- dashboard.section.buttons.opts.hl = "Include"
 
 dashboard.opts.opts.noautocmd = true
 alpha.setup(dashboard.opts)

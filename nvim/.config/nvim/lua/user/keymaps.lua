@@ -56,12 +56,16 @@ keymap("n", "g#", "g#zz", {desc = "Search partial word under cursor backward", n
 -- keymap("n", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
 
 -- Better n and n
-keymap("n", "n", "'Nn'[v:searchforward].'zv'", {desc = "Next search result", noremap = true, silent = true})
-keymap("x", "n", "'Nn'[v:searchforward]", {desc = "Next search result", noremap = true, silent = true})
-keymap("o", "n", "'Nn'[v:searchforward]", {desc = "Next search result", noremap = true, silent = true})
-keymap("n", "N", "'nN'[v:searchforward].'zv'", {desc = "Prev search result", noremap = true, silent = true})
-keymap("x", "N", "'nN'[v:searchforward]", {desc = "Prev search result", noremap = true, silent = true})
-keymap("o", "N", "'nN'[v:searchforward]", {desc = "Prev search result", noremap = true, silent = true})
+-- keymap("n", "n", "'Nn'[v:searchforward].'zv'", {desc = "Next search result", noremap = true, silent = true})
+-- keymap("x", "n", "'Nn'[v:searchforward]", {desc = "Next search result", noremap = true, silent = true})
+-- keymap("o", "n", "'Nn'[v:searchforward]", {desc = "Next search result", noremap = true, silent = true})
+-- keymap("n", "N", "'nN'[v:searchforward].'zv'", {desc = "Prev search result", noremap = true, silent = true})
+-- keymap("x", "N", "'nN'[v:searchforward]", {desc = "Prev search result", noremap = true, silent = true})
+-- keymap("o", "N", "'nN'[v:searchforward]", {desc = "Prev search result", noremap = true, silent = true})
+
+-- Open mousemenu
+-- keymap("n", "<RightMouse>", "<cmd>:popup mousemenu<CR>", {desc = "Open mousemenu", noremap = true, silent = true})
+-- keymap("n", "<Tab>", "<cmd>:popup mousemenu<CR>", {desc = "Open mousemenu", noremap = true, silent = true})
 
 -- Insert mode
 -- Press `fj` or `jj` to exit insert mode

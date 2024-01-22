@@ -1,6 +1,6 @@
 -- Use 'q' to quit from plugins
 vim.api.nvim_create_autocmd({"FileType"}, {
-    pattern = {"qf", "help", "man", "lspinfo", "spectre_panel", "lir", "fzf"},
+    pattern = {"qf", "help", "man", "lspinfo", "spectre_panel", "lir", "fzf", "Jaq", "oil", "DressingSelect", "tsplayground", "netrw", "qf"},
     callback = function()
         vim.cmd([[
             nnoremap <silent> <buffer> q :close<cr>

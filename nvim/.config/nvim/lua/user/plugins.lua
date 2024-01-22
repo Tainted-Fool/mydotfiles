@@ -62,6 +62,7 @@ require("lazy").setup({
     -- Colorschemes
     "rafi/awesome-vim-colorschemes",
     "folke/tokyonight.nvim",
+    "rebelot/kanagawa.nvim",
 
     -- Autocompletion
     "hrsh7th/nvim-cmp", -- the auto completion plugin
@@ -71,6 +72,7 @@ require("lazy").setup({
     "hrsh7th/cmp-nvim-lsp", -- lsp completion
     "hrsh7th/cmp-nvim-lua", -- lua completion
     "saadparwaiz1/cmp_luasnip", -- snippet completion
+    "zbirenbaum/copilot-cmp", -- copilot completion
 
     -- Snippets
     "L3MON4D3/LuaSnip", -- snippet engine
@@ -87,6 +89,7 @@ require("lazy").setup({
     "lvimuser/lsp-inlayhints.nvim", -- shows data type for certain languages
     "b0o/SchemaStore.nvim", -- access to the SchemaStore catalog - large collection of JSON schemas
     "SmiteshP/nvim-navic", -- show current code context in winbar or statusline
+    "LunarVim/breadcrumbs.nvim", -- provides context about your code in winbar
     "simrat39/symbols-outline.nvim", -- show document symbols in right window
     {
         "j-hui/fidget.nvim",
@@ -112,6 +115,10 @@ require("lazy").setup({
     "nvim-telescope/telescope.nvim", -- find files
     "nvim-telescope/telescope-file-browser.nvim", -- preview of file
     "nvim-telescope/telescope-ui-select.nvim", -- UI for telescope
+    {
+      "nvim-telescope/telescope-fzf-native.nvim", -- fzf sorter for telescope
+      build = "make",
+    },
     "ibhagwan/fzf-lua", -- fzf made in lua
 
     -- Treesitter
@@ -189,11 +196,12 @@ require("lazy").setup({
     "lewis6991/gitsigns.nvim", -- git symbols
 
     -- Debug
-    "mfussenegger/nvim-dap", -- debugger
+    "mfussenegger/nvim-dap", -- debug adapter protocol
     "rcarriga/nvim-dap-ui", -- debugger ui
     "mfussenegger/nvim-dap-python", -- dap for python
     -- "ravenxrz/DAPInstall.nvim", -- debugger installer - use Mason
 
     -- AI
-    "github/copilot.vim", -- code ai - use :copilot setup
+    "zbirenbaum/copilot.lua", -- code ai - use :copilot setup
+    "AndreM222/copilot-lualine", -- copilot lualine integration
 })

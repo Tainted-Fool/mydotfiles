@@ -47,13 +47,13 @@
 -- Declare variable
 local opt = vim.opt -- to save typing
 
--- Set options by using lua api
+-- Set options by using lua api (0=false, 1=true)
 -- opt.autowrite = true -- enable auto write
 opt.backup = false -- create a backup file
 -- opt.clipboard = "unnamedplus", -- allows access to the system clipboard
-opt.cmdheight = 1 -- more space in command line
+-- opt.cmdheight = 1 -- more space in command line
 opt.completeopt = "menu,menuone,noselect" -- completion options
-opt.conceallevel = 0 -- turns certain characters invisible like `` 3 hides * markupp for bold and italics
+opt.conceallevel = 0 -- turns certain characters invisible like `` - 3 hides * markupp for bold and italics
 -- opt.confirm = true -- confirm to save changes before exiting modified buffer
 opt.cursorline = true -- highlight the current line
 opt.expandtab = true -- use spaces instead of tabs
@@ -62,7 +62,7 @@ opt.fileencoding = "utf-8" -- set encoding for file
 -- opt.grepformat = "%f:%l:%c:%m" -- format for grep
 opt.grepprg = "rg --vimgrep" -- use ripgrep for grep
 -- opt.guifont = "monospace:h17" -- font to use
-opt.hlsearch = false -- highlight search
+opt.hlsearch = true -- highlight search
 opt.ignorecase = true -- ignore case in search patterns
 -- opt.inccommand = "nosplit" -- preview incremental substitute
 opt.incsearch = true -- incremental search
@@ -79,6 +79,8 @@ opt.scrolloff = 4 -- amount of lines to keep above and below cursor
 -- opt.shiftround = true -- round indent
 opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 -- opt.shortmess:append({W = true, I = true, c = true, C = true}) -- append to the short messasge list
+opt.showcmd = true -- show command in bottom bar
+-- opt.showcmdloc = "statusline" -- show command in bottom bar
 opt.showmode = false -- show mode like 'normal', 'insert', etc.
 opt.showtabline = 0 -- show tabs - 0 is never, 2 is always
 opt.sidescrolloff = 8 -- amount of screen columns to keep left and right

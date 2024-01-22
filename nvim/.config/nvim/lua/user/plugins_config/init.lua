@@ -1,3 +1,6 @@
+-- Speed up LUA modules loading
+require("user.plugins_config.impatient")
+
 -- Color
 require("user.plugins_config.colorscheme")
 
@@ -71,6 +74,9 @@ require("user.plugins_config.gitsigns")
 
 -- Debug
 require("user.plugins_config.dap")
+
+-- AI
+require("user.plugins_config.copilot")
 
 -- Snippets
 -- require("user.plugins_config.luasnip")

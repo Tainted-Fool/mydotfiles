@@ -1,9 +1,4 @@
 -- Init.lua is the entry point for nvim
--- Speed up LUA modules loading
--- require("user.impatient")
-
--- User Keymaps
--- require("user.keymaps")
 
 -- User Settings
 require("user.options")

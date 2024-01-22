@@ -5,17 +5,6 @@ if not status_ok then
     return
 end
 
--- Use protected call so we know where error is coming from
-local navic_ok, navic = pcall(require, "nvim-navic")
-if not navic_ok then
-    vim.notify("nvim-navic plugin was not found!")
-    return
-end
-
-local hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
-end
-
 -- local diagnostics = {
 -- 	"diagnostics",
 -- 	sources = { "nvim_diagnostic" },
@@ -25,6 +14,10 @@ end
 -- 	update_in_insert = false,
 -- 	always_visible = true,
 -- }
+
+local hide_in_width = function()
+    return vim.fn.winwidth(0) > 80
+end
 
 local diff = {
     "diff",
@@ -37,24 +30,42 @@ local diff = {
     cond = hide_in_width
 }
 
+local fileformat = {
+    "fileformat",
+    colored = true,
+    -- separator = "|"
+}
+
 local filetype = {
     "filetype",
     colored = true,
     icons_enabled = true,
-    icon = nil,
-    separator = "|"
-}
-
-local fileformat = {
-    "fileformat",
-    colored = true,
-    separator = "|"
+    icon_only = true,
+    -- icon = nil,
+    -- separator = "|"
 }
 
 local location = {
     "location",
-    padding = 0
+    padding = {
+        left = 0,
+        right = 1
+    }
 }
+
+local progress = {
+    "progress",
+    separator = " ",
+    padding = {
+        left = 1,
+        right = 0
+    }
+}
+
+-- Show current time
+local clock = function()
+    return " " .. os.date("%R")
+end
 
 -- Show hexadecimal value of what is under cursor
 local hex = function()
@@ -62,9 +73,9 @@ local hex = function()
 end
 
 -- Shows how many spaces a tab is in current file
--- local spaces = function()
--- 	return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
--- end
+local spaces = function()
+	return "Spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+end
 
 -- Return a string with a list of attached LSP clients, including
 -- formatters and linters from null-ls, nvim-lint and formatter.nvim
@@ -77,16 +88,16 @@ end
 -- 	local buf_ft = vim.bo.filetype
 -- 	local buf_client_names = {}
 --
--- add client
+-- -- add client
 -- for _, client in pairs(buf_clients) do
 -- 	if client.name ~= "copilot" and client.name ~= "null-ls" then
 -- 		table.insert(buf_client_names, client.name)
 -- 	end
 -- end
 --
--- Generally, you should use either null-ls or nvim-lint + formatter.nvim, not both.
--- Add sources (from null-ls)
--- local null_ls_s, null_ls = pcall(require, "null-ls")
+-- -- Generally, you should use either null-ls or nvim-lint + formatter.nvim, not both.
+-- -- Add sources (from null-ls)
+-- local null_ls_s, null_ls = pcall(require, "none-ls")
 -- if null_ls_s then
 -- 	local sources = null_ls.get_sources()
 -- 	for _, source in ipairs(sources) do
@@ -100,7 +111,7 @@ end
 -- 	end
 -- end
 --
--- Add linters (from nvim-lint)
+-- -- Add linters (from nvim-lint)
 -- local lint_s, lint = pcall(require, "lint")
 -- if lint_s then
 -- 	for ft_k, ft_v in pairs(lint.linters_by_ft) do
@@ -129,7 +140,7 @@ end
 -- 	end
 -- end
 --
--- This needs to be a string only table so we can use concat below
+-- -- This needs to be a string only table so we can use concat below
 -- 	local unique_client_names = {}
 -- 	for _, client_name_target in ipairs(buf_client_names) do
 -- 		local is_duplicate = false
@@ -162,24 +173,93 @@ lualine.setup({
             left = "",
             right = ""
         },
-        disabled_filetypes = {"alpha", "dashboard"},
-        always_divide_middle = true
+        disabled_filetypes = {"alpha", "dashboard", "starter"},
+        always_divide_middle = true,
+        refresh = {
+            statusline = 500,
+            tabline = 500,
+            winbar = 500,
+        },
     },
     sections = {
         lualine_a = {"mode"}, -- can use the `mode` function to get -- <mode> --
         lualine_b = {"branch"},
-        lualine_c = { -- diagnostics,
-        -- navic.get_location,
-        {
-            function()
-                return navic.get_location()
-            end,
-            cond = navic.is_available
-        }},
-        lualine_x = {diff, "encoding", fileformat, filetype, hex -- spaces,
-        -- get_attached_clients,
+        lualine_c = {
+            diff,
+            "diagnostics",
+            -- "filename",
+            -- Show commands in statusline
+            {
+                function() return require("noice").api.status.command.get() end,
+                cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+                color = { fg = "#ff9e64" },
+            },
+            -- Show recording in statusline
+            {
+                function() return require("noice").api.status.mode.get() end,
+                cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+                color = { fg = "#ff9e64" },
+            },
+            {
+                function() return "  " .. require("dap").status() end,
+                cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+                color = { fg = "#ff9e64" },
+            },
         },
-        lualine_y = {location},
-        lualine_z = {"progress"} -- same goes for progress -- displays % instead of declared function above
-    }
+        lualine_x = {
+            -- Show messages in statusline
+            -- {
+            --     require("noice").api.status.message.get_hl,
+            --     cond = require("noice").api.status.message.has,
+            -- },
+            -- Show commands in statusline
+            -- {
+            --     require("noice").api.status.command.get,
+            --     cond = require("noice").api.status.command.has,
+            --     color = { fg = "#ff9e64" },
+            -- },
+            -- Show recording in statusline
+            -- {
+            --     require("noice").api.status.mode.get,
+            --     cond = require("noice").api.status.mode.has,
+            --     color = { fg = "#ff9e64" },
+            -- },
+            -- Show search count message in statusline
+            -- {
+            --     require("noice").api.status.search.get,
+            --     cond = require("noice").api.status.search.has,
+            --     color = { fg = "#ff9e64" },
+            -- },
+            -- Show what register you are recording too
+            -- {
+            --     function()
+            --         local reg = vim.fn.reg_recording()
+            --         if reg ~= "" then reg = "@" .. reg end
+            --         return reg
+            --     end,
+            -- },
+            "encoding",
+            fileformat,
+            filetype,
+            "copilot",
+            hex,
+            spaces,
+            -- get_attached_clients,
+        },
+        lualine_y = {progress, location},
+        lualine_z = {clock} -- same goes for progress -- displays % instead of declared function above
+    },
+    -- breadcrumbs plugin does this by default
+    -- winbar = {
+    --     lualine_c = {
+    --         {
+    --             function()
+    --                 return navic.get_location()
+    --             end,
+    --             cond = function()
+    --                 return navic.is_available()
+    --             end
+    --         }
+    --     }
+    -- }
 })

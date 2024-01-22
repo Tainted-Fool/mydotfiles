@@ -128,7 +128,7 @@ M.setup = function()
         signs = {
             active = signs
         },
-        update_in_insert = true,
+        update_in_insert = false,
         underline = true,
         severity_sort = true,
 
@@ -175,6 +175,11 @@ M.on_attach = function(client, bufnr)
     lsp_signature(bufnr)
     lsp_navic(client, bufnr)
     lsp_highlight_document(client)
+
+    -- Enable inlay hints
+    if client.supports_method("textDocument/inlayHints") then
+        vim.lsp.inlay_hint.enable(bufnr, true)
+    end
 end
 
 return M
