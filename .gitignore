@@ -6,3 +6,6 @@ nvim/.config/nvim/plugin/*
 
 # ignore lazy plugin json file
 lazy-lock.json
+
+# ignore tmux plugin folder
+tmux/.config/tmux/plugins/*

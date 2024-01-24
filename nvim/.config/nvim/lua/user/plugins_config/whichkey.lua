@@ -80,18 +80,36 @@ local mappings = {
     -- 	"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     -- 	"Buffers",
     -- },
-    ["b"] = {"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File Browser"},
-    ["c"] = {"<cmd>Bdelete!<cr>", "Close Buffer"},
+    ["B"] = {"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File Browser"},
+    -- ["c"] = {"<cmd>Bdelete!<cr>", "Close Buffer"},
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     -- ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
     -- ["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["m"] = {"<cmd>Mason<cr>", "Mason"},
     ["P"] = {"<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects"},
     ["q"] = {"<cmd>q!<cr>", "Quit"},
-    ["w"] = {"<cmd>w!<cr>", "Save"},
+    ["W"] = {"<cmd>wq!<cr>", "Save and quit"},
     ["x"] = {"<cmd>!chmod +x %<cr>", "Execute"},
     ["/"] = {"<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", "Comment Toggle"},
     ["?"] = {"<cmd>Cheatsheet<cr>", "Cheatsheet"},
+    ["-"] = {"<C-W>s", "Split window below"},
+    ["|"] = {"<C-W>v", "Split window right"},
+
+    -- Tmux window navigation
+    -- ["C-S-h"] = {"<cmd> TmuxNavigateLeft<cr>", "Window Left"},
+    -- ["C-S-l"] = {"<cmd> TmuxNavigateRight<cr>", "Window Right"},
+    -- ["C-S-j"] = {"<cmd> TmuxNavigateDown<cr>", "Window Down"},
+    -- ["C-S-k"] = {"<cmd> TmuxNavigateUp<cr>", "Window Up"},
+
+    b = {
+        name = "Buffer",
+        c = {"<cmd>Bdelete!<cr>", "Close Buffer"},
+        b = {"<cmd>e #<cr>", "Other Buffer"},
+        e = {
+            "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+            "Buffer explorer",
+        },
+    },
 
     d = {
         name = "Debug",
@@ -249,7 +267,15 @@ local mappings = {
         t = {"<cmd>lua _HTOP_TOGGLE()<cr>", "HTop"},
         u = {"<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU"},
         v = {"<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical"}
-    }
+    },
+
+    w = {
+       name = "Windows",
+        w = {"<C-W>p", "Other window"},
+        d = {"<C-W>c", "Delete window"},
+        s = {"<C-W>s", "Split window below"},
+        v = {"<C-W>v", "Split window right"}
+    },
 }
 
 which_key.setup(setup)

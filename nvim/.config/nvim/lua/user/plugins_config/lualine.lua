@@ -246,8 +246,9 @@ lualine.setup({
             spaces,
             -- get_attached_clients,
         },
-        lualine_y = {progress, location},
-        lualine_z = {clock} -- same goes for progress -- displays % instead of declared function above
+        lualine_y = {location},
+        lualine_z = {progress} -- same goes for progress -- displays % instead of declared function above
+        -- lualine_z = {clock}
     },
     -- breadcrumbs plugin does this by default
     -- winbar = {

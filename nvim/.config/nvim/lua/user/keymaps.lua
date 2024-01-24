@@ -28,6 +28,12 @@ keymap("n", "<C-j>", "<C-w>j", {desc = "Go to lower window", noremap = true, sil
 keymap("n", "<C-k>", "<C-w>k", {desc = "Go to upper window", noremap = true, silent = true})
 keymap("n", "<C-l>", "<C-w>l", {desc = "Go to right window", noremap = true, silent = true})
 
+    -- Tmux window navigation
+-- keymap("n", "<C-S-h>", "<cmd> TmuxNavigateLeft<cr>", {desc = "Go to left tmux window", noremap = true, silent = true})
+-- keymap("n", "<C-S-j>", "<cmd> TmuxNavigateDown<cr>", {desc = "Go to lower tmux window", noremap = true, silent = true})
+-- keymap("n", "<C-S-k>", "<cmd> TmuxNavigateUp<cr>", {desc = "Go to upper tmux window", noremap = true, silent = true})
+-- keymap("n", "<C-S-l>", "<cmd> TmuxNavigateRight<cr>", {desc = "Go to right tmux window", noremap = true, silent = true})
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", {desc = "Increase window height", noremap = true, silent = true})
 keymap("n", "<C-Down>", ":resize -2<CR>", {desc = "Decrease window height", noremap = true, silent = true})

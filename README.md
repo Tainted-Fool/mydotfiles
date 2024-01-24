@@ -37,7 +37,8 @@ Switched to `stow` for dotfiles management. It's a lot easier to manage and upda
 ```bash
 sudo apt install stow
 cd mydotfiles
-stow */ -t ~
+# stow */ -t ~
+stow .
 ```
 
 ## Dependencies
@@ -191,7 +192,7 @@ cd lazygit
 go install
 ```
 
-### Install Tmux
+### Install Tmux and Tmux Plugin Manager
 
 Add terminal configuration
 
@@ -200,6 +201,7 @@ git clone https://github.com/tmux/tmux.git
 cd tmux
 sh autogen.sh
 ./configure && make
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 ### Install Colorls

@@ -172,6 +172,7 @@ require("lazy").setup({
 
     -- Terminal
     "akinsho/toggleterm.nvim", -- toggle terminal
+    "christoomey/vim-tmux-navigator", -- navigate between vim and tmux panes
 
     -- Status Bar
     "nvim-lualine/lualine.nvim", -- status bar/line
