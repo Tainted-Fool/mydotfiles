@@ -173,12 +173,33 @@ mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLo "Caskaydia Cover Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete.otf
 ```
 
-A better way to install NerdFonts is with this repo. Then running `getnf`
+A better way to install NerdFonts is with this [repo](https://github.com/ronniedroid/getnf). Then running `getnf`
 
 ```bash
 git clone https://github.com/ronniedroid/getnf.git
 cd getnf
 ./install.sh
+```
+
+### Install Lazygit
+
+Add terminal UI for git commands
+
+```bash
+git clone https://github.com/jesseduffield/lazygit
+cd lazygit
+go install
+```
+
+### Install Tmux
+
+Add terminal configuration
+
+```bash
+git clone https://github.com/tmux/tmux.git
+cd tmux
+sh autogen.sh
+./configure && make
 ```
 
 ### Install Colorls
