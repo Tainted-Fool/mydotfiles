@@ -21,13 +21,6 @@ if not kind_status_ok then
 	return
 end
 
--- Use protected call so we know where error is coming from
--- local co_cmp_ok, co_cmp = pcall(require, "copilot_cmp")
--- if not co_cmp_ok then
--- 	vim.notify("copilot-cmp plugin was not found!")
--- 	return
--- end
-
 -- Load snippets from VSCode
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -134,6 +127,46 @@ cmp.setup({
 		--     end
 		-- end, {"i", "s"})
 
+		-- Tab autocompletion with copilot
+		-- ["<Tab>"] = cmp.mapping(function(fallback)
+		-- 	local copilot = require("copilot.suggestion")
+		-- 	if copilot.is_visible() then
+		-- 		copilot.accept()
+		-- 	elseif cmp.visible() then
+		-- 		local entry = cmp.get_selected_entry()
+		-- 		if not entry then
+		-- 			cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
+		-- 		else
+		-- 			cmp.confirm()
+		-- 		end
+		-- 	elseif luasnip.expand_or_jumpable() then
+		-- 		luasnip.expand_or_jump()
+		-- 	elseif check_backspace() then
+		-- 		fallback()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, {"i", "s"}),
+
+		-- Same as TAB for copilot but backwards
+		-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+		-- 	local copilot = require("copilot.suggestion")
+		-- 	if copilot.is_visible() then
+		-- 		copilot.accept()
+		-- 	elseif cmp.visible() then
+		-- 		local entry = cmp.get_selected_entry()
+		-- 		if not entry then
+		-- 			cmp.select_prev_item({behavior = cmp.SelectBehavior.Select})
+		-- 		else
+		-- 			cmp.confirm()
+		-- 		end
+		-- 	elseif luasnip.jumpable(-1) then
+		-- 		luasnip.jump(-1)
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, {"i", "s"}),
+
 		-- Autocompletion choose next menu item
 		["<C-n>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
@@ -185,8 +218,8 @@ cmp.setup({
 
 	-- Menu popup configuration
 	window = {
-		-- completion = cmp.config.window.bordered(),
-		-- documentation = cmp.config.window.bordered(),
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
 		fields = {

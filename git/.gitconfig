@@ -47,3 +47,5 @@
 [delta]
 	navigate = true # Use n and N to move between diff sections
 	light = false # set to true if you're in a terminal with a light background color
+	side-by-side = true
+	line-numbers = true

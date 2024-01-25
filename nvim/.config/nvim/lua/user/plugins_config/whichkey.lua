@@ -80,20 +80,22 @@ local mappings = {
     -- 	"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     -- 	"Buffers",
     -- },
-    ["B"] = {"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File Browser"},
-    -- ["c"] = {"<cmd>Bdelete!<cr>", "Close Buffer"},
+    -- ["b"] = {"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File Browser"},
+    ["c"] = {"<cmd>Bdelete!<cr>", "Close Buffer"},
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     -- ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
     -- ["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["m"] = {"<cmd>Mason<cr>", "Mason"},
+    ["o"] = {"<cmd>Oil<cr>", "Oil"},
     ["P"] = {"<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects"},
     ["q"] = {"<cmd>q!<cr>", "Quit"},
-    ["W"] = {"<cmd>wq!<cr>", "Save and quit"},
-    ["x"] = {"<cmd>!chmod +x %<cr>", "Execute"},
+    -- ["W"] = {"<cmd>wq!<cr>", "Save and quit"},
+    -- ["x"] = {"<cmd>!chmod +x %<cr>", "Execute"},
+    ["x"] = {"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "Telescope Explorer"},
     ["/"] = {"<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", "Comment Toggle"},
     ["?"] = {"<cmd>Cheatsheet<cr>", "Cheatsheet"},
     ["-"] = {"<C-W>s", "Split window below"},
-    ["|"] = {"<C-W>v", "Split window right"},
+    ["\\"] = {"<C-W>v", "Split window right"},
 
     -- Tmux window navigation
     -- ["C-S-h"] = {"<cmd> TmuxNavigateLeft<cr>", "Window Left"},
@@ -103,12 +105,15 @@ local mappings = {
 
     b = {
         name = "Buffer",
-        c = {"<cmd>Bdelete!<cr>", "Close Buffer"},
         b = {"<cmd>e #<cr>", "Other Buffer"},
+        c = {"<cmd>Bdelete!<cr>", "Close Buffer"},
         e = {
             "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
             "Buffer explorer",
         },
+        s = {"<cmd>w<cr>", "Save/Write Buffer"},
+        q = {"<cmd>wq!<cr>", "Save and Quit Buffer"},
+        w = {"<cmd>write<cr>", "Save/Write Buffer"}
     },
 
     d = {
@@ -236,7 +241,8 @@ local mappings = {
         o = {"<cmd>source ~/.config/nvim/lua/user/luasnip.lua<cr>", "Source Snippets"},
         p = {"<cmd>Lab code run<cr>", "Code Preview"},
         r = {"<cmd>w | Jaq<cr>", "Run"},
-        s = {"<cmd>Lab code stop<cr>", "Code Preview Stop"}
+        s = {"<cmd>Lab code stop<cr>", "Code Preview Stop"},
+        x = {"<cmd>!chmod +x %<cr>", "Add Execute Bit"},
     },
 
     s = {
@@ -271,10 +277,11 @@ local mappings = {
 
     w = {
        name = "Windows",
-        w = {"<C-W>p", "Other window"},
+        c = {"<C-W>c", "Close window"},
         d = {"<C-W>c", "Delete window"},
         s = {"<C-W>s", "Split window below"},
-        v = {"<C-W>v", "Split window right"}
+        v = {"<C-W>v", "Split window right"},
+        w = {"<C-W>p", "Other window"}
     },
 }
 

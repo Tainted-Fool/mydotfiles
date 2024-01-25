@@ -23,21 +23,21 @@ local function lsp_keymaps(bufnr)
     local keymap = vim.api.nvim_buf_set_keymap
     -- local keymap = vim.keymap.set -- does not work with bufnr
 
-	-- Set keymaps for buffers
-	keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", {desc = "Go to definition", noremap = true, silent = true})
-	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", {desc = "Go to declaration", noremap = true, silent = true}) -- not supported by all LSPs
-	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {desc = "Show LSP hover", noremap = true, silent = true})
-	keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", {desc = "Show LSP hover", noremap = true, silent = true})
-	keymap(bufnr, "n", "gi", "<cmd>Telescope lsp_implementations<cr>", {desc = "Go to implementation", noremap = true, silent = true}) -- not supported by all LSPs
-	keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<cr>", {desc = "Go to reference", noremap = true, silent = true})
-	keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<cr>', {desc = "Show diagnostic on line", noremap = true, silent = true})
-	keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', {desc = "Go to next diagnostic", noremap = true, silent = true})
-	keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<cr>', {desc = "Go to previous diagnostic", noremap = true, silent = true})
-	keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", {desc = "Show signature help", noremap = true, silent = true})
-	keymap(bufnr, "n", "gS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", {desc = "Show signature help", noremap = true, silent = true})
-	keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", {desc = "Rename variable", noremap = true, silent = true})
-	keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", {desc = "Go to code action", noremap = true, silent = true})
-	keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format()<cr>", {desc = "Format current buffer", noremap = true, silent = true})
+    -- Set keymaps for buffers
+    keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<cr>", {desc = "Go to definition", noremap = true, silent = true})
+    keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", {desc = "Go to declaration", noremap = true, silent = true}) -- not supported by all LSPs
+    keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {desc = "Show LSP hover", noremap = true, silent = true})
+    keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", {desc = "Show LSP hover", noremap = true, silent = true})
+    keymap(bufnr, "n", "gi", "<cmd>Telescope lsp_implementations<cr>", {desc = "Go to implementation", noremap = true, silent = true}) -- not supported by all LSPs
+    keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<cr>", {desc = "Go to reference", noremap = true, silent = true})
+    keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float({border = "rounded"})<cr>', {desc = "Show diagnostic on line", noremap = true, silent = true})
+    keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<cr>', {desc = "Go to next diagnostic", noremap = true, silent = true})
+    keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<cr>', {desc = "Go to previous diagnostic", noremap = true, silent = true})
+    keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", {desc = "Show signature help", noremap = true, silent = true})
+    keymap(bufnr, "n", "gS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", {desc = "Show signature help", noremap = true, silent = true})
+    keymap(bufnr, "n", "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", {desc = "Rename variable", noremap = true, silent = true})
+    keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", {desc = "Go to code action", noremap = true, silent = true})
+    keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format()<cr>", {desc = "Format current buffer", noremap = true, silent = true})
 
     -- Create a 'Format' command for formatting files
     vim.cmd([[command! Format execute 'lua vim.lsp.buf.format{async=true}']])
@@ -96,15 +96,15 @@ M.setup = function()
         name = "DiagnosticSignError",
         text = ""
     }, {
-        name = "DiagnosticSignWarn",
-        text = ""
-    }, {
-        name = "DiagnosticSignHint",
-        text = ""
-    }, {
-        name = "DiagnosticSignInfo",
-        text = ""
-    }}
+            name = "DiagnosticSignWarn",
+            text = ""
+        }, {
+            name = "DiagnosticSignHint",
+            text = ""
+        }, {
+            name = "DiagnosticSignInfo",
+            text = ""
+        }}
 
     -- Define the signs
     for _, sign in ipairs(signs) do

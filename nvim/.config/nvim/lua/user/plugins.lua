@@ -48,6 +48,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Autocommand that runs 'Lazy sync' whenever you save the plugins.lua file
+vim.cmd([[
+    augroup lazy_user_config
+        autocmd!
+        autocmd BufWritePost plugins.lua source <afile> | Lazy sync
+    augroup end
+]])
+
 -- Install plugins here
 require("lazy").setup({
     -- Speed up Loading
@@ -67,7 +75,7 @@ require("lazy").setup({
     -- Autocompletion
     "hrsh7th/nvim-cmp", -- the auto completion plugin
     "hrsh7th/cmp-buffer", -- buffer completion
-    "hrsh7th/cmp-cmdline", -- cmdline completion
+    -- "hrsh7th/cmp-cmdline", -- cmdline completion (bugs with noice)
     "hrsh7th/cmp-path", -- path completion
     "hrsh7th/cmp-nvim-lsp", -- lsp completion
     "hrsh7th/cmp-nvim-lua", -- lua completion
@@ -154,12 +162,13 @@ require("lazy").setup({
     "abecodes/tabout.nvim", -- use tab to exit quotation marks and other characters
     "ThePrimeagen/harpoon", -- mark and get file
     "folke/noice.nvim", -- replace UI for messages, cmdline, and popupmenu
-    "gelguy/wilder.nvim", -- adds new features and capabilities to wildmenu
+    -- "gelguy/wilder.nvim", -- adds new features and capabilities to wildmenu
     "EtiamNullam/deferred-clipboard.nvim", -- use system clipboard
     "sudormrfbin/cheatsheet.nvim", -- cheatsheet buffer
     "gaoDean/autolist.nvim", -- auto complete list continuation and formatting
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     "Wansmer/treesj", -- split and join lines
+    "stevearc/oil.nvim", -- edit files like a normal vim buffer
 
     -- File Explorer
     "kyazdani42/nvim-tree.lua", -- tree viewer
@@ -205,4 +214,5 @@ require("lazy").setup({
     -- AI
     "zbirenbaum/copilot.lua", -- code ai - use :copilot setup
     "AndreM222/copilot-lualine", -- copilot lualine integration
+    "jackmort/chatgpt.nvim", -- chat with gpt3
 })
