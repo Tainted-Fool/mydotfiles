@@ -37,8 +37,9 @@ Switched to `stow` for dotfiles management. It's a lot easier to manage and upda
 ```bash
 sudo apt install stow
 cd mydotfiles
-# stow */ -t ~
 stow .
+# stow */ -t ~
+# stow --target ~/.config .
 ```
 
 ## Dependencies

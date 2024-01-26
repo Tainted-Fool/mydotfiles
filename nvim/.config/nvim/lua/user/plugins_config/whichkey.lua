@@ -271,7 +271,7 @@ local mappings = {
         n = {"<cmd>lua _NODE_TOGGLE()<cr>", "Node"},
         p = {"<cmd>lua _PYTHON_TOGGLE()<cr>", "Python"},
         t = {"<cmd>lua _HTOP_TOGGLE()<cr>", "HTop"},
-        u = {"<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU"},
+        u = {"<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU - Disk Usage"},
         v = {"<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical"}
     },
 

@@ -38,6 +38,7 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    autoupdate
     colored-man-pages
     compleat
     copybuffer
@@ -55,7 +56,8 @@ plugins=(
 # added extra plugins
 # these have to be downloaded from github and added to $ZSH_CUSTOM/plugins/
 plugins+=(
-    fast-syntax-highlighting
+    fast-syntax-highlighting # this is slow
+    zsh-syntax-highlighting
     zsh-aliases
     zsh-autosuggestions
     zsh-functions
@@ -66,7 +68,7 @@ plugins+=(
 # source bash script
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# ZVim configuration
 ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BLOCK
 ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
 ZVM_VI_INSERT_ESCAPE_BINDKEY=fj
