@@ -43,7 +43,7 @@ require("user.plugins_config.cheatsheet")
 require("user.plugins_config.autolist")
 require("user.plugins_config.treesj")
 require("user.plugins_config.oil")
-require("user.plugins_config.chatgpt" )
+require("user.plugins_config.obsidian" )
 
 -- File Explorer
 require("user.plugins_config.nvim-tree")
@@ -79,6 +79,7 @@ require("user.plugins_config.dap")
 
 -- AI
 require("user.plugins_config.copilot")
+require("user.plugins_config.chatgpt" )
 
 -- Snippets
 -- require("user.plugins_config.luasnip")

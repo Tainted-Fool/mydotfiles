@@ -169,6 +169,7 @@ require("lazy").setup({
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     "Wansmer/treesj", -- split and join lines
     "stevearc/oil.nvim", -- edit files like a normal vim buffer
+    "epwalsh/obsidian.nvim", -- use obsidian in neovin
 
     -- File Explorer
     "kyazdani42/nvim-tree.lua", -- tree viewer

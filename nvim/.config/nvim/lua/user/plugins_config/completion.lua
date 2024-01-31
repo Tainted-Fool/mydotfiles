@@ -218,8 +218,8 @@ cmp.setup({
 
 	-- Menu popup configuration
 	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+		-- completion = cmp.config.window.bordered(),
+		-- documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
 		fields = {
@@ -312,9 +312,9 @@ cmp.setup({
 -- cmdline setup for '/'
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = "buffer" },
-	}),
+	sources = {
+		{ name = "buffer" }
+	}
 })
 
 -- cmdline setup for ':'
@@ -325,6 +325,8 @@ cmp.setup.cmdline(":", {
 		}, {
 			{
 				name = "cmdline",
+				keyword_pattern = [=[[^[:blank:]\!]*]=],
+				keyword_length = 3,
 				option = {
 					ignore_cmds = {"Man", "!" }
 				}

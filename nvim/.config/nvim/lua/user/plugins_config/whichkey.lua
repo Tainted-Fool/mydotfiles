@@ -286,9 +286,10 @@ local mappings = {
        name = "Windows",
         c = {"<C-W>c", "Close window"},
         d = {"<C-W>c", "Delete window"},
+        o = {"<C-W>o", "Close all other windows"},
         s = {"<C-W>s", "Split window below"},
         v = {"<C-W>v", "Split window right"},
-        w = {"<C-W>p", "Other window"}
+        w = {"<C-W>w", "Switch window"}
     },
 }
 

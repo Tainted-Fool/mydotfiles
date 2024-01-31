@@ -94,10 +94,10 @@ alias cat="batcat -pp --paging=never --style='plain' --theme=TwoDark "
 alias rdp="remmina"
 
 # edit alias file
-alias edita="nvim ~/.oh-my-zsh/custom/plugins/zsh-aliases/zsh-aliases.plugin.zsh"
+alias editali="nvim ~/.oh-my-zsh/custom/plugins/zsh-aliases/zsh-aliases.plugin.zsh"
 
 # edit functions file
-alias editf="nvim ~/.oh-my-zsh/custom/plugins/zsh-functions/zsh-functions.plugin.zsh"
+alias editfun="nvim ~/.oh-my-zsh/custom/plugins/zsh-functions/zsh-functions.plugin.zsh"
 
 # edit zshrc file
 alias editzsh="nvim ~/.zshrc"
@@ -106,7 +106,10 @@ alias editzsh="nvim ~/.zshrc"
 alias editvim="nvim ~/.vim/vimrc"
 
 # edit nvim file
-alias editn="nvim ~/.config/nvim/init.lua"
+alias editnvim="nvim ~/.config/nvim/init.lua"
+
+# edit tmux file
+alias edittmux="nvim ~/.config/tmux/tmux.conf"
 
 # source zsh file
 alias src="source ~/.zshrc"

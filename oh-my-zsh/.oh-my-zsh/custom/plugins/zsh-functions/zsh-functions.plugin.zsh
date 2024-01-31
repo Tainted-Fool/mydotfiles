@@ -86,15 +86,15 @@ function checkargs() {
 }
 
 # Open Obsidian notebook in VS Code in home directory
-function notes() {
-    # Create a variable for notebook directory
-    DIR=$HOME/Notebook
-    # Check if directory exist; if not, create dir and clone notebook
-    if [ ! -d $DIR ]; then
-        mkdir $DIR
-        git clone https://github.com/Tainted-Fool/ObsidianNotebook $DIR
-    fi
-
-    code $DIR
-}
+# function notes() {
+#     # Create a variable for notebook directory
+#     DIR=$HOME/Notebook
+#     # Check if directory exist; if not, create dir and clone notebook
+#     if [ ! -d $DIR ]; then
+#         mkdir $DIR
+#         git clone https://github.com/Tainted-Fool/ObsidianNotebook $DIR
+#     fi
+#
+#     code $DIR
+# }
 

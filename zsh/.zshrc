@@ -9,12 +9,12 @@ export TYPEWRITTEN_COLOR_MAPPINGS="primary:#81A1C1;secondary:#B48EAD;accent:yell
 
 # Set PATH to include user's private bin if found
 if [ -d "$HOME/.local/bin" ]; then
-	PATH="$HOME/.local/bin:$PATH"
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 # Set PATH to include cargo's bin if found
 if [ -d "$HOME/.cargo/bin" ]; then
-	PATH="$HOME/.cargo/bin:$PATH"
+    PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # Declare Windows C and D directories
@@ -33,12 +33,18 @@ if [ -x "$(command -v tasklist.exe)" ] && (tasklist.exe | grep -q vcxsrv.exe); t
     export LIBGL_ALWAYS_INDIRECT=1
 fi
 
+# Install oh-my-zsh plugins
+# Check if directory exist; if not, create dir and clone repo
+DIR=$ZSH/custom/plugins/zsh-syntax-highlighting
+if [ ! -d $DIR ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting $DIR
+fi
+
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    autoupdate
     colored-man-pages
     compleat
     copybuffer
@@ -56,7 +62,8 @@ plugins=(
 # added extra plugins
 # these have to be downloaded from github and added to $ZSH_CUSTOM/plugins/
 plugins+=(
-    fast-syntax-highlighting # this is slow
+    # fast-syntax-highlighting # this is slow
+    autoupdate
     zsh-syntax-highlighting
     zsh-aliases
     zsh-autosuggestions
