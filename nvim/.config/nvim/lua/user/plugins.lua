@@ -75,7 +75,7 @@ require("lazy").setup({
     -- Autocompletion
     "hrsh7th/nvim-cmp", -- the auto completion plugin
     "hrsh7th/cmp-buffer", -- buffer completion
-    -- "hrsh7th/cmp-cmdline", -- cmdline completion (bugs with noice)
+    "hrsh7th/cmp-cmdline", -- cmdline completion (bugs with noice)
     "hrsh7th/cmp-path", -- path completion
     "hrsh7th/cmp-nvim-lsp", -- lsp completion
     "hrsh7th/cmp-nvim-lua", -- lua completion

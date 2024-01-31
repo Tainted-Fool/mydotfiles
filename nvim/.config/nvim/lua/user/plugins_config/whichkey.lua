@@ -225,10 +225,17 @@ local mappings = {
         -- },
     },
 
+   m = {
+        name = "Misc",
+        d = {"<cmd>NoiceDismiss<cr>", "Dismiss Noice Message"},
+        h = {"<cmd>nohlsearch<cr>", "No Highlight"},
+    },
+
     p = {
         name = "Plugin Manager",
         -- c = {"<cmd>PackerCompile<cr>", "Compile"},
         -- i = {"<cmd>PackerInstall<cr>", "Install"},
+        l = {"<cmd>Lazy<cr>", "Lazy"},
         -- s = {"<cmd>PackerSync<cr>", "Sync"},
         -- S = {"<cmd>PackerStatus<cr>", "Status"},
         -- u = {"<cmd>PackerUpdate<cr>", "Update"}
