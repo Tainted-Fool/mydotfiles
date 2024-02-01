@@ -90,6 +90,7 @@ require("lazy").setup({
     "neovim/nvim-lspconfig", -- enable lsp
     "williamboman/mason.nvim", -- easy install lsp servers
     "williamboman/mason-lspconfig.nvim", -- lsp configurations
+    "whoissethdaniel/mason-tool-installer.nvim", -- install and upgrade Mason tools
     "nvimtools/none-ls.nvim", -- formatters and linters community driven
     "RRethy/vim-illuminate", -- highlight same symbols under cursor
     "arkav/lualine-lsp-progress", -- indicator that shows when lsp is ready

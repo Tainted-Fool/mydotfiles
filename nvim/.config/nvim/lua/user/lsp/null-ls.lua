@@ -9,11 +9,14 @@ end
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
--- Setup linters and formatters
+-- Setup Formatters and Linters
 null_ls.setup({
     debug = false,
     sources = {
-        -- formatting
+        -- Formatters
+        formatting.black.with({ -- Python formatter
+            extra_args = {"--fast"}
+        }),
         formatting.prettier.with({ -- JavaScript, TypeScript, CSS, HTML, JSON, Markdown formatter
             extra_args = {
                 "--no-semi",
@@ -21,12 +24,13 @@ null_ls.setup({
                 "--jsx-single-quote"
             }
         }),
-        formatting.black.with({ -- Python formatter
-            extra_args = {"--fast"}
-        }),
         formatting.stylua, -- Lua formatter
-        -- linting
+        -- Linters
         diagnostics.flake8, -- Python linting
-        diagnostics.markdownlint -- Markdown linting
+        diagnostics.markdownlint, -- Markdown linting
+        diagnostics.mypy, -- Python linting
+        diagnostics.pylint, -- Python linting
+        diagnostics.ruff, -- Python linting
+        diagnostics.vulture, -- Python linting
     }
 })

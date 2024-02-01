@@ -19,21 +19,46 @@ if not mason_lsp_ok then
     return
 end
 
--- Declare LSP servers to install
+-- Use protected call so we know where error is coming from
+local mason_installer_ok, mason_installer = pcall(require, "mason-tool-installer")
+if not mason_installer_ok then
+    vim.notify("mason-tool-installer.nvim plugin was not found!")
+    return
+end
+
+-- Declare LSP servers
 local servers = {
     "bashls", -- Bash
+    "clangd", -- C
+    -- "csharp_ls" -- C Sharp
     "cssls", -- CSS
     "html", -- HTML
+    "jedi_language_server", -- Python
     "jsonls", -- JSON
+    "lua_ls", -- Lua
     "marksman", -- Markdown
     "omnisharp", -- C Sharp
-    -- "csharp_ls" -- C Sharp
     -- "pyright", -- Python
-    "jedi_language_server", -- Python
     -- "sumneko_lua", -- Lua (legacy)
-    "lua_ls", -- Lua
     "tsserver", -- TypeScript
-    "clangd" -- C
+}
+
+-- Declare tools (dap, format, lint)
+-- Accepts Mason and lspconfig package names
+local tools = {
+    -- DAP
+    -- "debugpy",
+    -- Formatter
+    "black", -- Python
+    "prettier", -- Multiple languages
+    "stylua", -- Lua
+    -- Linter
+    "flake8", -- Python
+    "markdownlint", -- Markdown
+    "mypy", -- Python
+    "pylint", -- Python
+    "ruff", -- Python
+    "vulture", -- Python
 }
 
 local settings = {
@@ -56,6 +81,12 @@ mason.setup(settings)
 mason_lspconfig.setup({
     ensure_installed = servers,
     automatic_installation = true
+})
+
+-- Install Mason tools (dap, format, lint)
+mason_installer.setup({
+    ensure_installed = tools,
+    auto_update = true
 })
 
 -- Go through the lua table as a key-value pair

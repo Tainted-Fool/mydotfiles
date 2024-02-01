@@ -85,7 +85,7 @@ local mappings = {
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     -- ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
     -- ["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
-    ["m"] = {"<cmd>Mason<cr>", "Mason"},
+    -- ["m"] = {"<cmd>Mason<cr>", "Mason"},
     ["o"] = {"<cmd>Oil<cr>", "Oil"},
     ["P"] = {"<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects"},
     ["q"] = {"<cmd>q!<cr>", "Quit"},
@@ -239,6 +239,7 @@ local mappings = {
         -- s = {"<cmd>PackerSync<cr>", "Sync"},
         -- S = {"<cmd>PackerStatus<cr>", "Status"},
         -- u = {"<cmd>PackerUpdate<cr>", "Update"}
+        m = {"<cmd>Mason<cr>", "Mason"},
         u = {"<cmd>Lazy<cr>", "Update"}
     },
 
@@ -263,7 +264,7 @@ local mappings = {
         g = {"<cmd>Telescope live_grep<cr>", "Live Grep"},
         h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
         k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
-        M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
+        m = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
         p = {"<cmd>Telescope projects<cr>", "Projects"},
         r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
