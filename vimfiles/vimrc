@@ -1,8 +1,9 @@
 """""""""
 "Plugins"
 """""""""
-" set vim shell. NOTE: pwsh has issues with `:PlugClean` and others see below
+"""set vim shell. NOTE: pwsh has issues with `:PlugClean` and others see below
 " comment below to go back to default settings
+
 set shell=pwsh.exe
 set shellcmdflag=\ -ExecutionPolicy\ RemoteSigned\ -NoProfile\ -Nologo\ -NonInteractive\ -Command
 
@@ -31,7 +32,7 @@ call plug#begin('$HOME/vimfiles/plugged')
 Plug 'ap/vim-css-color' " displays css colors in vim
 Plug 'chun-yang/auto-pairs' " inserts/deletes brackets, parens, and quotes in pairs
 Plug 'dense-analysis/ale' " asynchronous lint engine
-Plug 'conradirwin/vim-bracketed-paste' " allows you to paste text from other apps without indent
+" Plug 'conradirwin/vim-bracketed-paste' " allows you to paste text from other apps without indent (bug Windows)
 Plug 'davidhalter/jedi-vim' " python auto-completion and vim key bindings
 Plug 'easymotion/vim-easymotion' " easier way to move around vim - use <Leader><Leader><action>
 Plug 'godlygeek/tabular' " code alignment with ':Tabularsize /[character]'
@@ -79,6 +80,7 @@ Plug 'voldikss/vim-floaterm' " adds a popup for the terminal
 Plug 'wsdjeg/vim-fetch' " allows you to process line and column jump with vim file:<line>:<col>
 Plug 'yegappan/mru' " to open a file from the recently used list use 'MRU:'
 Plug 'yggdroot/indentline' " adds thin vertical lines at each indentation level for code
+Plug 'jszakmeister/vim-togglecursor' " changes the cursor shape in different modes
 
 " old plugins - no longer in use
 "Plug 'ackyshake/VimCompletesMe' " tab completion for vim
@@ -115,6 +117,28 @@ Plug 'yggdroot/indentline' " adds thin vertical lines at each indentation level 
 
 call plug#end()
 
+"""""""
+"Theme"
+"""""""
+" set true colors and enable theme
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+  set t_Co=256
+  colorscheme onehalfdark
+endif
+
+" set background color
+set background=dark
+
+" disable beep sound and visual queue
+" set noerrorbells
+" set novisualbell
+" set noeb vb t_vb= " (bug Windows with 'set termguicolors')
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
 """"""""
 "Cursor"
 """"""""
@@ -127,16 +151,17 @@ call plug#end()
 " 5 = blinking bar (xterm)
 " 6 = steady bar (xterm)
 
-" set cursor for insert mode
-let &t_SI = "\e[3 q"
-" set cursor for everything else
-let &t_EI = "\e[1 q"
-
-" reset cursor on startup
-augroup ResetCursorShape
-au!
-autocmd VimEnter * :normal :startinsert :stopinsert
-augroup END
+" using a plugin to change cursor shape
+" " set cursor for insert mode
+" let &t_SI = "\e[3 q"
+" " set cursor for everything else
+" let &t_EI = "\e[1 q"
+"
+" " reset cursor on startup
+" augroup ResetCursorShape
+" au!
+" autocmd VimEnter * :normal :startinsert :stopinsert
+" augroup END
 
 " set cursor on vim startup - command status bar has weird entries when this is set
 " autocmd VimEnter * silent exec "!echo -ne '\e[1 q'"
@@ -145,6 +170,9 @@ augroup END
 
 " set the timeout length for cursor to change faster
 set timeoutlen=1000 ttimeoutlen=0
+let g:togglecursor_default = "blinking_block"
+let g:togglecursor_insert = "blinking_block"
+let g:togglecursor_leave = "blinking_block"
 
 """""""""""""""
 "Miscellaneous"
@@ -214,11 +242,6 @@ set incsearch
 
 " set screen to not redrawn while execution macros, registers, or commands
 set lazyredraw
-
-" disable beep sound and visual queue
-set noerrorbells
-set novisualbell
-set noeb vb t_vb=
 
 " display line number
 set number
@@ -364,21 +387,6 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 "  " use autocmd to force lightline to update
 "  autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
-"""""""
-"Theme"
-"""""""
-" set true colors and enable theme
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-  set t_Co=256
-  colorscheme onehalfdark
-endif
-
-" set background color
-set background=dark
 
 """"""""""""""""""""
 "KEY MAPPINGS BEGIN"
