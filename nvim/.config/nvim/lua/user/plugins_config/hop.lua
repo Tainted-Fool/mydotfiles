@@ -12,7 +12,7 @@ hop.setup({
     teasing = true,
     jump_on_sole_occurrence = true,
     case_insensitive = true,
-    create_h1_autocmd = true,
+    create_hl_autocmd = true,
     direction = nil,
     hint_position = require("hop.hint").HintPosition.BEGIN,
     hint_offset = 0,

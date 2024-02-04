@@ -49,12 +49,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Autocommand that runs 'Lazy sync' whenever you save the plugins.lua file
-vim.cmd([[
-    augroup lazy_user_config
-        autocmd!
-        autocmd BufWritePost plugins.lua source <afile> | Lazy sync
-    augroup end
-]])
+-- vim.cmd([[
+--     augroup lazy_user_config
+--         autocmd!
+--         autocmd BufWritePost plugins.lua source <afile> | Lazy sync
+--     augroup end
+-- ]])
 
 -- Install plugins here
 require("lazy").setup({
@@ -151,14 +151,20 @@ require("lazy").setup({
     "tpope/vim-sleuth", -- Automatically adjusts 'shiftwidth' and 'expandtab'
     "justinmk/vim-sneak", -- faster motion with 's'
     -- "easymotion/vim-easymotion", -- faster motion with dash '-' '<motion>'
-    "phaazon/hop.nvim", -- better navigation with f and t
+    -- "phaazon/hop.nvim", -- better navigation with f and t (legacy)
+    -- "smoka7/hop.nvim", -- better navigation with f and t
+    "folke/flash.nvim", -- better navigation with f and t (updated)
     "NvChad/nvim-colorizer.lua", -- displays the hexvalue color
     "monaqa/dial.nvim", -- increment/decrement/interate various elements
     "andymass/vim-matchup", -- better % navigate and highlight matching words
     {
-        "iamcco/markdown-preview.nvim", -- live markdown previewer
-        build = "cd app && npm install",
-        ft = "markdown"
+      "iamcco/markdown-preview.nvim", -- live markdown previewer
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = "cd app && yarn install",
+      init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+      ft = { "markdown" },
     },
     "abecodes/tabout.nvim", -- use tab to exit quotation marks and other characters
     "ThePrimeagen/harpoon", -- mark and get file

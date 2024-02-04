@@ -175,7 +175,8 @@ mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLo "Caskaydia Cover Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete.otf
 ```
 
-A better way to install NerdFonts is with this [repo](https://github.com/ronniedroid/getnf). Then running `getnf`
+A better way to install NerdFonts is with this [repo](https://github.com/ronniedroid/getnf)
+> set font in terminal settings
 
 ```bash
 git clone https://github.com/ronniedroid/getnf.git
@@ -191,6 +192,16 @@ Add terminal UI for git commands
 git clone https://github.com/jesseduffield/lazygit
 cd lazygit
 go install
+```
+
+### Install Git-Delta
+
+Add syntax highlighting to git
+
+```bash
+git clone https://github.com/dandavison/delta
+cd delta
+make install
 ```
 
 ### Install Tmux and Tmux Plugin Manager
@@ -319,7 +330,7 @@ sudo apt install Universal-ctags
 
 ### Fix iamcco/markdown-preview
 
-Keept getting error getting this to work
+Kept getting error getting this to work
 
 ```bash
 # comment out the plugin
@@ -397,17 +408,8 @@ sudo make install
 nvim -v
 ```
 
-### Formatters and Linters
-
-Run these commands to install formatters and linters or use `:Mason`
+### Daily Message
 
 ```bash
-cargo install stylua # lua formatter
-npm install -location=global markdownlint-cli # markdown linter and formatter
-npm install prettier # multi-language formatter
-pip install black # python formatter
-pip install flake8 # python linter
-pip install pylint # python linter - alternative
-pip install vulture # useful in python to find unused code
 sudo apt install fortune-mod
 ```
