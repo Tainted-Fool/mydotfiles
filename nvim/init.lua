@@ -5,7 +5,8 @@ if (vim.g.vscode) then
     require "user.vsoptions"
     require "user.surround"
     require "user.comment"
-    require "user.hop"
+    -- require "user.hop"
+    require "user.flash"
     require "user.treesj"
 else
     -- Speed up LUA modules loading
@@ -43,7 +44,8 @@ else
     -- QOL
     require "user.surround"
     require "user.comment"
-    require "user.hop"
+    -- require "user.hop"
+    require "user.flash"
     require "user.autopairs"
     require "user.tabout"
     require "user.indentline"
@@ -53,7 +55,7 @@ else
     require "user.dial"
     require "user.harpoon"
     require "user.noice"
-    require "user.wilder"
+    -- require "user.wilder"
     require "user.clipboard"
     require "user.cheatsheet"
     require "user.autolist"

@@ -86,9 +86,21 @@ function ccat()
 }
 
 # Similar to linux's `time` command
-function time 
-{ 
-  Measure-Command { Invoke-Expression $args 2>&1 | out-default} 
+function time
+{
+  Measure-Command { Invoke-Expression $args 2>&1 | out-default}
+}
+
+# Call vim and set cursor to blinking underline
+function vim()
+{
+    & "C:\tools\vim\vim91\vim.exe" $args && echo "`e[3 q"
+}
+
+# Call nvim and set cursor to blinking underline
+function nvim()
+{
+    & "C:\tools\neovim\bin\nvim.exe" $args && echo "`e[3 q"
 }
 
 # Edit vimrc with vim
@@ -100,7 +112,13 @@ function vimrc()
 # Edit nvimrc with nvim
 function nvimrc()
 {
-  nvim ~\AppData\Local\nvim\init.vim
+  nvim C:\Users\Laz\AppData\Local\nvim\init.lua
+}
+
+# Edit pwshrc with nvim
+function pwshrc()
+{
+    nvim D:\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 }
 
 # Source PowerShellProfile
@@ -586,3 +604,7 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 (& "C:\Python\Anaconda39\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
 conda deactivate
 # endregion
+
+#34de4b3d-13a8-4540-b76d-b9e8d3851756 PowerToys CommandNotFound module
+
+Import-Module "C:\Program Files\PowerToys\WinUI3Apps\..\WinGetCommandNotFound.psd1"

@@ -4,24 +4,17 @@
 	username = Tainted-Fool
 [core]
 	editor = "code --wait"
-	pager = delta
-[interactive]
-    diffFilter = delta --color-only
-[delta]
-    navigate = true # use n and N to move between diff sections
-    light = false # set to true if you're in a terminal with a light backgroundff
+    pager = LESS=-R delta
 [credential]
 	helper = store
 [color]
 	ui = auto
 [diff]
-    tool = vscode
-    colorMoved = default
+	tool = vscode
 [difftool "vscode"]
 	cmd = "code --wait --diff $LOCAL $REMOTE"
 [merge]
-    tool = vscode
-    conflictstyle = diff3
+	tool = vscode
 [mergetool "vscode"]
 	cmd = "code --wait $MERGED"
 [alias]
@@ -37,3 +30,10 @@
 	st = status
 	uncommit = reset --soft HEAD~1 # Undo last commit but keep files in stage area
 	untrack = rm --cache --	# Remove files from Git but not from disk
+[interactive]
+    diffFilter = LESS=-R delta --color-only
+[delta]
+    navigate = true
+    light = false
+    side-by-side = true
+    line-number = true

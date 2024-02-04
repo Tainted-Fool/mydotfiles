@@ -61,7 +61,6 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lua" -- lua completion
     use "saadparwaiz1/cmp_luasnip" -- snippet completion
 
-
     -- Snippets
     use "L3MON4D3/LuaSnip" -- snippet engine
     use "rafamadriz/friendly-snippets" -- snippets to use
@@ -125,19 +124,23 @@ return packer.startup(function(use)
     use "tpope/vim-sleuth" -- Automatically adjusts 'shiftwidth' and 'expandtab'
     use "justinmk/vim-sneak" -- faster motion with 's'
     --[[ use "easymotion/vim-easymotion"       -- faster motion with '<leader><leader>' ]]
-    use "phaazon/hop.nvim" -- better navigation with f and t
+    -- use "phaazon/hop.nvim" -- better navigation with f and t (legacy)
+    use "folke/flash.nvim" -- better navigation with f and t (updated)
     use "NvChad/nvim-colorizer.lua" -- displays the hexvalue color
     use "monaqa/dial.nvim" -- increment/decrement/interate various elements
     use "andymass/vim-matchup" -- better % navigate and highlight matching words
     use({
         "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
-        ft = "markdown"
+        setup = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
     })
     use "abecodes/tabout.nvim" -- use tab to exit quotation marks and other characters
     use "ThePrimeagen/harpoon" -- mark and get file
     use "folke/noice.nvim" -- replace UI for messages, cmdline, and popupmenu
-    use "gelguy/wilder.nvim" -- adds new features and capabilities to wildmenu
+    -- use "gelguy/wilder.nvim" -- adds new features and capabilities to wildmenu
     use "EtiamNullam/deferred-clipboard.nvim" -- use system clipboard
     use "sudormrfbin/cheatsheet.nvim" -- cheatsheet buffer
     use "gaoDean/autolist.nvim" -- atuo complete list continuation and formatting

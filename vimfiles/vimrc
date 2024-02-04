@@ -1,7 +1,7 @@
 """""""""
 "Plugins"
 """""""""
-"""set vim shell. NOTE: pwsh has issues with `:PlugClean` and others see below
+" set vim shell. NOTE: pwsh has issues with `:PlugClean` and others see below
 " comment below to go back to default settings
 
 set shell=pwsh.exe
@@ -80,7 +80,6 @@ Plug 'voldikss/vim-floaterm' " adds a popup for the terminal
 Plug 'wsdjeg/vim-fetch' " allows you to process line and column jump with vim file:<line>:<col>
 Plug 'yegappan/mru' " to open a file from the recently used list use 'MRU:'
 Plug 'yggdroot/indentline' " adds thin vertical lines at each indentation level for code
-Plug 'jszakmeister/vim-togglecursor' " changes the cursor shape in different modes
 
 " old plugins - no longer in use
 "Plug 'ackyshake/VimCompletesMe' " tab completion for vim
@@ -152,10 +151,10 @@ autocmd GUIEnter * set visualbell t_vb=
 " 6 = steady bar (xterm)
 
 " using a plugin to change cursor shape
-" " set cursor for insert mode
-" let &t_SI = "\e[3 q"
+" set cursor for insert mode
+let &t_SI = "\e[3 q"
 " " set cursor for everything else
-" let &t_EI = "\e[1 q"
+let &t_EI = "\e[1 q"
 "
 " " reset cursor on startup
 " augroup ResetCursorShape
@@ -170,9 +169,11 @@ autocmd GUIEnter * set visualbell t_vb=
 
 " set the timeout length for cursor to change faster
 set timeoutlen=1000 ttimeoutlen=0
-let g:togglecursor_default = "blinking_block"
-let g:togglecursor_insert = "blinking_block"
-let g:togglecursor_leave = "blinking_block"
+
+" let g:togglecursor_default = "block"
+" let g:togglecursor_insert = "block"
+" let g:togglecursor_leave = "block"
+" let g:togglecursor_disable_default_init = 1
 
 """""""""""""""
 "Miscellaneous"
@@ -307,6 +308,10 @@ set signcolumn=yes
 " set tab and space characters
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:·
 set list
+
+" allow scrolling
+set scrolloff=4
+set sidescrolloff=8
 
 " set ripgrep as search
 " set grepprg=rg\ --vimgrep\ --smart-case\ --follow
@@ -850,8 +855,12 @@ nnoremap <leader>i :Startify<Cr>
 
 
 " bookmarks - syntax is clear; add your own
-let g:startify_bookmarks = [ {'I': '~/i3/i3/config'},{'L': '~/.blerc'},{'Z': '~/.zshrc'},{'B': '~/.bashrc'},{'V': '~/.vimrc'}]
-    let g:startify_lists = [
+let g:startify_bookmarks = [
+            \ {'n': 'C:\Users\Laz\AppData\Local\nvim\init.lua'},
+            \ {'p': 'D:\Documents\PowerShell\Microsoft.PowerShell_profile.ps1'},
+            \ {'v': '~\vimfiles\vimrc'},
+            \ ]
+let g:startify_lists = [
           \ { 'type': 'bookmarks' , 'header': ['   Bookmarks']      } ,
           \ { 'type': 'files'     , 'header': ['   Recent'   ]      } ,
           \ { 'type': 'sessions'  , 'header': ['   Sessions' ]      } ,
