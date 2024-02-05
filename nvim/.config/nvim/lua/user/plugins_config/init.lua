@@ -60,7 +60,7 @@ require("user.plugins_config.toggleterm")
 require("user.plugins_config.lualine")
 
 -- Dashboard
-require("user.plugins_config.alpha")
+-- require("user.plugins_config.alpha")
 require("user.plugins_config.whichkey")
 require("user.plugins_config.nvim-notify")
 
