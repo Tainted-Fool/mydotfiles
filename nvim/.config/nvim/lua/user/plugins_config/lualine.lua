@@ -164,7 +164,8 @@ lualine.setup({
     options = {
         globalstatus = true, -- enable to have a single statusline
         icons_enabled = true,
-        theme = "auto",
+        -- theme = "iceberg_dark", -- "auto" tries to match colorscheme
+        theme = "kanagawa",
         component_separators = {
             left = "",
             right = ""
@@ -173,7 +174,13 @@ lualine.setup({
             left = "",
             right = ""
         },
-        disabled_filetypes = {"alpha", "dashboard", "starter"},
+        disabled_filetypes = {
+            "alpha",
+            "dashboard",
+            "starter",
+            "lazy",
+            "mason",
+        },
         always_divide_middle = true,
         refresh = {
             statusline = 500,

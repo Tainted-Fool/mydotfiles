@@ -1,5 +1,5 @@
 -- Speed up LUA modules loading
-require("user.plugins_config.impatient")
+-- require("user.plugins_config.impatient")
 
 -- Color
 require("user.plugins_config.colorscheme")
@@ -44,7 +44,7 @@ require("user.plugins_config.cheatsheet")
 require("user.plugins_config.autolist")
 require("user.plugins_config.treesj")
 require("user.plugins_config.oil")
-require("user.plugins_config.obsidian" )
+-- require("user.plugins_config.obsidian" )
 
 -- File Explorer
 require("user.plugins_config.nvim-tree")

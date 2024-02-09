@@ -19,5 +19,14 @@ local lazy = require("lazy")
 lazy.setup({
   -- import all plugins from nvim/lua/plugins
   -- lazy looks for all lua files in the plugins directory
-  { import = "plugins" },
+  spec = {
+    { import = "plugins" },
+  },
+  ui = {
+    border = "rounded",
+    title = "Plugin Manager",
+  },
+  checker = {
+    enabled = true,
+  },
 })

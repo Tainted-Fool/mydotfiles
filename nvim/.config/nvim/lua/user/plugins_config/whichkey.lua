@@ -37,7 +37,7 @@ local setup = {
         scroll_up = "<c-u>" -- bindings to scroll up inside the popup
     },
     window = {
-        border = "rounded", -- none, single, double, or shadow
+        border = "rounded", -- none, single, double, rounded, or shadow
         position = "bottom", -- bottom, or top
         margin = {1, 0, 1, 0}, -- extra window margin [top, right, bottom, left]
         padding = {2, 2, 2, 2}, -- extra window padding [top, right, bottom, left]
@@ -113,7 +113,8 @@ local mappings = {
         },
         s = {"<cmd>w<cr>", "Save/Write Buffer"},
         q = {"<cmd>wq!<cr>", "Save and Quit Buffer"},
-        w = {"<cmd>write<cr>", "Save/Write Buffer"}
+        w = {"<cmd>write<cr>", "Save/Write Buffer"},
+        x = {"<cmd>w<cr>:bd!<cr>", "Save and Close Buffer"}
     },
 
     d = {
@@ -259,7 +260,7 @@ local mappings = {
         B = {"<cmd>Telescope buffers<cr>", "Buffers"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
         C = {"<cmd>Telescope commands<cr>", "Commands"},
-        f = {":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", "Search and Replace"},
+        f = {":%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", "Search and Replace"},
         F = {"<cmd>Telescope find_files<cr>", "Find Files"},
         g = {"<cmd>Telescope live_grep<cr>", "Live Grep"},
         h = {"<cmd>Telescope help_tags<cr>", "Find Help"},

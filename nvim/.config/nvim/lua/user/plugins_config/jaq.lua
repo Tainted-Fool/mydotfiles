@@ -45,7 +45,7 @@ jaq.setup({
     ui = {
         float = {
             -- See ':h nvim_open_win'
-            border = "none",
+            border = "rounded",
 
             -- See ':h winhl'
             winhl = "Normal",

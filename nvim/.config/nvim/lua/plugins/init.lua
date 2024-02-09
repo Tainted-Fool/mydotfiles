@@ -1,3 +1,5 @@
+-- This file is optional when using lazy
+-- TODO: Migrate to individual files
 return {
     -- Speed up Loading
     "lewis6991/impatient.nvim", -- speed up loading lua modules
