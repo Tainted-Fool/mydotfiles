@@ -33,12 +33,12 @@ local servers = {
     -- "csharp_ls" -- C Sharp
     "cssls", -- CSS
     "html", -- HTML
-    "jedi_language_server", -- Python
+    -- "jedi_language_server", -- Python
     "jsonls", -- JSON
     "lua_ls", -- Lua
     "marksman", -- Markdown
     "omnisharp", -- C Sharp
-    -- "pyright", -- Python
+    "pyright", -- Python
     -- "sumneko_lua", -- Lua (legacy)
     "tsserver", -- TypeScript
 }

@@ -39,9 +39,9 @@ local setup = {
     window = {
         border = "rounded", -- none, single, double, rounded, or shadow
         position = "bottom", -- bottom, or top
-        margin = {1, 0, 1, 0}, -- extra window margin [top, right, bottom, left]
-        padding = {2, 2, 2, 2}, -- extra window padding [top, right, bottom, left]
-        winblend = 0
+        -- margin = {1, 0, 1, 0}, -- extra window margin [top, right, bottom, left]
+        -- padding = {2, 2, 2, 2}, -- extra window padding [top, right, bottom, left]
+        -- winblend = 0
     },
     layout = {
         height = {
@@ -299,4 +299,5 @@ which_key.setup(setup)
 which_key.register(mappings, opts)
 
 -- Change default background color
-vim.cmd([[hi WhichKeyFloat ctermfg=grey]])
+vim.cmd([[hi WhichKeyFloat ctermfg=White]])
+vim.cmd([[hi WhichKeyBorder ctermfg=White]])

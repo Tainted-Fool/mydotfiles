@@ -116,6 +116,6 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", {desc = "Move line up", noremap = tr
 -- Better paste
 -- It deletes the selected content and drops it in the black hole register
 -- and puts the content of the default register in place of the selected text
-keymap("x", "p", '[["_dP]]', {desc = "Paste from default register", noremap = true, silent = true})
+-- keymap("x", "p", '[["_dP]]', {desc = "Paste from default register", noremap = true, silent = true})
 
 -- keymap("n", "<leader>ur", ':nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', {desc = "Redraw/clear hlsearch/diff update", noremap = true, silent = true})

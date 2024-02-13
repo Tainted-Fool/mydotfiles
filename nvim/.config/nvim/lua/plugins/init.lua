@@ -79,7 +79,7 @@ return {
     "p00f/nvim-ts-rainbow", -- rainbow pairs for treesitter
     "windwp/nvim-ts-autotag", -- autoclose/autorename html tags
     "JoosepAlviste/nvim-ts-context-commentstring",
-    "vimjas/vim-python-pep8-indent", -- Fix treesitter auto-indent for python
+    -- "vimjas/vim-python-pep8-indent", -- Fix treesitter auto-indent for python
 
     -- QOL
     "kylechui/nvim-surround", -- add/change/delete surrounding pairs

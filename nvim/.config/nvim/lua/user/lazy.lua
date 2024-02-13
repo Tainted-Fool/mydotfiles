@@ -23,7 +23,7 @@ lazy.setup({
     { import = "plugins" },
   },
   ui = {
-    border = "rounded",
+    border = "rounded", -- none, single, double, rounded, or shadow
     title = "Plugin Manager",
   },
   checker = {
