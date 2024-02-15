@@ -136,7 +136,7 @@ require("lazy").setup({
     "p00f/nvim-ts-rainbow", -- rainbow pairs for treesitter
     "windwp/nvim-ts-autotag", -- autoclose/autorename html tags
     "JoosepAlviste/nvim-ts-context-commentstring",
-    "vimjas/vim-python-pep8-indent", -- Fix treesitter auto-indent for python
+    -- "vimjas/vim-python-pep8-indent", -- Fix treesitter auto-indent for python
 
     -- QOL
     "kylechui/nvim-surround", -- add/change/delete surrounding pairs
@@ -176,7 +176,7 @@ require("lazy").setup({
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     "Wansmer/treesj", -- split and join lines
     "stevearc/oil.nvim", -- edit files like a normal vim buffer
-    "epwalsh/obsidian.nvim", -- use obsidian in neovin
+    -- "epwalsh/obsidian.nvim", -- use obsidian in neovin
 
     -- File Explorer
     "kyazdani42/nvim-tree.lua", -- tree viewer

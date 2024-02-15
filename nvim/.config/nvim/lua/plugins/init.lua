@@ -115,7 +115,6 @@ return {
     -- "gelguy/wilder.nvim", -- adds new features and capabilities to wildmenu
     "EtiamNullam/deferred-clipboard.nvim", -- use system clipboard
     "sudormrfbin/cheatsheet.nvim", -- cheatsheet buffer
-    "gaoDean/autolist.nvim", -- auto complete list continuation and formatting
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     "Wansmer/treesj", -- split and join lines
     "stevearc/oil.nvim", -- edit files like a normal vim buffer

@@ -56,7 +56,7 @@ opt.completeopt = "menu,menuone,noselect" -- completion options
 opt.conceallevel = 0 -- turns certain characters invisible like `` - 3 hides * markupp for bold and italics
 -- opt.confirm = true -- confirm to save changes before exiting modified buffer
 opt.cursorline = true -- highlight the current line
-opt.expandtab = true -- use spaces instead of tabs
+-- opt.expandtab = true -- use spaces instead of tabs (vim-sleuth)
 opt.fileencoding = "utf-8" -- set encoding for file
 -- opt.formatoptions = "jcroqlnt" -- tcqj
 -- opt.grepformat = "%f:%l:%c:%m" -- format for grep
@@ -77,7 +77,7 @@ opt.relativenumber = true -- set relative numbered lines
 opt.scrolloff = 4 -- amount of lines to keep above and below cursor
 -- opt.sessionoptions = {"buffers", "curdir", "tabpages", "winsize"} -- what to save for sessions
 -- opt.shiftround = true -- round indent
-opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
+-- opt.shiftwidth = 2 -- the number of spaces inserted for each indentation (vim-sleuth)
 -- opt.shortmess:append({W = true, I = true, c = true, C = true}) -- append to the short messasge list
 opt.showcmd = true -- show command in bottom bar
 -- opt.showcmdloc = "statusline" -- show command in bottom bar

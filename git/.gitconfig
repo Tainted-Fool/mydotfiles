@@ -49,3 +49,13 @@
 	light = false # set to true if you're in a terminal with a light background color
 	side-by-side = true
 	line-numbers = true
+[rerere]
+	enabled = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[maintenance]
+	repo = /home/laz/.dotfiles
+	auto = false
+	strategy = incremental
