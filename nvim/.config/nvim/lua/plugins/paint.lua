@@ -1,7 +1,8 @@
 return {
     -- add highlights to buffers
     "folke/paint.nvim",
-    ft = "markdown",
+    enabled = false, -- disable plugin
+    -- ft = "markdown",
 
     config = function()
         -- Use protected call so we know where error is coming from
@@ -13,19 +14,17 @@ return {
 
         local hlmap = {
             -- patterns :help luaref-pattern
-            -- highlights :help highlight
-            -- find current highlights `:so $VIMRUNTIME/syntax/hitest.vim`
-            -- pattern to highlight or capture group is inside parenthesis
-            ["^#%s+(.-)%s*$"] = "Operator",
+            -- pattern = "%s*%-%-%-%s*(@w+)" -- @someword
+            ["^#%s+(.-)%s*$"] = "Operator", -- # some header
             ["^##%s+(.-)%s*$"] = "Type",
             ["^###%s+(.-)%s*$"] = "String",
             ["^####%s+(.-)%s*$"] = "Constant",
             ["^#####%s+(.-)%s*$"] = "Number",
             ["^######%s+(.-)%s*$"] = "Error",
-            ["`(%w+)`"] = "String",
-            ["*(%w+)*"] = "Exception",
-            ["%[(%w+)%]"] = "WarningMsg",
-            ["%((%w+)%)"] = "DashboardKey",
+            -- ["%`([^%`].-)%`"] = "String", -- `some words` (bugged)
+            -- ["%*([^%*].-)%*"] = "Exception", -- *some words* (in colorscheme.lua)
+            -- ["%[([^%]].-)%]"] = "WarningMsg", -- [some words] (in colorscheme.lua)
+            -- ["%(([^%)].-)%)"] = "DashboardKey", -- (some words) (in colorscheme.lua)
         }
 
         local highlights = {}

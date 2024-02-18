@@ -22,6 +22,7 @@ configs.setup({
 		"lua",
 		"luadoc",
 		"markdown",
+		"markdown_inline",
 		"php",
 		"python",
 		"regex",

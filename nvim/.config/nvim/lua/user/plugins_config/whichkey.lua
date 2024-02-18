@@ -91,7 +91,6 @@ local mappings = {
     ["q"] = {"<cmd>q!<cr>", "Quit"},
     -- ["W"] = {"<cmd>wq!<cr>", "Save and quit"},
     -- ["x"] = {"<cmd>!chmod +x %<cr>", "Execute"},
-    ["x"] = {"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "Telescope Explorer"},
     ["/"] = {"<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", "Comment Toggle"},
     ["?"] = {"<cmd>Cheatsheet<cr>", "Cheatsheet"},
     ["-"] = {"<C-W>s", "Split window below"},
@@ -185,13 +184,6 @@ local mappings = {
         -- m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Menu" },
     },
 
-    j = {
-        name = "Join/Split",
-        j = {"<cmd>TSJJoin<cr>", "Join Line"},
-        m = {"<cmd>TSJToggle<cr>", "Toggle Node under Cursor"},
-        s = {"<cmd>TSJSplit<cr>", "Split Line"}
-    },
-
     l = {
         name = "LSP",
         a = {"<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action"},
@@ -228,8 +220,16 @@ local mappings = {
 
    m = {
         name = "Misc",
-        d = {"<cmd>NoiceDismiss<cr>", "Dismiss Noice Message"},
+        d = {"<cmd>NoiceDismiss<cr>", "Dismiss Noice Messages"},
+        e = {"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "Explorer"},
         h = {"<cmd>nohlsearch<cr>", "No Highlight"},
+        H = {"<cmd>Telescope highlights<cr>", "Display Highlight Groups"},
+        j = {"<cmd>TSJJoin<cr>", "Join Line"},
+        i = {"<cmd>Inspect<cr>", "Inspect"},
+        I = {"<cmd>InspectTree<cr>", "Inspect Symbols"},
+        m = {"<cmd>Telescope notify<cr>", "Display Messages"},
+        s = {"<cmd>TSJSplit<cr>", "Split Line"},
+        t = { "<cmd>TSJToggle<cr>", "Toggle Split/Join Line" },
     },
 
     p = {
@@ -297,7 +297,3 @@ local mappings = {
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
-
--- Change default background color
-vim.cmd([[hi WhichKeyFloat ctermfg=White]])
-vim.cmd([[hi WhichKeyBorder ctermfg=White]])

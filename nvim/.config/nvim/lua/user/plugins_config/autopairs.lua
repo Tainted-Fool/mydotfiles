@@ -20,7 +20,7 @@ if not cmp_status_ok then
 end
 
 npairs.setup({
-    map_cr = true,
+    -- map_cr = true,
     check_ts = true, -- treesitting integration
     ts_config = {
         lua = {"string", "source"},

@@ -2,6 +2,31 @@
 -- stylua: ignore
 if true then return {} end
 
+-- With Lazy we can return a function or a table
+-- If we return a function, it will be called when the module is required
+-- If we return a table, it will be used as the module
+
+-- Return a function
+-- local M = {
+--     "LunarVim/darkplus.nvim",
+--     lazy = false
+--     priority = 1000,
+-- }
+-- function M.config()
+--    vim.cmd.colorscheme "darkplus"
+-- end
+-- return M
+
+-- Return a table
+-- return {
+--    "LunarVim/darkplus.nvim",
+--    lazy = false
+--   priority = 1000,
+--    config = function()
+--       vim.cmd.colorscheme "darkplus"
+--    end
+-- }
+
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
 -- In your plugin files, you can:
