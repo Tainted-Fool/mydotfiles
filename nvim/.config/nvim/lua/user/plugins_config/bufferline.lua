@@ -7,6 +7,11 @@ end
 
 bufferline.setup({
     options = {
+        hover = {
+            enabled = true,
+            delay = 200,
+            reveal = { "close" }
+        },
         mode = "buffers",
         numbers = "none",
         close_command = "Bdelete! %d",

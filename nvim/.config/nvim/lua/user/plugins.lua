@@ -133,7 +133,7 @@ require("lazy").setup({
     -- Treesitter
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting
     "nvim-treesitter/nvim-treesitter-textobjects", -- syntax aware text-objects
-    "p00f/nvim-ts-rainbow", -- rainbow pairs for treesitter
+    -- "p00f/nvim-ts-rainbow", -- rainbow pairs for treesitter (legacy)
     "windwp/nvim-ts-autotag", -- autoclose/autorename html tags
     "JoosepAlviste/nvim-ts-context-commentstring",
     -- "vimjas/vim-python-pep8-indent", -- Fix treesitter auto-indent for python

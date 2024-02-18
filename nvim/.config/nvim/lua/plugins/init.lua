@@ -35,7 +35,7 @@ return {
     "williamboman/mason-lspconfig.nvim", -- lsp configurations
     "whoissethdaniel/mason-tool-installer.nvim", -- install and upgrade Mason tools
     "nvimtools/none-ls.nvim", -- formatters and linters community driven
-    "RRethy/vim-illuminate", -- highlight same symbols under cursor
+    -- "RRethy/vim-illuminate", -- highlight same symbols under cursor
     "arkav/lualine-lsp-progress", -- indicator that shows when lsp is ready
     "ray-x/lsp_signature.nvim", -- better signature help
     "lvimuser/lsp-inlayhints.nvim", -- shows data type for certain languages
@@ -74,17 +74,17 @@ return {
     "ibhagwan/fzf-lua", -- fzf made in lua
 
     -- Treesitter
-    "nvim-treesitter/nvim-treesitter", -- syntax highlighting
-    "nvim-treesitter/nvim-treesitter-textobjects", -- syntax aware text-objects
-    "p00f/nvim-ts-rainbow", -- rainbow pairs for treesitter
-    "windwp/nvim-ts-autotag", -- autoclose/autorename html tags
-    "JoosepAlviste/nvim-ts-context-commentstring",
+    -- "nvim-treesitter/nvim-treesitter", -- syntax highlighting (done)
+    -- "nvim-treesitter/nvim-treesitter-textobjects", -- syntax aware text-objects (done)
+    -- "p00f/nvim-ts-rainbow", -- rainbow pairs for treesitter (legacy)
+    -- "windwp/nvim-ts-autotag", -- autoclose/autorename html tags (done)
+    -- "JoosepAlviste/nvim-ts-context-commentstring", (done)
     -- "vimjas/vim-python-pep8-indent", -- Fix treesitter auto-indent for python
 
     -- QOL
     "kylechui/nvim-surround", -- add/change/delete surrounding pairs
-    "windwp/nvim-autopairs", -- auto pairs
-    "numToStr/Comment.nvim", -- comment/uncomment
+    -- "windwp/nvim-autopairs", -- auto pairs
+    -- "numToStr/Comment.nvim", -- comment/uncomment (done)
     "lukas-reineke/indent-blankline.nvim", -- adds `|` as indentation guides
     "karb94/neoscroll.nvim", -- better scrolling
     "tpope/vim-fugitive", -- git wrapper :Git <tab>
@@ -99,7 +99,7 @@ return {
     "folke/flash.nvim", -- better navigation with f and t (updated)
     "NvChad/nvim-colorizer.lua", -- displays the hexvalue color
     "monaqa/dial.nvim", -- increment/decrement/interate various elements
-    "andymass/vim-matchup", -- better % navigate and highlight matching words
+    -- "andymass/vim-matchup", -- better % navigate and highlight matching words (done)
     {
       "iamcco/markdown-preview.nvim", -- live markdown previewer
       cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -109,12 +109,13 @@ return {
       end,
       ft = { "markdown" },
     },
-    "abecodes/tabout.nvim", -- use tab to exit quotation marks and other characters
+    -- "abecodes/tabout.nvim", -- use tab to exit quotation marks and other characters
     "ThePrimeagen/harpoon", -- mark and get file
     "folke/noice.nvim", -- replace UI for messages, cmdline, and popupmenu
     -- "gelguy/wilder.nvim", -- adds new features and capabilities to wildmenu
     "EtiamNullam/deferred-clipboard.nvim", -- use system clipboard
     "sudormrfbin/cheatsheet.nvim", -- cheatsheet buffer
+    -- "gaoDean/autolist.nvim", -- auto complete list continuation and formatting (done)
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     "Wansmer/treesj", -- split and join lines
     "stevearc/oil.nvim", -- edit files like a normal vim buffer
@@ -122,7 +123,7 @@ return {
 
     -- File Explorer
     "kyazdani42/nvim-tree.lua", -- tree viewer
-    -- "kyazdani42/nvim-web-devicons", -- icons for tree view
+    -- "kyazdani42/nvim-web-devicons", -- icons for tree view (done)
 
     -- Buffers
     "moll/vim-bbye", -- close/delete buffers easier
@@ -137,7 +138,7 @@ return {
     "nvim-lualine/lualine.nvim", -- status bar/line
 
     -- Dashboard
-    -- "goolord/alpha-nvim", -- home page
+    -- "goolord/alpha-nvim", -- home page (done)
     "folke/which-key.nvim", -- show leader key bindings
 
     -- Sessions

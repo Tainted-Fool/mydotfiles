@@ -5,9 +5,10 @@ return {
     -- ft = "markdown",
 
     config = function()
+
         -- Use protected call so we know where error is coming from
-        local status_ok, paint = pcall(require, "paint")
-        if not status_ok then
+        local config_ok, paint = pcall(require, "paint")
+        if not config_ok then
             vim.notify("paint plugin was not found!")
             return
         end

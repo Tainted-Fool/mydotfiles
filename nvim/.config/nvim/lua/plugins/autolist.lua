@@ -10,9 +10,10 @@ return {
     },
 
     config = function()
+
         -- Use protected call so we know where error is coming from
-        local status_ok, autolist = pcall(require, "autolist")
-        if not status_ok then
+        local config_ok, autolist = pcall(require, "autolist")
+        if not config_ok then
             vim.notify("autolist plugin was not found!")
             return
         end

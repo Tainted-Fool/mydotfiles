@@ -69,6 +69,7 @@ opt.incsearch = true -- incremental search
 -- opt.laststatus = 3 -- global statusline
 -- opt.list = true -- show some invisible characters (tabs...
 opt.mouse = "a" -- allow the mouse to be used
+opt.mousemoveevent = true -- allow mouse move events
 opt.number = true -- set numbered lines
 opt.numberwidth = 4 -- set number column width
 opt.pumblend = 10 -- pop up menu blend

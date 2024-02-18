@@ -6,9 +6,10 @@ return {
     },
 
    config = function()
+
         -- Use protected call so we know where error is coming from
-        local status_ok, alpha = pcall(require, "alpha")
-        if not status_ok then
+        local config_ok, alpha = pcall(require, "alpha")
+        if not config_ok then
             vim.notify("alpha plugin was not found!")
             return
         end

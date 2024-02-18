@@ -1,12 +1,12 @@
 -- Use protected call so we know where error is coming from
-local config_ok, configs = pcall(require, "nvim-treesitter.configs")
+local config_ok, treesitter = pcall(require, "nvim-treesitter.configs")
 if not config_ok then
 	vim.notify("nvim-treesitter plugin was not found!")
 	return
 end
 
 -- Setup Language Syntax
-configs.setup({
+treesitter.setup({
 	ensure_installed = {
 		"bash",
 		"c",
@@ -14,6 +14,8 @@ configs.setup({
 		"cpp",
 		"css",
 		"csv",
+		"dockerfile",
+		"gitignore",
 		"go",
 		"html",
 		"java",
@@ -69,26 +71,41 @@ configs.setup({
 			enable = true,
 			lookahead = true,
 			keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["at"] = "@class.outer",
-				["it"] = "@class.inner",
-				["ac"] = "@call.outer",
-				["ic"] = "@call.inner",
+				["a="] = "assignment.outer",
+				["i="] = "assignment.inner",
+				-- ["h="] = "assignment.lhs",
+				-- ["l="] = "assignment.rhs",
+
+				["am"] = "@function.outer",
+				["im"] = "@function.inner",
+
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+
+				["af"] = "@call.outer",
+				["if"] = "@call.inner",
+
 				["aa"] = "@parameter.outer",
 				["ia"] = "@parameter.inner",
+
 				["al"] = "loop.outer",
 				["il"] = "loop.inner",
+
 				["ai"] = "conditional.outer",
 				["ii"] = "conditional.inner",
+
 				["a/"] = "@comment.outer",
 				["i/"] = "@comment.inner",
+
 				["ab"] = "@block.outer",
 				["ib"] = "@block.inner",
+
 				["as"] = "@statement.outer",
 				["is"] = "@scopename.inner",
+
 				["aA"] = "@attribute.outer",
 				["iA"] = "@attribute.inner",
+
 				["aF"] = "@frame.outer",
 				["iF"] = "@frame.inner",
 			},
@@ -122,5 +139,15 @@ configs.setup({
 				["<leader>,"] = "@parameter.inner",
 			},
 		},
+		-- does not work use nvim-treesitter-textobjects	instead
+		-- incremental_selection = {
+		-- 	enable = true,
+		-- 	keymaps = {
+		-- 		init_selection = "<Tab>",
+		-- 		node_incremental = "<Tab>",
+		-- 		node_decremental = "<S-Tab>",
+		-- 		scope_incremental = false,
+		-- 	},
+		-- },
 	},
 })
