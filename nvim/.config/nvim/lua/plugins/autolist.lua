@@ -1,5 +1,5 @@
 return {
-     -- auto complete list continuation and formatting
+    -- auto complete list continuation and formatting
     "gaoDean/autolist.nvim",
     ft = {
         "markdown",

@@ -5,7 +5,7 @@ return {
         "kyazdani42/nvim-web-devicons",
     },
 
-   config = function()
+    config = function()
 
         -- Use protected call so we know where error is coming from
         local config_ok, alpha = pcall(require, "alpha")

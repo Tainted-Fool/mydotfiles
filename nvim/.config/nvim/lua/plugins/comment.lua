@@ -1,5 +1,5 @@
 return {
- -- line and block comments with `gbc` and `gcc`
+    -- line and block comments with `gbc` and `gcc`
     "numToStr/Comment.nvim",
     -- lazy = false,
     -- enabled = false, -- disable plugin

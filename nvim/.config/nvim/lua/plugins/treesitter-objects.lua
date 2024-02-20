@@ -1,5 +1,5 @@
 return {
-     -- syntax aware text-objects
+    -- syntax aware text-objects
     "nvim-treesitter/nvim-treesitter-textobjects",
     -- lazy = true, -- load when nvim-tree-sitter loads
     -- enabled = false, -- disable plugin

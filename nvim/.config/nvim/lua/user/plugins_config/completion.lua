@@ -262,13 +262,13 @@ cmp.setup({
 	-- Order of source completion providers
 	sources = {
 		{
-			name = "copilot",
-		},
-		{
 			name = "nvim_lsp",
 		},
 		{
 			name = "nvim_lua",
+		},
+		{
+			name = "copilot",
 		},
 		{
 			name = "luasnip",

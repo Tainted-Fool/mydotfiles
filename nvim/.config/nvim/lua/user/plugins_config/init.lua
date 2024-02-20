@@ -2,7 +2,7 @@
 -- require("user.plugins_config.impatient")
 
 -- Color
-require("user.plugins_config.colorscheme")
+-- require("user.plugins_config.colorscheme")
 
 -- Autocompletion
 require("user.plugins_config.completion")
