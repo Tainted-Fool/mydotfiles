@@ -78,17 +78,6 @@ local function lsp_navic(client, bufnr)
     navic.attach(client, bufnr)
 end
 
--- Declare document highlighting
-local function lsp_highlight_document(client)
-    -- Use protected call so we know where error is coming from
-    local illuminate_ok, illuminate = pcall(require, "illuminate")
-    if not illuminate_ok then
-        vim.notify("vim-illuminate was not found!")
-        return
-    end
-    illuminate.on_attach(client)
-end
-
 -- Setup handlers
 M.setup = function()
     -- Set diagnostic signs
@@ -159,22 +148,11 @@ end
 
 --- Do things when LSP attaches to buffer (called from configs.lua)
 M.on_attach = function(client, bufnr)
-    -- Turn off formatting for typescript
-    if client.name == "tsserver" then
-        client.server_capabilities.documentFormattingProvider = false
-    end
-
-    -- Turn off formatting for lua
-    -- if client.name == "sumneko_lua" then
-    if client.name == "lua_ls" then
-        client.server_capabilities.documentFormattingProvider = false
-    end
 
     -- Use functions that we declared above
     lsp_keymaps(bufnr)
     lsp_signature(bufnr)
     lsp_navic(client, bufnr)
-    lsp_highlight_document(client)
 
     -- Enable inlay hints
     if client.supports_method("textDocument/inlayHints") then

@@ -4,43 +4,22 @@ return {
     dependencies = {
         "kyazdani42/nvim-web-devicons",
     },
+    event = "VimEnter",
 
-    config = function()
-
-        -- Use protected call so we know where error is coming from
-        local config_ok, alpha = pcall(require, "alpha")
-        if not config_ok then
-            vim.notify("alpha plugin was not found!")
-            return
-        end
+    opts = function()
 
         local dashboard = require("alpha.themes.dashboard")
-        -- Choose a header from below or add a new one
-        -- dashboard.section.header.val = {
-        --     [[                       _           ]],
-        --     [[ _ __   ___  _____   _(_)_ __ ___  ]],
-        --     [[| '_ \ / _ \/ _ \ \ / / | '_ ` _ \ ]],
-        --     [[| | | |  __/ (_) \ V /| | | | | | |]],
-        --     [[|_| |_|\___|\___/ \_/ |_|_| |_| |_|]]
-        -- }
 
-        -- dashboard.section.header.val = {
-        -- 	[[                               __                ]],
-        -- 	[[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-        -- 	[[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-        -- 	[[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-        -- 	[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-        -- 	[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-        -- }
+        local logo = [[
+            ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗
+            ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║
+            ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║
+            ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║
+            ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
+            ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
+        ]]
 
-        dashboard.section.header.val ={
-            [[ ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ]],
-            [[ ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ]],
-            [[ ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ]],
-            [[ ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║ ]],
-            [[ ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ]],
-            [[ ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ]]
-        }
+        dashboard.section.header.val = vim.split(logo, "\n")
 
         dashboard.section.buttons.val = {
             dashboard.button("f", "  Find File", ":Telescope find_files hidden=true<CR>"),
@@ -52,15 +31,36 @@ return {
             dashboard.button("q", "  Quit", ":qa<CR>")
         }
 
-        -- local function footer()
-        --     return os.date("%m-%d-%Y")
-        -- end
+        dashboard.section.header.opts.hl = "Function"
+        dashboard.section.buttons.opts.hl = "Keyword"
+        dashboard.section.footer.opts.hl = "Special"
+        return dashboard
+    end,
+    config = function(_, dashboard)
+        -- dashboard.opts.opts.noautocmd = true
+        -- alpha.setup(dashboard.opts)
 
+        -- close lazy and re-open when the dashboard is ready
+        if vim.o.filetype == "lazy" then
+            vim.cmd.close()
+            vim.api.nvim_create_autocmd("User", {
+                once = true,
+                pattern = "AlphaReady",
+                callback = function()
+                    require("lazy").show()
+                end,
+            })
+        end
+
+        -- setup alpha dashboard
+        require("alpha").setup(dashboard.opts)
+
+        -- setup fortune-mod
         local function footer()
             -- need fortune-mod -> sudo apt install fortune-mod
             local handle = io.popen("fortune")
             if not handle then
-                vim.norify("Fortune-mod not installed")
+                vim.notify("Fortune-mod not installed")
                 vim.notify("Run `sudo apt install fortune-mod`")
                 return
             end
@@ -70,16 +70,24 @@ return {
             return fortune
         end
 
-        dashboard.section.footer.val = footer()
-        -- dashboard.section.footer.opts.hl = "Type"
-        dashboard.section.footer.opts.hl = "White"
-        dashboard.section.header.opts.hl = "Function"
-        -- dashboard.section.header.opts.hl = "Keyword"
-        -- dashboard.section.header.opts.hl = "Type"
-        dashboard.section.buttons.opts.hl = "Keyword"
-        -- dashboard.section.buttons.opts.hl = "Include"
-
-        dashboard.opts.opts.noautocmd = true
-        alpha.setup(dashboard.opts)
+        -- Display fortune-mod and startuptime
+        vim.api.nvim_create_autocmd("User", {
+            once = true,
+            pattern = "LazyVimStarted",
+            callback = function()
+                local stats = require("lazy").stats()
+                local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+                dashboard.section.footer.val = "⚡ Neovim loaded "
+                    .. stats.loaded
+                    .. "/"
+                    .. stats.count
+                    .. " plugins in "
+                    .. ms
+                    .. "ms"
+                    .. "\n"
+                    .. footer()
+                pcall(vim.cmd.AlphaRedraw)
+            end,
+        })
     end,
 }

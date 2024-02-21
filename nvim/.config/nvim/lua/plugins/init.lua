@@ -87,7 +87,7 @@ return {
   -- "numToStr/Comment.nvim", -- comment/uncomment (done)
   "lukas-reineke/indent-blankline.nvim", -- adds `|` as indentation guides
   "karb94/neoscroll.nvim", -- better scrolling
-  "tpope/vim-fugitive", -- git wrapper :Git <tab>
+  -- "tpope/vim-fugitive", -- git wrapper :Git <tab>
   "tpope/vim-repeat", -- repeat last command
   "tpope/vim-unimpaired", -- useful mappings like ]space and ]b
   "tpope/vim-abolish", -- convert words to camel, mix, with 'crc'

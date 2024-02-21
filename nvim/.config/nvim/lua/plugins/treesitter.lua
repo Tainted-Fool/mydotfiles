@@ -2,7 +2,7 @@ return {
     -- syntax highlighting
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate", -- whenever you install or update through lazy
-    event = { "BufReadPre", "BufNewFile" }, -- load when file is read or open
+    event = { "BufReadPre", "BufNewFile", "VeryLazy" }, -- load when file is read or open
     depedencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
     },
@@ -58,6 +58,20 @@ return {
                 enable = true,
                 -- disable = { "python" },
             },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "C-/",
+                    node_incremental = "C-/",
+                    scope_incremental = false,
+                    node_decremental = "<bs>",
+                },
+            },
         })
     end,
+    cmd = { "TSUpdate", "TSUpdateSync", "TSInstall" }, -- load on these commands
+    keys = { -- load on these keys
+        { "<C-/>", desc = "Incremenet Selection" },
+        { "<bs>", desc = "Decrement Selection", mode = "x" },
+    }
 }

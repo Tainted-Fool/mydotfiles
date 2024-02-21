@@ -4,7 +4,8 @@
 	username = Tainted-Fool
 
 [core]
-	editor = "code --wait"
+	; editor = "code --wait"
+	editor = "nvim"
 	pager = delta
 
 [credential]

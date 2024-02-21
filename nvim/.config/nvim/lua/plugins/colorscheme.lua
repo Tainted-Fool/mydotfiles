@@ -2,27 +2,27 @@ return {
     {
         -- original colorscheme
         "rafi/awesome-vim-colorschemes",
-        enabled = false, -- disable plugin
+        -- enabled = false, -- disable plugin
 
-        config = function()
-            vim.cmd("colorscheme onehalfdark")
-        end
+        -- config = function()
+        --     vim.cmd("colorscheme onehalfdark")
+        -- end
     },
     {
         -- modern colorscheme
         "folke/tokyonight.nvim",
-        enabled = false, -- disable plugin
+        -- enabled = false, -- disable plugin
 
-        config = function()
-            vim.cmd("colorscheme tokyonight-moon")
-        end
+        -- config = function()
+        --     vim.cmd("colorscheme tokyonight-moon")
+        -- end
     },
     {
         -- favorite colorscheme
         "rebelot/kanagawa.nvim",
         -- enabled = false, -- disable plugin
-        -- lazy = false, -- make sure we load this during startup if it is your main colorscheme
-        -- priority = 1000, -- make sure to load this before all the other start plugins
+        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
 
         config = function()
 
@@ -92,6 +92,11 @@ return {
                         PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
                         PmenuSbar = { bg = theme.ui.bg_m1 },
                         PmenuThumb = { bg = theme.ui.bg_p2 },
+
+                        -- highlight vim-illuminate
+                        IlluminatedWordText = { bg = "#49443c" },
+                        IlluminatedWordRead = { bg = "#49443c" },
+                        IlluminatedWordWrite = { bg = "#49443c" },
                     }
                 end,
             })

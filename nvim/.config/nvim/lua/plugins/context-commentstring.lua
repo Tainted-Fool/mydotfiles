@@ -1,7 +1,7 @@
 return {
     -- commentstring based on cursor location
     "JoosepAlviste/nvim-ts-context-commentstring",
-    lazy = true, -- load when nvim-tree-sitter loads
+    -- lazy = true, -- do not load plugin unless needed
     -- enabled = false, -- disable plugin
 
     config = function()

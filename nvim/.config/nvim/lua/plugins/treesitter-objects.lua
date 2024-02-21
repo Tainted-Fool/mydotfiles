@@ -1,6 +1,7 @@
 return {
     -- syntax aware text-objects
     "nvim-treesitter/nvim-treesitter-textobjects",
+    -- lazy = true, -- do not load plugin unless needed
     -- lazy = true, -- load when nvim-tree-sitter loads
     -- enabled = false, -- disable plugin
 
@@ -63,19 +64,19 @@ return {
                     set_jump = true,
                     goto_next_start = {
                         ["]m"] = "@function.outer",
-                        ["]]"] = "@class.outer",
+                        ["]c"] = "@class.outer",
                     },
                     goto_next_end = {
                         ["]M"] = "@function.outer",
-                        ["]["] = "@class.outer",
+                        ["]C"] = "@class.outer",
                     },
                     goto_previous_start = {
                         ["[m"] = "@function.outer",
-                        ["[["] = "@class.outer",
+                        ["[c"] = "@class.outer",
                     },
                     goto_previous_end = {
                         ["[M"] = "@function.outer",
-                        ["[]"] = "@class.outer",
+                        ["[C"] = "@class.outer",
                     },
                 },
                 swap = {

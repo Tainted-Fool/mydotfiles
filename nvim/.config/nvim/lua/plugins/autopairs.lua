@@ -1,7 +1,7 @@
 return {
     -- Autopairs auto-completion and indentation
     'windwp/nvim-autopairs',
-    -- lazy = true, -- load when nvim-tree-sitter loads
+    -- lazy = true, -- do not load plugin unless needed
     -- enabled = false, -- disable plugin
 
     config = function()

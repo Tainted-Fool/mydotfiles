@@ -1,7 +1,7 @@
 return {
     -- better % navigate and highlight matching words
     "andymass/vim-matchup",
-    -- lazy = true, -- load when nvim-tree-sitter loads
+    -- lazy = true, -- do not load plugin unless needed
     -- enabled = false, -- disable plugin
 
     setup = function()
