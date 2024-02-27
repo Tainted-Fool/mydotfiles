@@ -61,17 +61,17 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = "C-/",
-                    node_incremental = "C-/",
-                    scope_incremental = false,
-                    node_decremental = "<bs>",
+                    init_selection = "<CR>",
+                    node_incremental = "<TAB>",
+                    scope_incremental = "<CR>",
+                    node_decremental = "<S-TAB>",
                 },
             },
         })
     end,
     cmd = { "TSUpdate", "TSUpdateSync", "TSInstall" }, -- load on these commands
     keys = { -- load on these keys
-        { "<C-/>", desc = "Incremenet Selection" },
-        { "<bs>", desc = "Decrement Selection", mode = "x" },
+        { "<CR>", desc = "Incremenet Selection" },
+        { "<S-TAB>", desc = "Decrement Selection", mode = "x" },
     }
 }

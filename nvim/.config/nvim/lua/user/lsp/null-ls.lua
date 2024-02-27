@@ -26,11 +26,11 @@ null_ls.setup({
         }),
         formatting.stylua, -- Lua formatter
         -- Linters
-        diagnostics.flake8, -- Python linting
         diagnostics.markdownlint, -- Markdown linting
+        -- diagnostics.flake8, -- Python linting (use ruff lsp)
         diagnostics.mypy, -- Python linting
         diagnostics.pylint, -- Python linting
-        diagnostics.ruff, -- Python linting
-        diagnostics.vulture, -- Python linting
+        -- diagnostics.ruff, -- Python linting (use ruff lsp)
+        -- diagnostics.vulture, -- Python linting (use ruff lsp)
     }
 })

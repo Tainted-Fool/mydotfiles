@@ -53,12 +53,13 @@ local tools = {
     "prettier", -- Multiple languages
     "stylua", -- Lua
     -- Linter
-    "flake8", -- Python
+    -- "flake8", -- Python (legacy)
     "markdownlint", -- Markdown
     "mypy", -- Python
     "pylint", -- Python
-    "ruff", -- Python
-    "vulture", -- Python
+    "ruff-lsp", -- Python
+    -- "ruff", -- Python (legacy)
+    -- "vulture", -- Python (legacy)
 }
 
 local settings = {

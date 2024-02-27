@@ -90,7 +90,7 @@ cmp.setup({
 		-- ["<C-j>"] = cmp.mapping.select_next_item(),
 		["<C-b>"] = cmp.mapping.scroll_docs(-1),
 		["<C-f>"] = cmp.mapping.scroll_docs(1),
-		["<C-\\>"] = cmp.mapping.complete(),
+		["<C-z>"] = cmp.mapping.complete(),
 		-- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping
 		["<C-e>"] = cmp.mapping.close(),
 
