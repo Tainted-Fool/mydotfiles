@@ -3,8 +3,8 @@
 	name = Tainted-Fool
 	username = Tainted-Fool
 [core]
-	editor = "code --wait"
-    pager = LESS=-R delta
+	editor = "nvim"
+  pager = LESS=-R delta
 [credential]
 	helper = store
 [color]
@@ -31,9 +31,9 @@
 	uncommit = reset --soft HEAD~1 # Undo last commit but keep files in stage area
 	untrack = rm --cache --	# Remove files from Git but not from disk
 [interactive]
-    diffFilter = LESS=-R delta --color-only
+  diffFilter = LESS=-R delta --color-only
 [delta]
-    navigate = true
-    light = false
-    side-by-side = true
-    line-number = true
+  navigate = true
+  light = false
+  side-by-side = true
+  line-number = true
