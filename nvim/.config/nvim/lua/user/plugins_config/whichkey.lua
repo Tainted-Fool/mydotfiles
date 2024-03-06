@@ -91,7 +91,7 @@ local mappings = {
     ["q"] = {"<cmd>q!<cr>", "Quit"},
     -- ["W"] = {"<cmd>wq!<cr>", "Save and quit"},
     -- ["x"] = {"<cmd>!chmod +x %<cr>", "Execute"},
-    ["/"] = {"<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", "Comment Toggle"},
+    ["/"] = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false })<cr>", "Fuzzy Search"},
     ["?"] = {"<cmd>Cheatsheet<cr>", "Cheatsheet"},
     ["-"] = {"<C-W>s", "Split window below"},
     ["\\"] = {"<C-W>v", "Split window right"},
@@ -163,23 +163,24 @@ local mappings = {
         c = {"<cmd>Telescope git_commits<cr>", "Checkout Commit"},
         d = {"<cmd>Gitsigns diffthis HEAD<cr>", "Diff"},
         f = {"<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-             "Find Git Files"},
+            "Find Git Files"},
         g = {"<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit"},
-        j = {"<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk"},
-        k = {"<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk"},
-        l = {"<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame"},
+        j = {"<cmd>lua require('gitsigns').next_hunk()<cr>", "Next Hunk"},
+        k = {"<cmd>lua require('gitsigns').prev_hunk()<cr>", "Prev Hunk"},
+        l = {"<cmd>lua require('gitsigns').blame_line()<cr>", "Blame"},
         o = {"<cmd>Telescope git_status<cr>", "Open Changed File"},
-        p = {"<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk"},
-        r = {"<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk"},
-        R = {"<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer"},
+        p = {"<cmd>lua require('gitsigns').preview_hunk()<cr>", "Preview Hunk"},
+        r = {"<cmd>lua require('gitsigns').reset_hunk()<cr>", "Reset Hunk"},
+        R = {"<cmd>lua require('gitsigns').reset_buffer()<cr>", "Reset Buffer"},
         s = {"<cmd>Git<cr>", "Git Status"},
-        S = {"<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk"},
-        u = {"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk"}
+        S = {"<cmd>lua require('gitsigns').stage_hunk()<cr>", "Stage Hunk"},
+        u = {"<cmd>lua require('gitsigns').undo_stage_hunk()<cr>", "Undo Stage Hunk"}
     },
 
     h = {
         name = "Harpoon",
-        a = {"<cmd>lua require('harpoon.mark').add_file()<cr>", "Harpoon Add"},
+        a = {"<cmd>lua require('harpoon'):list():append()<cr>", "Harpoon Add"},
+        l = {"<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", "Harpoon List"},
         m = {"<cmd>Telescope harpoon marks<cr>", "Harpoon Marks"}
         -- m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Menu" },
     },
@@ -218,18 +219,18 @@ local mappings = {
         -- },
     },
 
-   m = {
+    m = {
         name = "Misc",
         d = {"<cmd>NoiceDismiss<cr>", "Dismiss Noice Messages"},
         e = {"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "Explorer"},
         h = {"<cmd>nohlsearch<cr>", "No Highlight"},
         H = {"<cmd>Telescope highlights<cr>", "Display Highlight Groups"},
-        j = {"<cmd>TSJJoin<cr>", "Join Line"},
         i = {"<cmd>Inspect<cr>", "Inspect"},
         I = {"<cmd>InspectTree<cr>", "Inspect Symbols"},
+        j = {"<cmd>TSJJoin<cr>", "Join Line"},
         m = {"<cmd>Telescope notify<cr>", "Display Messages"},
         s = {"<cmd>TSJSplit<cr>", "Split Line"},
-        t = { "<cmd>TSJToggle<cr>", "Toggle Split/Join Line" },
+        t = {"<cmd>TSJToggle<cr>", "Toggle Split/Join Line"},
     },
 
     p = {
@@ -260,17 +261,20 @@ local mappings = {
         B = {"<cmd>Telescope buffers<cr>", "Buffers"},
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
         C = {"<cmd>Telescope commands<cr>", "Commands"},
-        f = {":%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", "Search and Replace"},
-        F = {"<cmd>Telescope find_files<cr>", "Find Files"},
+        d = {"<cmd>Telescope grep_string<cr>", "Find string under cursor"},
+        F = {"<cmd>%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", "Search and Replace"},
+        f = {"<cmd>Telescope find_files<cr>", "Find Files"},
         g = {"<cmd>Telescope live_grep<cr>", "Live Grep"},
         h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
         k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
         m = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
+        n = {"<cmd>lua require('telescope.builtin').find_files {cwd = vim.fn.stdpath('config')}<cr>", "Neovim Files"},
         p = {"<cmd>Telescope projects<cr>", "Projects"},
         r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         s = {"<cmd>Telescope session-lens search_session<cr>", "Search Sessions"},
-        S = {"<cmd>SaveSession<cr>", "Save Sessions"}
+        S = {"<cmd>SaveSession<cr>", "Save Sessions"},
+        u = {"<cmd>Telescope undo<cr>", "Undo History"},
     },
 
     t = {
@@ -285,7 +289,7 @@ local mappings = {
     },
 
     w = {
-       name = "Windows",
+        name = "Windows",
         c = {"<C-W>c", "Close window"},
         d = {"<C-W>c", "Delete window"},
         o = {"<C-W>o", "Close all other windows"},

@@ -120,7 +120,7 @@ telescope.setup({
             }
         },
         -- ui-select = {
-        -- opts = "default",    
+        -- opts = "default",
         -- }
     }
 })

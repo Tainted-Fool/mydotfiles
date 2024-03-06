@@ -1,60 +1,15 @@
--- Automatically install Packer
--- local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
--- if fn.empty(fn.glob(install_path)) > 0 then
---     PACKER_BOOTSTRAP = fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
---     print("Installing packer close and reopen Neovim...")
---     vim.cmd([[packadd packer.nvim]])
--- end
-
--- Autocommand that runs 'PackerSync' whenever you save the plugins.lua file
--- vim.cmd([[
---     augroup packer_user_config
---         autocmd!
---         autocmd BufWritePost plugins.lua source <afile> | PackerSync
---     augroup end
--- ]])
-
--- Use protected call so we know where error is coming from
--- local status_ok, lazy = pcall(require, "lazy")
--- if not status_ok then
---     vim.notify("lazy plugin was not found!")
---     return
--- end
-
--- Have Packer use a popup window
--- packer.init({
---     display = {
---         open_fn = function()
---             return require("packer.util").float({
---                 border = "rounded"
---             })
---         end
---     }
--- })
-
--- Declare variable
--- local fn = vim.fn
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
-
--- Autocommand that runs 'Lazy sync' whenever you save the plugins.lua file
--- vim.cmd([[
---     augroup lazy_user_config
---         autocmd!
---         autocmd BufWritePost plugins.lua source <afile> | Lazy sync
---     augroup end
--- ]])
 
 -- Install plugins here
 require("lazy").setup({
@@ -106,7 +61,7 @@ require("lazy").setup({
     }, -- show lsp progress handler
     "folke/trouble.nvim", -- better lsp diagnostics and quickfix list
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim", -- multiline diagnostics
-    "onsails/lspkind.nvim", -- lsp completion icons
+    "onsails/lspkind.nvim", -- lsp completion icons (done)
     "amrbashir/nvim-docs-view", -- lsp hover documentation in a side panel
     -- "vonheikemen/lsp-zero.nvim", -- zero lsp configurations
     -- "decodetalkers/csharpls-extended-lsp.nvim", -- csharp_ls extended
@@ -125,8 +80,8 @@ require("lazy").setup({
     "nvim-telescope/telescope-file-browser.nvim", -- preview of file
     "nvim-telescope/telescope-ui-select.nvim", -- UI for telescope
     {
-      "nvim-telescope/telescope-fzf-native.nvim", -- fzf sorter for telescope
-      build = "make",
+        "nvim-telescope/telescope-fzf-native.nvim", -- fzf sorter for telescope
+        build = "make",
     },
     "ibhagwan/fzf-lua", -- fzf made in lua
 
@@ -158,13 +113,13 @@ require("lazy").setup({
     "monaqa/dial.nvim", -- increment/decrement/interate various elements
     "andymass/vim-matchup", -- better % navigate and highlight matching words
     {
-      "iamcco/markdown-preview.nvim", -- live markdown previewer
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      build = "cd app && yarn install",
-      init = function()
-        vim.g.mkdp_filetypes = { "markdown" }
-      end,
-      ft = { "markdown" },
+        "iamcco/markdown-preview.nvim", -- live markdown previewer
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
     },
     "abecodes/tabout.nvim", -- use tab to exit quotation marks and other characters
     "ThePrimeagen/harpoon", -- mark and get file

@@ -195,6 +195,11 @@ lualine.setup({
             diff,
             "diagnostics",
             -- "filename",
+            -- Show pending plugin updates
+            {
+                require("lazy.status").updates,
+                cond = require("lazy.status").has_updates,
+            },
             -- Show commands in statusline
             {
                 function() return require("noice").api.status.command.get() end,

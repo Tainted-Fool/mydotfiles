@@ -29,7 +29,7 @@ lens.setup({
     theme_conf = {
         border = false
     },
-    previewer = false,
+    previewer = true,
     prompt_title = "Sessions"
 })
 

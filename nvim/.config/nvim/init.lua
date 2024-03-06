@@ -8,13 +8,4 @@ require("user.keymaps")
 require("user.autocommands")
 
 -- Plugin Manager
--- require("user.plugins")
-
--- transition to lazy loading
 require("user.lazy")
-
--- Plugin Configurations
-require("user.plugins_config")
-
--- LSP
-require("user.lsp")

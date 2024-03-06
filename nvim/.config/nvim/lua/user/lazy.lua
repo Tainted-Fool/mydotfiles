@@ -17,10 +17,13 @@ vim.opt.rtp:prepend(lazypath)
 local lazy = require("lazy")
 
 lazy.setup({
-  -- import all plugins from nvim/lua/plugins
-  -- lazy looks for all lua files in the plugins directory
+  -- import all plugins from nvim/lua/plugins by default
   spec = {
     { import = "plugins" },
+    { import = "lsp" }, -- lazy looks for all lua files in the directory
+  },
+  install = {
+    colorscheme = { "kanagawa" },
   },
   ui = {
     border = "rounded", -- none, single, double, rounded, or shadow
@@ -28,5 +31,9 @@ lazy.setup({
   },
   checker = {
     enabled = true,
+    notify = false,
+  },
+  change_detection = {
+    notify = false,
   },
 })

@@ -97,6 +97,15 @@ return {
                         IlluminatedWordText = { bg = "#49443c" },
                         IlluminatedWordRead = { bg = "#49443c" },
                         IlluminatedWordWrite = { bg = "#49443c" },
+
+                        -- rainbow-delimiters
+                        TSRainbowRed = { fg = colors.palette.autumnRed },
+                        TSRainbowYellow = { fg = colors.palette.carpYellow },
+                        TSRainbowBlue = { fg = colors.palette.dragonBlue },
+                        TSRainbowOrange = { fg = colors.palette.surimiOrange },
+                        TSRainbowGreen = { fg = colors.palette.springGreen },
+                        TSRainbowViolet = { fg = colors.palette.oniViolet },
+                        TSRainbowCyan = { fg = colors.palette.waveAqua1 },
                     }
                 end,
             })
@@ -107,8 +116,8 @@ return {
         -- best colorscheme
         "catppuccin/nvim",
         lazy = true, -- do not load plugin unless needed
-        name = "catppuccin", -- require("name") then setup("opts")
-        opts = {
+        name = "catppuccin",
+        opts = { -- require("name").setup(opts)
             integrations = {
                 -- theme support for other plugins highlight groups
                 aerial = true,

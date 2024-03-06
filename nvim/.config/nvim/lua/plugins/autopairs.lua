@@ -1,34 +1,11 @@
 return {
-    -- Autopairs auto-completion and indentation
-    'windwp/nvim-autopairs',
-    -- lazy = true, -- do not load plugin unless needed
-    -- enabled = false, -- disable plugin
+    {
+        -- Autopairs auto-completion and indentation
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
 
-    config = function()
-
-        -- Use protected call so we know where error is coming from
-        local config_ok, npairs = pcall(require, "nvim-autopairs")
-        if not config_ok then
-            vim.notify("nvim-autopairs plugin was not found!")
-            return
-        end
-
-        -- Use protected call so we know where error is coming from
-        local cmp_autopairs_ok , cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
-        if not cmp_autopairs_ok then
-            vim.notify("cmp_autopairs plugin was not found!")
-            return
-        end
-
-        -- Use protected call so we know where error is coming from
-        local cmp_status_ok, cmp = pcall(require, "cmp")
-        if not cmp_status_ok then
-            vim.notify("cmp plugin was not found!")
-            return
-        end
-
-        npairs.setup({
-            -- map_cr = true,
+        opts = {
+            enable_check_bracket_line = false, -- check bracket in same line
             check_ts = true, -- treesitting integration
             ts_config = {
                 lua = {"string", "source"},
@@ -39,17 +16,32 @@ return {
             fast_wrap = {
                 map = "<M-e>", -- Alt+e then `$` to move to end
                 chars = {"{", "[", "(", '"', "'"},
-                pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
-                offset = 0, -- Offset from pattern match
+                pattern = [=[[%'%"%>%]%)%}%,]]=],
                 end_key = "$",
+                before_key = "h",
+                after_key = "l",
+                cursor_pos_before = true,
                 keys = "qwertyuiopzxcvbnmasdfghjkl",
-                check_comma = true,
-                highlight = "PmenuSel",
-                highlight_grey = "LineNr"
+                manual_position = true,
+                highlight = "Search",
+                highlight_grey = "Comment"
             }
-        })
+        },
+        config = function(_, opts)
 
-        -- Add utopairs to atuo-completion
-        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-    end
+            local cmp = require("cmp")
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+            require("nvim-autopairs").setup(opts)
+
+            -- Add autopairs to atuo-completion
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        end
+    },
+    {
+        "hiphish/rainbow-delimiters.nvim",
+        config = function()
+            require("rainbow-delimiters.setup").setup()
+        end
+    }
 }

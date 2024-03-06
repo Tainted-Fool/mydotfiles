@@ -2,8 +2,6 @@ return {
     -- highlight same symbols under cursor
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufWritePost", "BufNewFile" }, -- "LazyFile"
-    -- event = "VeryLazy", -- load later and are not important for the initial UI
-    -- enabled = false, -- disable plugin
     opts = {
         delay = 200,
         providers = {
@@ -66,33 +64,6 @@ return {
                 map("[[", "prev", buffer)
             end,
         })
-
-        -- Same as above
-        -- vim.api.nvim_create_autocmd("FileType", {
-        --     callback = function()
-        --         local buffer = vim.api.nvim_get_current_buf()
-        --         vim.keymap.set("n", "]]", function()
-        --             require("illuminate")["goto_next_reference"](true)
-        --         end, {
-        --                 desc = "Next Reference",
-        --                 buffer = buffer,
-        --             })
-        --         vim.keymap.set("n", "[[", function()
-        --             require("illuminate")["goto_prev_reference"](true)
-        --         end, {
-        --                 desc = "Previous Reference",
-        --                 buffer = buffer,
-        --             })
-        --     end,
-        -- })
-
-        -- vim.keymap.set("n", "]]", function()
-        --     require("illuminate").goto_next_reference()
-        -- end)
-        -- vim.keymap.set("n", "[[", function()
-        --     require("illuminate").goto_prev_reference()
-        -- end)
-
     end,
     keys = {
         { "]]", desc = "Next Reference" },
