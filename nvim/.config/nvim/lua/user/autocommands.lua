@@ -114,56 +114,56 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --         end
 --     end,
 -- })
-
+--
 -- Execute cmd in each tab page or if range is given
 -- vim.api.nvim_create_autocmd({ "VimResized" }, {
--- 	callback = function()
--- 		vim.cmd("tabdo wincmd =")
--- 	end,
+--     callback = function()
+--         vim.cmd("tabdo wincmd =")
+--     end,
 -- })
-
+--
 -- Quit cmd on enter
 -- vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
--- 	callback = function()
--- 		vim.cmd("quit")
--- 	end,
+--     callback = function()
+--     vim.cmd("quit")
+--     end,
 -- })
-
+--
 -- Refresh code lens on file type
 -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
--- 	pattern = { "*.java", "*.py" },
--- 	callback = function()
--- 		vim.lsp.codelens.refresh()
--- 	end,
+--     pattern = { "*.java", "*.py" },
+--     callback = function()
+--         vim.lsp.codelens.refresh()
+--     end,
 -- })
-
+--
 -- Pause highlight after 5000 lines
 -- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
--- 	callback = function()
--- 		local line_count = vim.api.nvim_buf_line_count(0)
--- 		if line_count >= 5000 then
--- 			vim.cmd("IlluminatePauseBuf")
--- 		end
--- 	end,
+--     callback = function()
+--         local line_count = vim.api.nvim_buf_line_count(0)
+--         if line_count >= 5000 then
+--             vim.cmd("IlluminatePauseBuf")
+--         end
+--     end,
 -- })
-
+--
 -- Show Diagnostics on mouse hover
 -- vim.api.nvim_create_autocmd("CursorHold", {
--- buffer = bufnr,
--- callback = function ()
--- local opts = {
--- foscusable = false,
--- close_events = {
--- "BufLeave",
--- "CursorMoved",
--- "InsertEnter",
--- "FocusLost"
--- },
--- border = "rounded",
--- source = "always",
--- prefix = " ",
--- scope = "cursor"
--- }
--- vim.diagnostic.open_float(nil, opts)
--- end
+--     buffer = bufnr,
+--     callback = function ()
+--         local opts = {
+--             foscusable = false,
+--             close_events = {
+--                 "BufLeave",
+--                 "CursorMoved",
+--                 "InsertEnter",
+--                 "FocusLost"
+--             },
+--             border = "rounded",
+--             source = "always",
+--             prefix = " ",
+--             scope = "cursor"
+--         }
+--         vim.diagnostic.open_float(nil, opts)
+--     end
 -- })

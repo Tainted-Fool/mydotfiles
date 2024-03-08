@@ -7,5 +7,5 @@ require("user.keymaps")
 -- User Autocommands
 require("user.autocommands")
 
--- Plugin Manager
-require("user.lazy")
+-- User Plugins
+require("user.plugins")
