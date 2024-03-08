@@ -1,7 +1,7 @@
 return {
     -- the auto completion plugin
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
         "hrsh7th/cmp-buffer", -- buffer completion
         "hrsh7th/cmp-cmdline", -- cmdline completion (bugs with noice)
@@ -234,22 +234,6 @@ return {
                     max_width = 50,
                     ellipsis_char = "...",
                     show_labelDetails = true,
-                    before = function(entry, vim_item)
-                        -- get the full snippet and only keep the first line
-                        local word = entry:get_insert_text()
-                        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-                            word = vim.lsp.util.parse_snippet(word)
-                        end
-                        word = str.oneline(word)
-                        if
-                            entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-                            and string.sub(vim_item.abbr, -1, -1) == "~"
-                        then
-                            word = word .. "~"
-                        end
-                        vim_item.abbr = word
-                        return vim_item
-                    end,
                 }),
             },
 

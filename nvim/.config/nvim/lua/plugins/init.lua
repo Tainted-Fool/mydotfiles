@@ -10,7 +10,9 @@ return {
 
     -- QOL
     { "kylechui/nvim-surround", opts = {} }, -- add/change/delete surrounding pairs
-    { "karb94/neoscroll.nvim", opts = {} }, -- better scrolling
+    -- { "karb94/neoscroll.nvim", opts = {} }, -- better scrolling
+    { "echasnovski/mini.animate", opts = {} }, -- animate the cursor and better scrolling
+    { "chentoast/marks.nvim", opts = {} }, -- marks on the sign column
     "tpope/vim-repeat", -- repeat last command
     "tpope/vim-unimpaired", -- useful mappings like ]space and ]b
     "tpope/vim-abolish", -- convert words to snake, camel, mix case 'crs', 'crc', 'crm'
