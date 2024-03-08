@@ -1,4 +1,6 @@
 return {
+    -- nvim lua API docs and completion
+    { "folke/neodev.nvim", opts = {} }, -- make sure to setup neodev before lspconfig
     {
         -- enable lsp
         "neovim/nvim-lspconfig",

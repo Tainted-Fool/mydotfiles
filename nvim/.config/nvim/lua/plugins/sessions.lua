@@ -24,7 +24,7 @@ return {
     {
         -- save/restore sessions
         "rmagatti/auto-session",
-        lazy = true,
+        -- BUG: auto-session is not working with lazy
         -- init = function()
         --     local function restore()
         --         if vim.fn.argc(-1) > 0 then
@@ -55,6 +55,7 @@ return {
         --         end,
         --     })
         -- end,
+
         opts = {
             log_level = "error",
             auto_session_enable_last_session = false,
@@ -79,7 +80,8 @@ return {
     {
         -- use telescope to view sessions
         "rmagatti/session-lens",
-        lazy = true,
+        event = "VeryLazy",
+        cmd = { "SessionSave", "SessionDelete", "SessionRestore" },
         opts = {
             path_display = { "shorten" },
             theme_conf = {

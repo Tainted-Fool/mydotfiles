@@ -1,6 +1,7 @@
 return {
     -- tree viewer
     "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle" },
     -- opts = {}, -- require("nvim-tree").setup(opts)
 
     config = function()

@@ -28,11 +28,11 @@ return {
             }):find()
         end
 
-        vim.keymap.set("n", "<C-a>", function() toggle_telescope(harpoon:list()) end,
+        vim.keymap.set("n", "<C-s>", function() toggle_telescope(harpoon:list()) end,
             { desc = "Open Harpoon Window" })
     end,
     keys = { -- load on these keys
-        { "<C-a>", desc = "Harpoon List", mode = "n" },
+        { "<C-s>", desc = "Harpoon List", mode = "n" },
     }
 
 }

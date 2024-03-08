@@ -14,7 +14,7 @@ return {
                     suggestions = 20
                 },
                 presets = {
-                    operators = false, -- adds help for operators like d, y, c, s, etc.
+                    operators = true, -- adds help for operators like d, y, c, s, etc.
                     motions = true, -- adds help for motions
                     text_objects = true, -- adds help for text objects triggered after entering an operator
                     windows = true, -- default bindings on <C-w>
@@ -24,8 +24,8 @@ return {
                 }
             },
             key_labels = {
-                -- ["<leader>"] = "SPC"
-                -- ["<cr>"] = "ENTER"
+                ["<leader>"] = "SPC",
+                ["<cr>"] = "ENTER",
             },
             icons = {
                 breadcrumbs = "»", -- symbol used in the command line area that shows your active key combo
@@ -86,7 +86,7 @@ return {
             -- ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
             -- ["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
             -- ["m"] = {"<cmd>Mason<cr>", "Mason"},
-            ["o"] = {"<cmd>Oil<cr>", "Oil"},
+            ["o"] = {"<cmd>lua require('oil').open_float()<cr>", "Oil"},
             ["P"] = {"<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects"},
             ["q"] = {"<cmd>q!<cr>", "Quit"},
             -- ["W"] = {"<cmd>wq!<cr>", "Save and quit"},
@@ -95,12 +95,6 @@ return {
             ["?"] = {"<cmd>Cheatsheet<cr>", "Cheatsheet"},
             ["-"] = {"<C-W>s", "Split window below"},
             ["\\"] = {"<C-W>v", "Split window right"},
-
-            -- Tmux window navigation
-            -- ["C-S-h"] = {"<cmd> TmuxNavigateLeft<cr>", "Window Left"},
-            -- ["C-S-l"] = {"<cmd> TmuxNavigateRight<cr>", "Window Right"},
-            -- ["C-S-j"] = {"<cmd> TmuxNavigateDown<cr>", "Window Down"},
-            -- ["C-S-k"] = {"<cmd> TmuxNavigateUp<cr>", "Window Up"},
 
             b = {
                 name = "Buffer",
@@ -141,9 +135,9 @@ return {
 
             f = {
                 name = "Fuzzy Find",
-                -- 	f = {
-                -- 	"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-                -- 	"Find Files",
+                -- f = {
+                --     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+                --     "Find Files",
                 -- },
                 -- f = { "<cmd>lua require('fzf-lua').files()
                 -- c = { "<cmd>lua require('fzf-lua').files({cwd= '~/.config'}), "Find Files in .config" },
@@ -172,8 +166,7 @@ return {
                 p = {"<cmd>lua require('gitsigns').preview_hunk()<cr>", "Preview Hunk"},
                 r = {"<cmd>lua require('gitsigns').reset_hunk()<cr>", "Reset Hunk"},
                 R = {"<cmd>lua require('gitsigns').reset_buffer()<cr>", "Reset Buffer"},
-                s = {"<cmd>Git<cr>", "Git Status"},
-                S = {"<cmd>lua require('gitsigns').stage_hunk()<cr>", "Stage Hunk"},
+                s = {"<cmd>lua require('gitsigns').stage_hunk()<cr>", "Stage Hunk"},
                 u = {"<cmd>lua require('gitsigns').undo_stage_hunk()<cr>", "Undo Stage Hunk"}
             },
 
@@ -189,8 +182,8 @@ return {
                 name = "LSP",
                 a = {"<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action"},
                 -- d = {
-                -- 	"<cmd>Telescope lsp_document_diagnostics<cr>",
-                -- 	"Document Diagnostics",
+                --     "<cmd>Telescope lsp_document_diagnostics<cr>",
+                --     "Document Diagnostics",
                 -- },
                 d = {"<cmd>lua require('lsp_lines').toggle()<cr>", "Diagnostics Toggle"},
                 D = {"<cmd>DocsViewToggle <cr>", "Documentation toggle"},
@@ -199,12 +192,12 @@ return {
                 i = {"<cmd>LspInfo<cr>", "Info"},
                 I = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
                 -- j = {
-                -- 	"<cmd>lua vim.lsp.diagnostic.goto_next({buffer=0})<cr>",
-                -- 	"Next Diagnostic",
+                --     "<cmd>lua vim.lsp.diagnostic.goto_next({buffer=0})<cr>",
+                --     "Next Diagnostic",
                 -- },
                 -- k = {
-                -- 	"<cmd>lua vim.lsp.diagnostic.goto_prev({buffer=0})<cr>",
-                -- 	"Prev Diagnostic",
+                --     "<cmd>lua vim.lsp.diagnostic.goto_prev({buffer=0})<cr>",
+                --     "Prev Diagnostic",
                 -- },
                 l = {"<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action"},
                 o = {"<cmd>SymbolsOutline<cr>", "Symbols Outline Toggle"},
@@ -214,8 +207,8 @@ return {
                 S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"},
                 t = {"<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Inlayhints Toggle"}
                 -- w = {
-                -- 	"<cmd>Telescope lsp_workspace_diagnostics<cr>",
-                -- 	"Workspace Diagnostics",
+                --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+                --     "Workspace Diagnostics",
                 -- },
             },
 
@@ -235,12 +228,7 @@ return {
 
             p = {
                 name = "Plugin Manager",
-                -- c = {"<cmd>PackerCompile<cr>", "Compile"},
-                -- i = {"<cmd>PackerInstall<cr>", "Install"},
                 l = {"<cmd>Lazy<cr>", "Lazy"},
-                -- s = {"<cmd>PackerSync<cr>", "Sync"},
-                -- S = {"<cmd>PackerStatus<cr>", "Status"},
-                -- u = {"<cmd>PackerUpdate<cr>", "Update"}
                 m = {"<cmd>Mason<cr>", "Mason"},
                 u = {"<cmd>Lazy<cr>", "Update"}
             },
@@ -258,12 +246,12 @@ return {
 
             s = {
                 name = "Search",
-                b = {"<cmd>Telescope git_branches<cr>", "Checkout Branch"},
-                B = {"<cmd>Telescope buffers<cr>", "Buffers"},
+                B = {"<cmd>Telescope git_branches<cr>", "Checkout Branch"},
+                b = {"<cmd>Telescope buffers<cr>", "Buffers"},
                 c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
                 C = {"<cmd>Telescope commands<cr>", "Commands"},
                 d = {"<cmd>Telescope grep_string<cr>", "Find string under cursor"},
-                F = {"<cmd>%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", "Search and Replace"},
+                -- F = {"<cmd>%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>", "Search and Replace"},
                 f = {"<cmd>Telescope find_files<cr>", "Find Files"},
                 g = {"<cmd>Telescope live_grep<cr>", "Live Grep"},
                 h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
@@ -274,7 +262,7 @@ return {
                 r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
                 R = {"<cmd>Telescope registers<cr>", "Registers"},
                 s = {"<cmd>Telescope session-lens search_session<cr>", "Search Sessions"},
-                S = {"<cmd>SaveSession<cr>", "Save Sessions"},
+                S = {"<cmd>SessionSave<cr>", "Save Sessions"},
                 u = {"<cmd>Telescope undo<cr>", "Undo History"},
             },
 
