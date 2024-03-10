@@ -258,6 +258,7 @@ return {
         -- better lsp diagnostics and quickfix list
         "folke/trouble.nvim",
         lazy = true,
+        cmd = "TroubleToggle",
         opts = {
             position = "right",
             use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
