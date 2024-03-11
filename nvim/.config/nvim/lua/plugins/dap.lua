@@ -1,9 +1,11 @@
 return {
     -- debug adapter protocol
     "mfussenegger/nvim-dap",
+    event = "VeryLazy",
     dependencies = {
         "rcarriga/nvim-dap-ui", -- debugger ui
         "mfussenegger/nvim-dap-python", -- dap for python
+        { "thehamsta/nvim-dap-virtual-text", opts = {commented = true} }, -- virtual text for dap
     },
     config = function()
 

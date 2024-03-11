@@ -22,8 +22,8 @@ return {
 
         -- Declare variables
         local cmp = require("cmp")
-        local types = require("cmp.types")
-        local str = require("cmp.utils.str")
+        -- local types = require("cmp.types")
+        -- local str = require("cmp.utils.str")
         local luasnip = require("luasnip")
         local lspkind = require("lspkind")
 
@@ -241,8 +241,8 @@ return {
             sources = {
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
-                { name = "copilot" },
                 { name = "luasnip" },
+                { name = "copilot" },
                 { name = "buffer" },
                 { name = "path" },
                 -- { name = "cmdline", keyword_length = 3 },

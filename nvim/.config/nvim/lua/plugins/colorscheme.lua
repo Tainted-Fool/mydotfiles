@@ -155,5 +155,9 @@ return {
                 which_key = true,
             },
         },
+    },
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
     }
 }

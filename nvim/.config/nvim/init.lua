@@ -1,15 +1,18 @@
 -- Init.lua is the entry point for nvim
 if (vim.g.vscode) then
     -- VScode settings
-    require("user.vscode")
+    require("core.vscode")
 else
+    -- Globals
+    require("core.globals")
+
     -- User Settings
-    require("user.options")
-    require("user.keymaps")
+    require("core.options")
+    require("core.keymaps")
 
     -- User Autocommands
-    require("user.autocommands")
+    require("core.autocommands")
 
     -- User Plugins
-    require("user.plugins")
+    require("core.plugins")
 end

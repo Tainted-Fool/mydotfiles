@@ -6,15 +6,15 @@ return {
     },
     config = function()
 
-        -- local diagnostics = {
-        --     "diagnostics",
-        --     sources = { "nvim_diagnostic" },
-        --     sections = { "error", "warn" },
-        --     symbols = { error = " ", warn = " " },
-        --     colored = true,
-        --     update_in_insert = false,
-        --     always_visible = true,
-        -- }
+        local diagnostics = {
+            "diagnostics",
+            sources = { "nvim_diagnostic" },
+            sections = { "error", "warn" },
+            symbols = { error = " ", warn = " " },
+            colored = true,
+            update_in_insert = false,
+            always_visible = true,
+        }
 
         local hide_in_width = function()
             return vim.fn.winwidth(0) > 80
@@ -165,8 +165,9 @@ return {
             options = {
                 globalstatus = true, -- enable to have a single statusline
                 icons_enabled = true,
-                -- theme = "iceberg_dark", -- "auto" tries to match colorscheme
-                theme = "kanagawa",
+                theme = "auto", -- "auto" tries to match colorscheme
+                -- theme = "iceberg_dark",
+                -- theme = "codedark",
                 component_separators = {
                     left = "",
                     right = ""
