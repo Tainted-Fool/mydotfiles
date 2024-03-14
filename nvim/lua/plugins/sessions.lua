@@ -24,6 +24,7 @@ return {
     {
         -- save/restore sessions
         "rmagatti/auto-session",
+        enabled = false,
         -- BUG: auto-session is not working with lazy
         -- init = function()
         --     local function restore()
@@ -80,6 +81,7 @@ return {
     {
         -- use telescope to view sessions
         "rmagatti/session-lens",
+        enabled = false,
         event = "VeryLazy",
         cmd = { "SessionSave", "SessionDelete", "SessionRestore" },
         opts = {

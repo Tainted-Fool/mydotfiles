@@ -114,7 +114,7 @@ return {
         telescope.load_extension("fzf")
         telescope.load_extension("noice")
         telescope.load_extension("projects")
-        telescope.load_extension("session-lens")
+        -- telescope.load_extension("session-lens")
         telescope.load_extension("undo")
     end,
 }

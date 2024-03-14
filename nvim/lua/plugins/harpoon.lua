@@ -2,7 +2,8 @@ return {
      -- mark and get file
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    lazy = true,
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim",
