@@ -34,6 +34,7 @@ return {
             -- Default lsp communication capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             -- extend capabilities with nvim-cmp and luasnip
+            -- capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
             capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
 
             -- TODO: snippet support is set to false for some reason
@@ -67,7 +68,7 @@ return {
                     floating_window_above_cur_line = false,
                     hint_enable = true,
                     hint_prefix = "💀 ",
-                    toggle_key = "<C-\\>",
+                    toggle_key = "<C-h>",
                     select_signature_key = "<C-]>"
                 }
                 signature.on_attach(signature_cfg, bufnr)
@@ -102,12 +103,13 @@ return {
                 -- "csharp_ls" -- C Sharp
                 "cssls", -- CSS
                 "html", -- HTML
-                -- "jedi_language_server", -- Python
+                "jedi_language_server", -- Python (better docs)
                 "jsonls", -- JSON
                 "lua_ls", -- Lua
                 "marksman", -- Markdown
                 "omnisharp", -- C Sharp
-                "pyright", -- Python
+                -- "pyright", -- Python (Microsoft)
+                -- "pylsp", -- Python (Community)
                 -- "sumneko_lua", -- Lua (legacy)
                 "tsserver", -- TypeScript
             }
@@ -210,12 +212,9 @@ return {
                     vim.lsp.inlay_hint.enable(bufnr, true)
                 end
 
-                -- Enable document highlight =vim.lsp.buf_get_clients()[1].server_capabilities
-                -- if client.supports_method("textDocument/documentHighlight") then
-                --     vim.notify("Document highlight enabled")
-                --     vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
-                --     vim.cmd([[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]])
-                --     vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
+                -- -- Disable hover with pyright
+                -- if client.name == "pyright" then
+                --     client.resolved_capabilities.hover = false
                 -- end
             end
 

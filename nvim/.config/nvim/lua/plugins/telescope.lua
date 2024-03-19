@@ -100,9 +100,17 @@ return {
                         },
                     },
                 },
+                -- Undo history tree
                 undo = {
                     side_by_side = true,
                     layout_strategy = "horizontal", -- horizontal, vertical
+                },
+                -- Fzf
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = "smart_case",
                 }
             }
         })

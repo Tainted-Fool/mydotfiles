@@ -80,7 +80,7 @@ return {
     {
         -- use telescope to view sessions
         "rmagatti/session-lens",
-        event = "VeryLazy",
+        -- event = "VeryLazy",
         cmd = { "SessionSave", "SessionDelete", "SessionRestore" },
         opts = {
             path_display = { "shorten" },

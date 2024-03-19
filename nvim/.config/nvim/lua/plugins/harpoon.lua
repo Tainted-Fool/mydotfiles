@@ -35,5 +35,4 @@ return {
     keys = { -- load on these keys
         { "<C-s>", desc = "Harpoon List", mode = "n" },
     }
-
 }

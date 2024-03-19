@@ -79,27 +79,3 @@ vim.cmd([[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]])
 
 -- Speed up loading lua modles to improve startup time
 vim.loader.enable()
-
--- Set all vim.notify to the plugin one
--- vim.notify = require("notify")
-
--- Map `-` as the Easymotion key
--- vim.cmd([[map - <Plug>(easymotion-prefix)]])
--- vim.cmd([[let g:EasyMotion_disable_two_key_combo = 1]])
-
--- Clipboard
---     vim.opt.clipboard:prepend({"unnamed", "unnamedplus"})
--- if _G.IS_WSL and vim.fn.executable("win32yank.exe") == 1 then
---     vim.g.clipboard = {
---         name = "win32yank-wsl",
---         copy = {
---             ["+"] = {"win32yank.exe", "-i", "--crlf"},
---             ["*"] = {"win32yank.exe", "-i", "--crlf"},
---         },
---         paste = {
---             ["+"] = {"win32yank.exe", "-o", "--lf"},
---             ["*"] = {"win32yank.exe", "-o", "--lf"},
---         },
---         cache_enabled = true,
---     }
--- end

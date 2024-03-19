@@ -6,6 +6,7 @@ end
 -- Set leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+keymap({"n", "v"}, "<Space>", "<Nop>")
 
 -- Modes:
 -- n = normal_mode - typing commands
@@ -24,7 +25,7 @@ keymap("n", "<C-j>", "<C-w>j", "Go to lower window")
 keymap("n", "<C-k>", "<C-w>k", "Go to upper window")
 keymap("n", "<C-l>", "<C-w>l", "Go to right window")
 
-    -- Tmux window navigation
+-- Tmux window navigation
 -- keymap("n", "<C-S-h>", "<cmd> TmuxNavigateLeft<cr>", "Go to left tmux window")
 -- keymap("n", "<C-S-j>", "<cmd> TmuxNavigateDown<cr>", "Go to lower tmux window")
 -- keymap("n", "<C-S-k>", "<cmd> TmuxNavigateUp<cr>", "Go to upper tmux window")

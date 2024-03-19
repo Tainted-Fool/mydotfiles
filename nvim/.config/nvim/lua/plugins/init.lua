@@ -20,6 +20,7 @@ return {
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     { "NvChad/nvim-colorizer.lua", opts = {} }, -- displays the hexvalue color
     { "EtiamNullam/deferred-clipboard.nvim", opts = {failback = "unnamedplus"} }, -- use system clipboard
+    { "smjonas/inc-rename.nvim", opts = {} }, -- incremental lsp renaming
     {
         "stevearc/oil.nvim", -- edit files like a normal vim buffer
         opts = {
@@ -46,6 +47,7 @@ return {
         end
     },
     -- { "epwalsh/obsidian.nvim", opts = {} } -- use obsidian in neovim
+    "girishji/pythondoc.vim", -- python docs
 
     -- Buffers
     "moll/vim-bbye", -- close/delete buffers easier :Bdelete, :Bwipeout

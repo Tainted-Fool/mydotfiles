@@ -6,6 +6,7 @@ return {
         "rcarriga/nvim-dap-ui", -- debugger ui
         "mfussenegger/nvim-dap-python", -- dap for python
         { "thehamsta/nvim-dap-virtual-text", opts = {commented = true} }, -- virtual text for dap
+        "nvim-neotest/nvim-nio",
     },
     config = function()
 

@@ -42,5 +42,4 @@ return {
         keymap("v", "<C-a>", map.inc_normal("visual"), "Increment")
         keymap("v", "<C-x>", map.dec_normal("visual"), "Decrement")
     end
-
 }
