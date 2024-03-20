@@ -1,6 +1,4 @@
 return {
-    -- nvim lua API docs and completion
-    { "folke/neodev.nvim", opts = {} }, -- make sure to setup neodev before lspconfig
     {
         -- enable lsp
         "neovim/nvim-lspconfig",
@@ -15,21 +13,21 @@ return {
             "nvimtools/none-ls.nvim", -- diagnostics, code actions, and formatting
             "folke/neodev.nvim", -- better nvim and lsp configuration
             "arkav/lualine-lsp-progress", -- indicator that shows when lsp is ready
-            "j-hui/fidget.nvim", -- show lsp progress handler
+            { "folke/neodev.nvim", opts = {} }, -- nvim lua API docs and completion
+            { "j-hui/fidget.nvim", opts = {} }, -- show lsp progress handler
         },
         config = function()
             -- Declare variables
+            local lspconfig = require("lspconfig")
             local mason = require("mason")
             local mason_lspconfig = require("mason-lspconfig")
             local mason_installer = require("mason-tool-installer")
-
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
             local keymap = function(bufnr, keys, func, desc)
                 vim.api.nvim_buf_set_keymap(bufnr, "n", keys, func, { desc = desc, noremap = true, silent = true })
             end
-            local signature = require("lsp_signature")
-            local navic = require("nvim-navic")
-            local lspconfig = require("lspconfig")
+            -- local signature = require("lsp_signature")
+            -- local navic = require("nvim-navic")
 
             -- Default lsp communication capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -60,25 +58,25 @@ return {
             end
 
             -- Declare LSP signature
-            local lsp_signature = function(bufnr)
-                -- Setup signature configurations
-                local signature_cfg = {
-                    doc_lines = 0, -- show lines of comment/docs
-                    floating_window = false,
-                    floating_window_above_cur_line = false,
-                    hint_enable = true,
-                    hint_prefix = "💀 ",
-                    toggle_key = "<C-h>",
-                    select_signature_key = "<C-]>"
-                }
-                signature.on_attach(signature_cfg, bufnr)
-            end
+            -- local lsp_signature = function(bufnr)
+            --     -- Setup signature configurations
+            --     local signature_cfg = {
+            --         doc_lines = 0, -- show lines of comment/docs
+            --         floating_window = false,
+            --         floating_window_above_cur_line = false,
+            --         hint_enable = true,
+            --         hint_prefix = "💀 ",
+            --         toggle_key = "<C-h>",
+            --         select_signature_key = "<C-]>"
+            --     }
+            --     signature.on_attach(signature_cfg, bufnr)
+            -- end
 
             -- Declare code context
-            local lsp_navic = function(client, bufnr)
-                vim.g.navic_silence = false -- supress error messages thrown by nvim-navic
-                navic.attach(client, bufnr)
-            end
+            -- local lsp_navic = function(client, bufnr)
+            --     vim.g.navic_silence = false -- supress error messages thrown by nvim-navic
+            --     navic.attach(client, bufnr)
+            -- end
 
             -- -- Set diagnostic signs
             local signs = {
@@ -164,7 +162,7 @@ return {
             -- Declare configurations for Diagnostics when LSP is running
             local config = {
                 -- Disable virtual text/diagnostic errors
-                virtual_text = false, -- enable/disable diagnostic text for plugin trouble
+                virtual_text = true, -- enable/disable diagnostic text for plugin trouble
                 virtual_lines = {
                     only_current_line = true
                 },
@@ -205,7 +203,7 @@ return {
             -- Declare on_attach function
             local on_attach = function(client, bufnr)
                 lsp_keymaps(bufnr)
-                lsp_signature(bufnr)
+                -- lsp_signature(bufnr)
                 -- lsp_navic(client, bufnr)
 
                 -- Enable inlay hints
@@ -263,6 +261,7 @@ return {
         -- multiline diagnostics
         "https://github.com/Tainted-Fool/lsp_lines",
         -- opts = {}, -- no options yet...
+        enabled = false,
         config = function()
             require("lsp_lines").setup()
         end
@@ -315,7 +314,7 @@ return {
             }
 
             local hover = require("hover")
-            hover.setup {
+            hover.setup({
                 init = function()
                     hover.register(LSPWithDiagSource)
                     require("hover.providers.dictionary")
@@ -325,7 +324,7 @@ return {
                 },
                 preview_window = false,
                 title = true,
-            }
+            })
             vim.keymap.set("n", "K", hover.hover, { desc = "Show hover", noremap = true, silent = true })
             vim.keymap.set("n", "gK", hover.hover_select, { desc = "Show hover select", noremap = true, silent = true })
         end

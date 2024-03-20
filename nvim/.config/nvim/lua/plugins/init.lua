@@ -10,15 +10,15 @@ return {
 
     -- QOL
     { "kylechui/nvim-surround", opts = {} }, -- add/change/delete surrounding pairs
-    -- { "karb94/neoscroll.nvim", opts = {} }, -- better scrolling
-    { "echasnovski/mini.animate", opts = {} }, -- animate the cursor and better scrolling
+    { "karb94/neoscroll.nvim", opts = {} }, -- better scrolling
+    { "echasnovski/mini.animate", opts = {scroll = {enable = false}} }, -- animate the cursor and better scrolling
     { "chentoast/marks.nvim", opts = {} }, -- marks on the sign column
     "tpope/vim-repeat", -- repeat last command
     "tpope/vim-unimpaired", -- useful mappings like ]space and ]b
     "tpope/vim-abolish", -- convert words to snake, camel, mix case 'crs', 'crc', 'crm'
     "tpope/vim-sleuth", -- Automatically adjusts 'tabstop', 'shiftwidth', and 'expandtab'
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
-    { "NvChad/nvim-colorizer.lua", opts = {} }, -- displays the hexvalue color
+    { "NvChad/nvim-colorizer.lua", opts = {user_default_options = {names = false}} }, -- displays the hexvalue color
     { "EtiamNullam/deferred-clipboard.nvim", opts = {failback = "unnamedplus"} }, -- use system clipboard
     { "smjonas/inc-rename.nvim", opts = {} }, -- incremental lsp renaming
     {
