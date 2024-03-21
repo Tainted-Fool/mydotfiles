@@ -33,6 +33,6 @@ return {
             { desc = "Open Harpoon Window" })
     end,
     keys = { -- load on these keys
-        { "<C-s>", desc = "Harpoon List", mode = "n" },
+        { "<C-1>", desc = "Harpoon List", mode = "n" },
     }
 }

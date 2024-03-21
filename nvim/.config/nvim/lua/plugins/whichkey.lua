@@ -14,7 +14,7 @@ return {
                     suggestions = 20
                 },
                 presets = {
-                    operators = true, -- adds help for operators like d, y, c, s, etc.
+                    operators = false, -- adds help for operators like d, y, c, s, etc.
                     motions = true, -- adds help for motions
                     text_objects = true, -- adds help for text objects triggered after entering an operator
                     windows = true, -- default bindings on <C-w>
@@ -185,8 +185,8 @@ return {
                 --     "<cmd>Telescope lsp_document_diagnostics<cr>",
                 --     "Document Diagnostics",
                 -- },
-                d = {"<cmd>lua require('lsp_lines').toggle()<cr>", "Diagnostics Toggle"},
-                D = {"<cmd>DocsViewToggle <cr>", "Documentation toggle"},
+                d = {"<cmd>lua require('lsp_lines').toggle()<cr>", "Diagnostics Toggle Off"},
+                D = {"<cmd>lua require('lsp_lines').toggle()<cr>:=vim.diagnostic.config({virtual_lines={only_current_line=true}})<cr>", "Diagnostics Toggle On"},
                 f = {"<cmd>lua vim.lsp.buf.format({async=true})<cr>", "Format"},
                 h = {"<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help"},
                 i = {"<cmd>LspInfo<cr>", "Info"},
@@ -205,7 +205,8 @@ return {
                 r = {"<cmd>lua vim.lsp.buf.rename()<cr>", "Rename"},
                 s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
                 S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"},
-                t = {"<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Inlayhints Toggle"}
+                t = {"<cmd>lua require('lsp-inlayhints').toggle()<cr>", "Inlayhints Toggle"},
+                v = {"<cmd>DocsViewToggle <cr>", "Documentation toggle"},
                 -- w = {
                 --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
                 --     "Workspace Diagnostics",

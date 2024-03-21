@@ -9,10 +9,10 @@ return {
     "ibhagwan/fzf-lua", -- fzf made in lua
 
     -- QOL
-    { "kylechui/nvim-surround", opts = {} }, -- add/change/delete surrounding pairs
+    { "kylechui/nvim-surround", opts = {}, event = "VeryLazy" }, -- add/change/delete surrounding pairs
     { "karb94/neoscroll.nvim", opts = {} }, -- better scrolling
     { "echasnovski/mini.animate", opts = {scroll = {enable = false}} }, -- animate the cursor and better scrolling
-    { "chentoast/marks.nvim", opts = {} }, -- marks on the sign column
+    { "chentoast/marks.nvim", opts = {}, event = "VeryLazy" }, -- marks on the sign column
     "tpope/vim-repeat", -- repeat last command
     "tpope/vim-unimpaired", -- useful mappings like ]space and ]b
     "tpope/vim-abolish", -- convert words to snake, camel, mix case 'crs', 'crc', 'crm'
@@ -20,7 +20,7 @@ return {
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     { "NvChad/nvim-colorizer.lua", opts = {user_default_options = {names = false}} }, -- displays the hexvalue color
     { "EtiamNullam/deferred-clipboard.nvim", opts = {failback = "unnamedplus"} }, -- use system clipboard
-    { "smjonas/inc-rename.nvim", opts = {} }, -- incremental lsp renaming
+    { "smjonas/inc-rename.nvim", opts = {}, event = "VeryLazy" }, -- incremental lsp renaming
     {
         "stevearc/oil.nvim", -- edit files like a normal vim buffer
         opts = {
@@ -31,27 +31,33 @@ return {
                 padding = 0,
                 max_width = 50,
                 max_height = 40,
-            }
+            },
+            default_file_explorer = true,
         },
     },
     {
         "folke/todo-comments.nvim", -- TODO:, FIXME: and NOTE: comments
         config = function()
             require("todo-comments").setup()
-            local keymap = function(keys, func, desc)
-                vim.keymap.set("n", keys, func, { desc = desc, noremap = true, silent = true })
-            end
-            keymap("]t", function() require("todo-comments").jump_next() end, "Next todo comment")
-            keymap("[t", function() require("todo-comments").jump_prev() end, "Previous todo comment")
-            keymap("]t", function() require("todo-comments").jump_next({keywords = { "BUG", "WARNING" }}) end, "Next bug/warning todo comment")
-        end
+            -- local keymap = function(keys, func, desc)
+            --     vim.keymap.set("n", keys, func, { desc = desc, noremap = true, silent = true })
+            -- end
+            -- keymap("]t", function() require("todo-comments").jump_next() end, "Next todo comment")
+            -- keymap("[t", function() require("todo-comments").jump_prev() end, "Previous todo comment")
+            -- keymap("]t", function() require("todo-comments").jump_next({keywords = { "BUG", "WARNING" }}) end, "Next bug/warning todo comment")
+        end,
+        keys = {
+            { "]t", "<cmd>lua require('todo-comments').jump_next()<CR>", desc = "Next todo comment" },
+            { "[t", "<cmd>lua require('todo-comments').jump_prev()<CR>", desc = "Previous todo comment" },
+            { "]t", "<cmd>lua require('todo-comments').jump_next({keywords = { 'BUG', 'WARNING' }})<CR>", desc = "Next bug/warning todo comment" },
+        }
     },
     -- { "epwalsh/obsidian.nvim", opts = {} } -- use obsidian in neovim
     "girishji/pythondoc.vim", -- python docs
 
     -- Buffers
     "moll/vim-bbye", -- close/delete buffers easier :Bdelete, :Bwipeout
-    { "nacro90/numb.nvim", opts = {} }, -- peek lines of the buffer
+    { "nacro90/numb.nvim", opts = {}, event = "VeryLazy" }, -- peek lines of the buffer
 
     -- Terminal
     "christoomey/vim-tmux-navigator", -- navigate between vim and tmux panes

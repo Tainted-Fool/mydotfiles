@@ -1,11 +1,12 @@
 return {
-    "zbirenbaum/copilot.lua", -- code ai - use :copilot setup
+    -- code ai - use :copilot setup
+    "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
 
     opts = {
         panel = {
-            enabled = false,
+            enabled = false, -- using nvim-cmp
             auto_refresh = false,
             keymap = {
                 jump_prev = "[[",
@@ -20,7 +21,7 @@ return {
             },
         },
         suggestion = {
-            enabled = false,
+            enabled = false, -- using nvim-cmp
             auto_trigger = false,
             debounce = 75,
             keymap = {

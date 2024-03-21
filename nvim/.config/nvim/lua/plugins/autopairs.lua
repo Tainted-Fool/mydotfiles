@@ -11,7 +11,7 @@ return {
             javascript = {"string", "template_string"},
             java = false
         },
-        disable_filetype = {"TelescopePrompt", "spectre_panel"}, -- disable autopairs for these filetypes
+        disable_filetype = { "TelescopePrompt", "spectre_panel", "vim" }, -- disable autopairs for these filetypes
         fast_wrap = {
             map = "<M-e>", -- Alt+e then `$` to move to end
             chars = {"{", "[", "(", '"', "'"},
