@@ -229,6 +229,7 @@ return {
         "https://github.com/Tainted-Fool/lsp_lines",
         -- opts = {}, -- no options yet...
         enabled = true, -- enable/disable virtual_text
+        event = "LspAttach",
         config = function()
             require("lsp_lines").setup()
         end

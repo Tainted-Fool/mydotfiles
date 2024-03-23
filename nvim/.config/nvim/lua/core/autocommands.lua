@@ -1,6 +1,19 @@
 -- Use 'q' to quit from plugins
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"qf", "help", "man", "lspinfo", "spectre_panel", "lir", "fzf", "Jaq", "oil", "DressingSelect", "tsplayground", "netrw", "qf"},
+    pattern = {
+        "help",
+        "man",
+        "lspinfo",
+        "spectre_panel",
+        "lir",
+        "fzf",
+        "Jaq",
+        "oil",
+        "DressingSelect",
+        "tsplayground",
+        "netrw",
+        "qf",
+    },
     callback = function()
         vim.cmd([[
             nnoremap <silent> <buffer> q :close<cr>
@@ -73,6 +86,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
         if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
             vim.cmd("quit")
         end
+    end
+})
+
+-- Disable lsp_lines in floating windows like lazy plugin manager
+vim.api.nvim_create_autocmd("WinEnter", {
+    callback = function()
+    local floating = vim.api.nvim_win_get_config(0).relative ~= ""
+        vim.diagnostic.config({
+            virtual_text = floating,
+            virtual_lines = not floating
+        })
     end
 })
 
