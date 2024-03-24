@@ -2,11 +2,14 @@ return {
     settings = {
         Lua = {
             runtime = { version = "LuaJIT" },
+            completion = {
+                callSnippet = "Replace",
+            },
             diagnostics = {
                 globals = { "vim" } -- allow LSP server to recognize the "vim" global variable
             },
             hint = {
-                enable = true,
+                enable = true, --inlayhints
                 arrayIndex = "Disable", -- Auto, Disable, Enable
                 await = true,
                 paramName = "Disable", -- All, Disable, Literal

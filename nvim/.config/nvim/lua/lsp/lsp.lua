@@ -23,28 +23,6 @@ return {
             local mason_lspconfig = require("mason-lspconfig")
             local mason_installer = require("mason-tool-installer")
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
-            local keymap = function(bufnr, keys, func, desc)
-                vim.api.nvim_buf_set_keymap(bufnr, "n", keys, func, { desc = desc, noremap = true, silent = true })
-            end
-
-            -- Declare keymaps when LSP is running
-            local lsp_keymaps = function(bufnr)
-                keymap(bufnr, "gd", "<cmd>Telescope lsp_definitions<cr>", "Go to definition")
-                keymap(bufnr, "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to declaration") -- not supported by all LSPs
-                -- keymap(bufnr, "K", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP hover")
-                keymap(bufnr, "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP hover")
-                keymap(bufnr, "gi", "<cmd>Telescope lsp_implementations<cr>", "Go to implementation") -- not supported by all LSPs
-                keymap(bufnr, "gr", "<cmd>Telescope lsp_references<cr>", "Go to reference")
-                keymap(bufnr, "gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Show diagnostic on line")
-                keymap(bufnr, "]d", "<cmd>lua vim.diagnostic.goto_next({border = 'rounded'})<cr>", "Go to next diagnostic")
-                keymap(bufnr, "[d", "<cmd>lua vim.diagnostic.goto_prev({border = 'rounded'})<cr>", "Go to previous diagnostic")
-                -- keymap(bufnr, "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help")
-                keymap(bufnr, "gS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help")
-                keymap(bufnr, "gn", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable")
-                keymap(bufnr, "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Go to code action")
-                keymap(bufnr, "gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format current buffer")
-
-            end
 
             -- -- Set diagnostic signs
             local signs = {
@@ -139,28 +117,65 @@ return {
                 -- "vulture", -- Python (legacy)
             }
 
+            -- Declare on_attach function
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("Lsp-Attach", { clear = true }),
+                callback = function(event)
+                    local keymap = function(keys, func, desc)
+                        vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, noremap = true, silent = true})
+                    end
+
+                    -- Declare keymaps when LSP is running
+                    keymap("gd", "<cmd>Telescope lsp_definitions<cr>", "Go to definition")
+                    keymap("gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to declaration") -- not supported by all LSPs
+                    -- keymap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP hover")
+                    keymap("gh", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP hover")
+                    keymap("gi", "<cmd>Telescope lsp_implementations<cr>", "Go to implementation") -- not supported by all LSPs
+                    keymap("gr", "<cmd>Telescope lsp_references<cr>", "Go to reference")
+                    keymap("gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Show diagnostic on line")
+                    keymap("]d", "<cmd>lua vim.diagnostic.goto_next({border = 'rounded'})<cr>", "Go to next diagnostic")
+                    keymap("[d", "<cmd>lua vim.diagnostic.goto_prev({border = 'rounded'})<cr>", "Go to previous diagnostic")
+                    -- keymap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help")
+                    keymap("gS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help")
+                    keymap("gn", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable")
+                    keymap("ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Go to code action")
+                    keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format current buffer")
+                end
+            })
+
             -- Default lsp communication capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            capabilities.textDocument.completion.completionItem.resolveSupport = {
+                properties = {
+                    "documentation",
+                    "detail",
+                    "additionalTextEdits"
+                }
+            }
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true
+            }
             -- extend capabilities with nvim-cmp
-            capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
             -- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
+            capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
-            -- Declare on_attach function
-            local on_attach = function(client, bufnr)
-                lsp_keymaps(bufnr)
-
-                -- Enable inlay hints -- not needed for nvim 0.10+
-                if client.supports_method("textDocument/inlayHints") then
-                    vim.lsp.inlay_hint.enable(bufnr, true)
-                    -- vim.notify("Inlay hints enabled for " .. client.name, "info")
-                end
-            end
+            -- local on_attach = function(client, bufnr)
+            --     lsp_keymaps(bufnr)
+            --
+            --     -- Enable inlay hints -- not needed for nvim 0.10+
+            --     if client.supports_method("textDocument/inlayHints") then
+            --         vim.lsp.inlay_hint.enable(bufnr, true)
+            --         -- vim.notify("Inlay hints enabled for " .. client.name, "info")
+            --     end
+            -- end
 
             -- Declare server options
-            local server_opts = {
-                on_attach = on_attach,
-                capabilities = capabilities
-            }
+            -- local server_opts = {
+            --     on_attach = on_attach,
+            --     capabilities = capabilities
+            -- }
 
             -- Setup Mason
             mason.setup({
@@ -188,15 +203,26 @@ return {
                 automatic_installation = true,
                 handlers = {
                     function(server_name)
-                        -- Declare variable for LSP server config file to use
+                        lspconfig[server_name].setup({
+                            on_attach = function(client, bufnr)
+                                -- Enable inlay hints -- not needed for nvim 0.10+
+                                if client.supports_method("textDocument/inlayHints") then
+                                    vim.lsp.inlay_hint.enable(bufnr, true)
+                                    vim.notify("Inlay hints enabled for " .. client.name, "info")
+                                end
+
+                            end,
+                            capabilities = capabilities
+                        })
+
+                        -- If LSP server config file exists, then use those options
                         -- conf_opts = require("lsp.setting.<server>")
                         local require_ok, conf_opts = pcall(require, "lsp.settings." .. server_name)
-                        -- If LSP server config file exists, then use those options
                         if require_ok then
-                            server_opts = vim.tbl_deep_extend("force", conf_opts, server_opts)
+                            local server_opts = vim.tbl_deep_extend("force", conf_opts, capabilities)
+                            lspconfig[server_name].setup(server_opts)
                             -- vim.notify("LSP server " .. server_name .. " has been installed and configured", "info")
                         end
-                        lspconfig[server_name].setup(server_opts)
                     end
                 }
             })
@@ -228,7 +254,7 @@ return {
         -- multiline diagnostics
         "https://github.com/Tainted-Fool/lsp_lines",
         -- opts = {}, -- no options yet...
-        enabled = true, -- enable/disable virtual_text
+        -- enabled = true, -- enable/disable virtual_text
         event = "LspAttach",
         config = function()
             require("lsp_lines").setup()
@@ -296,5 +322,90 @@ return {
             vim.keymap.set("n", "K", hover.hover, { desc = "Show hover", noremap = true, silent = true })
             vim.keymap.set("n", "gK", hover.hover_select, { desc = "Show hover select", noremap = true, silent = true })
         end
-    }
+    },
+    {
+        -- better fold
+        "kevinhwang91/nvim-ufo",
+        event = "BufReadPost",
+        dependencies = {
+            "kevinhwang91/promise-async",
+            {
+                "luukvbaal/statuscol.nvim",
+                config = function()
+                    local builtin = require("statuscol.builtin")
+                    require("statuscol").setup({
+                        relculright = true,
+                        segments = {
+                            { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+                            { text = { "%s" }, click = "v:lua.ScSa" },
+                            { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+                        },
+                    })
+                end,
+            },
+        },
+        config = function()
+            local opt = vim.opt -- to save typing
+            opt.foldcolumn = "1"
+            opt.foldlevel = 99
+            opt.foldlevelstart = 99
+            opt.foldenable = true
+            opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
+            local handler = function(virtText, lnum, endLnum, width, truncate)
+                local newVirtText = {}
+                local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+                local sufWidth = vim.fn.strdisplaywidth(suffix)
+                local targetWidth = width - sufWidth
+                local curWidth = 0
+                for _, chunk in ipairs(virtText) do
+                    local chunkText = chunk[1]
+                    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                    if targetWidth > curWidth + chunkWidth then
+                        table.insert(newVirtText, chunk)
+                    else
+                        chunkText = truncate(chunkText, targetWidth - curWidth)
+                        local hlGroup = chunk[2]
+                        table.insert(newVirtText, {chunkText, hlGroup})
+                        chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                        -- str width returned from truncate() may less than 2nd argument, need padding
+                        if curWidth + chunkWidth < targetWidth then
+                            suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+                        end
+                        break
+                    end
+                    curWidth = curWidth + chunkWidth
+                end
+                table.insert(newVirtText, {suffix, 'MoreMsg'})
+                return newVirtText
+            end
+
+            vim.keymap.set("n", "zR", "<cmd>lua require('ufo').openAllFolds()<CR>", { desc = "Open all folds" })
+            vim.keymap.set("n", "zM", "<cmd>lua require('ufo').closeAllFolds()<CR>", { desc = "Close all folds" })
+            vim.keymap.set("n", "zr", "<cmd>lua require('ufo').openFoldsExceptKinds()<CR>", { desc = "Open less folds" })
+
+            require("ufo").setup({
+                open_fold_hl_timeout = 400,
+                -- provider_selection = function()
+                --     return { "treesitter", "indent" }
+                -- end,
+                close_fold_kinds_for_ft = {},
+                fold_virt_text_handler = handler,
+                enable_get_fold_virt_text = true,
+                preview = {
+                    win_config = {
+                        border = "rounded",
+                        winblend = 0,
+                    }
+                }
+            })
+        end,
+    },
+    {
+        -- fold preview
+        "anuvyklack/fold-preview.nvim",
+        dependencies = "anuvyklack/keymap-amend.nvim",
+        enabled = false,
+        opts = {},
+    },
 }

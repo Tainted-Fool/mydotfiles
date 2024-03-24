@@ -13,6 +13,7 @@ return {
     { "karb94/neoscroll.nvim", opts = {} }, -- better scrolling
     { "echasnovski/mini.animate", opts = {scroll = {enable = false}} }, -- animate the cursor and better scrolling
     { "chentoast/marks.nvim", opts = {}, event = "VeryLazy" }, -- marks on the sign column
+    -- { "lewis6991/gitsigns.nvim", opts = { signcolumn = false, numhl = true } }, -- gitsigns on the sign column
     "tpope/vim-repeat", -- repeat last command
     "tpope/vim-unimpaired", -- useful mappings like ]space and ]b
     "tpope/vim-abolish", -- convert words to snake, camel, mix case 'crs', 'crc', 'crm'
