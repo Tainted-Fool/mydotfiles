@@ -43,5 +43,12 @@ return {
             inc_rename = true,            -- enables an input dialog for inc-rename.nvim
             lsp_doc_border = false,        -- add a border to hover docs and signature help
         },
+        routes = {
+            {
+                -- Ignore error from `:q` with nvim-treesitter-context
+                filter = { event = "msg_show", find = "nvim_win_close" },
+                opts = { skip = true },
+            }
+        }
     }
 }

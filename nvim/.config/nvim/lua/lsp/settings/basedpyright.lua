@@ -14,18 +14,19 @@ return {
     mason = true,
     autostart = true,
     settings = {
-        pyright = {
+        basedpyright = {
             disableOrganizeImports = true, -- using ruff-lsp
+            typeCheckingMode = "standard",
         },
-        python = {
-            analysis = {
-                ignore = { "*" },
-                typeCheckingMode = "off", -- basic, strict, off - using ruff-lsp
-                inlayHints = {
-                    variableTypes = true,
-                    functionReturnTypes = true
-                }
-            }
-        }
+        -- python = {
+        --     analysis = {
+        --         ignore = { "*" },
+        --         typeCheckingMode = "off", -- basic, strict, off - using ruff-lsp
+        --         inlayHints = {
+        --             variableTypes = true,
+        --             functionReturnTypes = true
+        --         }
+        --     }
+        -- }
     }
 }

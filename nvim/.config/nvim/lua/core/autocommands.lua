@@ -14,6 +14,8 @@ vim.api.nvim_create_autocmd("FileType", {
         "netrw",
         "qf",
         "query",
+        "vim",
+        "notify",
     },
     callback = function()
         vim.cmd([[

@@ -54,19 +54,19 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        init_selection = "<CR>",
-                        node_incremental = "<TAB>",
-                        scope_incremental = "<CR>",
-                        node_decremental = "<S-TAB>",
+                        -- init_selection = "<CR>", -- bug with `q:`
+                        -- scope_incremental = "<CR>",
+                        node_incremental = "v",
+                        node_decremental = "V",
                     },
                 },
             })
         end,
         cmd = { "TSUpdate", "TSUpdateSync", "TSInstall" }, -- load on these commands
-        keys = { -- load on these keys
-            { "<CR>", desc = "Incremenet Selection" },
-            { "<S-TAB>", desc = "Decrement Selection", mode = "x" },
-        }
+        -- keys = { -- load on these keys
+        --     { "<CR>", desc = "Incremenet Selection" },
+        --     { "<S-TAB>", desc = "Decrement Selection", mode = "x" },
+        -- }
     },
     {
         -- commentstring based on cursor location

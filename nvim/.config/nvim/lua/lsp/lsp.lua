@@ -82,7 +82,7 @@ return {
 
             -- Declare LSP servers
             local servers = {
-                -- "basedpyright", -- Python (Open-source pyright)
+                "basedpyright", -- Python (Open-source pyright)
                 "bashls",   -- Bash
                 "clangd",   -- C
                 -- "csharp_ls" -- C Sharp
@@ -93,7 +93,7 @@ return {
                 "lua_ls",   -- Lua
                 "marksman", -- Markdown
                 "omnisharp", -- C Sharp
-                "pyright",  -- Python (Microsoft)
+                -- "pyright",  -- Python (Microsoft)
                 -- "pylsp", -- Python (Community)
                 -- "sumneko_lua", -- Lua (legacy)
                 "tsserver", -- TypeScript

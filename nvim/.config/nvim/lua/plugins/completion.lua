@@ -114,10 +114,10 @@ return {
                     ["<C-z>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.close(),
                     ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                    ["<S-CR>"] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true, -- set to false to only confirm explicitly selected items
-                    }),
+                    -- ["<S-CR>"] = cmp.mapping.confirm({
+                    --     behavior = cmp.ConfirmBehavior.Replace,
+                    --     select = true, -- set to false to only confirm explicitly selected items
+                    -- }),
                     ["<C-CR>"] = function(fallback)
                         cmp.abort()
                         fallback()
