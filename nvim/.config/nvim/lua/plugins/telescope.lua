@@ -30,7 +30,7 @@ return {
                 selection_caret = " ",
                 path_display = { "smart" },
                 file_ignore_patterns = {
-                    ".git",
+                    -- ".git", -- BUG: keyword `gitsign` is ignored
                     ".next",
                     ".sl",
                     "_build",

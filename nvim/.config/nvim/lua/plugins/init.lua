@@ -12,7 +12,8 @@ return {
     { "kylechui/nvim-surround", opts = {}, event = "VeryLazy" }, -- add/change/delete surrounding pairs
     { "karb94/neoscroll.nvim", opts = {} }, -- better scrolling
     { "echasnovski/mini.animate", opts = {scroll = {enable = false}} }, -- animate the cursor and better scrolling
-    { "chentoast/marks.nvim", opts = {}, event = "VeryLazy" }, -- marks on the sign column
+    { "chentoast/marks.nvim", opts = {}, event = "VeryLazy" }, -- show marks in the sign column
+    -- "yaocccc/vim-showmarks", -- show marks in the sign column
     -- { "lewis6991/gitsigns.nvim", opts = { signcolumn = false, numhl = true } }, -- gitsigns on the sign column
     "tpope/vim-repeat", -- repeat last command
     "tpope/vim-unimpaired", -- useful mappings like ]space and ]b

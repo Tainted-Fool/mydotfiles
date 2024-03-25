@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "tsplayground",
         "netrw",
         "qf",
+        "query",
     },
     callback = function()
         vim.cmd([[

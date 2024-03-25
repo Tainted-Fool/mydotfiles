@@ -272,7 +272,7 @@ return {
                 enabled = function()
                     return true
                 end,
-                execute = function(opts, done)
+                execute = function(_, done)
                     local params = util.make_position_params()
                     vim.lsp.buf_request_all(0, 'textDocument/hover', params, function(responses)
                         local value = ''
@@ -335,26 +335,30 @@ return {
                     local builtin = require("statuscol.builtin")
                     require("statuscol").setup({
                         relculright = true,
+                        bt_ignore = { "dashboard", "NvimTree", "Lazy" },
                         segments = {
-                            { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-                            { text = { "%s" }, click = "v:lua.ScSa" },
-                            { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+                            { text = { "%s" }, click = "v:lua.ScSa" }, -- gitsigns (moves diagnostic too)
+                            { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" }, -- line number
+                            { text = { builtin.foldfunc }, click = "v:lua.ScFa" }, -- fold icons
                         },
                     })
                 end,
             },
         },
         config = function()
-            local opt = vim.opt -- to save typing
-            opt.foldcolumn = "1"
-            opt.foldlevel = 99
-            opt.foldlevelstart = 99
-            opt.foldenable = true
-            opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+            vim.o.foldcolumn = "1"
+            vim.o.foldlevel = 99
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+            vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+            -- vim.o.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} %s"
+            -- vim.o.statuscolumn = "%=%l%s%C"
 
             local handler = function(virtText, lnum, endLnum, width, truncate)
                 local newVirtText = {}
-                local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+                local totalLines = vim.api.nvim_buf_line_count(0)
+                local foldedLines = endLnum - lnum
+                local suffix = ("  %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
                 local sufWidth = vim.fn.strdisplaywidth(suffix)
                 local targetWidth = width - sufWidth
                 local curWidth = 0
@@ -366,17 +370,20 @@ return {
                     else
                         chunkText = truncate(chunkText, targetWidth - curWidth)
                         local hlGroup = chunk[2]
-                        table.insert(newVirtText, {chunkText, hlGroup})
+                        table.insert(newVirtText, { chunkText, hlGroup })
                         chunkWidth = vim.fn.strdisplaywidth(chunkText)
                         -- str width returned from truncate() may less than 2nd argument, need padding
                         if curWidth + chunkWidth < targetWidth then
-                            suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+                            suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
                         end
                         break
                     end
                     curWidth = curWidth + chunkWidth
                 end
-                table.insert(newVirtText, {suffix, 'MoreMsg'})
+                local rAlignAppndx =
+                math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
+                suffix = (" "):rep(rAlignAppndx) .. suffix
+                table.insert(newVirtText, { suffix, "MoreMsg" })
                 return newVirtText
             end
 
@@ -385,10 +392,11 @@ return {
             vim.keymap.set("n", "zr", "<cmd>lua require('ufo').openFoldsExceptKinds()<CR>", { desc = "Open less folds" })
 
             require("ufo").setup({
-                open_fold_hl_timeout = 400,
+                -- uncomment to use treesitter as fold provider or defaults to nvim lsp
                 -- provider_selection = function()
                 --     return { "treesitter", "indent" }
                 -- end,
+                open_fold_hl_timeout = 400,
                 close_fold_kinds_for_ft = {},
                 fold_virt_text_handler = handler,
                 enable_get_fold_virt_text = true,

@@ -53,6 +53,9 @@ keymap("n", "#", "#zz", "Search word under cursor backward")
 keymap("n", "g*", "g*zz", "Search partial word under cursor foward")
 keymap("n", "g#", "g#zz", "Search partial word under cursor backward")
 
+-- Delete marks
+-- keymap("n", "dm", "<cmd>execute 'delmarks '.nr2char(getchar())<CR>", "Delete marks")
+
 -- Insert mode
 -- Press `fj` or `jj` to exit insert mode
 keymap("i", "fj", "<ESC>", "Exit insert mode")
