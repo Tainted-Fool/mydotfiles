@@ -91,7 +91,7 @@ return {
             ["q"] = {"<cmd>q!<cr>", "Quit"},
             -- ["W"] = {"<cmd>wq!<cr>", "Save and quit"},
             -- ["x"] = {"<cmd>!chmod +x %<cr>", "Execute"},
-            ["/"] = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false })<cr>", "Fuzzy Search"},
+            ["/"] = {"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 20, previewer = true })<cr>", "Fuzzy Search"},
             ["?"] = {"<cmd>Cheatsheet<cr>", "Cheatsheet"},
             ["-"] = {"<C-W>s", "Split window below"},
             ["\\"] = {"<C-W>v", "Split window right"},
@@ -106,7 +106,7 @@ return {
                 },
                 s = {"<cmd>w<cr>", "Save/Write Buffer"},
                 q = {"<cmd>wq!<cr>", "Save and Quit Buffer"},
-                w = {"<cmd>write<cr>", "Save/Write Buffer"},
+                w = {"<cmd>Format<cr>:w<cr>", "Format and Save"},
                 x = {"<cmd>w<cr>:bd!<cr>", "Save and Close Buffer"}
             },
 

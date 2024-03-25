@@ -3,16 +3,16 @@ return {
         -- enable lsp
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
-        cmd = {"LspInfo", "LspInstall", "LspUninstall", "Mason" },
+        cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
         build = ":MasonUpdate",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp", -- lsp completion
-            "williamboman/mason.nvim", -- easy install lsp servers
+            "hrsh7th/cmp-nvim-lsp",             -- lsp completion
+            "williamboman/mason.nvim",          -- easy install lsp servers
             "williamboman/mason-lspconfig.nvim", -- lsp configurations (done)
             "whoissethdaniel/mason-tool-installer.nvim", -- install and upgrade Mason tools
-            "nvimtools/none-ls.nvim", -- diagnostics, code actions, and formatting
-            "folke/neodev.nvim", -- better nvim and lsp configuration
-            "arkav/lualine-lsp-progress", -- indicator that shows when lsp is ready
+            "nvimtools/none-ls.nvim",           -- diagnostics, code actions, and formatting
+            "folke/neodev.nvim",                -- better nvim and lsp configuration
+            "arkav/lualine-lsp-progress",       -- indicator that shows when lsp is ready
             { "folke/neodev.nvim", opts = {} }, -- nvim lua API docs and completion
             { "j-hui/fidget.nvim", opts = {} }, -- show lsp progress handler
         },
@@ -24,33 +24,33 @@ return {
             local mason_installer = require("mason-tool-installer")
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-            -- -- Set diagnostic signs
+            -- -- Declare diagnostic signs
             local signs = {
                 { name = "DiagnosticSignError", text = "" },
                 { name = "DiagnosticSignWarn", text = "" },
                 { name = "DiagnosticSignHint", text = "" },
-                { name = "DiagnosticSignInfo", text = "" }
+                { name = "DiagnosticSignInfo", text = "" },
             }
-            -- Define the signs
+            -- Set the signs
             for _, sign in ipairs(signs) do
                 vim.fn.sign_define(sign.name, {
                     texthl = sign.name,
                     text = sign.text,
-                    numhl = ""
+                    numhl = "",
                 })
             end
 
-            -- Declare configurations for Diagnostics when LSP is running
+            -- Declare configurations for diagnostics when LSP is running
             local config = {
                 -- Disable virtual text/diagnostic errors
                 virtual_text = false, -- enable/disable diagnostic text for trouble plugin
                 virtual_lines = {
-                    only_current_line = true
+                    only_current_line = true,
                 },
 
                 -- Show signs
                 signs = {
-                    active = signs
+                    active = signs,
                 },
                 update_in_insert = false,
                 underline = true,
@@ -63,8 +63,8 @@ return {
                     border = "rounded",
                     source = "always",
                     header = "",
-                    prefix = ""
-                }
+                    prefix = "",
+                },
             }
             vim.diagnostic.config(config)
 
@@ -83,17 +83,17 @@ return {
             -- Declare LSP servers
             local servers = {
                 -- "basedpyright", -- Python (Open-source pyright)
-                "bashls", -- Bash
-                "clangd", -- C
+                "bashls",   -- Bash
+                "clangd",   -- C
                 -- "csharp_ls" -- C Sharp
-                "cssls", -- CSS
-                "html", -- HTML
+                "cssls",    -- CSS
+                "html",     -- HTML
                 "jedi_language_server", -- Python (better docs)
-                "jsonls", -- JSON
-                "lua_ls", -- Lua
+                "jsonls",   -- JSON
+                "lua_ls",   -- Lua
                 "marksman", -- Markdown
                 "omnisharp", -- C Sharp
-                "pyright", -- Python (Microsoft)
+                "pyright",  -- Python (Microsoft)
                 -- "pylsp", -- Python (Community)
                 -- "sumneko_lua", -- Lua (legacy)
                 "tsserver", -- TypeScript
@@ -122,7 +122,7 @@ return {
                 group = vim.api.nvim_create_augroup("Lsp-Attach", { clear = true }),
                 callback = function(event)
                     local keymap = function(keys, func, desc)
-                        vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, noremap = true, silent = true})
+                        vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, noremap = true, silent = true })
                     end
 
                     -- Declare keymaps when LSP is running
@@ -140,7 +140,7 @@ return {
                     keymap("gn", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable")
                     keymap("ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Go to code action")
                     keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format current buffer")
-                end
+                end,
             })
 
             -- Default lsp communication capabilities
@@ -150,12 +150,13 @@ return {
                 properties = {
                     "documentation",
                     "detail",
-                    "additionalTextEdits"
-                }
+                    "additionalTextEdits",
+                },
             }
+            -- enable folding
             capabilities.textDocument.foldingRange = {
                 dynamicRegistration = false,
-                lineFoldingOnly = true
+                lineFoldingOnly = true,
             }
             -- extend capabilities with nvim-cmp
             -- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
@@ -184,17 +185,17 @@ return {
                     icons = {
                         package_installed = "✓",
                         package_pending = "➜",
-                        package_uninstalled = "✗"
-                    }
+                        package_uninstalled = "✗",
+                    },
                 },
                 log_level = vim.log.levels.INFO,
-                max_concurrent_installers = 4
+                max_concurrent_installers = 4,
             })
 
             -- Install Mason tools (dap, format, lint)
             mason_installer.setup({
                 ensure_installed = tools,
-                auto_update = true
+                auto_update = true,
             })
 
             -- Install and setup LSP servers
@@ -210,9 +211,8 @@ return {
                                     vim.lsp.inlay_hint.enable(bufnr, true)
                                     vim.notify("Inlay hints enabled for " .. client.name, "info")
                                 end
-
                             end,
-                            capabilities = capabilities
+                            capabilities = capabilities,
                         })
 
                         -- If LSP server config file exists, then use those options
@@ -223,8 +223,8 @@ return {
                             lspconfig[server_name].setup(server_opts)
                             -- vim.notify("LSP server " .. server_name .. " has been installed and configured", "info")
                         end
-                    end
-                }
+                    end,
+                },
             })
 
             -- Create a 'Format' command for formatting files
@@ -237,8 +237,8 @@ return {
         lazy = true,
         cmd = "DocsViewToggle",
         opts = {
-            position = "right"
-        }
+            position = "right",
+        },
     },
     {
         -- better lsp diagnostics and quickfix list
@@ -247,8 +247,8 @@ return {
         cmd = "TroubleToggle",
         opts = {
             position = "right",
-            use_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
-        }
+            use_diagnostic_signs = true, -- enabling this will use the signs defined in your lsp client
+        },
     },
     {
         -- multiline diagnostics
@@ -258,48 +258,49 @@ return {
         event = "LspAttach",
         config = function()
             require("lsp_lines").setup()
-        end
+        end,
     },
     {
         "lewis6991/hover.nvim",
         config = function()
             local util = vim.lsp.util
-            local ___ = '\n─────────────────────────────────────────────────────────────────────────────\n'
+            local ___ =
+            "\n─────────────────────────────────────────────────────────────────────────────\n"
 
             local LSPWithDiagSource = {
-                name = 'LSP',
+                name = "LSP",
                 priority = 1000,
                 enabled = function()
                     return true
                 end,
                 execute = function(_, done)
                     local params = util.make_position_params()
-                    vim.lsp.buf_request_all(0, 'textDocument/hover', params, function(responses)
-                        local value = ''
+                    vim.lsp.buf_request_all(0, "textDocument/hover", params, function(responses)
+                        local value = ""
                         for _, response in pairs(responses) do
                             local result = response.result
                             if result and result.contents and result.contents.value then
-                                if value ~= '' then
+                                if value ~= "" then
                                     value = value .. ___
                                 end
                                 value = value .. result.contents.value
                             end
                         end
 
-                        local _, row = unpack(vim.fn.getpos('.'))
+                        local _, row = unpack(vim.fn.getpos("."))
                         local lineDiag = vim.diagnostic.get(0, { lnum = row - 1 })
                         for _, d in pairs(lineDiag) do
                             if d.message then
-                                if value ~= '' then
+                                if value ~= "" then
                                     value = value .. ___
                                 end
-                                value = value .. string.format('*%s* %s', d.source, d.message)
+                                value = value .. string.format("*%s* %s", d.source, d.message)
                             end
                         end
-                        value = value:gsub('\r', '')
+                        value = value:gsub("\r", "")
 
-                        if value ~= '' then
-                            done({ lines = vim.split(value, '\n', true), filetype = 'markdown' })
+                        if value ~= "" then
+                            done({ lines = vim.split(value, "\n"), filetype = "markdown" })
                         else
                             done()
                         end
@@ -314,14 +315,14 @@ return {
                     require("hover.providers.dictionary")
                 end,
                 preview_opts = {
-                    border = nil,
+                    border = "rounded", -- rounded, single, double, shadow
                 },
                 preview_window = false,
                 title = true,
             })
             vim.keymap.set("n", "K", hover.hover, { desc = "Show hover", noremap = true, silent = true })
             vim.keymap.set("n", "gK", hover.hover_select, { desc = "Show hover select", noremap = true, silent = true })
-        end
+        end,
     },
     {
         -- better fold
@@ -380,8 +381,7 @@ return {
                     end
                     curWidth = curWidth + chunkWidth
                 end
-                local rAlignAppndx =
-                math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
+                local rAlignAppndx = math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
                 suffix = (" "):rep(rAlignAppndx) .. suffix
                 table.insert(newVirtText, { suffix, "MoreMsg" })
                 return newVirtText
@@ -404,8 +404,8 @@ return {
                     win_config = {
                         border = "rounded",
                         winblend = 0,
-                    }
-                }
+                    },
+                },
             })
         end,
     },

@@ -95,8 +95,9 @@ return {
 
             cmp.setup({
                 -- Completion for luasnip plugin
+                preselect = cmp.PreselectMode.None,
                 completion = {
-                    completeopt = "menu,menuone,noinsert",
+                    completeopt = "menu,menuone,noinsert,noselect",
                 },
                 snippet = {
                     expand = function(args)
