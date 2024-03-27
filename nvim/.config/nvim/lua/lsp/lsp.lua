@@ -153,7 +153,7 @@ return {
                     "additionalTextEdits",
                 },
             }
-            -- enable folding
+            -- enable folding by lsp :395
             capabilities.textDocument.foldingRange = {
                 dynamicRegistration = false,
                 lineFoldingOnly = true,
@@ -206,10 +206,10 @@ return {
                     function(server_name)
                         lspconfig[server_name].setup({
                             on_attach = function(client, bufnr)
-                                -- Enable inlay hints -- not needed for nvim 0.10+
+                                -- Enable inlay hints
                                 if client.supports_method("textDocument/inlayHints") then
                                     vim.lsp.inlay_hint.enable(bufnr, true)
-                                    vim.notify("Inlay hints enabled for " .. client.name, "info")
+                                    -- vim.notify("Inlay hints enabled for " .. client.name, "info")
                                 end
                             end,
                             capabilities = capabilities,
@@ -329,6 +329,7 @@ return {
         "kevinhwang91/nvim-ufo",
         event = "BufReadPost",
         dependencies = {
+            "masukomi/vim-markdown-folding",
             "kevinhwang91/promise-async",
             {
                 "luukvbaal/statuscol.nvim",
@@ -340,7 +341,7 @@ return {
                         segments = {
                             { text = { "%s" }, click = "v:lua.ScSa" }, -- gitsigns (moves diagnostic too)
                             { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" }, -- line number
-                            { text = { builtin.foldfunc }, click = "v:lua.ScFa" }, -- fold icons
+                            { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" }, -- fold icons
                         },
                     })
                 end,
@@ -352,6 +353,7 @@ return {
             vim.o.foldlevelstart = 99
             vim.o.foldenable = true
             vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+            vim.g.markdown_folding = true
             -- vim.o.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} %s"
             -- vim.o.statuscolumn = "%=%l%s%C"
 
@@ -392,7 +394,7 @@ return {
             vim.keymap.set("n", "zr", "<cmd>lua require('ufo').openFoldsExceptKinds()<CR>", { desc = "Open less folds" })
 
             require("ufo").setup({
-                -- uncomment to use treesitter as fold provider or defaults to nvim lsp
+                -- uncomment to use treesitter as fold provider or defaults to nvim lsp :156
                 -- provider_selection = function()
                 --     return { "treesitter", "indent" }
                 -- end,
