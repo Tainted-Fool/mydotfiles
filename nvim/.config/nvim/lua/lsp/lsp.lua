@@ -26,10 +26,10 @@ return {
 
             -- -- Declare diagnostic signs
             local signs = {
-                { name = "DiagnosticSignError", text = "" },
-                { name = "DiagnosticSignWarn", text = "" },
-                { name = "DiagnosticSignHint", text = "" },
-                { name = "DiagnosticSignInfo", text = "" },
+                { name = "DiagnosticSignError", text = "" }, -- ✘
+                { name = "DiagnosticSignWarn", text = "" }, -- ▲
+                { name = "DiagnosticSignHint", text = "" }, -- ⚑
+                { name = "DiagnosticSignInfo", text = "" }, -- »
             }
             -- Set the signs
             for _, sign in ipairs(signs) do
@@ -43,21 +43,17 @@ return {
             -- Declare configurations for diagnostics when LSP is running
             local config = {
                 -- Disable virtual text/diagnostic errors
-                virtual_text = false, -- enable/disable diagnostic text for trouble plugin
+                virtual_text = false, -- show diagnostic message using virtual text
                 virtual_lines = {
-                    only_current_line = true,
+                    only_current_line = true, -- show virtual text when your cursor is in line
                 },
-
-                -- Show signs
                 signs = {
-                    active = signs,
+                    active = signs, -- set signs to the above configuration
                 },
-                update_in_insert = false,
-                underline = true,
-                severity_sort = true,
-
-                -- Set our popup options for diagnostic errors
-                float = {
+                update_in_insert = false, -- update while editting in insert mode
+                underline = true, -- use underline to show diagnostic location
+                severity_sort = true, -- order diagnostics by severity
+                float = { -- show diagnostics in a floating window
                     focusable = true,
                     style = "minimal",
                     border = "rounded",
@@ -69,16 +65,16 @@ return {
             vim.diagnostic.config(config)
 
             -- Set popup options for hover window
-            -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-            --     border = "rounded"
-            --     -- width = 60,
-            -- })
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+                border = "rounded"
+                -- width = 60,
+            })
 
             -- Set popup options for signature help window
-            -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-            --     border = "rounded"
-            --     -- width = 60,
-            -- })
+            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+                border = "rounded"
+                -- width = 60,
+            })
 
             -- Declare LSP servers
             local servers = {
@@ -143,6 +139,19 @@ return {
                 end,
             })
 
+            -- Disable diagnostics in insert mode
+            vim.api.nvim_create_autocmd('ModeChanged', {
+                pattern = {'n:i', 'v:s'},
+                desc = 'Disable diagnostics in insert and select mode',
+                callback = function(e) vim.diagnostic.disable(e.buf) end
+            })
+
+            vim.api.nvim_create_autocmd('ModeChanged', {
+                pattern = 'i:n',
+                desc = 'Enable diagnostics when leaving insert mode',
+                callback = function(e) vim.diagnostic.enable(e.buf) end
+            })
+
             -- Default lsp communication capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -161,22 +170,6 @@ return {
             -- extend capabilities with nvim-cmp
             -- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
             capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-
-            -- local on_attach = function(client, bufnr)
-            --     lsp_keymaps(bufnr)
-            --
-            --     -- Enable inlay hints -- not needed for nvim 0.10+
-            --     if client.supports_method("textDocument/inlayHints") then
-            --         vim.lsp.inlay_hint.enable(bufnr, true)
-            --         -- vim.notify("Inlay hints enabled for " .. client.name, "info")
-            --     end
-            -- end
-
-            -- Declare server options
-            -- local server_opts = {
-            --     on_attach = on_attach,
-            --     capabilities = capabilities
-            -- }
 
             -- Setup Mason
             mason.setup({
