@@ -105,9 +105,9 @@ return {
                         backgrounds = {
                             "DiffAdd",
                             "DiffChange",
-                            "DiffDelete",
+                            "Todo",
                             "DiffText",
-                            "Todo"
+                            "DiffDelete",
                         }
                     }
                 }
@@ -117,6 +117,34 @@ return {
     {
         "tadmccorkle/markdown.nvim", -- markdown syntax highlighting
         ft = "markdown",
-        opts = {}
+        opts = {
+            mappings = {
+                inline_surround_toggle = false, -- toggle inline style default:`gs`
+                inline_surround_toggle_line = false, -- toggle line-wise inline style default:`gss`
+                inline_surround_delete = false, -- delete emphasis surrounding curosr default:`ds`
+                inline_surround_change = false, -- chgange emphasis surrounding curosr default:`cs`
+                link_add = false, -- add link default:`gl`
+                link_follow = "gx", -- follow link default:`gx`
+                go_curr_heading = false, -- go to current heading default:`]c`
+                go_parent_heading = false, -- go to parent heading default:`]p`
+                go_next_heading = false, -- go to next heading default:`]]`
+                go_prev_heading = false, -- go to previous heading default:`[[`
+                on_attach = function(bufnr)
+                    local map = vim.keymap.set
+                    local opts = { buffer = bufnr }
+                    local function toggle(key)
+                        return "<Esc>gv<cmd>lua require'markdown.inline'" .. ".toggle_emphasis_visual'" .. key .. "'1<cr>"
+                    end
+
+                    -- buffer only keymaps
+                    map({ "n", "i" }, "<M-l><M-o>", "<cmd>MDListItemBelow<cr>", opts)
+                    map({ "n", "i" }, "<M-L><M-O>", "<cmd>MDListItemAbove<cr>", opts)
+                    map("n", "<M-c>", "<cmd>MDtaskToggle<cr>", opts)
+                    map("x", "<M-c>", ":MDTaskToggle<cr>", opts)
+                    map("x", "<C-b>", toggle("b"), opts) -- strong/bold toggle
+                    map("x", "<C-i>", toggle("i"), opts) -- emphasis/italics toggle
+                end
+            }
+        }
     },
 }

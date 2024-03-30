@@ -162,7 +162,7 @@ return {
                     "additionalTextEdits",
                 },
             }
-            -- enable folding by lsp :395
+            -- enable folding by lsp :398
             capabilities.textDocument.foldingRange = {
                 dynamicRegistration = false,
                 lineFoldingOnly = true,
@@ -347,6 +347,7 @@ return {
             vim.o.foldenable = true
             vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
             vim.g.markdown_folding = true
+            vim.g.markdown_fold_style = "nested"
             -- vim.o.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} %s"
             -- vim.o.statuscolumn = "%=%l%s%C"
 
