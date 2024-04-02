@@ -98,7 +98,9 @@ vim.api.nvim_create_autocmd("WinEnter", {
     local floating = vim.api.nvim_win_get_config(0).relative ~= ""
         vim.diagnostic.config({
             virtual_text = floating,
-            virtual_lines = not floating
+            virtual_lines = {
+                only_current_line = not floating, -- show virtual text when your cursor is in line
+            },
         })
     end
 })
