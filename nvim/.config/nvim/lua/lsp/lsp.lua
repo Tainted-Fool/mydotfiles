@@ -64,6 +64,11 @@ return {
             }
             vim.diagnostic.config(config)
 
+            local foldsettings = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            }
+
             -- Set popup options for hover window
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
                 border = "rounded"
@@ -154,6 +159,7 @@ return {
 
             -- Default lsp communication capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.foldingRange = foldsettings
             capabilities.textDocument.completion.completionItem.snippetSupport = true
             capabilities.textDocument.completion.completionItem.resolveSupport = {
                 properties = {
