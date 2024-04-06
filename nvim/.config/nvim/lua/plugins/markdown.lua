@@ -105,8 +105,8 @@ return {
                         backgrounds = {
                             "DiffAdd",
                             "DiffChange",
-                            "Todo",
                             "DiffText",
+                            "WildMenu",
                             "DiffDelete",
                         }
                     }

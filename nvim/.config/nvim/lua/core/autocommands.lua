@@ -94,6 +94,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- Disable lsp_lines in floating windows like lazy plugin manager
 vim.api.nvim_create_autocmd("WinEnter", {
+    -- pattern = "lazy",
     callback = function()
     local floating = vim.api.nvim_win_get_config(0).relative ~= ""
         vim.diagnostic.config({

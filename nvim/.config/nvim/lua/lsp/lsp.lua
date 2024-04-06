@@ -47,6 +47,9 @@ return {
                 virtual_lines = {
                     only_current_line = true, -- show virtual text when your cursor is in line
                 },
+                -- virtual_improved = {
+                --     current_line = "only" -- save as above
+                -- },
                 signs = {
                     active = signs, -- set signs to the above configuration
                 },

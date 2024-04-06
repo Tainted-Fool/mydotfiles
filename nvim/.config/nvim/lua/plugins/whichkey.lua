@@ -282,7 +282,9 @@ return {
             w = {
                 name = "Windows",
                 c = {"<C-W>c", "Close window"},
+                -- c = {"<cmd>close<cr>", "Close window"},
                 d = {"<C-W>c", "Delete window"},
+                e = {"<C-W>=", "Split window equal size"},
                 o = {"<C-W>o", "Close all other windows"},
                 s = {"<C-W>s", "Split window below"},
                 v = {"<C-W>v", "Split window right"},
