@@ -21,6 +21,7 @@ B = function()
 end
 
 -- print server capabilities
-S = function()
-    return vim.lsp.get_active_clients()
-end
+-- =vim.lsp.get_active_clients()[4].server_capabilities
+-- S = function()
+--     return vim.lsp.get_active_clients()
+-- end
