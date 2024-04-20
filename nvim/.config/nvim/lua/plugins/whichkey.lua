@@ -237,6 +237,7 @@ return {
 
             r = {
                 name = "Run",
+                -- e = {"<cmd>lua require('swenv.api').pick_venv()<cr>", "Switch Envar"},
                 i = {"<cmd>Lab code panel<cr>", "Code Infomation"},
                 m = {"<cmd>MarkdownPreviewToggle<cr>", "Markdown Preview"},
                 o = {"<cmd>source ~/.config/nvim/lua/user/luasnip.lua<cr>", "Source Snippets"},
@@ -277,6 +278,15 @@ return {
                 t = {"<cmd>lua _HTOP_TOGGLE()<cr>", "HTop"},
                 u = {"<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU - Disk Usage"},
                 v = {"<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical"}
+            },
+
+            v = {
+                name = "Virtual Env",
+                a = { "<cmd>lua require('venv-selector').get_active_venv()<cr>", "Get Active Virtual Env Path"},
+                c = { "<cmd>VenvSelectCached<cr>", "Virtual Env Select from Cache"},
+                g = { "<cmd>VenvSelectCurrent<cr>", "Get Current Virtual Env"},
+                s = { "<cmd>VenvSelect<cr>", "Virtual Env Select"},
+                p = { "<cmd>lua require('venv-selector').get_active_path()<cr>", "Get Active Python Exe Path"},
             },
 
             w = {

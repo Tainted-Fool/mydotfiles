@@ -25,6 +25,7 @@ return {
     { "smjonas/inc-rename.nvim", opts = {}, event = "VeryLazy" }, -- incremental lsp renaming
     {
         "stevearc/oil.nvim", -- edit files like a normal vim buffer
+        tag = "v2.8.0", -- floating window bug on latest version
         opts = {
             view_options = {
                 show_hidden = true,
@@ -69,6 +70,7 @@ return {
     },
     -- { "epwalsh/obsidian.nvim", opts = {} } -- use obsidian in neovim
     "girishji/pythondoc.vim", -- python docs
+    -- "AckslD/swenv.nvim", -- switch between python virtualenvs
 
     -- Buffers
     "moll/vim-bbye", -- close/delete buffers easier :Bdelete, :Bwipeout
