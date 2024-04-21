@@ -115,16 +115,18 @@ alias edittmux="nvim ~/.config/tmux/tmux.conf"
 alias src="source ~/.zshrc"
 
 # add alias to 'fzf'
-alias fuzz="fzf"
+# alias fuzz="fzf"
 
-# add alias to 'colorls' and 'exa' if found on machine
-if [ -x "$(command -v colorls)" ]; then
-	alias ls="colorls"
-	alias la="colorls -al"
+# add alias to 'fdfind'
+# alias fd="fdfind"
+
+# add alias to 'eza' if found on machine
+if [ -x "$(command -v eza)" ]; then
+  alias ls="eza"
+  alias la="eza --long --all --group"
 fi
 
-if [ -x "$(command -v exa)" ]; then
-  alias ls="exa"
-	alias la="exa --long --all --group"
+# add alias to 'zoxide' if found on machine
+if [ -x "$(command -v zoxide)" ]; then
+  alias cd="z"
 fi
-

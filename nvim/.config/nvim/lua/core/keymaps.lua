@@ -97,3 +97,7 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", "Move line down")
 keymap("x", "K", ":move '<-2<CR>gv-gv", "Move line up")
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", "Move line down")
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", "Move line up")
+
+-- Move to beginning or end of line
+keymap({"n", "o", "x"}, "<S-h>", "^")
+keymap({"n", "o", "x"}, "<S-l>", "g_")

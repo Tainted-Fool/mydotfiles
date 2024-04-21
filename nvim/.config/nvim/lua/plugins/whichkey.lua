@@ -14,7 +14,7 @@ return {
                     suggestions = 20
                 },
                 presets = {
-                    operators = false, -- adds help for operators like d, y, c, s, etc.
+                    operators = true, -- adds help for operators like d, y, c, s, etc.
                     motions = true, -- adds help for motions
                     text_objects = true, -- adds help for text objects triggered after entering an operator
                     windows = true, -- default bindings on <C-w>
@@ -38,7 +38,7 @@ return {
             },
             window = {
                 border = "rounded", -- none, single, double, rounded, or shadow
-                position = "bottom", -- bottom, or top
+                position = "top", -- bottom, or top
                 -- margin = {1, 0, 1, 0}, -- extra window margin [top, right, bottom, left]
                 -- padding = {2, 2, 2, 2}, -- extra window padding [top, right, bottom, left]
                 -- winblend = 0
@@ -104,8 +104,9 @@ return {
                     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
                     "Buffer explorer",
                 },
-                s = {"<cmd>w<cr>", "Save/Write Buffer"},
+                m = {"<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split"},
                 q = {"<cmd>wq!<cr>", "Save and Quit Buffer"},
+                s = {"<cmd>w<cr>", "Save/Write Buffer"},
                 w = {"<cmd>Format<cr>:w<cr>", "Format and Save"},
                 x = {"<cmd>w<cr>:bd!<cr>", "Save and Close Buffer"}
             },
@@ -266,6 +267,7 @@ return {
                 R = {"<cmd>Telescope registers<cr>", "Registers"},
                 s = {"<cmd>Telescope session-lens search_session<cr>", "Search Sessions"},
                 S = {"<cmd>SessionSave<cr>", "Save Sessions"},
+                t = {"<cmd>SessionRestore<cr>", "Restore Session"},
                 u = {"<cmd>Telescope undo<cr>", "Undo History"},
             },
 

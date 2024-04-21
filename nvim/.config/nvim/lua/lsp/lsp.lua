@@ -263,6 +263,7 @@ return {
         end,
     },
     {
+        -- Better hover capabilities with 'K' and 'gK'
         "lewis6991/hover.nvim",
         config = function()
             local util = vim.lsp.util

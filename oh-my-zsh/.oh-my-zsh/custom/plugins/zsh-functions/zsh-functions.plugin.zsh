@@ -85,6 +85,12 @@ function checkargs() {
     echo "$1"
 }
 
+# check startup time of shell
+function timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 5); do time $shell -i -c exit; done
+}
+
 # Open Obsidian notebook in VS Code in home directory
 # function notes() {
 #     # Create a variable for notebook directory

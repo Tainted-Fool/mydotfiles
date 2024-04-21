@@ -74,18 +74,18 @@ return {
                         NormalFloat = { bg = "none" },
                         FloatBorder = { bg = "none" },
                         FloatTitle = { bg = "none" },
-                        NormalDark = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-                        LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-                        MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+                        -- NormalDark = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+                        -- LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+                        -- MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
 
                         -- block-lick modern Telescope UI
-                        TelescopeTitle = { fg = theme.ui.special, bold = true },
-                        TelescopePromptNormal = { bg = theme.ui.bg_p1 },
-                        TelescopePromptBorder = { bg = theme.ui.bg_p1, fg = theme.ui.bg_p1 },
-                        TelescopeResultsNormal = { bg = theme.ui.bg_m1, fg = theme.ui.fg_dim },
-                        TelescopeResultsBorder = { bg = theme.ui.bg_m1, fg = theme.ui.bg_m1 },
-                        TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-                        TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+                        -- TelescopeTitle = { fg = theme.ui.special, bold = true },
+                        -- TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+                        -- TelescopePromptBorder = { bg = theme.ui.bg_p1, fg = theme.ui.bg_p1 },
+                        -- TelescopeResultsNormal = { bg = theme.ui.bg_m1, fg = theme.ui.fg_dim },
+                        -- TelescopeResultsBorder = { bg = theme.ui.bg_m1, fg = theme.ui.bg_m1 },
+                        -- TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+                        -- TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
 
                         -- more uniform colors for the popup menu
                         Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add blend = vim.o.pumblend to enable
