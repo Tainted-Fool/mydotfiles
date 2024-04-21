@@ -332,9 +332,10 @@ return {
         "kevinhwang91/nvim-ufo",
         event = "BufReadPost",
         dependencies = {
-            "masukomi/vim-markdown-folding",
+            "masukomi/vim-markdown-folding", -- fold markdown documents by section
             "kevinhwang91/promise-async",
             {
+                -- better status column
                 "luukvbaal/statuscol.nvim",
                 config = function()
                     local builtin = require("statuscol.builtin")

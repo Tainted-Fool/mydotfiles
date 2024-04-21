@@ -124,5 +124,6 @@ return {
         telescope.load_extension("projects")
         telescope.load_extension("session-lens")
         telescope.load_extension("undo")
+        -- telescope.load_extension("mapper")
     end,
 }

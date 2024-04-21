@@ -38,27 +38,23 @@ Switched to `stow` for dotfiles management. It's a lot easier to manage and upda
 sudo apt install stow
 cd mydotfiles
 stow .
+# stow nvim
 # stow */ -t ~
 # stow --target ~/.config .
 ```
 
 ## Dependencies
 
-- vim 8.2+
-- stow
-- vimplug (auto-installs)
+- vim 8.2+ or nvim 0.5+
 - nodejs and npm for coc.nvim
 - FZF for fuzzy search files/folders
-- xsel for shared clipboard - not needed
-- Figlet for ascii art - not needed
-- Ranger for file management - not needed
 - A Nerd Font (see optional)
 - wslu for WSL utilities (see optional)
 - wsl-open for opening files with WSL (see optional)
 
 ```bash
 sudo apt update && sudo apt upgrade
-sudo apt install nodejs npm fzf vifm xsel figlet ranger ueberzug
+sudo apt install nodejs npm vifm xsel figlet ranger ueberzug
 ```
 
 ### Optional Dependencies
@@ -66,6 +62,8 @@ sudo apt install nodejs npm fzf vifm xsel figlet ranger ueberzug
 - fd-find(fd) for better `find` utility
 - ripgrep(rg) for better `grep` utility
 - bat for better `cat` utility
+- eza for better `ls` utility
+- zoxide for better `cd` utility
 - delta for better `git` pager utility
 - chafa for terminal image previewer
 - ueberzug for X11 image previewer - not needed
@@ -216,24 +214,27 @@ sh autogen.sh
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-### Install Colorls
-
-Add color to the `ls` command
-
-```bash
-sudo gem install colorls
-sudo apt install ruby-full
-
-# Or install below; DO NOT INSTALL BOTH
-sudo apt install exa
-```
-
 ### Install Batcat
 
 An alternative to `cat` with syntax highlight
 
 ```bash
 sudo apt install bat
+```
+
+### Install Eza
+
+Add color to the `ls` command
+
+```bash
+sudo apt install eza
+```
+
+### Install Zoxide
+
+A better `cd` command
+```bash
+sudo apt install zoxide
 ```
 
 ### Install Azure CLI
@@ -244,6 +245,15 @@ Usful for doing a lot of Azure stuff
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py --silent
 python3 get-pip.py
 pip install azure-cli
+```
+
+### Install Fzf
+
+A fuzzy search utility
+
+```bash
+git clone --depth 1 https:.//github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 ```
 
 ### Install Anaconda
@@ -412,4 +422,10 @@ nvim -v
 
 ```bash
 sudo apt install fortune-mod
+```
+
+### TooLongDidntRead
+
+```python
+pip install tldr
 ```

@@ -71,11 +71,27 @@ return {
     -- { "epwalsh/obsidian.nvim", opts = {} } -- use obsidian in neovim
     "girishji/pythondoc.vim", -- python docs
     -- "AckslD/swenv.nvim", -- switch between python virtualenvs
+    {
+        "gregorias/nvim-mapper", -- map keys with telescope
+        enabled = false,
+        dependencies = "nvim-telescope/telescope.nvim",
+        config = function()
+            require("nvim-mapper").setup({
+                no_map = true, -- map to <leader>MM
+            })
+            -- require("nvim-mapper").map({ "i", "s" }, "<leader>sk", function()
+            --     if ls.expand_or_jumpable() then
+            --         ls.expand_or_jump(1)
+            --     end
+            -- end, {silent = true}, "Snippets", "snippet_jump_or_expand",
+            -- "Expand or jump to next snippet placeholder")
+        end,
+    },
 
     -- Buffers
     "moll/vim-bbye", -- close/delete buffers easier :Bdelete, :Bwipeout
     { "nacro90/numb.nvim", opts = {}, event = "VeryLazy" }, -- peek lines of the buffer
-    { "szw/vim-maximizer", opts = {}, event = "VeryLazy"}, -- maximize the current buffer
+    "szw/vim-maximizer", -- maximize the current buffer
 
     -- Terminal
     "christoomey/vim-tmux-navigator", -- navigate between vim and tmux panes

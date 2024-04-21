@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "query",
         "vim",
         "notify",
+        "checkhealth",
     },
     callback = function()
         vim.cmd([[

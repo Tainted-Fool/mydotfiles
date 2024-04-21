@@ -260,6 +260,7 @@ return {
                 g = {"<cmd>Telescope live_grep<cr>", "Live Grep"},
                 h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
                 k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
+                -- k = {"<cmd>Telescope mapper<cr>", "Keymaps"},
                 m = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
                 n = {"<cmd>lua require('telescope.builtin').find_files {cwd = vim.fn.stdpath('config')}<cr>", "Neovim Files"},
                 p = {"<cmd>Telescope projects<cr>", "Projects"},

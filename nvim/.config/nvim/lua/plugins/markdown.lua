@@ -94,7 +94,8 @@ return {
         end,
     },
     {
-        "meanderingprogrammer/markdown.nvim", -- markdown renderer
+        -- markdown renderer
+        "meanderingprogrammer/markdown.nvim",
         -- cmd = { "RenderMarkdownToggle" },
         ft = "markdown",
         name = "render-markdown",
@@ -115,7 +116,8 @@ return {
         end
     },
     {
-        "tadmccorkle/markdown.nvim", -- markdown syntax highlighting
+        -- markdown syntax highlighting
+        "tadmccorkle/markdown.nvim",
         ft = "markdown",
         opts = {
             mappings = {
