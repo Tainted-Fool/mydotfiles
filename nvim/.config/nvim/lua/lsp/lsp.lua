@@ -106,7 +106,10 @@ return {
             -- Accepts Mason and lspconfig package names (dap, format, lint)
             local tools = {
                 -- DAP
-                -- "debugpy",
+                "bash-debug-adapter",
+                "codelldb", -- C, C++
+                "debugpy", -- pip install debugpy
+                "netcoredbg", -- CSharp
                 -- Formatter
                 "black", -- Python
                 "prettier", -- Multiple languages
@@ -209,10 +212,12 @@ return {
                         lspconfig[server_name].setup({
                             on_attach = function(client, bufnr)
                                 -- Enable inlay hints
-                                if client.supports_method("textDocument/inlayHints") then
-                                    vim.lsp.inlay_hint.enable(bufnr, true)
-                                    -- vim.notify("Inlay hints enabled for " .. client.name, "info")
+                                if client.server_capabilities.inlayHintProvider then
+                                    vim.lsp.inlay_hint.enable = true
                                 end
+                                -- if client.supports_method("textDocument/inlayHints") then
+                                --     vim.lsp.inlay_hint.enable(bufnr, true)
+                                -- end
                             end,
                             capabilities = capabilities,
                         })

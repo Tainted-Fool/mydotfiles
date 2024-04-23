@@ -114,6 +114,7 @@ return {
             d = {
                 name = "Debug",
                 b = {"<cmd>lua require('dap').toggle_breakpoint()<cr>", "Toggle Breakpoint"},
+                B = {"<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", "Breakpoint Condition"},
                 c = {"<cmd>lua require('dap').continue()<cr>", "Continue"},
                 i = {"<cmd>lua require('dap').step_into()<cr>", "Step Into"},
                 l = {"<cmd>lua require('dap').run_last()<cr>", "Run Last"},

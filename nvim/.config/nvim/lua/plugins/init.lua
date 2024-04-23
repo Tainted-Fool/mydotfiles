@@ -92,6 +92,7 @@ return {
     "moll/vim-bbye", -- close/delete buffers easier :Bdelete, :Bwipeout
     { "nacro90/numb.nvim", opts = {}, event = "VeryLazy" }, -- peek lines of the buffer
     "szw/vim-maximizer", -- maximize the current buffer
+    -- { "szw/vim-maximizer", opts = {}, event = "VeryLazy"}, -- maximize the current buffer
 
     -- Terminal
     "christoomey/vim-tmux-navigator", -- navigate between vim and tmux panes
