@@ -160,6 +160,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugi
 git clone https://github.com/hlissner/zsh-autopair $ZSH_CUSTOM/plugins/zsh-autopair
 git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_CUSTOM/plugins/fast-syntax-highlighting
+git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins $ZSH_CUSTOM/plugins/autoupdate
 ```
 
 ## Optional
@@ -174,12 +175,15 @@ cd ~/.local/share/fonts && curl -fLo "Caskaydia Cover Nerd Font Complete.otf" ht
 ```
 
 A better way to install NerdFonts is with this [repo](https://github.com/ronniedroid/getnf)
-> set font in terminal settings
+
+If using WSL then you need to install [Caskaydia
+Cove](https://github.com/microsoft/cascadia-code/releases) from Microsoft github and set font in terminal settings
 
 ```bash
 git clone https://github.com/ronniedroid/getnf.git
 cd getnf
 ./install.sh
+getnf 9
 ```
 
 ### Install Lazygit
@@ -197,9 +201,7 @@ go install
 Add syntax highlighting to git
 
 ```bash
-git clone https://github.com/dandavison/delta
-cd delta
-make install
+sudo apt install git-delta
 ```
 
 ### Install Tmux and Tmux Plugin Manager
@@ -212,6 +214,23 @@ cd tmux
 sh autogen.sh
 ./configure && make
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# run prefix(CTRL + SPACE) + I (capital eye)
+```
+
+### Install Ripgrep
+
+An alternative to `grep` with `rg`
+
+```bash
+sudo apt install ripgrep
+```
+
+### Install Fd-Find
+
+An alternative to `find` with `fdfind`
+
+```bash
+sudo apt install fd-find
 ```
 
 ### Install Batcat
@@ -252,7 +271,7 @@ pip install azure-cli
 A fuzzy search utility
 
 ```bash
-git clone --depth 1 https:.//github.com/junegunn/fzf.git ~/.fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 

@@ -89,7 +89,8 @@ source $ZSH/oh-my-zsh.sh
 # Zsh-vi-mode configuration
 ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BLOCK
 ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
-ZVM_VI_INSERT_ESCAPE_BINDKEY=fj
+# ZVM_VI_INSERT_ESCAPE_BINDKEY=fj
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 
 # Fix up and down arrow keys in zsh-vi-mode
 zvm_after_init_commands+=("bindkey '^[[A' up-line-or-search" "bindkey '^[[B' down-line-or-search")
