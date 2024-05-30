@@ -38,7 +38,7 @@ return {
             },
             window = {
                 border = "rounded", -- none, single, double, rounded, or shadow
-                position = "bottom", -- bottom, or top
+                position = "top", -- bottom, or top
                 -- margin = {1, 0, 1, 0}, -- extra window margin [top, right, bottom, left]
                 -- padding = {2, 2, 2, 2}, -- extra window padding [top, right, bottom, left]
                 -- winblend = 0

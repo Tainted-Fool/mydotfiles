@@ -46,6 +46,7 @@ return {
         end
     },
     -- { "epwalsh/obsidian.nvim", opts = {} } -- use obsidian in neovim
+    "girishji/pythondoc.vim", -- python docs
 
     -- Buffers
     "moll/vim-bbye", -- close/delete buffers easier :Bdelete, :Bwipeout

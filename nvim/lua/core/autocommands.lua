@@ -1,6 +1,23 @@
 -- Use 'q' to quit from plugins
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"qf", "help", "man", "lspinfo", "spectre_panel", "lir", "fzf", "Jaq", "oil", "DressingSelect", "tsplayground", "netrw", "qf"},
+    pattern = {
+        "help",
+        "man",
+        "lspinfo",
+        "spectre_panel",
+        "lir",
+        "fzf",
+        "Jaq",
+        "oil",
+        "DressingSelect",
+        "tsplayground",
+        "netrw",
+        "qf",
+        "query",
+        "vim",
+        "notify",
+        "checkhealth",
+    },
     callback = function()
         vim.cmd([[
             nnoremap <silent> <buffer> q :close<cr>
@@ -74,6 +91,45 @@ vim.api.nvim_create_autocmd("BufEnter", {
             vim.cmd("quit")
         end
     end
+})
+
+-- Disable lsp_lines in floating windows like lazy plugin manager
+vim.api.nvim_create_autocmd("WinEnter", {
+    pattern = "lazy",
+    callback = function()
+    local floating = vim.api.nvim_win_get_config(0).relative ~= ""
+        vim.diagnostic.config({
+            virtual_text = floating,
+            virtual_lines = {
+                only_current_line = not floating, -- show virtual text when your cursor is in line
+            },
+        })
+    end
+})
+
+-- Enable/disable highlight group
+vim.api.nvim_create_autocmd('CmdlineChanged', {
+   -- group = 'AutoCommands',
+   pattern = '*',
+   callback = function()
+       if vim.fn.getcmdtype() == '/'
+           or vim.fn.getcmdtype() == '?'
+           or string.sub(vim.fn.getcmdline(), 1, 2) == 'g/'
+           or string.sub(vim.fn.getcmdline(), 1, 3) == 'g!/'
+           or string.sub(vim.fn.getcmdline(), 1, 2) == 'v/'
+       then
+           vim.cmd('set hlsearch')
+       else
+           vim.cmd('set nohlsearch')
+       end
+   end
+})
+vim.api.nvim_create_autocmd('CmdlineLeave', {
+   -- group = 'AutoCommands',
+   pattern = '*',
+   callback = function()
+       vim.cmd('set nohlsearch')
+   end
 })
 
 -- Lazy and auto-sessions

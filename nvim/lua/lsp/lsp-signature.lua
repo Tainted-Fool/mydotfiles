@@ -7,8 +7,9 @@ return {
         hint_prefix = "💀 ", -- Skull emoji for parameter
         -- hint_scheme = "Comment", -- or 'String'
         -- use_lspsaga = false, -- set to true if you want to use lspsaga popup
-        toggle_key = "<C-\\>",
+        toggle_key = "<C-s>",
         select_signature_key = "<C-]>",
+        cursorhold_update = false -- fix jedi_ls on empty line
     },
     config = function(_, opts)
         require("lsp_signature").setup(opts)

@@ -14,5 +14,5 @@ else
     require("core.autocommands")
 
     -- User Plugins
-    require("core.plugins")
+    require("core.lazy")
 end

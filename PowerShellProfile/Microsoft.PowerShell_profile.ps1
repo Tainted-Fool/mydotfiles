@@ -6,7 +6,7 @@ using namespace System.Management.Automation.Language
 ##################
 
 # Invoke Oh-My-Posh
-Oh-My-Posh --init --shell pwsh --config ~/AppData/Local/Programs/oh-my-posh/themes/pure.omp.json | Invoke-Expression
+Oh-My-Posh --init --shell pwsh --config C:/tools/ohmyposh/themes/pure.omp.json | Invoke-Expression
 
 # Import Modules
 Import-Module Posh-Git
@@ -34,7 +34,8 @@ if (Test-Path($ChocolateyProfile))
 ###########
 Set-Alias which Get-Command
 Set-Alias grep findstr.exe
-Set-Alias -Name sandbox -Value "D:\Documents\Github\Dynamo\bin\2.14\DynamoSandbox.exe"
+# Set-Alias -Name sandbox -Value "D:\Documents\Github\Dynamo\bin\2.14\DynamoSandbox.exe"
+Set-Alias note notepad++.exe
 
 if (-not(Test-Path -Path Alias:Touch))
 {
@@ -112,13 +113,13 @@ function vimrc()
 # Edit nvimrc with nvim
 function nvimrc()
 {
-  nvim C:\Users\Laz\AppData\Local\nvim\init.lua
+  nvim "C:\Users\Laz\AppData\Local\nvim\init.lua"
 }
 
 # Edit pwshrc with nvim
 function pwshrc()
 {
-    nvim D:\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+    nvim "C:\Users\Laz\.dotfiles\PowerShellProfile\Microsoft.PowerShell_profile.ps1"
 }
 
 # Source PowerShellProfile
@@ -601,10 +602,10 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 #####################
 # region conda initialize
 # !! Contents within this block are managed by 'conda init' !!
-(& "C:\Python\Anaconda39\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
-conda deactivate
+
+# (& "C:\Python\Anaconda39\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
+# conda deactivate
 # endregion
 
 #34de4b3d-13a8-4540-b76d-b9e8d3851756 PowerToys CommandNotFound module
-
-Import-Module "C:\Program Files\PowerToys\WinUI3Apps\..\WinGetCommandNotFound.psd1"
+Import-Module "C:\Users\laz\AppData\Local\PowerToys\WinUI3Apps\..\WinGetCommandNotFound.psd1"

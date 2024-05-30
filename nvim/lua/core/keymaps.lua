@@ -54,7 +54,7 @@ keymap("n", "g#", "g#zz", "Search partial word under cursor backward")
 
 -- Insert mode
 -- Press `fj` or `jj` to exit insert mode
-keymap("i", "fj", "<ESC>", "Exit insert mode")
+-- keymap("i", "fj", "<ESC>", "Exit insert mode")
 keymap("i", "jj", "<ESC>", "Exit insert mode")
 
 -- Move lines up and down
@@ -93,3 +93,7 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", "Move line down")
 keymap("x", "K", ":move '<-2<CR>gv-gv", "Move line up")
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", "Move line down")
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", "Move line up")
+
+-- Move to begginning or end of line
+keymap({"n", "o", "x"}, "<S-h>", "^")
+keymap({"n", "o", "x"}, "<S-l>", "g_")

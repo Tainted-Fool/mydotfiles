@@ -13,10 +13,7 @@ return {
         "sudormrfbin/cheatsheet.nvim", -- cheatsheet buffer
         {
             "nvim-telescope/telescope-fzf-native.nvim", -- fzf sorter for telescope
-            build = "make",
-            cond = function()
-                return vim.fn.executable("make") == 1
-            end
+            build = "make", -- rename mys-make to make
         },
     },
     config = function()
