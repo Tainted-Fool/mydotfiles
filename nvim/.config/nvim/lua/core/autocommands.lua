@@ -132,6 +132,24 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
    end
 })
 
+-- Disable diagnostics in insert mode
+vim.api.nvim_create_autocmd('ModeChanged', {
+    pattern = {'n:i', 'v:s'},
+    desc = 'Disable diagnostics in insert and select mode',
+    callback = function()
+        vim.diagnostic.enable(false)
+    end
+})
+
+-- Enable diagnostics in normal mode
+vim.api.nvim_create_autocmd('ModeChanged', {
+    pattern = 'i:n',
+    desc = 'Enable diagnostics when leaving insert mode',
+    callback = function()
+        vim.diagnostic.enable(true)
+    end
+})
+
 -- Lazy and auto-sessions
 -- local autocmd = vim.api.nvim_create_autocmd
 -- local lazy_did_show_install_view = false

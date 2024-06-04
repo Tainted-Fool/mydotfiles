@@ -11,9 +11,8 @@ return {
             "williamboman/mason-lspconfig.nvim", -- lsp configurations (done)
             "whoissethdaniel/mason-tool-installer.nvim", -- install and upgrade Mason tools
             "nvimtools/none-ls.nvim",           -- diagnostics, code actions, and formatting
-            "folke/neodev.nvim",                -- better nvim and lsp configuration
             "arkav/lualine-lsp-progress",       -- indicator that shows when lsp is ready
-            { "folke/neodev.nvim", opts = {} }, -- nvim lua API docs and completion
+            { "folke/neodev.nvim", opts = {library = {plugins = {"nvim--dap-ui"}, types = true}} }, -- nvim lua API docs and completion
             { "j-hui/fidget.nvim", opts = {} }, -- show lsp progress handler
         },
         config = function()
@@ -24,34 +23,19 @@ return {
             local mason_installer = require("mason-tool-installer")
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-            -- -- Declare diagnostic signs
-            local signs = {
-                { name = "DiagnosticSignError", text = "" }, -- ✘
-                { name = "DiagnosticSignWarn", text = "" }, -- ▲
-                { name = "DiagnosticSignHint", text = "" }, -- ⚑
-                { name = "DiagnosticSignInfo", text = "" }, -- »
-            }
-            -- Set the signs
-            for _, sign in ipairs(signs) do
-                vim.fn.sign_define(sign.name, {
-                    texthl = sign.name,
-                    text = sign.text,
-                    numhl = "",
-                })
-            end
-
             -- Declare configurations for diagnostics when LSP is running
-            local config = {
-                -- Disable virtual text/diagnostic errors
+            vim.diagnostic.config({
                 virtual_text = false, -- show diagnostic message using virtual text
                 virtual_lines = {
-                    only_current_line = true, -- show virtual text when your cursor is in line
+                    only_current_line = true, -- show virtual text when your cursor is on line
                 },
-                -- virtual_improved = {
-                --     current_line = "only" -- save as above
-                -- },
                 signs = {
-                    active = signs, -- set signs to the above configuration
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.HINT] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                    },
                 },
                 update_in_insert = false, -- update while editting in insert mode
                 underline = true, -- use underline to show diagnostic location
@@ -64,13 +48,7 @@ return {
                     header = "",
                     prefix = "",
                 },
-            }
-            vim.diagnostic.config(config)
-
-            local foldsettings = {
-                dynamicRegistration = false,
-                lineFoldingOnly = true,
-            }
+            })
 
             -- Set popup options for hover window
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -150,22 +128,12 @@ return {
                 end,
             })
 
-            -- Disable diagnostics in insert mode
-            vim.api.nvim_create_autocmd('ModeChanged', {
-                pattern = {'n:i', 'v:s'},
-                desc = 'Disable diagnostics in insert and select mode',
-                callback = function(e) vim.diagnostic.disable(e.buf) end
-            })
-
-            vim.api.nvim_create_autocmd('ModeChanged', {
-                pattern = 'i:n',
-                desc = 'Enable diagnostics when leaving insert mode',
-                callback = function(e) vim.diagnostic.enable(e.buf) end
-            })
-
             -- Default lsp communication capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.foldingRange = foldsettings
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            }
             capabilities.textDocument.completion.completionItem.snippetSupport = true
             capabilities.textDocument.completion.completionItem.resolveSupport = {
                 properties = {
@@ -174,7 +142,7 @@ return {
                     "additionalTextEdits",
                 },
             }
-            -- enable folding by lsp :398
+            -- enable folding by lsp :375
             capabilities.textDocument.foldingRange = {
                 dynamicRegistration = false,
                 lineFoldingOnly = true,
@@ -404,7 +372,7 @@ return {
             vim.keymap.set("n", "zr", "<cmd>lua require('ufo').openFoldsExceptKinds()<CR>", { desc = "Open less folds" })
 
             require("ufo").setup({
-                -- uncomment to use treesitter as fold provider or defaults to nvim lsp :156
+                -- uncomment to use treesitter as fold provider or defaults to nvim lsp :145
                 -- provider_selection = function()
                 --     return { "treesitter", "indent" }
                 -- end,
@@ -431,6 +399,7 @@ return {
     {
         -- switch between python virtualenvs
         "linux-cultist/venv-selector.nvim",
+        branch = "regexp", -- new 2024 version
         config = function()
             require("venv-selector").setup({
                 name = { "venv", ".virtualenvs" },
