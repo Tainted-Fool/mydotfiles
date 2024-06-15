@@ -19,6 +19,8 @@ return {
             require("project_nvim").setup(opts)
             -- Recommended session options configurations
             vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+            -- BUG: files are being saved to parent directory
+            -- vim.o.autochdir = true -- use current file dir as working dir
         end
     },
     {

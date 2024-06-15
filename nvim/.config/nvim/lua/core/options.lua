@@ -30,10 +30,10 @@ opt.numberwidth = 4 -- set number column width
 opt.pumblend = 10 -- pop up menu blend
 opt.pumheight = 10 -- pop up menu height
 opt.relativenumber = true -- set relative numbered lines
-opt.scrolloff = 4 -- amount of lines to keep above and below cursor
+opt.scrolloff = 4 -- amount of lines to keep above and below cursor (keep it high to place it in the middle)
 -- opt.sessionoptions = {"buffers", "curdir", "tabpages", "winsize"} -- what to save for sessions
 -- opt.shiftround = true -- round indent
-opt.shiftwidth = 4 -- the number of spaces inserted for each indentation (vim-sleuth)
+opt.shiftwidth = 2 -- the number of spaces inserted for each indentation (vim-sleuth)
 -- opt.shortmess:append({W = true, I = true, c = true, C = true}) -- append to the short messasge list
 opt.showcmd = true -- show command in bottom bar
 -- opt.showcmdloc = "statusline" -- show command in bottom bar
@@ -45,12 +45,12 @@ opt.signcolumn = "yes" -- always show the sign column
 opt.smartcase = true -- override ignorecase if serach pattern contains uppercase
 opt.smartindent = true -- indent when going to a new line
 opt.smarttab = true -- after insert space or tab to go to next line indent
-opt.softtabstop = 4 -- tab key will insert spaces or tabs
+opt.softtabstop = 2 -- tab key will insert spaces or tabs
 opt.splitbelow = true -- force horizontal splits to below of current window
 -- opt.splitkeep = "screen" -- keep window split when opening new file
 opt.splitright = true -- force vertical splits to go right of current window
 opt.swapfile = false -- create a swapfile
-opt.tabstop = 4 -- insert X spaces for a tab - width of tab
+opt.tabstop = 2 -- insert X spaces for a tab - width of tab
 opt.termguicolors = true -- set terminal colors
 opt.textwidth = 100 -- set line width
 opt.timeoutlen = 100 -- time to wait for mapped sequence default=300
@@ -80,3 +80,6 @@ vim.cmd([[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]])
 
 -- Speed up loading lua modles to improve startup time
 vim.loader.enable()
+
+-- Enable automatic codelens refreshing for lsp that support it.
+vim.g.codelens_enabled = true

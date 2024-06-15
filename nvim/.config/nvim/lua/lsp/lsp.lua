@@ -201,9 +201,6 @@ return {
                     end,
                 },
             })
-
-            -- Create a 'Format' command for formatting files
-            vim.cmd([[command! Format execute 'lua vim.lsp.buf.format{async=true}']])
         end,
     },
     {
@@ -325,12 +322,12 @@ return {
             },
         },
         config = function()
-            vim.o.foldcolumn = "1"
-            vim.o.foldlevel = 99
-            vim.o.foldlevelstart = 99
-            vim.o.foldenable = true
-            vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-            vim.g.markdown_folding = true
+            vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]] -- fold icons
+            vim.o.foldcolumn = "1" -- show foldcolumn
+            vim.o.foldenable = true -- enable fold for nvim-ufo
+            vim.o.foldlevel = 99 -- set highest folder level for nvim-ufo
+            vim.o.foldlevelstart = 99 -- start with all the code unfolded
+            vim.g.markdown_folding = true -- enable markdown folding
             vim.g.markdown_fold_style = "nested"
             -- vim.o.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} %s"
             -- vim.o.statuscolumn = "%=%l%s%C"

@@ -1,5 +1,8 @@
+local autocmd = vim.api.nvim_create_autocmd
+local cmd = vim.api.nvim_create_user_command
+
 -- Use 'q' to quit from plugins
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
     pattern = {
         "help",
         "man",
@@ -27,7 +30,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Remove stausline and tabline when in Alpha dashboard
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
     pattern = "AlphaReady",
     callback = function()
         vim.cmd([[
@@ -38,7 +41,7 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Set 'wrap' and 'spell' in markdown and gitcommit
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
     pattern = {"markdown", "gitcommit"},
     callback = function()
         vim.opt_local.wrap = true
@@ -47,14 +50,14 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Fix autocomment
-vim.api.nvim_create_autocmd("BufWinEnter", {
+autocmd("BufWinEnter", {
     callback = function()
         vim.cmd("set formatoptions-=cro")
     end
 })
 
 -- Highlight yanked text
-vim.api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
     callback = function()
         vim.highlight.on_yank({
             higroup = "Visual",
@@ -64,7 +67,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Restore cursor position when opening recent file
-vim.api.nvim_create_autocmd("BufReadPost", {
+autocmd("BufReadPost", {
     pattern = {"*"},
     callback = function()
         vim.api.nvim_exec('silent! normal! g`"zv', false)
@@ -72,7 +75,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Clear all notifications when entering insert mode
-vim.api.nvim_create_autocmd("InsertEnter", {
+autocmd("InsertEnter", {
     group = vim.api.nvim_create_augroup("NotifyClearGrp", {}),
     pattern = "*",
     callback = function()
@@ -84,7 +87,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
 -- Automatically close tab when nvim-tree is the last window in tab
 -- vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
-vim.api.nvim_create_autocmd("BufEnter", {
+autocmd("BufEnter", {
     nested = true,
     callback = function()
         if vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
@@ -94,7 +97,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Disable lsp_lines in floating windows like lazy plugin manager
-vim.api.nvim_create_autocmd("WinEnter", {
+autocmd("WinEnter", {
     pattern = "lazy",
     callback = function()
     local floating = vim.api.nvim_win_get_config(0).relative ~= ""
@@ -108,7 +111,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
 })
 
 -- Enable/disable highlight group
-vim.api.nvim_create_autocmd('CmdlineChanged', {
+autocmd('CmdlineChanged', {
    -- group = 'AutoCommands',
    pattern = '*',
    callback = function()
@@ -124,7 +127,7 @@ vim.api.nvim_create_autocmd('CmdlineChanged', {
        end
    end
 })
-vim.api.nvim_create_autocmd('CmdlineLeave', {
+autocmd('CmdlineLeave', {
    -- group = 'AutoCommands',
    pattern = '*',
    callback = function()
@@ -133,7 +136,7 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
 })
 
 -- Disable diagnostics in insert mode
-vim.api.nvim_create_autocmd('ModeChanged', {
+autocmd('ModeChanged', {
     pattern = {'n:i', 'v:s'},
     desc = 'Disable diagnostics in insert and select mode',
     callback = function()
@@ -142,7 +145,7 @@ vim.api.nvim_create_autocmd('ModeChanged', {
 })
 
 -- Enable diagnostics in normal mode
-vim.api.nvim_create_autocmd('ModeChanged', {
+autocmd('ModeChanged', {
     pattern = 'i:n',
     desc = 'Enable diagnostics when leaving insert mode',
     callback = function()
@@ -150,8 +153,18 @@ vim.api.nvim_create_autocmd('ModeChanged', {
     end
 })
 
+-- Create a 'Format' command for formatting files
+cmd("Format", function()
+    vim.cmd("lua vim.lsp.buf.format{async=true}")
+end, { desc = "Format" })
+
+-- Change working directory
+cmd("Cwd", function()
+  vim.cmd(":cd %:p:h")
+  vim.cmd(":pwd")
+end, { desc = "Change working directory" })
+
 -- Lazy and auto-sessions
--- local autocmd = vim.api.nvim_create_autocmd
 -- local lazy_did_show_install_view = false
 -- local function auto_session_restore()
 --     -- important! without vim.schedule other necessary plugins might not load (eg treesitter) after restoring the session
@@ -190,21 +203,21 @@ vim.api.nvim_create_autocmd('ModeChanged', {
 -- })
 --
 -- Execute cmd in each tab page or if range is given
--- vim.api.nvim_create_autocmd({ "VimResized" }, {
+-- autocmd({ "VimResized" }, {
 --     callback = function()
 --         vim.cmd("tabdo wincmd =")
 --     end,
 -- })
 --
 -- Quit cmd on enter
--- vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
+-- autocmd({ "CmdWinEnter" }, {
 --     callback = function()
 --     vim.cmd("quit")
 --     end,
 -- })
 --
 -- Refresh code lens on file type
--- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- autocmd({ "BufWritePost" }, {
 --     pattern = { "*.java", "*.py" },
 --     callback = function()
 --         vim.lsp.codelens.refresh()
@@ -212,7 +225,7 @@ vim.api.nvim_create_autocmd('ModeChanged', {
 -- })
 --
 -- Pause highlight after 5000 lines
--- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+-- autocmd({ "BufWinEnter" }, {
 --     callback = function()
 --         local line_count = vim.api.nvim_buf_line_count(0)
 --         if line_count >= 5000 then
@@ -222,7 +235,7 @@ vim.api.nvim_create_autocmd('ModeChanged', {
 -- })
 --
 -- Show Diagnostics on mouse hover
--- vim.api.nvim_create_autocmd("CursorHold", {
+-- autocmd("CursorHold", {
 --     buffer = bufnr,
 --     callback = function ()
 --         local opts = {

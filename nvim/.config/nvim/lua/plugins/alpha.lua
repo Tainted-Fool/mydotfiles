@@ -41,7 +41,7 @@ return {
         dashboard.section.header.val = vim.split(logo, "\n")
 
         dashboard.section.buttons.val = {
-            dashboard.button("f", "󰈞 Find File", ":Telescope find_files hidden=true<CR>"),
+            dashboard.button("f", "󰈞  Find File", ":Telescope find_files hidden=true<CR>"),
             dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
             dashboard.button("p", "  Find Project", ":Telescope projects <CR>"),
             dashboard.button("r", "  Recent Files", ":Telescope oldfiles <CR>"),

@@ -9,6 +9,7 @@ else
     -- User Settings
     require("core.options")
     require("core.keymaps")
+    -- require("core.utils") -- testing
 
     -- User Autocommands
     require("core.autocommands")
