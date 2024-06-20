@@ -430,6 +430,7 @@ return {
     {
         -- switch between python virtualenvs
         "linux-cultist/venv-selector.nvim",
+        branch = "regexp", -- new 2024 version
         config = function()
             require("venv-selector").setup({
                 name = { "venv", ".virtualenvs" },

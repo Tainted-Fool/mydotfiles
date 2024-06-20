@@ -6,13 +6,13 @@ using namespace System.Management.Automation.Language
 ##################
 
 # Invoke Oh-My-Posh
-Oh-My-Posh --init --shell pwsh --config ~/AppData/Local/Programs/oh-my-posh/themes/pure.omp.json | Invoke-Expression
+Oh-My-Posh --init --shell pwsh --config $env:POSH_THEMES_PATH/pure.omp.json | Invoke-Expression
 
 # Import Modules
 Import-Module Posh-Git
 Import-Module Terminal-Icons
 Import-module Z
-Import-Module PSReadLine
+# Import-Module PSReadLine
 Import-Module PSWindowsUpdate
 Import-Module DockerCompletion
 #Import-Module AZ.Tools.Predictor
@@ -41,9 +41,6 @@ if (-not(Test-Path -Path Alias:Touch))
     New-Alias -Name touch touchfile -Force
 }
 
-#############
-# Functions #
-#############
 #############
 # Functions #
 #############
@@ -586,6 +583,6 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 #####################
 # region conda initialize
 # !! Contents within this block are managed by 'conda init' !!
-(& "C:\Python\Anaconda39\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
-conda deactivate
+# (& "C:\Python\Anaconda39\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
+# conda deactivate
 # endregion

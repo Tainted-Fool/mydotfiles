@@ -6,7 +6,7 @@ using namespace System.Management.Automation.Language
 ##################
 
 # Invoke Oh-My-Posh
-Oh-My-Posh --init --shell pwsh --config C:/tools/ohmyposh/themes/pure.omp.json | Invoke-Expression
+Oh-My-Posh --init --shell pwsh --config $env:POSH_THEMES_PATH/pure.omp.json | Invoke-Expression
 
 # Import Modules
 Import-Module Posh-Git
@@ -607,5 +607,4 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 # conda deactivate
 # endregion
 
-#34de4b3d-13a8-4540-b76d-b9e8d3851756 PowerToys CommandNotFound module
-Import-Module "C:\Users\laz\AppData\Local\PowerToys\WinUI3Apps\..\WinGetCommandNotFound.psd1"
+Import-Module -Name Microsoft.WinGet.CommandNotFound
