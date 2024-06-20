@@ -19,7 +19,7 @@ return {
     "tpope/vim-sleuth", -- Automatically adjusts 'tabstop', 'shiftwidth', and 'expandtab'
     "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
     { "NvChad/nvim-colorizer.lua", opts = {user_default_options = {names = false}} }, -- displays the hexvalue color
-    { "EtiamNullam/deferred-clipboard.nvim", opts = {failback = "unnamedplus"}, lazy = true }, -- use system clipboard
+    { "EtiamNullam/deferred-clipboard.nvim", opts = { lazy = true, failback = "unnamedplus"} }, -- use system clipboard
     { "smjonas/inc-rename.nvim", opts = {}, event = "VeryLazy" }, -- incremental lsp renaming
     {
         "stevearc/oil.nvim", -- edit files like a normal vim buffer
