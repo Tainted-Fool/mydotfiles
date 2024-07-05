@@ -4,7 +4,7 @@ return {
     dependencies = {
         {
             -- Provides context about your code in winbar
-            "LunarVim/breadcrumbs.nvim",
+            "Tainted-Fool/breadcrumbs.nvim",
             config = function()
                 require("breadcrumbs").setup()
             end
