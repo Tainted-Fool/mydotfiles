@@ -1,14 +1,25 @@
 return {
     {
-        -- project manager
+        -- Project manager
         "ahmedkhalf/project.nvim",
         event = "VeryLazy",
         opts = {
             active = true,
             on_config_done = nil,
             manual_mode = false,
-            detection_methods = {"lsp", "pattern"},
-            patterns = {".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json"},
+            detection_methods = {
+                "lsp",
+                "pattern",
+            },
+            patterns = {
+                ".git",
+                "_darcs",
+                ".hg",
+                ".bzr",
+                ".svn",
+                "Makefile",
+                "package.json",
+            },
             ignore_lsp = {},
             exclude_dirs = {},
             show_hidden = false,
@@ -19,45 +30,12 @@ return {
             require("project_nvim").setup(opts)
             -- Recommended session options configurations
             vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
-            -- BUG: files are being saved to parent directory
             -- vim.o.autochdir = true -- use current file dir as working dir
         end
     },
     {
-        -- save/restore sessions
+        -- Save/restore sessions
         "rmagatti/auto-session",
-        -- BUG: auto-session is not working with lazy
-        -- init = function()
-        --     local function restore()
-        --         if vim.fn.argc(-1) > 0 then
-        --             return
-        --         end
-        --         vim.schedule(function()
-        --             require("auto-session").AutoRestoreSession()
-        --         end)
-        --     end
-        --     local lazy_view_win = nil
-        --     vim.api.nvim_create_autocmd("User", {
-        --         pattern = { "AlphaReady", "VeryLazy" },
-        --         callback = function()
-        --             local lazy_view = require("lazy.view")
-        --             if lazy_view.visible() then
-        --                 lazy_view_win = lazy_view.view.win
-        --             else
-        --                 restore()
-        --             end
-        --         end,
-        --     })
-        --     vim.api.nvim_create_autocmd("WinClosed", {
-        --         callback = function(event)
-        --             if not lazy_view_win or event.match ~= tostring(lazy_view_win) then
-        --                 return
-        --             end
-        --             restore()
-        --         end,
-        --     })
-        -- end,
-
         opts = {
             log_level = "error",
             auto_session_enable_last_session = false,
@@ -80,21 +58,27 @@ return {
                 "oil",
                 "lazy",
                 "vim",
+                "man",
+                "help",
             }
         }
     },
     {
-        -- use telescope to view sessions
+        -- View sessions with Telescope
         "rmagatti/session-lens",
         -- event = "VeryLazy",
-        cmd = { "SessionSave", "SessionDelete", "SessionRestore" },
+        cmd = {
+            "SessionSave",
+            "SessionDelete",
+            "SessionRestore",
+        },
         opts = {
             path_display = { "shorten" },
             theme_conf = {
-                border = false
+                border = false,
             },
             previewer = true,
-            prompt_title = "Sessions"
+            prompt_title = "Sessions",
         }
     }
 }

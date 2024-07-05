@@ -1,30 +1,34 @@
 return {
-    -- debug adapter protocol
+    -- Debug adapter protocol
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
     dependencies = {
         "rcarriga/nvim-dap-ui", -- debugger ui
         "mfussenegger/nvim-dap-python", -- dap for python
-        { "thehamsta/nvim-dap-virtual-text", opts = {commented = true} }, -- virtual text for dap
+        { "thehamsta/nvim-dap-virtual-text", opts = { commented = true } }, -- virtual text for dap
         "nvim-neotest/nvim-nio",
         {
             "rcarriga/cmp-dap",
             dependencies = { "nvim-cmp" },
             config = function()
                 require("cmp").setup.filetype(
-                    { "dap-repl", "dapui_watches", "dapui_hover" },
+                    {
+                        "dap-repl",
+                        "dapui_watches",
+                        "dapui_hover",
+                    },
                     {
                         sources = {
-                            { name = "dap" },
-                        },
+                            { name = "dap" }
+                        }
                     }
                 )
-            end,
-        },
+            end
+        }
     },
     config = function()
-
-        local windows = vim.fn.has('win32') == 1 -- true if on windows
+        local icons = require("core.icons")
+        local windows = vim.fn.has("win32") == 1 -- true if on windows
         local dap = require("dap")
         local dapui = require("dapui")
         local dap_python = require("dap-python")
@@ -32,60 +36,71 @@ return {
         dapui.setup({
             expand_lines = true,
             icons = {
-                expanded = "",
-                collapsed = "",
-                circular = ""
+                expanded = icons.misc.Expanded,
+                collapsed = icons.misc.Collapsed,
+                circular = icons.misc.Circular,
             },
             mappings = {
-                expand = {"<CR>", "<2-LeftMouse>"},
+                expand = { "<CR>", "<2-LeftMouse>" },
                 open = "o",
                 remove = "d",
                 edit = "e",
                 repl = "r",
-                toggle = "t"
+                toggle = "t",
             },
-            layouts = {{
-                elements = {{
-                    id = "scopes",
-                    size = 0.33
-                }, {
-                        id = "breakpoints",
-                        size = 0.17
-                    }, {
-                        id = "stacks",
-                        size = 0.25
-                    }, {
-                        id = "watches",
-                        size = 0.25
-                    }},
-                size = 0.33,
-                position = "left"
-            }, {
-                    elements = {{
-                        id = "repl",
-                        size = 0.45
-                    }, {
+            layouts = {
+                {
+                    elements = {
+                        {
+                            id = "scopes",
+                            size = 0.33,
+                        },
+                        {
+                            id = "breakpoints",
+                            size = 0.17,
+                        },
+                        {
+                            id = "stacks",
+                            size = 0.25,
+                        },
+                        {
+                            id = "watches",
+                            size = 0.25,
+                        }
+                    },
+                    size = 0.33,
+                    position = "left",
+                },
+                {
+                    elements = {
+                        {
+                            id = "repl",
+                            size = 0.45,
+                        },
+                        {
                             id = "console",
-                            size = 0.55
-                        }},
+                            size = 0.55,
+                        }
+                    },
                     size = 0.27,
-                    position = "bottom"
-                }},
+                    position = "bottom",
+                }
+            },
             floating = {
                 max_height = 0.9,
                 max_width = 0.5,
                 border = "rounded",
                 mappings = {
-                    close = {"q", "<Esc>"}
+                    close = { "q", "<Esc>" }
                 }
             }
         })
 
         vim.fn.sign_define("DapBreakpoint", {
-            text = "",
+            text = icons.ui.Bug,
             texthl = "DiagnosticSignError",
             linehl = "",
-            numhl = ""
+            numhl = "",
         })
 
         -- DAP settings for python
@@ -132,9 +147,15 @@ return {
             type = "server",
             port = "${port}",
             executable = {
-                command = vim.fn.stdpath('data').."/mason/bin/codelldb",
-                args = {"--port", "${port}"},
-                detached = function() if windows then return false else return true end end,
+                command = vim.fn.stdpath("data").."/mason/bin/codelldb",
+                args = { "--port", "${port}" },
+                detached = function()
+                    if windows then
+                        return false
+                    else
+                        return true
+                    end
+                end
             }
         }
         dap.configurations.c = {
@@ -145,17 +166,17 @@ return {
                 program = function()
                     return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/bin/program", "file")
                 end,
-                cwd = '${workspaceFolder}',
+                cwd = "${workspaceFolder}",
                 stopOnEntry = false,
                 args = {},
-            },
+            }
         }
 
         -- DAP settings for cplusplus
         dap.configurations.cpp = dap.configurations.c
 
         -- DAP settings for csharp
-        dap.adapters.coreclr ={
+        dap.adapters.coreclr = {
             type = "executable",
             command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
             args = {"--interpreter=vscode"},
@@ -166,9 +187,9 @@ return {
                 name = "launch - netcoredbg",
                 request = "launch",
                 program = function()
-                    return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-                end,
-            },
+                    return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+                end
+            }
         }
 
         -- Open dapui when dap in initialized

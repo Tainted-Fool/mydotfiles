@@ -1,5 +1,5 @@
 return {
-    -- better signature help
+    -- Better signature help
     "ray-x/lsp_signature.nvim",
     opts = {
         -- doc_lines = 0, -- show lines of comment/docs
@@ -11,7 +11,7 @@ return {
         -- use_lspsaga = false, -- set to true if you want to use lspsaga popup
         toggle_key = "<C-s>", -- toggle signature help window
         select_signature_key = "<C-]>", -- select the next signature if available
-        cursorhold_update = false -- fix jedi_ls on empty line
+        cursorhold_update = false, -- fix jedi_ls on empty line
     },
     config = function(_, opts)
         require("lsp_signature").setup(opts)

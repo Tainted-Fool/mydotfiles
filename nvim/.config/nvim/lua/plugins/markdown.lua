@@ -1,6 +1,16 @@
 return {
     {
-        -- add highlights to buffers
+        -- Live markdown previewer
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    },
+    {
+        -- Add highlights to buffers
         "lukas-reineke/headlines.nvim",
         enabled = false, -- disable plugin
         opts = function()
@@ -36,16 +46,15 @@ return {
             -- Defines the codeblock background color to something darker
             -- vim.cmd([[highlight CodeBlock guibg=#09090d]])
             vim.cmd([[highlight CodeBlock guibg=#111014]])
-
             -- PERF: schedule to prevent headlines slowing down opening a file
             vim.schedule(function()
                 require("headlines").setup(opts)
                 require("headlines").refresh()
             end)
-        end,
+        end
     },
     {
-        -- auto complete list continuation and formatting
+        -- Auto complete list continuation and formatting
         "gaoDean/autolist.nvim",
         enabled = false, -- disable plugin
         ft = {
@@ -58,43 +67,17 @@ return {
         config = function()
             local keymap = vim.keymap.set
             require("autolist").setup()
-            -- keymap("n", "<ESC>", ":noh<CR><ESC>", {desc = "Escape and clear hlsearch", noremap = true, silent = true})
-            -- keymap("i", "<tab>", "<cmd>AutolistTab<cr>", { desc = "AutolistTab", noremap = true, silent = true }),
-            -- keymap("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>", { desc = "AutolistShiftTab", noremap = true, silent = true }),
-            -- keymap("i", "<c-t>", "<c-t><cmd>AutolistRecalculate<cr>", {desc = "AutolistRecalculate", noremap = true, silent = true}) -- an example of using <c-t> to indent
-            -- keymap("i", "<cr>", "<CR><cmd>AutolistNewBullet<cr>", {desc = "AutolistNewBullet", noremap = true, silent = true}), -- conflicts with nvim-autopairs (below didnt work)
-            -- keymap("i", "<CR>", function()
-            --   -- run autolist-new-bullet after the <cr> of nvim-autopairs-cr
-            --   -- timeout of 0ms delays enough for my computer but you might need to adjust
-            --   local timeoutms = 10
-            --   vim.loop.new_timer():start(timeoutms, 0, vim.schedule_wrap(function()
-            --     require("autolist").new_bullet()
-            --   end))
-            --
-            --   require("nvim-autopairs").autopairs_cr()
-            -- end, {desc = "AutolistNewBullet", noremap = true, expr = true}),
             keymap("n", "o", "o<cmd>AutolistNewBullet<cr>", { desc = "AutolistNewBullet", noremap = true, silent = true })
             keymap("n", "O", "O<cmd>AutolistNewBulletBefore<cr>", { desc = "AutolistNewBulletBefore", noremap = true, silent = true })
             keymap("n", "<cr>", "<cmd>AutolistToggleCheckbox<cr><cr>", { desc = "AutolistToggleCheckbox", noremap = true, silent = true })
-            -- keymap("n", "<c-r>", "<cmd>AutolistRecalculate<cr>", {desc = "AtuolistRecalculate", noremap = true, silent = true}),
-
-            -- cycle list types with dot-repeat
-            -- keymap("n", "<leader>cn", "<cmd>AtuolistCycleNextDr<cr>", { desc = "AutolistCycleNextDr", noremap = true, silent = true, expr = true }),
-            -- keymap("n", "<leader>cp", "<cmd>AtuolistCyclePrevDr<cr>", { desc = "AutolistCyclePrevDr", noremap = true, silent = true, expr = true }),
-
-            -- if you don't want dot-repeat
-            -- keymap("n", "<leader>cn", "<cmd>AutolistCycleNext<cr>", {desc = "AutolistCycleNext", noremap = true, silent = true})
-            -- keymap("n", "<leader>cp", "<cmd>AutolistCycleNext<cr>", {desc = "AutolistCycleNext", noremap = true, silent = true})
-
-            -- functions to recalculate list on edit
             keymap("n", ">>", ">><cmd>AutolistRecalculate<cr>", { desc = "AutolistRecalculate", noremap = true, silent = true })
             keymap("n", "<<", "<<<cmd>AutolistRecalculate<cr>", { desc = "AutolistRecalculate", noremap = true, silent = true })
             keymap("n", "dd", "dd<cmd>AutolistRecalculate<cr>", { desc = "AutolistRecalculate", noremap = true, silent = true })
             keymap("v", "d", "d<cmd>AutolistRecalculate<cr>", { desc = "AutolistRecalculate", noremap = true, silent = true })
-        end,
+        end
     },
     {
-        -- markdown renderer
+        -- Markdown renderer
         "meanderingprogrammer/markdown.nvim",
         -- cmd = { "RenderMarkdownToggle" },
         ft = "markdown",
@@ -116,7 +99,7 @@ return {
         end
     },
     {
-        -- markdown syntax highlighting
+        -- Markdown syntax highlighting and configurable tools
         "tadmccorkle/markdown.nvim",
         ft = "markdown",
         opts = {
@@ -137,8 +120,7 @@ return {
                     local function toggle(key)
                         return "<Esc>gv<cmd>lua require'markdown.inline'" .. ".toggle_emphasis_visual'" .. key .. "'1<cr>"
                     end
-
-                    -- buffer only keymaps
+                    -- Keymaps
                     map({ "n", "i" }, "<M-l><M-o>", "<cmd>MDListItemBelow<cr>", opts)
                     map({ "n", "i" }, "<M-L><M-O>", "<cmd>MDListItemAbove<cr>", opts)
                     map("n", "<M-c>", "<cmd>MDtaskToggle<cr>", opts)
@@ -148,5 +130,5 @@ return {
                 end
             }
         }
-    },
+    }
 }

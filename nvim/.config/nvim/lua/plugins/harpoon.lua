@@ -1,8 +1,11 @@
 return {
-     -- mark and get file
+     -- Mark and get file
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     event = "VeryLazy",
+    keys = {
+        { "<C-1>", desc = "Harpoon List", mode = "n" },
+    },
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim",
@@ -10,15 +13,13 @@ return {
     config = function()
         local harpoon = require('harpoon')
         harpoon:setup({})
-
-        -- basic telescope configuration
+        -- Basic telescope configuration
         local conf = require("telescope.config").values
         local function toggle_telescope(harpoon_files)
             local file_paths = {}
             for _, item in ipairs(harpoon_files.items) do
                 table.insert(file_paths, item.value)
             end
-
             require("telescope.pickers").new({}, {
                 prompt_title = "Harpoon",
                 finder = require("telescope.finders").new_table({
@@ -28,11 +29,7 @@ return {
                 sorter = conf.generic_sorter({}),
             }):find()
         end
-
         vim.keymap.set("n", "<C-s>", function() toggle_telescope(harpoon:list()) end,
             { desc = "Open Harpoon Window" })
-    end,
-    keys = { -- load on these keys
-        { "<C-1>", desc = "Harpoon List", mode = "n" },
-    }
+    end
 }

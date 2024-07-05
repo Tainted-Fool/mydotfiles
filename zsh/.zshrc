@@ -2,23 +2,13 @@
 # zmodload zsh/zprof
 
 # Set name of the theme to load
-#PROMPT='%(!.%{%F{yellow}%}.)$USER @ %{$fg[white]%}%M %{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+# PROMPT='%(!.%{%F{yellow}%}.)$USER @ %{$fg[white]%}%M %{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 ZSH_THEME="typewritten/typewritten"
 
 # Customize prompt layout
 export TYPEWRITTEN_PROMPT_LAYOUT="pure_verbose"
 export TYPEWRITTEN_RELATIVE_PATH="home"
 export TYPEWRITTEN_COLOR_MAPPINGS="primary:#81A1C1;secondary:#B48EAD;accent:yellow;info_neutral_1:#BF616A"
-
-# Set PATH to include user's private bin if found
-if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-# Set PATH to include cargo's bin if found
-if [ -d "$HOME/.cargo/bin" ]; then
-    PATH="$HOME/.cargo/bin:$PATH"
-fi
 
 # Declare Windows C and D directories
 export HOMEC="/mnt/c/"
@@ -30,77 +20,72 @@ export HOMEG="/mnt/g/My Drive/"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# X11 forwarding - slows down oh-my-zsh startup
-# if [ -x "$(command -v tasklist.exe)" ] && (tasklist.exe | grep -q vcxsrv.exe); then
-#     export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-#     export LIBGL_ALWAYS_INDIRECT=1
-# fi
-
-# Install oh-my-zsh plugins
-# Check if directory exist; if not, create dir and clone repo
-DIR=$ZSH/custom/plugins/zsh-syntax-highlighting
-if [ ! -d $DIR ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting $DIR
+# Set PATH to include user's private bin if found
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    colored-man-pages
-    compleat
-    copybuffer
-    copyfile
-    copypath
-    fzf
-    encode64
-    extract
-    history
-    git
-    urltools
-    # vi-mode # switch to zsh-vi-mode
-    web-search
-    # z # switch to zoxide
+# Set PATH to include cargo's bin if found
+if [ -d "$HOME/.cargo/bin" ]; then
+    PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+# Install oh-my-zsh plugins
+DIR="${ZSH}/custom/plugins"
+declare -A REPOS=( # zsh
+    [autoupdate]="https://github.com/TamCore/autoupdate-oh-my-zsh-plugins"
+    [fzf-tab]="https://github.com/Aloxaf/fzf-tab"
+    [zsh-autopair]="https://github.com/hlissner/zsh-autopair"
+    [zsh-autosuggestions]="https://github.com/zsh-users/zsh-autosuggestions.git"
+    [zsh-syntax-highlighting]="https://github.com/zsh-users/zsh-syntax-highlighting"
+    [zsh-vi-mode]="https://github.com/jeffreytse/zsh-vi-mode"
 )
 
-# added extra plugins
-# these have to be downloaded from github and added to $ZSH_CUSTOM/plugins/
+# Loop through key/value pair
+for key value in ${(kv)REPOS}
+do
+# Check if directory exist; if not, create dir and clone repo
+    if [ ! -d "${DIR}/${key}" ]; then
+        git clone "${REPOS[$key]}" "${DIR}/${key}"
+    fi
+done
+
+# Standard plugins can be found in $ZSH/plugins/
+plugins=(
+    colored-man-pages # add color to man pages
+    compleat # generate tab completion
+    copybuffer # copy current text in command line to system clipboard ^O
+    copyfile # copy contents of file to systemclip `copyfile <filename>`
+    copypath # copy path or file name to systemclip `copypath [dir/file]`
+    fzf # enable fuzzy auto-completion and keybinds
+    encode64 # encode/decode base64 with `e64/d64` or file with `ef64`
+    extract # extract the archive file you pass in `extract <filename>`
+    history # add history alias h,hl,hs,hsi
+    git # add git alias and functions
+    urltools # encode/decode URL strings `urlencode <URL>`
+    web-search # add alias for searching `google`, `bing`, `ddg`, yandex`
+)
+
+# Custom plugins can be found in $ZSH_CUSTOM/plugins/
 plugins+=(
-    # fast-syntax-highlighting # this is slow
-    autoupdate
-    zsh-syntax-highlighting
-    zsh-aliases
-    zsh-autosuggestions
-    zsh-functions
-    zsh-vi-mode
-    zsh-autopair
+    autoupdate # update custom plugins
+    # fzf-tab # replace completion menu with fzf (bugged)
+    zsh-syntax-highlighting # highlights commands
+    zsh-aliases # personal alias file
+    zsh-autosuggestions # suggest commands as you type
+    zsh-functions # personal functions file
+    zsh-vi-mode # vim modes normal/visual
+    zsh-autopair # create pairs for quotes/brackets
 )
 
 # source oh-my-zsh script
 source $ZSH/oh-my-zsh.sh
 
-# Vi-mode configuration
-# VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true # redraw prompt when switching modes
-# VI_MODE_SET_CURSOR=true # change cursor style when switching modes
-# VI_MODE_CURSOR_NORMAL=1 # blinking block
-# VI_MODE_CURSOR_INSERT=3 # blinking underline
-
 # Zsh-vi-mode configuration
 ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BLOCK
 ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
-# ZVM_VI_INSERT_ESCAPE_BINDKEY=fj
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
-
-# Fix up and down arrow keys in zsh-vi-mode
-zvm_after_init_commands+=("bindkey '^[[A' up-line-or-search" "bindkey '^[[B' down-line-or-search")
-
-# Fix autopair plugin
-zvm_after_init_commands+=(autopair-init)
-AUTOPAIR_INIT_INHIBIT=1
-
-# Fix fzf keybinds CTRL+t and CTRL+r - use ~/.fzf/install
-zvm_after_init_commands+=("[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh")
+ZVM_VI_INSERT_ESCAPE_BINDKEY=fj
+# ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 
 # Fzf and fdfind configuration
 export FZF_DEFAULT_COMMAND="fdfind --type=f --hidden --strip-cwd-prefix --exclude .git"
@@ -111,15 +96,15 @@ export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 _fzf_compgen_path() {
-  fdfind --type=f --hidden --exclude .git . "$1"
+  fdfind --type=f --hidden --exclude .git . "$1" # [cmd] ** tab completion
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fdfind --type=d --hidden --exclude .git . "$1"
+  fdfind --type=d --hidden --exclude .git . "$1" # tab completion
 }
 
-# Setup file previews with bat and directory previews with eza
+# Setup file previews with bat and directory previews with eza with ^T and [cmd] ** tab
 _fzf_comprun() {
   local command=$1
   shift
@@ -134,16 +119,66 @@ _fzf_comprun() {
 
 # Set fzf color layout
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#d0d0d0,fg+:#d0d0d0,bg:#121212,bg+:#262626
-  --color=hl:#c19d5e,hl+:#f72c11,info:#afaf87,marker:#f72c11
-  --color=prompt:#7936a9,spinner:#c19d5e,pointer:#705d76,header:#1e42c6
-  --color=border:#262626,label:#aeaeae,query:#d9d9d9
+  --color=fg:#d0d0d0,fg+:#d0d0d0,bg:#282C34,bg+:#143652
+  --color=hl:#c19d5e,hl+:#B388FF,info:#BF616A,marker:#f72c11
+  --color=prompt:#B48EAD,spinner:#c19d5e,pointer:#81A1C1,header:#81A1C1
+  --color=border:#d9d9d9,label:#aeaeae,query:#d9d9d9
   --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> "
   --marker=">" --pointer="◆" --separator="─" --scrollbar="│"
   --layout="reverse" --info="right"'
 
 # Better `cd`
 eval "$(zoxide init zsh)"
+
+# bat theme - alternative to cat
+export BAT_THEME=TwoDark
+
+# Better history
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+
+# Keybindings
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# Fix up and down arrow keys in zsh-vi-mode
+zvm_after_init_commands+=("bindkey '^[[A' up-line-or-search" "bindkey '^[[B' down-line-or-search")
+
+# Fix autopair plugin
+zvm_after_init_commands+=(autopair-init)
+AUTOPAIR_INIT_INHIBIT=1
+
+# Fix fzf keybinds CTRL+t and CTRL+r - use ~/.fzf/install
+# ^R is to look through history
+zvm_after_init_commands+=("[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh")
+
+# disable sort when completing `git checkout`
+# zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+# zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+# zstyle ':completion:*' menu no
+
+# BUG: not loading with zsh-vi-mode
+# fzf-tab completion configurations
+# preview directory's content with eza when completing cd
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
+# switch group using `<` and `>`
+# zstyle ':fzf-tab:*' switch-group '<' '>'
+# make use of popup feature in tmux
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

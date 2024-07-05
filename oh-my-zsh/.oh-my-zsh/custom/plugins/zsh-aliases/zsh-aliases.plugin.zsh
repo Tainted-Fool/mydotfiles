@@ -88,7 +88,9 @@ alias start="explorer.exe "
 alias bat="batcat "
 
 # colorize cat
-alias cat="batcat -pp --paging=never --style='plain' --theme=TwoDark "
+# view a list of themes `bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file`
+# alias cat="batcat -pp --paging=never --style='plain' --theme=TwoDark "
+alias cat="batcat -pp --paging=never --style='plain' " # add BAT_THEME in .zshrc
 
 # shorthand remmina
 alias rdp="remmina"

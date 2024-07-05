@@ -1,38 +1,34 @@
 return {
     {
-        -- original colorscheme
+        -- Original colorscheme
         "rafi/awesome-vim-colorschemes",
         -- enabled = false, -- disable plugin
-
         -- config = function()
         --     vim.cmd("colorscheme onehalfdark")
         -- end
     },
     {
-        -- modern colorscheme
+        -- Modern colorscheme
         "folke/tokyonight.nvim",
         -- enabled = false, -- disable plugin
-
         -- config = function()
         --     vim.cmd("colorscheme tokyonight-moon")
         -- end
     },
     {
-        -- favorite colorscheme
+        -- Favorite colorscheme
         "rebelot/kanagawa.nvim",
         -- enabled = false, -- disable plugin
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
-
         config = function()
-
-            -- find current highlights `:so $VIMRUNTIME/syntax/hitest.vim`
+            -- Find current highlights `:so $VIMRUNTIME/syntax/hitest.vim`
             require("kanagawa").setup({
                 colors = {
                     theme = {
                         all = {
                             ui = {
-                                bg_gutter = "none"
+                                bg_gutter = "none",
                             }
                         }
                     }
@@ -107,19 +103,19 @@ return {
                         TSRainbowViolet = { fg = colors.palette.oniViolet },
                         TSRainbowCyan = { fg = colors.palette.waveAqua1 },
                     }
-                end,
+                end
             })
             vim.cmd("colorscheme kanagawa-wave")
-        end,
+        end
     },
     {
-        -- best colorscheme
+        -- Alternative colorscheme
         "catppuccin/nvim",
         lazy = true, -- do not load plugin unless needed
         name = "catppuccin",
         opts = { -- require("name").setup(opts)
             integrations = {
-                -- theme support for other plugins highlight groups
+                -- Theme support for other plugins highlight groups
                 aerial = true,
                 alpha = true,
                 cmp = true,
@@ -141,7 +137,7 @@ return {
                         hints = { "undercurl" },
                         warnings = { "undercurl" },
                         information = { "undercurl" },
-                    },
+                    }
                 },
                 navic = { enabled = true, custom_bg = "lualine" },
                 neotest = true,
@@ -153,10 +149,11 @@ return {
                 treesitter = true,
                 treesitter_context = true,
                 which_key = true,
-            },
-        },
+            }
+        }
     },
     {
+        -- Alternative colorscheme
         "rose-pine/neovim",
         name = "rose-pine",
     }

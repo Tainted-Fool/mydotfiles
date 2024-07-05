@@ -1,9 +1,13 @@
 return {
-    -- highlight same symbols under cursor
+    -- Highlight same symbols under cursor
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufWritePost", "BufNewFile" }, -- "LazyFile"
+    keys = {
+        { "]]", desc = "Next Reference" },
+        { "[[", desc = "Prev Reference" },
+    },
     opts = {
-        delay = 200,
+        delay = 100,
         providers = {
             "lsp",
             "treesitter",
@@ -37,25 +41,16 @@ return {
             providers = { "lsp" },
         },
         min_count_to_highlight = 1,
-        should_enable = function(bufnr) return true end,
-        case_insensitive_regex = false,
     },
-
     config = function(_, opts)
-
-        -- Pass the options above
-        require("illuminate").configure(opts)
-
         -- Map keybinds
         local function map(key, dir, buffer)
             vim.keymap.set("n", key, function()
                 require("illuminate")["goto_" .. dir .. "_reference"](true)
             end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
         end
-
         map("]]", "next")
         map("[[", "prev")
-
         -- Overwrite bindings if they are already set
         vim.api.nvim_create_autocmd("FileType", {
             callback = function()
@@ -64,9 +59,6 @@ return {
                 map("[[", "prev", buffer)
             end,
         })
-    end,
-    keys = {
-        { "]]", desc = "Next Reference" },
-        { "[[", desc = "Prev Reference" },
-    },
+        require("illuminate").configure(opts)
+    end
 }

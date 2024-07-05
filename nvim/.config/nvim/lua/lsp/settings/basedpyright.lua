@@ -6,7 +6,7 @@ return {
         textDocument = {
             publishDiagnostic = {
                 tagSupport = {
-                    valueSet = { 2 }
+                    valueSet = { 2 },
                 }
             }
         }

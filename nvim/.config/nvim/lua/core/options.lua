@@ -1,6 +1,4 @@
--- Declare variable
 local opt = vim.opt -- to save typing
-
 -- Set options by using lua api (0=false, 1=true)
 -- opt.autowrite = true -- enable auto write
 opt.backup = false -- create a backup file
@@ -19,7 +17,7 @@ opt.grepprg = "rg --vimgrep" -- use ripgrep for grep
 -- opt.guifont = "monospace:h17" -- font to use
 opt.hlsearch = true -- highlight search
 opt.ignorecase = true -- ignore case in search patterns
--- opt.inccommand = "nosplit" -- preview incremental substitute
+-- opt.inccommand = "split" -- preview incremental substitute or `split`
 opt.incsearch = true -- incremental search
 -- opt.laststatus = 3 -- global statusline
 -- opt.list = true -- show some invisible characters (tabs...
@@ -52,7 +50,7 @@ opt.splitright = true -- force vertical splits to go right of current window
 opt.swapfile = false -- create a swapfile
 opt.tabstop = 2 -- insert X spaces for a tab - width of tab
 opt.termguicolors = true -- set terminal colors
-opt.textwidth = 100 -- set line width
+opt.textwidth = 80 -- set line width/vertical bar - used for text wrapping
 opt.timeoutlen = 100 -- time to wait for mapped sequence default=300
 opt.ttimeoutlen = 50 -- time to wait for key code sequence to complete
 opt.undofile = true -- create a undo file for persistent undo
@@ -61,25 +59,19 @@ opt.updatetime = 300 -- faster completion save swap file and trigger CursorHold
 -- opt.virtualedit = "block" -- allow cursor to move where there is no characters
 opt.wildmode = "longest:full,full" -- command-line completion mode
 -- opt.winminwidth = 5 -- minimum width of a window
-opt.wrap = true -- allow lines to wrap
+opt.wrap = true -- allow lines to wrap at the window boundary
 opt.wrapscan = true -- allow search to cycle to top once it hits bottom
 opt.writebackup = false -- create a writebackup file
 opt.shortmess:append("c") -- append to the short messasge list
-
 -- Set options by passing vimscript commands
 vim.cmd("set whichwrap+=<,>,[,],h,l") -- allows specific characters to move to new line when at end/start
-
 -- Set options by passing vimscript commands - another way to write it
 vim.cmd([[set iskeyword+=-]]) -- treat 'some-word' as one word
-
 -- Default cursor settings
 -- vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20]]
-
 -- Change the default cursor settings
 vim.cmd([[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]])
-
 -- Speed up loading lua modles to improve startup time
 vim.loader.enable()
-
 -- Enable automatic codelens refreshing for lsp that support it.
 vim.g.codelens_enabled = true

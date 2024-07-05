@@ -1,5 +1,5 @@
 return {
-    -- better notifications
+    -- Better notifications
     "rcarriga/nvim-notify",
     opts = {
         render = "minimal",
@@ -7,8 +7,7 @@ return {
     },
     config = function(_, opts)
         local notify = require("notify")
-
         notify.setup(opts)
         vim.notify = notify
-    end,
+    end
 }

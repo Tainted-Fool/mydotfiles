@@ -1,5 +1,4 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -10,11 +9,8 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
-
 vim.opt.rtp:prepend(lazypath)
-
 local lazy = require("lazy")
-
 lazy.setup({
     "tpope/vim-repeat", -- repeat last command
     "tpope/vim-unimpaired", -- useful mappings like ]space and ]b

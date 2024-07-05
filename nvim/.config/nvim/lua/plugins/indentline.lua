@@ -1,12 +1,22 @@
 return {
     {
-        -- adds `|` as indentation guides
+        -- Adds `|` as indentation guides
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         event = "BufEnter",
         dependencies = "hiphish/rainbow-delimiters.nvim",
         config = function()
-
+            local highlight = {
+                "RainbowRed",
+                "RainbowYellow",
+                "RainbowBlue",
+                "RainbowOrange",
+                "RainbowGreen",
+                "RainbowViolet",
+                "RainbowCyan",
+            }
+            local lbl = require("ibl")
+            local hooks = require("ibl.hooks")
             -- Set tab and space characters
             vim.opt.list = true
             vim.opt.listchars:append("eol:↴")
@@ -16,19 +26,7 @@ return {
             vim.opt.listchars:append("precedes:«")
             vim.opt.listchars:append("nbsp:‡")
             vim.opt.listchars:append("trail:↝")
-
-            local highlight = {
-                "RainbowRed",
-                "RainbowYellow",
-                "RainbowBlue",
-                "RainbowOrange",
-                "RainbowGreen",
-                "RainbowViolet",
-                "RainbowCyan"
-            }
-            local lbl = require("ibl")
-            local hooks = require("ibl.hooks")
-
+            -- Set highlight groups
             hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
                 vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
                 vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
@@ -38,7 +36,6 @@ return {
                 vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
                 vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
             end)
-
             vim.g.rainbow_delimiters = { highlight = highlight }
             lbl.setup({
                 scope = { highlight = highlight },
@@ -64,13 +61,14 @@ return {
                         "lazyterm",
                         "DressingSelect",
                         "TelescopePrompt",
-                    },
+                    }
                 }
             })
             hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
         end
     },
     {
+        -- Highlights the current scope
         "echasnovski/mini.indentscope",
         opts = {
             symbol = "│",
@@ -96,8 +94,8 @@ return {
                 },
                 callback = function()
                     vim.b.miniindentscope_disable = true
-                end,
+                end
             })
-        end,
+        end
     }
 }

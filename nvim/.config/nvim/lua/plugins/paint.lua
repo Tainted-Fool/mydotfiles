@@ -1,18 +1,10 @@
 return {
-    -- add highlights to buffers
+    -- Add highlights to buffers
     "folke/paint.nvim",
     enabled = false, -- disable plugin
     -- ft = "markdown",
-
     config = function()
-
-        -- Use protected call so we know where error is coming from
-        local config_ok, paint = pcall(require, "paint")
-        if not config_ok then
-            vim.notify("paint plugin was not found!")
-            return
-        end
-
+        local paint = require("paint")
         local hlmap = {
             -- patterns :help luaref-pattern
             -- pattern = "%s*%-%-%-%s*(@w+)" -- @someword
@@ -27,7 +19,6 @@ return {
             -- ["%[([^%]].-)%]"] = "WarningMsg", -- [some words] (in colorscheme.lua)
             -- ["%(([^%)].-)%)"] = "DashboardKey", -- (some words) (in colorscheme.lua)
         }
-
         local highlights = {}
         for pattern, hl in pairs(hlmap) do
             table.insert(highlights, {
@@ -36,10 +27,9 @@ return {
                 hl = hl,
             })
         end
-
         paint.setup({
             --@type PaintHighligh[]
             highlights = highlights,
         })
-    end,
+    end
 }

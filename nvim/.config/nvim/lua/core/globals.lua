@@ -1,26 +1,22 @@
--- print tables
+-- Print tables
 P = function(val)
     print(vim.inspect(val))
     return val
 end
-
--- reload config
+-- Reload config
 RELOAD = function(...)
     return require("plenary.reload").reload(...)
 end
-
--- reload config
+-- Reload config
 R = function(name)
     RELOAD(name)
     return require(name)
 end
-
--- print buffer filetype
+-- Print buffer filetype
 B = function()
     return vim.notify(vim.bo.filetype)
 end
-
--- print server capabilities
+-- Print server capabilities
 -- =vim.lsp.get_active_clients()[4].server_capabilities
 -- S = function()
 --     return vim.lsp.get_active_clients()

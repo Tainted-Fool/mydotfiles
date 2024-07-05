@@ -20,16 +20,14 @@ return {
                     return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<Tab>"
                 end,
                 expr = true, silent = true, mode = "i",
-                desc = "Next snippet"
+                desc = "Next snippet",
             },
-            -- { "<tab>", function() require("luasnip").jump(1) end, mode = "s", desc = "Next snippet" },
-            -- { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" }, desc = "Previous snippet" },
             { "<c-j>", function() require("luasnip").jump(1) end, mode = "s", desc = "Next snippet" },
             { "<c-k>", function() require("luasnip").jump(-1) end, mode = { "i", "s" }, desc = "Previous snippet" },
         }
     },
     {
-        -- the auto completion plugin
+        -- Auto completion
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
@@ -47,50 +45,43 @@ return {
             }
         },
         config = function()
-
-            -- Declare variables
             local cmp = require("cmp")
             local luasnip = require("luasnip")
             local lspkind = require("lspkind")
+            local icons = require("core.icons")
 
-            -- Completion function when backspace is press
-            -- local has_words_before = function()
-            --     unpack = unpack or table.unpack
-            --     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-            --     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-            -- end
-
+            -- Setup lspkind icons
             lspkind.init({
-                mode = "symbol", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+                mode = "symbol", -- "text" | "text_symbol" | "symbol_text" | "symbol"
                 preset = "default", -- codicons or default
                 symbol_map = {
-                    Text = "󰉿",
-                    Method = "󰆧",
-                    Function = "󰊕",
-                    Constructor = "",
-                    Field = "󰜢",
-                    Variable = "󰀫",
-                    Class = "󰠱",
-                    Interface = "",
-                    Module = "",
-                    Property = "󰜢",
-                    Unit = "󰑭",
-                    Value = "󰎠",
-                    Enum = "",
-                    Keyword = "󰌋",
-                    Snippet = "",
-                    Color = "󰏘",
-                    File = "󰈙",
-                    Reference = "󰈇",
-                    Folder = "󰉋",
-                    EnumMember = "",
-                    Constant = "󰏿",
-                    Struct = "󰙅",
-                    Event = "",
-                    Operator = "󰆕",
-                    TypeParameter = "",
-                    Copilot = "",
-                },
+                    Class = icons.kind.Class,
+                    Color = icons.kind.Color,
+                    Constant = icons.kind.Constant,
+                    Constructor = icons.kind.Constructor,
+                    Copilot = icons.git.Copilot,
+                    Enum = icons.kind.Enum,
+                    EnumMember = icons.kind.EnumMember,
+                    Event = icons.kind.Event,
+                    Field = icons.kind.Field,
+                    File = icons.kind.File,
+                    Folder = icons.kind.Folder,
+                    Function = icons.kind.Function,
+                    Interface = icons.kind.Interface,
+                    Keyword = icons.kind.Keyword,
+                    Method = icons.kind.Method,
+                    Module = icons.kind.Module,
+                    Operator = icons.kind.Operator,
+                    Property = icons.kind.Property,
+                    Reference = icons.kind.Reference,
+                    Snippet = icons.kind.Snippet,
+                    Struct = icons.kind.Struct,
+                    Text = icons.kind.Text,
+                    TypeParameter = icons.kind.TypeParameter,
+                    Unit = icons.kind.Unit,
+                    Value = icons.kind.Value,
+                    Variable = icons.kind.Variable,
+                }
             })
 
             cmp.setup({
@@ -102,7 +93,7 @@ return {
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body)
-                    end,
+                    end
                 },
 
                 -- Completition key mappings
@@ -114,102 +105,10 @@ return {
                     ["<C-z>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.close(),
                     ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                    -- ["<S-CR>"] = cmp.mapping.confirm({
-                    --     behavior = cmp.ConfirmBehavior.Replace,
-                    --     select = true, -- set to false to only confirm explicitly selected items
-                    -- }),
                     ["<C-CR>"] = function(fallback)
                         cmp.abort()
                         fallback()
-                    end,
-
-                    -- Tab autocompletion
-                    -- ["<Tab>"] = cmp.mapping(function(fallback)
-                    --     if cmp.visible() then
-                    --         cmp.select_next_item()
-                    --     elseif luasnip.expand_or_jumpable() then
-                    --         luasnip.expand_or_jump()
-                    --     elseif has_words_before() then
-                    --         fallback()
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end, {"i", "s"}),
-
-                    -- -- Same as TAB but backwards
-                    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-                    --     if cmp.visible() then
-                    --         cmp.select_prev_item()
-                    --     elseif luasnip.jumpable(-1) then
-                    --         luasnip.jump(-1)
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end, {"i", "s"})
-
-                    -- Tab autocompletion with copilot
-                    -- ["<Tab>"] = cmp.mapping(function(fallback)
-                    --     local copilot = require("copilot.suggestion")
-                    --     if copilot.is_visible() then
-                    --         copilot.accept()
-                    --     elseif cmp.visible() then
-                    --         local entry = cmp.get_selected_entry()
-                    --         if not entry then
-                    --             cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
-                    --         else
-                    --             cmp.confirm()
-                    --         end
-                    --     elseif luasnip.expand_or_jumpable() then
-                    --         luasnip.expand_or_jump()
-                    --     elseif has_words_before() then -- might remove this
-                    --         fallback()
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end, {"i", "s"}),
-
-                    -- Same as TAB for copilot but backwards
-                    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-                    --     local copilot = require("copilot.suggestion")
-                    --     if copilot.is_visible() then
-                    --         copilot.accept()
-                    --     elseif cmp.visible() then
-                    --         local entry = cmp.get_selected_entry()
-                    --         if not entry then
-                    --             cmp.select_prev_item({behavior = cmp.SelectBehavior.Select})
-                    --         else
-                    --             cmp.confirm()
-                    --         end
-                    --     elseif luasnip.jumpable(-1) then
-                    --         luasnip.jump(-1)
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end, {"i", "s"}),
-
-                    -- Autocompletion choose next menu item
-                    -- ["<C-n>"] = cmp.mapping(function(fallback)
-                    --     if cmp.visible() then
-                    --         cmp.select_next_item()
-                    --     elseif luasnip.expand_or_jumpable() then
-                    --         luasnip.expand_or_jump()
-                    --     elseif has_words_before() then
-                    --         fallback()
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end, { "i", "s" }),
-
-                    -- Autocompletion choose previous menu item
-                    -- ["<C-p>"] = cmp.mapping(function(fallback)
-                    --     if cmp.visible() then
-                    --         cmp.select_prev_item()
-                    --     elseif luasnip.jumpable(-1) then
-                    --         luasnip.jump(-1)
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end, { "i", "s" }),
+                    end
                 }),
 
                 -- Menu popup configuration
@@ -229,7 +128,7 @@ return {
                         max_width = 50,
                         ellipsis_char = "...",
                         show_labelDetails = true,
-                    }),
+                    })
                 },
 
                 -- Order of source completion providers
@@ -239,7 +138,8 @@ return {
                     { name = "luasnip" },
                     { name = "copilot" },
                     { name = "path" },
-                }, { -- group_index
+                },
+                {
                     { name = "buffer" },
                     -- { name = "cmdline", keyword_length = 3 },
                 }),
@@ -247,35 +147,36 @@ return {
                 -- Cmp features
                 experimental = {
                     ghost_text = true, -- show ghost text of first item in completion menu
-                },
+                }
             })
 
-            -- Cmdline setup for '/'
+            -- Cmdline setup for "/"
             cmp.setup.cmdline("/", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "buffer" },
-                },
+                }
             })
 
-            -- Cmdline setup for ':'
+            -- Cmdline setup for ":"
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
                     { name = "path" },
-                }, {
-                        {
-                            name = "cmdline",
-                            keyword_pattern = [=[[^[:blank:]\!]*]=],
-                            keyword_length = 3,
-                            option = {
-                                ignore_cmds = { "Man", "!" },
-                            },
-                        },
-                    }),
+                },
+                {
+                    {
+                        name = "cmdline",
+                        keyword_pattern = [=[[^[:blank:]\!]*]=],
+                        keyword_length = 3,
+                        option = {
+                            ignore_cmds = { "Man", "!" },
+                        }
+                    }
+                })
             })
 
-            -- If you want to insert '(' after select function or method
+            -- If you want to insert "(" after select function or method
             cmp.event:on(
                 "confirm_done",
                 require("nvim-autopairs.completion.cmp").on_confirm_done()

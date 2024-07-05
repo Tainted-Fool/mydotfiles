@@ -1,15 +1,21 @@
 return {
-    -- home page
+    -- Dashboard
     "goolord/alpha-nvim",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
+    lazy = true, -- load after everything else
     event = "VimEnter",
-    lazy = true,
-
     opts = function()
-
         local dashboard = require("alpha.themes.dashboard")
+        local icons = require("core.icons")
+
+    --     local logo = [[
+    -- 🛸　　　 　🌎　°　　🌓　•　　.°•　　　🚀 ✯ ,
+    -- 　　　★　*　　　　　°　　　　🛰 　°·      🪐,
+    -- .　　　•　° ★　•  ☄                        ,
+    --                ▁▂▃▄▅▆▇▇▆▅▄▃▂▁.           ,
+    --     ]]
 
         -- local logo = [[
         --     ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗
@@ -31,35 +37,23 @@ return {
          ██████  █████████████████████ ████ █████ █████ ████ ██████ 
         ]]
 
-    --     local logo = [[
-    -- 🛸　　　 　🌎　°　　🌓　•　　.°•　　　🚀 ✯ ,
-    -- 　　　★　*　　　　　°　　　　🛰 　°·      🪐,
-    -- .　　　•　° ★　•  ☄                        ,
-    --                ▁▂▃▄▅▆▇▇▆▅▄▃▂▁.           ,
-    --     ]]
-
         dashboard.section.header.val = vim.split(logo, "\n")
-
         dashboard.section.buttons.val = {
-            dashboard.button("f", "󰈞  Find File", ":Telescope find_files hidden=true<CR>"),
-            dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
-            dashboard.button("p", "  Find Project", ":Telescope projects <CR>"),
-            dashboard.button("r", "  Recent Files", ":Telescope oldfiles <CR>"),
-            dashboard.button("t", "󰊄  Find Text", ":Telescope live_grep <CR>"),
-            dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
-            dashboard.button("q", "  Quit", ":qa<CR>")
+            dashboard.button("f", icons.ui.FindFile .. "  Find File", ":Telescope find_files hidden=true<CR>"),
+            dashboard.button("e", icons.ui.NewFile .. "  New File", ":ene <BAR> startinsert <CR>"),
+            dashboard.button("p", icons.ui.Project .. "  Find Project", ":Telescope projects <CR>"),
+            dashboard.button("r", icons.ui.RecentFiles .. "  Recent Files", ":Telescope oldfiles <CR>"),
+            dashboard.button("t", icons.ui.FindText .. "  Find Text", ":Telescope live_grep <CR>"),
+            dashboard.button("c", icons.kind.Constructor  .. "  Configuration", ":e $MYVIMRC <CR>"),
+            dashboard.button("q", icons.misc.Quit .. "  Quit", ":qa<CR>"),
         }
-
         dashboard.section.header.opts.hl = "Function"
         dashboard.section.buttons.opts.hl = "Keyword"
         dashboard.section.footer.opts.hl = "Special"
         return dashboard
     end,
     config = function(_, dashboard)
-        -- dashboard.opts.opts.noautocmd = true
-        -- alpha.setup(dashboard.opts)
-
-        -- close lazy and re-open when the dashboard is ready
+        -- Close lazy and re-open when the dashboard is ready
         if vim.o.filetype == "lazy" then
             vim.cmd.close()
             vim.api.nvim_create_autocmd("User", {
@@ -67,17 +61,13 @@ return {
                 pattern = "AlphaReady",
                 callback = function()
                     require("lazy").show()
-                end,
+                end
             })
         end
 
-        -- setup alpha dashboard
-        require("alpha").setup(dashboard.opts)
-
-        -- setup fortune-mod
+        -- Setup fortune-mod
         local function footer()
-            -- need fortune-mod -> sudo apt install fortune-mod
-            local handle = io.popen("fortune")
+            local handle = io.popen("fortune")-- sudo apt install fortune-mod
             if not handle then
                 vim.notify("Fortune-mod not installed")
                 vim.notify("Run `sudo apt install fortune-mod`")
@@ -106,7 +96,9 @@ return {
                     .. "\n"
                     .. footer()
                 pcall(vim.cmd.AlphaRedraw)
-            end,
+            end
         })
-    end,
+
+        require("alpha").setup(dashboard.opts)
+    end
 }

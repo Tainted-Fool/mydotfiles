@@ -1,10 +1,9 @@
 return {
-    -- show leader key bindings
+    -- Show leader key bindings
     "folke/which-key.nvim",
     event = "VeryLazy",
     config = function()
         local which_key = require("which-key")
-
         local setup = {
             plugins = {
                 marks = true, -- show a list of your marks on ' and `
@@ -20,7 +19,7 @@ return {
                     windows = true, -- default bindings on <C-w>
                     nav = true, -- misc bindings to work with windows
                     z = true, -- bindings for folds, spelling and others prefixed with z
-                    g = true -- bindings for prefixed with g
+                    g = true, -- bindings for prefixed with g
                 }
             },
             key_labels = {
@@ -30,11 +29,11 @@ return {
             icons = {
                 breadcrumbs = "»", -- symbol used in the command line area that shows your active key combo
                 separator = "➜", -- symbol used between a key and it's label
-                group = "+" -- symbol prepended to a group
+                group = "+", -- symbol prepended to a group
             },
             popup_mappings = {
                 scroll_down = "<c-d>", -- binding to scroll down inside the popup
-                scroll_up = "<c-u>" -- bindings to scroll up inside the popup
+                scroll_up = "<c-u>", -- bindings to scroll up inside the popup
             },
             window = {
                 border = "rounded", -- none, single, double, rounded, or shadow
@@ -46,14 +45,14 @@ return {
             layout = {
                 height = {
                     min = 4,
-                    max = 25
+                    max = 25,
                 }, -- min and max height of the columns
                 width = {
                     min = 20,
-                    max = 50
+                    max = 50,
                 }, -- min and max width of the columns
                 spacing = 3, -- spacing between columns
-                align = "left" -- align columns left, center, or right
+                align = "left", -- align columns left, center, or right
             },
             ignore_missing = true, -- enable this to hide mappings for these labels
             hidden = {"<silent>", "<cmd>", "<Cmd>", "<cr>", "<CR>", "call", "lua", "^:", "^ "},
@@ -61,7 +60,7 @@ return {
             triggers = "auto", -- auto setup triggers
             triggers_blacklist = {
                 i = {"j", "k"},
-                v = {"j", "k"}
+                v = {"j", "k"},
             }
         }
 
@@ -71,7 +70,7 @@ return {
             buffer = nil,
             silent = true, -- use these options when creating keymaps
             noremap = true,
-            nowait = true
+            nowait = true,
         }
 
         local mappings = {
@@ -98,17 +97,18 @@ return {
 
             b = {
                 name = "Buffer",
+                a = {"<cmd>%bd<cr>:e#<cr>:bd#<cr>", "Close All Buffers"},
                 b = {"<cmd>e #<cr>", "Other Buffer"},
                 c = {"<cmd>Bdelete!<cr>", "Close Buffer"},
                 e = {
                     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
                     "Buffer explorer",
                 },
-                m = {"<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split"},
+                f = {"<cmd>Format<cr>:w<cr>", "Format and Save"},
+                m = {"<cmd>MaximizerToggle<cr>", desc = "Maximize/minimize a split"},
                 q = {"<cmd>wq!<cr>", "Save and Quit Buffer"},
-                s = {"<cmd>w<cr>", "Save/Write Buffer"},
-                w = {"<cmd>Format<cr>:w<cr>", "Format and Save"},
-                x = {"<cmd>w<cr>:bd!<cr>", "Save and Close Buffer"}
+                w = {"<cmd>w<cr>", "Save/Write Buffer"},
+                x = {"<cmd>w<cr>:bd!<cr>", "Save and Close Buffer"},
             },
 
             d = {
@@ -122,7 +122,7 @@ return {
                 O = {"<cmd>lua require('dap').step_out()<cr>", "Step Out"},
                 r = {"<cmd>lua require('dap').repl.toggle()<cr>", "REPL Toggle"},
                 t = {"<cmd>lua require('dap').terminate()<cr>", "Terminate"},
-                u = {"<cmd>lua require('dapui').toggle()<cr>", "UI Toggle"}
+                u = {"<cmd>lua require('dapui').toggle()<cr>", "UI Toggle"},
             },
 
             D = {
@@ -132,7 +132,7 @@ return {
                 q = {"<cmd>TroubleToggle quickfix<cr>", "Quickfix"},
                 r = {"<cmd>TroubleToggle lsp_references<cr>", "References"},
                 t = {"<cmd>TroubleToggle<cr>", "Trouble Toggle"},
-                w = {"<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics"}
+                w = {"<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics"},
             },
 
             f = {
@@ -150,7 +150,7 @@ return {
                 h = {"<cmd>FzfLua command_history<cr>", "Find Command History"},
                 H = {"<cmd>FzfLua search_history<cr>", "Find Search History"},
                 m = {"<cmd>FzfLua man_pages<cr>", "Find Man Pages"},
-                s = {"<cmd>FzfLua spell_suggest<cr>", "Spell Suggestions"}
+                s = {"<cmd>FzfLua spell_suggest<cr>", "Spell Suggestions"},
             },
 
             g = {
@@ -169,14 +169,14 @@ return {
                 r = {"<cmd>lua require('gitsigns').reset_hunk()<cr>", "Reset Hunk"},
                 R = {"<cmd>lua require('gitsigns').reset_buffer()<cr>", "Reset Buffer"},
                 s = {"<cmd>lua require('gitsigns').stage_hunk()<cr>", "Stage Hunk"},
-                u = {"<cmd>lua require('gitsigns').undo_stage_hunk()<cr>", "Undo Stage Hunk"}
+                u = {"<cmd>lua require('gitsigns').undo_stage_hunk()<cr>", "Undo Stage Hunk"},
             },
 
             h = {
                 name = "Harpoon",
                 a = {"<cmd>lua require('harpoon'):list():append()<cr>", "Harpoon Add"},
                 l = {"<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", "Harpoon List"},
-                m = {"<cmd>Telescope harpoon marks<cr>", "Harpoon Marks"}
+                m = {"<cmd>Telescope harpoon marks<cr>", "Harpoon Marks"},
                 -- m = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon Menu" },
             },
 
@@ -228,13 +228,16 @@ return {
                 m = {"<cmd>Telescope notify<cr>", "Display Messages"},
                 s = {"<cmd>TSJSplit<cr>", "Split Line"},
                 t = {"<cmd>TSJToggle<cr>", "Toggle Split/Join Line"},
+                x = {"E[x]ecute"},
+                xx = {"<cmd>.lua<cr>", "Execute the current line"},
+                xf = {"<cmd>source %<cr>", "Execute the current file"},
             },
 
             p = {
                 name = "Plugin Manager",
                 l = {"<cmd>Lazy<cr>", "Lazy"},
                 m = {"<cmd>Mason<cr>", "Mason"},
-                u = {"<cmd>Lazy<cr>", "Update"}
+                u = {"<cmd>Lazy<cr>", "Update"},
             },
 
             r = {
@@ -251,8 +254,8 @@ return {
 
             s = {
                 name = "Search",
-                B = {"<cmd>Telescope git_branches<cr>", "Checkout Branch"},
                 b = {"<cmd>Telescope buffers<cr>", "Buffers"},
+                B = {"<cmd>Telescope git_branches<cr>", "Checkout Branch"},
                 c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
                 C = {"<cmd>Telescope commands<cr>", "Commands"},
                 d = {"<cmd>Telescope grep_string<cr>", "Find string under cursor"},
@@ -260,6 +263,7 @@ return {
                 f = {"<cmd>Telescope find_files<cr>", "Find Files"},
                 g = {"<cmd>Telescope live_grep<cr>", "Live Grep"},
                 h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
+                H = {"<cmd>Telescope pickers<cr>", "History Pickers"},
                 k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
                 -- k = {"<cmd>Telescope mapper<cr>", "Keymaps"},
                 m = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
@@ -281,7 +285,7 @@ return {
                 p = {"<cmd>lua _PYTHON_TOGGLE()<cr>", "Python"},
                 t = {"<cmd>lua _HTOP_TOGGLE()<cr>", "HTop"},
                 u = {"<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU - Disk Usage"},
-                v = {"<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical"}
+                v = {"<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical"},
             },
 
             v = {
@@ -302,10 +306,9 @@ return {
                 o = {"<C-W>o", "Close all other windows"},
                 s = {"<C-W>s", "Split window below"},
                 v = {"<C-W>v", "Split window right"},
-                w = {"<C-W>w", "Switch window"}
-            },
+                w = {"<C-W>w", "Switch window"},
+            }
         }
-
         which_key.setup(setup)
         which_key.register(mappings, opts)
     end

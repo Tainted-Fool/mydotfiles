@@ -1,5 +1,4 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -10,13 +9,10 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
-
 vim.opt.rtp:prepend(lazypath)
-
 local lazy = require("lazy")
-
 lazy.setup({
-    -- import all plugins from nvim/lua/plugins by default
+    -- Import all plugins from nvim/lua/plugins by default
     spec = {
         { import = "plugins" },
         { import = "lsp" }, -- lazy looks for all lua files in the directory
@@ -35,5 +31,5 @@ lazy.setup({
     change_detection = {
         enabled = true,
         notify = false,
-    },
+    }
 })

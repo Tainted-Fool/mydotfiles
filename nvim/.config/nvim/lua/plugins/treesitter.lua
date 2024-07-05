@@ -1,15 +1,17 @@
 return {
     {
-        -- syntax highlighting
+        -- Syntax highlighting
         "nvim-treesitter/nvim-treesitter",
         dependencies = { "nvim-treesitter/nvim-treesitter-context" }, -- see context in winbar
         event = { "BufReadPre", "BufNewFile", "VeryLazy" }, -- load when file is read or open
         build = ":TSUpdate", -- whenever you install or update through lazy
-
+        cmd = { "TSUpdate", "TSUpdateSync", "TSInstall" }, -- load on these commands
+        -- keys = {
+        --     { "<CR>", desc = "Incremenet Selection" },
+        --     { "<S-TAB>", desc = "Decrement Selection", mode = "x" },
+        -- },
         config = function()
-
             local treesitter = require("nvim-treesitter.configs")
-
             treesitter.setup({
                 ensure_installed = {
                     "bash",
@@ -58,25 +60,17 @@ return {
                         -- scope_incremental = "<CR>",
                         node_incremental = "v",
                         node_decremental = "V",
-                    },
-                },
+                    }
+                }
             })
-        end,
-        cmd = { "TSUpdate", "TSUpdateSync", "TSInstall" }, -- load on these commands
-        -- keys = { -- load on these keys
-        --     { "<CR>", desc = "Incremenet Selection" },
-        --     { "<S-TAB>", desc = "Decrement Selection", mode = "x" },
-        -- }
+        end
     },
     {
-        -- commentstring based on cursor location
+        -- Commentstring based on cursor location
         "windwp/nvim-ts-autotag",
         event = "VeryLazy",
-
         config = function()
-
             local treesitter = require("nvim-treesitter.configs")
-
             treesitter.setup({
                 autotag = {
                     enable = true,
@@ -89,14 +83,11 @@ return {
         end
     },
     {
-        -- syntax aware text-objects
+        -- Syntax aware text-objects
         "nvim-treesitter/nvim-treesitter-textobjects",
         event = "VeryLazy",
-
         config = function()
-
             local treesitter = require("nvim-treesitter.configs")
-
             treesitter.setup({
                 textobjects = {
                     select = {
@@ -107,40 +98,29 @@ return {
                             ["i="] = "assignment.inner",
                             ["h="] = "assignment.lhs",
                             ["l="] = "assignment.rhs",
-
                             ["am"] = "@function.outer",
                             ["im"] = "@function.inner",
-
                             ["ac"] = "@class.outer",
                             ["ic"] = "@class.inner",
-
                             ["af"] = "@call.outer",
                             ["if"] = "@call.inner",
-
                             ["aa"] = "@parameter.outer",
                             ["ia"] = "@parameter.inner",
-
                             ["al"] = "loop.outer",
                             ["il"] = "loop.inner",
-
                             ["ai"] = "conditional.outer",
                             ["ii"] = "conditional.inner",
-
                             ["a/"] = "@comment.outer",
                             ["i/"] = "@comment.inner",
-
                             ["ab"] = "@block.outer",
                             ["ib"] = "@block.inner",
-
                             ["as"] = "@statement.outer",
                             ["is"] = "@scopename.inner",
-
                             ["aA"] = "@attribute.outer",
                             ["iA"] = "@attribute.inner",
-
                             ["aF"] = "@frame.outer",
                             ["iF"] = "@frame.inner",
-                        },
+                        }
                     },
                     move = {
                         enable = true,
@@ -160,34 +140,30 @@ return {
                         goto_previous_end = {
                             ["[M"] = "@function.outer",
                             ["[C"] = "@class.outer",
-                        },
+                        }
                     },
                     swap = {
                         enable = true,
                         swap_next = {
-                            ["<leader>."] = "@parameter.inner",
+                            ["<leader>."] = "@parameter.inner"
                         },
                         swap_previous = {
-                            ["<leader>,"] = "@parameter.inner",
-                        },
-                    },
-                },
+                            ["<leader>,"] = "@parameter.inner"
+                        }
+                    }
+                }
             })
-        end,
+        end
     },
     {
-        -- better % navigate and highlight matching words
+        -- Better % navigate and highlight matching words
         "andymass/vim-matchup",
         event = "VeryLazy",
-
         setup = function()
             vim.g.matchup_matchparen_offscreen = { method = "popup" }
         end,
-
         config = function()
-
             local treesitter = require("nvim-treesitter.configs")
-
             treesitter.setup({
                 matchup = {
                     enable = true,
@@ -197,7 +173,7 @@ return {
         end
     },
     {
-        -- split and join lines 
+        -- Split and join lines 
         "Wansmer/treesj",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = function()

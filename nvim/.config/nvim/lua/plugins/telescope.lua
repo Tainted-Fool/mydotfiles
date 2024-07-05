@@ -1,5 +1,5 @@
 return {
-    -- find files
+    -- Fuzzy finder
     "nvim-telescope/telescope.nvim", tag = "0.1.5",
     event = "VeryLazy",
     dependencies = {
@@ -17,20 +17,21 @@ return {
             cond = function()
                 return vim.fn.executable("make") == 1
             end
-        },
+        }
     },
     config = function()
+        local icons = require("core.icons")
         local telescope = require("telescope")
         local actions = require("telescope.actions")
         local fb_actions = telescope.extensions.file_browser.actions
 
         telescope.setup({
             defaults = {
-                prompt_prefix = " ",
-                selection_caret = " ",
+                prompt_prefix = icons.ui.Telescope .. " ",
+                selection_caret = icons.ui.Forward .. " ",
                 path_display = { "smart" },
                 file_ignore_patterns = {
-                    -- ".git", -- BUG: keyword `gitsign` is ignored
+                    -- ".git",
                     ".next",
                     ".sl",
                     "_build",
@@ -39,7 +40,6 @@ return {
                     "node_modules",
                     "yarn.lock",
                 },
-                -- for live_grep
                 vimgrep_arguments = {
                     "rg", -- ripgrep
                     "--hidden", -- search hidden files
@@ -57,8 +57,10 @@ return {
                 },
                 mappings = {
                     i = {
-                        ["<C-j>"] = actions.move_selection_next,
-                        ["<C-k>"] = actions.move_selection_previous,
+                        ["<C-n>"] = actions.move_selection_next,
+                        ["<C-p>"] = actions.move_selection_previous,
+                        ["<C-Down>"] = actions.cycle_history_next,
+                        ["<C-Up>"] = actions.cycle_history_prev,
                     }
                 },
                 layout_strategy = "horizontal",
@@ -68,7 +70,7 @@ return {
                         -- width = { padding = 0 }, -- use full screen
                         -- height = { padding = 0 }, -- use full screen
                         preview_width = 0.5,
-                    },
+                    }
                 }
             },
             pickers = {
@@ -83,29 +85,23 @@ return {
                         "--glob=!**/peda-arm/*",
                         "--glob=!**/pwndbg/*",
                     }
-                },
+                }
             },
             extensions = {
-                -- File browser
                 file_browser = {
                     theme = "dropdown", -- dropdown, ivy, cursor
                     hijack_netrw = true,
                     mappings = {
-                        ["i"] = {
-                            -- own custom insert mode mappings
-                        },
+                        ["i"] = { }, -- own custom insert mode mappings
                         ["n"] = {
-                            -- own custom normal mode mappings
                             ["a"] = fb_actions.create
-                        },
-                    },
+                        }
+                    }
                 },
-                -- Undo history tree
                 undo = {
                     side_by_side = true,
                     layout_strategy = "horizontal", -- horizontal, vertical
                 },
-                -- Fzf
                 fzf = {
                     fuzzy = true,
                     override_generic_sorter = true,
@@ -114,7 +110,6 @@ return {
                 }
             }
         })
-
         -- Load extensions
         telescope.load_extension("file_browser")
         telescope.load_extension("dap")
@@ -125,5 +120,5 @@ return {
         telescope.load_extension("session-lens")
         telescope.load_extension("undo")
         -- telescope.load_extension("mapper")
-    end,
+    end
 }

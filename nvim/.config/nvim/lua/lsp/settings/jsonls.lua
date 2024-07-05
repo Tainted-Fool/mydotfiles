@@ -1,14 +1,14 @@
 return {
     init_options = {
-        provideFormatter = false
+        provideFormatter = false,
     },
     settings = {
         json = {
             schemas = require("schemastore").json.schemas(),
-            validate = { enable = true }
+            validate = { enable = true },
         }
     },
     setup = {
-        commands = {}
+        commands = {},
     }
 }

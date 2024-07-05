@@ -6,7 +6,7 @@ return {
                 callSnippet = "Replace",
             },
             diagnostics = {
-                globals = { "vim" } -- allow LSP server to recognize the "vim" global variable
+                globals = { "vim" }, -- allow LSP server to recognize the "vim" global variable
             },
             hint = {
                 enable = true, --inlayhints
@@ -15,7 +15,7 @@ return {
                 paramName = "Disable", -- All, Disable, Literal
                 paramType = false,
                 semicolon = "Disable", -- All, Disable, SameLine
-                setType = true
+                setType = true,
             },
             workspace = {
                 checkThirdParty = false,

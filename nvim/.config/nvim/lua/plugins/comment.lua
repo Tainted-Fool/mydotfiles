@@ -1,6 +1,6 @@
 return {
     {
-        -- line and block comments with `gbc` and `gcc`
+        -- Line and block comments with `gbc` and `gcc`
         "numToStr/Comment.nvim",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
@@ -11,7 +11,7 @@ return {
         end
     },
     {
-        -- commentstring based on cursor location
+        -- Commentstring based on cursor location
         "JoosepAlviste/nvim-ts-context-commentstring",
         event = "VeryLazy",
         opts = {
