@@ -82,7 +82,10 @@ alias dit="cd ~/.dotfiles && git status"
 alias multipull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 
 # open Windows file explorer
-alias start="explorer.exe "
+alias start="/mnt/c/Windows/explorer.exe "
+
+# open vscode from Windows - sudo apt purge code-oss
+alias code="/mnt/c/tools/vscode/bin/code "
 
 # shorthand batcat
 alias bat="batcat "

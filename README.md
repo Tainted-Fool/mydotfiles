@@ -41,6 +41,7 @@ stow .
 # stow nvim
 # stow */ -t ~
 # stow --target ~/.config .
+# stow wsl --target=/etc
 ```
 
 ## Dependencies
