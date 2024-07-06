@@ -228,9 +228,8 @@ return {
                 m = {"<cmd>Telescope notify<cr>", "Display Messages"},
                 s = {"<cmd>TSJSplit<cr>", "Split Line"},
                 t = {"<cmd>TSJToggle<cr>", "Toggle Split/Join Line"},
-                x = {"E[x]ecute"},
-                xx = {"<cmd>.lua<cr>", "Execute the current line"},
-                xf = {"<cmd>source %<cr>", "Execute the current file"},
+                x = {"<cmd>.lua<cr>", "Execute the current line"},
+                X = {"<cmd>source %<cr>", "Execute the current file"},
             },
 
             p = {

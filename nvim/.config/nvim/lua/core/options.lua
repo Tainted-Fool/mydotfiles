@@ -51,7 +51,7 @@ opt.swapfile = false -- create a swapfile
 opt.tabstop = 2 -- insert X spaces for a tab - width of tab
 opt.termguicolors = true -- set terminal colors
 opt.textwidth = 80 -- set line width/vertical bar - used for text wrapping
-opt.timeoutlen = 100 -- time to wait for mapped sequence default=300
+opt.timeoutlen = 500 -- time to wait for mapped sequence default=300
 opt.ttimeoutlen = 50 -- time to wait for key code sequence to complete
 opt.undofile = true -- create a undo file for persistent undo
 -- opt.undolevels = 1000 -- maximum number of changes that can be undone
@@ -75,3 +75,15 @@ vim.cmd([[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]])
 vim.loader.enable()
 -- Enable automatic codelens refreshing for lsp that support it.
 vim.g.codelens_enabled = true
+-- Set system clipboard
+vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+        ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+    },
+}

@@ -36,6 +36,9 @@ keymap("n", "*", "*zz", "Search word under cursor foward")
 keymap("n", "#", "#zz", "Search word under cursor backward")
 keymap("n", "g*", "g*zz", "Search partial word under cursor foward")
 keymap("n", "g#", "g#zz", "Search partial word under cursor backward")
+-- Quickly add space above/below
+keymap("n", "[<Space>", "O<Esc>j", "Space above")
+keymap("n", "]<Space>", "o<Esc>k", "Space below")
 -- Delete marks
 -- keymap("n", "dm", "<cmd>execute 'delmarks '.nr2char(getchar())<CR>", "Delete marks")
 -- Insert mode

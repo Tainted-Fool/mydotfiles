@@ -3,6 +3,7 @@ return {
         -- Line and block comments with `gbc` and `gcc`
         "numToStr/Comment.nvim",
         event = { "BufReadPre", "BufNewFile" },
+        enabled = false, -- disable plugin
         config = function()
             require("Comment").setup({
                 -- Integration with nvim-ts-context-commentstring
@@ -14,6 +15,7 @@ return {
         -- Commentstring based on cursor location
         "JoosepAlviste/nvim-ts-context-commentstring",
         event = "VeryLazy",
+        enabled = false, -- disable plugin
         opts = {
             enable_autocmd = false,
         }

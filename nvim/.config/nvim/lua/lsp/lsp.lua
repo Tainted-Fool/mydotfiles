@@ -116,7 +116,7 @@ return {
                     keymap("[d", "<cmd>lua vim.diagnostic.goto_prev({border = 'rounded'})<cr>", "Go to previous diagnostic")
                     -- keymap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help")
                     keymap("gS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help")
-                    keymap("gn", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable")
+                    -- keymap("gn", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable")
                     keymap("ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Go to code action")
                     keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format current buffer")
                 end
