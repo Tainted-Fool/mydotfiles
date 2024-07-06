@@ -119,9 +119,9 @@ _fzf_comprun() {
 
 # Set fzf color layout
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#d0d0d0,fg+:#d0d0d0,bg:#282C34,bg+:#143652
-  --color=hl:#c19d5e,hl+:#B388FF,info:#BF616A,marker:#f72c11
-  --color=prompt:#B48EAD,spinner:#c19d5e,pointer:#81A1C1,header:#81A1C1
+  --color=fg:#d0d0d0,fg+:#d0d0d0,bg:#1f1f28,bg+:#282C34
+  --color=hl:#c19d5e,hl+:#806D9E,info:#BF616A,marker:#f72c11
+  --color=prompt:#B48EAD,spinner:#c19d5e,pointer:#B48EAD,header:#81A1C1
   --color=border:#d9d9d9,label:#aeaeae,query:#d9d9d9
   --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> "
   --marker=">" --pointer="◆" --separator="─" --scrollbar="│"

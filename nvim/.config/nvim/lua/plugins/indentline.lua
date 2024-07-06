@@ -61,6 +61,8 @@ return {
                         "lazyterm",
                         "DressingSelect",
                         "TelescopePrompt",
+                        "fzf",
+                        "fzf-lua",
                     }
                 }
             })
@@ -91,6 +93,8 @@ return {
                     "lazyterm",
                     "DressingSelect",
                     "TelescopePrompt",
+                    "fzf",
+                    "fzf-lua",
                 },
                 callback = function()
                     vim.b.miniindentscope_disable = true
