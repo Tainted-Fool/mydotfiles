@@ -3,12 +3,9 @@
 - [Table of Contents](#table-of-contents)
   - [Intro](#intro)
   - [Using Stow](#using-stow)
-  - [Dependencies](#dependencies)
-    - [Optional Dependencies](#optional-dependencies)
-  - [Starting From Zero](#starting-from-zero)
   - [Starting On A New System](#starting-on-a-new-system)
     - [Installing Oh-My-Zsh](#installing-oh-my-zsh)
-  - [Optional](#optional)
+  - [Dependencies](#dependencies)
     - [Install NerdFont](#install-nerdfont)
     - [Install Lazygit](#install-lazygit)
     - [Install Git-Delta](#install-git-delta)
@@ -21,8 +18,6 @@
     - [Install Azure CLI](#install-azure-cli)
     - [Install Fzf](#install-fzf)
     - [Install Anaconda](#install-anaconda)
-    - [Install WSL Utilities](#install-wsl-utilities)
-    - [Install WSL-Open](#install-wsl-open)
     - [Install Universal-Ctags](#install-universal-ctags)
     - [Fix iamcco/markdown-preview](#fix-iamccomarkdown-preview)
     - [Install C Sharp Dependencies](#install-c-sharp-dependencies)
@@ -50,16 +45,6 @@ stow .
 # stow --target ~/.config .
 # stow wsl --target=/etc
 ```
-
-## Dependencies
-
-- fd-find(fd) for better `find` utility
-- ripgrep(rg) for better `grep` utility
-- bat for better `cat` utility
-- eza for better `ls` utility
-- zoxide for better `cd` utility
-- delta for better `git` pager utility
-- chafa for terminal image previewer
 
 ## Starting On A New System
 
@@ -108,10 +93,22 @@ Next, add a theme for `zsh` like [Typewritten](https://github.com/reobin/typewri
 git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
 ```
 
-## Optional
+## Dependencies
+
+- nerdfonts for fonts with glyphs
+- lazygit for a better `git` experience
+- delta for better `git` pager utility
+- tmux for better terminal management
+- ripgrep(rg) for better `grep` utility
+- fd-find(fd) for better `find` utility
+- bat for better `cat` utility
+- eza for better `ls` utility
+- zoxide for better `cd` utility
+- fzf for better fuzzy finder
+- chafa for terminal image previewer
+- tldr for quick `man` page
 
 ### Install NerdFont
-
 
 Install [Caskaydia Cove](https://github.com/microsoft/cascadia-code/releases) from Microsoft Github and set font in terminal settings
 

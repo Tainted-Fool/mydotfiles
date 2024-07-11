@@ -3,6 +3,12 @@
 
 # Set name of the theme to load
 # PROMPT='%(!.%{%F{yellow}%}.)$USER @ %{$fg[white]%}%M %{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+
+# Install typewritten zsh theme
+MY_THEME="${ZSH}/custom/themes/typewritten"
+if [ ! -d "${MY_THEME}" ]; then
+    git clone https://github.com/reobin/typewritten.git ${MY_THEME}
+fi
 ZSH_THEME="typewritten/typewritten"
 
 # Customize prompt layout
@@ -32,7 +38,7 @@ fi
 
 # Install oh-my-zsh plugins
 DIR="${ZSH}/custom/plugins"
-declare -A REPOS=( # zsh
+declare -A REPOS=(
     [autoupdate]="https://github.com/TamCore/autoupdate-oh-my-zsh-plugins"
     [fzf-tab]="https://github.com/Aloxaf/fzf-tab"
     [zsh-autopair]="https://github.com/hlissner/zsh-autopair"

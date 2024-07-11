@@ -211,7 +211,7 @@ return {
         -- Multiline diagnostics
         "Tainted-Fool/lsp_lines",
         -- opts = {}, -- no options yet...
-        enabled = false, -- enable/disable virtual_text
+        enabled = true, -- enable/disable virtual_text
         event = "LspAttach",
         config = function()
             require("lsp_lines").setup()

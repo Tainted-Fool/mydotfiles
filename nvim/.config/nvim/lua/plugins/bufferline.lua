@@ -14,7 +14,7 @@ return {
         options = {
             mode = "buffers", -- set to "tabs" to only show tabpages
             -- style_preset = require("bufferline").style_preset.default,
-            themable = false,
+            themable = true,
             numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both"
             close_command = "bdelete! %d",
             right_mouse_command = "bdelete! %d",
