@@ -4,14 +4,22 @@
   - [Intro](#intro)
   - [Using Stow](#using-stow)
   - [Dependencies](#dependencies)
+    - [Optional Dependencies](#optional-dependencies)
   - [Starting From Zero](#starting-from-zero)
   - [Starting On A New System](#starting-on-a-new-system)
     - [Installing Oh-My-Zsh](#installing-oh-my-zsh)
   - [Optional](#optional)
     - [Install NerdFont](#install-nerdfont)
-    - [Install Colorls](#install-colorls)
+    - [Install Lazygit](#install-lazygit)
+    - [Install Git-Delta](#install-git-delta)
+    - [Install Tmux and Tmux Plugin Manager](#install-tmux-and-tmux-plugin-manager)
+    - [Install Ripgrep](#install-ripgrep)
+    - [Install Fd-Find](#install-fd-find)
     - [Install Batcat](#install-batcat)
+    - [Install Eza](#install-eza)
+    - [Install Zoxide](#install-zoxide)
     - [Install Azure CLI](#install-azure-cli)
+    - [Install Fzf](#install-fzf)
     - [Install Anaconda](#install-anaconda)
     - [Install WSL Utilities](#install-wsl-utilities)
     - [Install WSL-Open](#install-wsl-open)
@@ -20,7 +28,8 @@
     - [Install C Sharp Dependencies](#install-c-sharp-dependencies)
     - [Install Nvim](#install-nvim)
     - [Build Nvim From Source](#build-nvim-from-source)
-    - [Formatters and Linters](#formatters-and-linters)
+    - [Daily Message](#daily-message)
+    - [TooLongDidntRead](#toolongdidntread)
 
 ## Intro
 
@@ -28,11 +37,9 @@ All my dot files used for Linux - more specifically for vim and [oh-my-zsh](#ins
 
 Check the other branch `windows` for that operating system
 
-[Guide](https://www.atlassian.com/git/tutorials/dotfiles) for reference
-
 ## Using Stow
 
-Switched to `stow` for dotfiles management. It's a lot easier to manage and update. The only downside is that it doesn't work with `git` so we have to manually update the files.
+Switched to `stow` for dotfiles management.
 
 ```bash
 sudo apt install stow
@@ -46,20 +53,6 @@ stow .
 
 ## Dependencies
 
-- vim 8.2+ or nvim 0.5+
-- nodejs and npm for coc.nvim
-- FZF for fuzzy search files/folders
-- A Nerd Font (see optional)
-- wslu for WSL utilities (see optional)
-- wsl-open for opening files with WSL (see optional)
-
-```bash
-sudo apt update && sudo apt upgrade
-sudo apt install nodejs npm vifm xsel figlet ranger ueberzug
-```
-
-### Optional Dependencies
-
 - fd-find(fd) for better `find` utility
 - ripgrep(rg) for better `grep` utility
 - bat for better `cat` utility
@@ -67,45 +60,6 @@ sudo apt install nodejs npm vifm xsel figlet ranger ueberzug
 - zoxide for better `cd` utility
 - delta for better `git` pager utility
 - chafa for terminal image previewer
-- ueberzug for X11 image previewer - not needed
-
-## Starting From Zero
-
-On a fresh new computer, make sure to install `git` then run these commands
-
-```bash
-git init --bare $HOME/.dotfiles
-echo "alias dit='/usr/bin/git --git-dir=$HOME/.dotfiles/ \
---work-tree=$HOME'" >> $HOME/.zshrc
-dit config --local status.showuntrackedfiles no
-```
-
-- The first line creates a hidden folder called `.dotfiles`
-- The second line creates an alias `dit` to used instead of `git`
-- The third line creates a flag to hide files we are not tracking yet
-
-Now we can version the files we want with `dit` i.e. same commands as `git`
-
-```bash
-dit status
-dit add .vimrc
-dit commit -m "add vimrc"
-dit push
-```
-
-We have to add username and email to `git` if we want to commit/push
-
-```bash
-dit config --global user.email "your@email.com"
-dit config --global user.name "yourUserName"
-```
-
-Don't forget to declare the remote repository to push
-
-```bash
-dit remote add origin https://github.com/Tainted-Fool/mydotfiles
-dit push -u origin <localBranchName>
-```
 
 ## Starting On A New System
 
@@ -154,39 +108,12 @@ Next, add a theme for `zsh` like [Typewritten](https://github.com/reobin/typewri
 git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
 ```
 
-Add more plugins to `zsh`
-
-```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/hlissner/zsh-autopair $ZSH_CUSTOM/plugins/zsh-autopair
-git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
-git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_CUSTOM/plugins/fast-syntax-highlighting
-git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins $ZSH_CUSTOM/plugins/autoupdate
-git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
-```
-
 ## Optional
 
 ### Install NerdFont
 
-A font with glyphs(icons) [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/font-downloads)
 
-```bash
-mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts && curl -fLo "Caskaydia Cover Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete.otf
-```
-
-A better way to install NerdFonts is with this [repo](https://github.com/ronniedroid/getnf)
-
-If using WSL then you need to install [Caskaydia
-Cove](https://github.com/microsoft/cascadia-code/releases) from Microsoft github and set font in terminal settings
-
-```bash
-git clone https://github.com/ronniedroid/getnf.git
-cd getnf
-./install.sh
-getnf 9
-```
+Install [Caskaydia Cove](https://github.com/microsoft/cascadia-code/releases) from Microsoft Github and set font in terminal settings
 
 ### Install Lazygit
 
@@ -283,56 +210,6 @@ A Python environmental variable manager
 
 ```bash
 curl -sL https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh | sudo sh
-```
-
-### Install WSL Utilities
-
-A collection of utilities for WSL [repo here](https://github.com/wslutilities/wslu)
-
-> Run these commands on Debian distros
-
-```bash
-sudo apt install gnupg2 apt-transport-https
-wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
-
-# Debian 10
-echo "deb https://pkg.wslutiliti.es/debian buster main" | sudo tee -a /etc/apt/sources.list
-# Debian 11
-echo "deb https://pkg.wslutiliti.es/debian bullseye main" | sudo tee -a /etc/apt/sources.list
-
-sudo apt update
-sudo apt install wslu
-```
-
-> Run these commands on Kali distros
-
-```bash
-sudo apt install gnupg2 apt-transport-https
-wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
-echo "deb https://pkg.wslutiliti.es/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
-sudo apt update
-sudo apt install wslu
-```
-
-> Run these commands on Ubuntu distros
-
-```bash
-sudo apt update
-sudo apt install ubuntu-wsl
-```
-
-### Install WSL-Open
-
-Allows you to open WSL files using Windows GUI applications [repo here](https://github.com/4U6U57/wsl-open)
-
-```bash
-curl https://raw.githubusercontent.com/4U6U57/wsl-open/master/wsl-open.sh -o wsl-open
-# OR
-sudo apt install -yqq npm
-sudo npm install -g wsl-open
-# link wsl-open to xdg-open
-sudo rm $(which xdg-open)
-sudo ln -s $(which wsl-open) /usr/local/bin/xdg-open
 ```
 
 ### Install Universal-Ctags

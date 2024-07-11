@@ -79,7 +79,7 @@ return {
     {
         -- Markdown renderer
         "meanderingprogrammer/markdown.nvim",
-        -- cmd = { "RenderMarkdownToggle" },
+        enabled = false,
         ft = "markdown",
         name = "render-markdown",
         config = function()
@@ -101,6 +101,7 @@ return {
     {
         -- Markdown syntax highlighting and configurable tools
         "tadmccorkle/markdown.nvim",
+        enabled = false,
         ft = "markdown",
         opts = {
             mappings = {
@@ -128,6 +129,25 @@ return {
                     map("x", "<C-b>", toggle("b"), opts) -- strong/bold toggle
                     map("x", "<C-i>", toggle("i"), opts) -- emphasis/italics toggle
                 end
+            }
+        }
+    },
+    {
+        -- Markdown viewer
+        "oxy2dev/markview.nvim",
+        opts = {
+            code_blocks = {
+                style = "language", -- simple | minimal | language
+                language_direction = "left", -- left | right
+                position = "overlay", -- inline | overlay
+                pad_char = " ",
+                pad_amount = 2,
+                hl = "dark",
+                min_width = 70,
+                sign = true,
+            },
+            list_items = {
+                shift_amount = 2,
             }
         }
     }

@@ -6,14 +6,14 @@ return {
         cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
         build = ":MasonUpdate",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",             -- lsp completion
-            "williamboman/mason.nvim",          -- easy install lsp servers
-            "williamboman/mason-lspconfig.nvim", -- lsp configurations (done)
+            "hrsh7th/cmp-nvim-lsp",             -- LSP completion
+            "williamboman/mason.nvim",          -- easy install LSP servers
+            "williamboman/mason-lspconfig.nvim", -- LSP configurations
             "whoissethdaniel/mason-tool-installer.nvim", -- install and upgrade Mason tools
             "nvimtools/none-ls.nvim",           -- diagnostics, code actions, and formatting
             "arkav/lualine-lsp-progress",       -- indicator that shows when lsp is ready
             { "folke/neodev.nvim", opts = { library = { plugins = { "nvim--dap-ui" }, types = true } } }, -- nvim lua API docs and completion
-            { "j-hui/fidget.nvim", opts = {} }, -- show lsp progress handler
+            { "j-hui/fidget.nvim", opts = {} }, -- show LSP progress handler
         },
         config = function()
             -- Declare variables
@@ -121,7 +121,7 @@ return {
                     keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format current buffer")
                 end
             })
-            -- Default lsp communication capabilities
+            -- Default LSP communication capabilities
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.foldingRange = {
                 dynamicRegistration = false,
@@ -135,7 +135,7 @@ return {
                     "additionalTextEdits",
                 }
             }
-            -- Enable folding by lsp on line :350
+            -- Enable folding by LSP on line :350
             capabilities.textDocument.foldingRange = {
                 dynamicRegistration = false,
                 lineFoldingOnly = true,
@@ -189,7 +189,7 @@ return {
         end
     },
     {
-        -- lsp hover documentation in a side panel
+        -- LSP hover documentation in a side panel
         "amrbashir/nvim-docs-view",
         lazy = true,
         cmd = "DocsViewToggle",
@@ -198,20 +198,20 @@ return {
         }
     },
     {
-        -- Better lsp diagnostics and quickfix list
+        -- Better LSP diagnostics and quickfix list
         "folke/trouble.nvim",
         lazy = true,
         cmd = "TroubleToggle",
         opts = {
             position = "right",
-            use_diagnostic_signs = true, -- enabling this will use the signs defined in your lsp client
+            use_diagnostic_signs = true, -- enabling this will use the signs defined in your LSP client
         }
     },
     {
         -- Multiline diagnostics
-        "https://github.com/Tainted-Fool/lsp_lines",
+        "Tainted-Fool/lsp_lines",
         -- opts = {}, -- no options yet...
-        -- enabled = true, -- enable/disable virtual_text
+        enabled = false, -- enable/disable virtual_text
         event = "LspAttach",
         config = function()
             require("lsp_lines").setup()

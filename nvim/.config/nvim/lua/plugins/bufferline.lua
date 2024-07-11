@@ -2,6 +2,7 @@ return {
     -- Buffer management
     "akinsho/bufferline.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- tag = "v4.6.1",
     event = "VeryLazy",
     keys = {
         { "]b", "<Cmd>BufferLineCycleNext<CR>", desc = "Next buffer" },
@@ -13,7 +14,7 @@ return {
         options = {
             mode = "buffers", -- set to "tabs" to only show tabpages
             -- style_preset = require("bufferline").style_preset.default,
-            themable = true,
+            themable = false,
             numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both"
             close_command = "bdelete! %d",
             right_mouse_command = "bdelete! %d",
@@ -28,9 +29,9 @@ return {
             close_icon = require("core.icons").ui.BoldClose,
             left_trunc_marker = require("core.icons").ui.ArrowCircleLeft,
             right_trunc_marker = require("core.icons").ui.ArrowCircleRight,
-            max_name_length = 20,
+            max_name_length = 18,
             max_prefix_length = 15,
-            tab_size = 15,
+            tab_size = 18,
             diagnostics = "nvim_lsp",
             diagnostics_update_in_insert = false,
             offsets = {
@@ -47,13 +48,13 @@ return {
             show_close_icon = true,
             show_tab_indicators = true,
             show_duplicate_prefix = false,
-            duplicates_across_groups = false,
-            persist_buffer_sort = false,
+            duplicates_across_groups = false, -- default:true
+            persist_buffer_sort = false, -- default:true
             move_wraps_at_ends = false,
             separator_style = "slope", -- "slant" | "slope" | "thick" | "thin"
             enforce_regular_tabs = true,
             always_show_bufferline = false,
-            auto_toggle_bufferline = false,
+            auto_toggle_bufferline = true,
             hover = {
                 enabled = true,
                 delay = 200,
