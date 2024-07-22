@@ -3,6 +3,7 @@ return {
         -- Snippet engine
         "L3MON4D3/LuaSnip",
         dependencies = {
+            { "garymjr/nvim-snippets", opts = { friendly_snippets = true } }, -- snippets for lua
             "rafamadriz/friendly-snippets", -- a bunch of snippets to use
             config = function()
                 -- Load snippets from VSCode
@@ -49,7 +50,6 @@ return {
             local luasnip = require("luasnip")
             local lspkind = require("lspkind")
             local icons = require("core.icons")
-
             -- Setup lspkind icons
             lspkind.init({
                 mode = "symbol", -- "text" | "text_symbol" | "symbol_text" | "symbol"
@@ -83,7 +83,6 @@ return {
                     Variable = icons.kind.Variable,
                 }
             })
-
             cmp.setup({
                 -- Completion for luasnip plugin
                 preselect = cmp.PreselectMode.None,
@@ -95,7 +94,6 @@ return {
                         luasnip.lsp_expand(args.body)
                     end
                 },
-
                 -- Completition key mappings
                 mapping = cmp.mapping.preset.insert({
                     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -110,7 +108,6 @@ return {
                         fallback()
                     end
                 }),
-
                 -- Menu popup configuration
                 window = {
                     completion = cmp.config.window.bordered(),
@@ -130,7 +127,6 @@ return {
                         show_labelDetails = true,
                     })
                 },
-
                 -- Order of source completion providers
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
@@ -138,18 +134,17 @@ return {
                     { name = "luasnip" },
                     { name = "copilot" },
                     { name = "path" },
+                    { name = "lazydev" },
                 },
                 {
                     { name = "buffer" },
                     -- { name = "cmdline", keyword_length = 3 },
                 }),
-
                 -- Cmp features
                 experimental = {
                     ghost_text = true, -- show ghost text of first item in completion menu
                 }
             })
-
             -- Cmdline setup for "/"
             cmp.setup.cmdline("/", {
                 mapping = cmp.mapping.preset.cmdline(),
@@ -157,7 +152,6 @@ return {
                     { name = "buffer" },
                 }
             })
-
             -- Cmdline setup for ":"
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
@@ -175,7 +169,6 @@ return {
                     }
                 })
             })
-
             -- If you want to insert "(" after select function or method
             cmp.event:on(
                 "confirm_done",

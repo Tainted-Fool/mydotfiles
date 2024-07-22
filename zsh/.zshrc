@@ -4,11 +4,6 @@
 # Set name of the theme to load
 # PROMPT='%(!.%{%F{yellow}%}.)$USER @ %{$fg[white]%}%M %{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
-# Install typewritten zsh theme
-MY_THEME="${ZSH}/custom/themes/typewritten"
-if [ ! -d "${MY_THEME}" ]; then
-    git clone https://github.com/reobin/typewritten.git ${MY_THEME}
-fi
 ZSH_THEME="typewritten/typewritten"
 
 # Customize prompt layout
@@ -34,6 +29,12 @@ fi
 # Set PATH to include cargo's bin if found
 if [ -d "$HOME/.cargo/bin" ]; then
     PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+# Install typewritten zsh theme
+MY_THEME="${ZSH}/custom/themes/typewritten"
+if [ ! -d "${MY_THEME}" ]; then
+    git clone https://github.com/reobin/typewritten.git ${MY_THEME}
 fi
 
 # Install oh-my-zsh plugins

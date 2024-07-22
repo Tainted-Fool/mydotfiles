@@ -19,5 +19,10 @@ return {
         opts = {
             enable_autocmd = false,
         }
+    },
+    {
+        "folke/ts-comments.nvim",
+        event = "VeryLazy",
+        enabled = false, -- disable plugin
     }
 }

@@ -176,6 +176,10 @@ return {
         -- Split and join lines 
         "Wansmer/treesj",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
+        keys = {
+            { "gj", "<cmd>TSJToggle<cr>", desc = "Join/split Lines (TreeSJ)" },
+            { "gj", "<esc><cmd>TSJToggle<cr>", desc = "Join/split Lines (TreeSJ)", mode = "v" },
+        },
         config = function()
             require("treesj").setup({
                 use_default_keymaps = false,

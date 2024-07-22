@@ -2,6 +2,9 @@ return {
     -- Edit files like a normal vim buffer
     "stevearc/oil.nvim",
     -- tag = "v2.8.0",
+    keys = {
+        { "<leader>o", "<cmd>lua require('oil').open_float()<cr>", desc = "Open (Oil)" },
+    },
     opts = {
         view_options = {
             show_hidden = true,

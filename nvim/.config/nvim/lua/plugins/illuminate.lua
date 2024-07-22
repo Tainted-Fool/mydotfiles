@@ -3,8 +3,8 @@ return {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufWritePost", "BufNewFile" }, -- "LazyFile"
     keys = {
-        { "]]", desc = "Next Reference" },
-        { "[[", desc = "Prev Reference" },
+        { "]]", desc = "Next Reference (vim-illuminate)" },
+        { "[[", desc = "Prev Reference (vim-illuminate)" },
     },
     opts = {
         delay = 100,
@@ -25,7 +25,6 @@ return {
             "Trouble",
             "lir",
             "Outline",
-            "spectre_panel",
             "toggleterm",
             "DressingSelect",
             "TelescopePrompt",

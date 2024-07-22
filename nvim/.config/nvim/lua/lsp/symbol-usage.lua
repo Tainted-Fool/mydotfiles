@@ -23,7 +23,8 @@ return {
         end
         require('symbol-usage').setup({
             text_format = text_format,
-            vt_position = "textwidth", -- above|end_of_line|textwidth|signcolumn|above
+            ---@type string above|end_of_line|textwidth|signcolumn
+            vt_position = "end_of_line",
             references = {
                 enabled = true,
                 include_declaration = true, -- default:false

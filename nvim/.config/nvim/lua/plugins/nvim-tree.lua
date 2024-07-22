@@ -2,6 +2,9 @@ return {
     -- Tree viewer
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle" },
+    keys = {
+        { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer (nvim-tree)" }
+    },
     config = function()
         local icons = require("core.icons")
         local function myattach(bufnr)

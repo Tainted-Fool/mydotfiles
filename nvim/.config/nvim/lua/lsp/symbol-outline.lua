@@ -3,6 +3,9 @@ return {
     "simrat39/symbols-outline.nvim",
     lazy = true,
     cmd = "SymbolsOutline",
+    keys = {
+        { "<leader>co", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline Toggle (symbols-outline)" },
+    },
     config = function()
         local icons = require("core.icons")
         local opts = {
@@ -21,7 +24,7 @@ return {
             auto_unfold_hover = true,
             fold_markers = { icons.ui.ChevronShortRight, icons.ui.ChevronShortDown },
             wrap = false,
-            keymaps = { -- These keymaps can be a string or a table for multiple keys
+            keymaps = {
                 close = { "<Esc>", "q" },
                 goto_location = "<Cr>",
                 focus_location = "o",

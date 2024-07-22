@@ -50,7 +50,7 @@ opt.splitright = true -- force vertical splits to go right of current window
 opt.swapfile = false -- create a swapfile
 opt.tabstop = 2 -- insert X spaces for a tab - width of tab
 opt.termguicolors = true -- set terminal colors
-opt.textwidth = 80 -- set line width/vertical bar - used for text wrapping
+-- opt.textwidth = 80 -- set line width/vertical bar - used for text wrapping
 opt.timeoutlen = 500 -- time to wait for mapped sequence default=300
 opt.ttimeoutlen = 50 -- time to wait for key code sequence to complete
 opt.undofile = true -- create a undo file for persistent undo

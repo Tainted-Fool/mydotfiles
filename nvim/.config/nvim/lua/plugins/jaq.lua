@@ -1,7 +1,11 @@
 return {
-    -- Run code of any language with `:` 
+    -- Run code of any language
     "is0n/jaq-nvim",
     event = "VeryLazy",
+    cmd = "Jaq",
+    keys = {
+        { "<leader>cr", "<cmd>w | Jaq<cr>", desc = "Run (JAQ)" },
+    },
     config = function()
         require("jaq-nvim").setup({
             cmds = {

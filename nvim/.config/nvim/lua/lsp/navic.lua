@@ -5,6 +5,8 @@ return {
         {
             -- Provides context about your code in winbar
             "Tainted-Fool/breadcrumbs.nvim",
+            -- enabled = false,
+            commit = "9f76427",
             config = function()
                 require("breadcrumbs").setup()
             end

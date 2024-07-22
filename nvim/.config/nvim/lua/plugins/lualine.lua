@@ -1,10 +1,8 @@
 return {
     -- Status bar/line
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-        "AndreM222/copilot-lualine", -- copilot lualine integration
-        "nvim-tree/nvim-web-devicons", -- icons for lualine
-    },
+    event = "VeryLazy",
+    dependencies = { "AndreM222/copilot-lualine" }, -- copilot lualine integration
     config = function()
         local icons = require("core.icons")
         -- Show diagnostics
@@ -85,7 +83,7 @@ return {
         local spaces = function()
             return "Spaces:" .. vim.api.nvim_get_option_value("shiftwidth", {})
         end
-        -- check for mason package upgrades
+        -- Check for mason package upgrades
         local function mason_updates()
             local registry = require("mason-registry")
             local installed_packages = registry.get_installed_package_names()
@@ -174,7 +172,7 @@ return {
                 lualine_x = {
                     "encoding",
                     "fileformat",
-                    filetype,
+                    -- filetype,
                     "copilot",
                     hex,
                     spaces,

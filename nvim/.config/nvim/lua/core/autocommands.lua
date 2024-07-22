@@ -6,7 +6,6 @@ autocmd("FileType", {
         "help",
         "man",
         "lspinfo",
-        "spectre_panel",
         "lir",
         "fzf",
         "Jaq",
@@ -19,6 +18,7 @@ autocmd("FileType", {
         "vim",
         "notify",
         "checkhealth",
+        "spectre_panel",
     },
     callback = function()
         vim.cmd([[

@@ -1,10 +1,12 @@
 return {
      -- Mark and get file
-    "ThePrimeagen/harpoon",
+    "theprimeagen/harpoon",
     branch = "harpoon2",
     event = "VeryLazy",
     keys = {
-        { "<C-1>", desc = "Harpoon List", mode = "n" },
+        { "<leader>ha", "<cmd>lua require('harpoon'):list():append()<cr>", desc = "Add (Harpoon)" },
+        { "<leader>hl", "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", desc = "List (Harpoon)" },
+        { "<leader>hm", "<cmd>Telescope harpoon marks<cr>", desc = "Marks (Harpoon)" },
     },
     dependencies = {
         "nvim-lua/plenary.nvim",

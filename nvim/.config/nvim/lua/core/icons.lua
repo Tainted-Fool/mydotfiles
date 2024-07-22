@@ -171,6 +171,7 @@ return {
         Pending = "➜",
         Prompt = "",
         Question = "",
+        Quickfix = "󱖫", -- 5 character hex code
         Quit = "",
         Robot = "󰚩", -- 5 character hex code
         Settings = "",
@@ -178,5 +179,6 @@ return {
         Squirrel = "",
         Tag = "",
         Watch = "",
+        UI = "󰙵", -- 5 character hex code
     }
 }

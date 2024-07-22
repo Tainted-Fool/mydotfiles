@@ -2,6 +2,17 @@ return {
     -- Toggle terminal
     "akinsho/toggleterm.nvim",
     event = "VeryLazy",
+    cmd = "ToggleTerm",
+    keys = {
+        { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float (Toggleterm)"},
+        { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal (Toggleterm)" },
+        { "<leader>tl", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Lazygit (Toggleterm)" },
+        { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", desc = "Node (Toggleterm)" },
+        { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc = "Python (Toggleterm)" },
+        { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "HTop (Toggleterm)" },
+        { "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", desc = "Disk Usage (Toggleterm)" },
+        { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical (Toggleterm)" },
+    },
     config = function()
         require("toggleterm").setup({
             size = 20,

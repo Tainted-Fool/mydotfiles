@@ -2,6 +2,18 @@ return {
     -- Debug adapter protocol
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
+    keys = {
+        { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "Toggle Breakpoint (DAP)" },
+        { "<leader>dB", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", desc = "Breakpoint Condition (DAP)" },
+        { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "Continue (DAP)" },
+        { "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "Step Into (DAP)" },
+        { "<leader>dl", "<cmd>lua require('dap').run_last()<cr>", desc = "Run Last (DAP)" },
+        { "<leader>do", "<cmd>lua require('dap').step_over()<cr>", desc = "Step Over (DAP)" },
+        { "<leader>dO", "<cmd>lua require('dap').step_out()<cr>", desc = "Step Out (DAP)" },
+        { "<leader>dr", "<cmd>lua require('dap').repl.toggle()<cr>", desc = "REPL Toggle (DAP)" },
+        { "<leader>dt", "<cmd>lua require('dap').terminate()<cr>", desc = "Terminate (DAP)" },
+        { "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", desc = "UI Toggle (DAP)" },
+    },
     dependencies = {
         "rcarriga/nvim-dap-ui", -- debugger ui
         "mfussenegger/nvim-dap-python", -- dap for python
@@ -32,7 +44,6 @@ return {
         local dap = require("dap")
         local dapui = require("dapui")
         local dap_python = require("dap-python")
-
         dapui.setup({
             expand_lines = true,
             icons = {
@@ -95,14 +106,12 @@ return {
                 }
             }
         })
-
         vim.fn.sign_define("DapBreakpoint", {
             text = icons.ui.Bug,
             texthl = "DiagnosticSignError",
             linehl = "",
             numhl = "",
         })
-
         -- DAP settings for python
         -- dap_python.setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
         -- RUN THESE COMMANDS
@@ -113,7 +122,6 @@ return {
         -- END
         dap_python.setup("~/.virtualenvs/debugpy/bin/python")
         -- dap_python.setup()
-
         -- DAP settings for bash
         dap.adapters.bashdb = {
             type = "executable",
@@ -141,7 +149,6 @@ return {
                 terminalKind = "integrated",
             }
         }
-
         -- DAP settings for c
         dap.adapters.codelldb = {
             type = "server",
@@ -171,10 +178,8 @@ return {
                 args = {},
             }
         }
-
         -- DAP settings for cplusplus
         dap.configurations.cpp = dap.configurations.c
-
         -- DAP settings for csharp
         dap.adapters.coreclr = {
             type = "executable",
@@ -191,17 +196,14 @@ return {
                 end
             }
         }
-
         -- Open dapui when dap in initialized
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
         end
-
         -- Close dapui when dap is terminated
         dap.listeners.before.event_terminated["dapui_config"] = function()
             dapui.close()
         end
-
         -- Close dapui when dap is exited
         dap.listeners.before.event_exited["dapui_config"] = function()
             dapui.close()

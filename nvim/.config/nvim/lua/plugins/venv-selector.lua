@@ -3,13 +3,13 @@ return {
     "linux-cultist/venv-selector.nvim",
     branch = "regexp", -- new 2024 version
     event = "VeryLazy",
-    -- keys = {
-    --     { "<leader>va", "require('venv-selector').get_active_venv()", "Get Active Virtual Env Path"},
-    --     { "<leader>vc", "<cmd>VenvSelectCached<cr>", "Virtual Env Select from Cache"},
-    --     { "<leader>vg", "<cmd>VenvSelectCurrent<cr>", "Get Current Virtual Env"},
-    --     { "<leader>vs", "<cmd>VenvSelect<cr>", "Virtual Env Select"},
-    --     { "<leader>vp", "require('venv-selector').get_active_path()", "Get Active Python Exe Path"},
-    -- }
+    keys = {
+        { "<leader>va", "require('venv-selector').get_active_venv()", desc = "Get Active Path (venv)"},
+        { "<leader>vc", "<cmd>VenvSelectCached<cr>", desc = "Select from Cache (venv)"},
+        { "<leader>vg", "<cmd>VenvSelectCurrent<cr>", desc = "Get Current (venv)"},
+        { "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select (venv)"},
+        { "<leader>vp", "require('venv-selector').get_active_path()", desc = "Get Current Python (venv)"},
+    },
     config = function()
         require("venv-selector").setup({
             name = { "venv", ".virtualenvs" },

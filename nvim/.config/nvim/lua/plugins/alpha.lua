@@ -6,6 +6,9 @@ return {
     },
     lazy = true, -- load after everything else
     event = "VimEnter",
+    keys = {
+        { "<leader>a", "<cmd>Alpha<cr>", desc = "Dashboard (Alpha)" }
+    },
     opts = function()
         local dashboard = require("alpha.themes.dashboard")
         local icons = require("core.icons")
