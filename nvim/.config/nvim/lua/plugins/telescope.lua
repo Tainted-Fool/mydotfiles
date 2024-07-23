@@ -123,6 +123,7 @@ return {
         -- telescope.load_extension("mapper")
     end,
     keys = {
+        { "<leader>cm", "<cmd>Telescope notify<cr>", desc = "Display Messages (Telescope)" },
         { "<leader>fa", "<cmd>Telescope commands<cr>", desc = "Lua Commands (Telescope)" },
         { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers (Telescope)" },
         { "<leader>fc", "<cmd>Telescope colorscheme<cr>", desc = "Colorschemes (Telescope)" },

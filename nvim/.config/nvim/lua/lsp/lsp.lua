@@ -16,28 +16,7 @@ return {
         "nvimtools/none-ls.nvim", -- diagnostics, code actions, and formatting
         "arkav/lualine-lsp-progress", -- indicator that shows when lsp is ready
         "b0o/SchemaStore.nvim", -- access to the SchemaStore catalog - large collection of JSON schemas
-        {
-            "folke/lazydev.nvim", -- nvim lua API docs and completion
-            dependencies = { "Bilal2453/luvit-meta", lazy = true },
-            ft = "lua",
-            cmd = "LazyDev",
-            opts = {
-                library = {
-                    { path = "luvit-meta/library", words = { "vim%.uv" } },
-                    { path = "LazyVim", words = { "LazyVim" } },
-                    { path = "lazy.nvim", words = { "LazyVim" } },
-                }
-            }
-        },
         { "j-hui/fidget.nvim", opts = {} }, -- show LSP progress handler
-        {
-            "smjonas/inc-rename.nvim", -- incremental LSP renaming
-            event = "VeryLazy",
-            keys = {
-                { "<leader>cn", ":IncRename ", desc = "Rename (inc-rename)" },
-            },
-            opts = {},
-        },
     },
     config = function()
         local lspconfig = require("lspconfig")
@@ -128,18 +107,18 @@ return {
                     vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, noremap = true, silent = true })
                 end
                 -- Declare keymaps when LSP is running
-                keymap("gd", "<cmd>Telescope lsp_definitions<cr>", "Go to Definition (LSP)")
-                keymap("gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declaration (LSP)") -- not supported by all LSPs
+                keymap("gd", "<cmd>Telescope lsp_definitions<cr>", "Go to Definition (lsp)")
+                keymap("gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declaration (lsp)") -- not supported by all LSPs
                 -- keymap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP Hover (LSP)")
-                keymap("gh", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP Hover (LSP)")
-                keymap("gi", "<cmd>Telescope lsp_implementations<cr>", "Go to Implementation (LSP)") -- not supported by all LSPs
-                keymap("gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Show Diagnostic on Line (LSP)")
-                keymap("]d", "<cmd>lua vim.diagnostic.goto_next({border = 'rounded'})<cr>", "Go to Next Diagnostic (LSP)")
-                keymap("[d", "<cmd>lua vim.diagnostic.goto_prev({border = 'rounded'})<cr>", "Go to Previous Diagnostic (LSP)")
+                keymap("gh", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP Hover (lsp)")
+                keymap("gi", "<cmd>Telescope lsp_implementations<cr>", "Go to Implementation (lsp)") -- not supported by all LSPs
+                keymap("gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Show Diagnostic on Line (lsp)")
+                keymap("]d", "<cmd>lua vim.diagnostic.goto_next({border = 'rounded'})<cr>", "Go to Next Diagnostic (lsp)")
+                keymap("[d", "<cmd>lua vim.diagnostic.goto_prev({border = 'rounded'})<cr>", "Go to Previous Diagnostic (lsp)")
                 -- keymap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (LSP)")
-                keymap("gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (LSP)")
-                keymap("ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Go to Code Action (LSP)")
-                keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format Current Buffer (LSP)")
+                keymap("gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (lsp)")
+                keymap("ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Go to Code Action (lsp)")
+                keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format Current Buffer (lsp)")
             end
         })
         -- Default LSP communication capabilities

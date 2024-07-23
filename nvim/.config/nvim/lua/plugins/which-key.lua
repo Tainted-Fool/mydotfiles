@@ -53,7 +53,6 @@ return {
             wo = { winblend = 20 },
         },
         spec = {
-            -- Splits keymaps
             { "<leader>q", "<cmd>q!<cr>", desc = "Quit" },
             { "<leader>-", "<C-W>s", desc = "Split Window Below" },
             { "<leader>\\", "<C-W>v", desc = "Split Window Right" },
@@ -71,10 +70,10 @@ return {
             { "<leader>cx", "<cmd>.lua<cr>", desc = "Execute Lua Line" },
             { "<leader>cX", "<cmd>source %<cr>", desc = "Source File" },
             -- UI keymaps
-            { "<leader>uh", "<cmd>nohlsearch<cr>", desc = "No Highlight" },
+            { "<leader>uH", "<cmd>nohlsearch<cr>", desc = "No Highlight" },
             { "<leader>ui", "<cmd>Inspect<cr>", desc = "Inspect" },
             { "<leader>uI", "<cmd>InspectTree<cr>", desc = "Inspect Symbols" },
-            { "<leader>up", "<cmd>Lazy<cr>", desc = "Plugin Manager (Lazy)" },
+            { "<leader>ul", "<cmd>Lazy<cr>", desc = "Plugin Manager (Lazy)" },
             -- Window keymap
             { "<leader>wc", "<C-w>c", desc = "Close Window" },
             { "<leader>we", "<C-w>=", desc = "Split Window Equal Size" },

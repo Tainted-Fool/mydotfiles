@@ -3,7 +3,7 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     keys = {
-        { "<leader>cm", "<cmd>MarkdownPreviewToggle<cr>", desc = "Preview (MarkdownPreview)" },
+        { "<leader>cd", "<cmd>MarkdownPreviewToggle<cr>", desc = "Preview (MarkdownPreview)" },
     },
     build = "cd app && yarn install",
     init = function()

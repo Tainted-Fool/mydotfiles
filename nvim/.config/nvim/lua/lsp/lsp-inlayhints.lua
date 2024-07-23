@@ -2,7 +2,7 @@ return {
     -- Shows data type
     "lvimuser/lsp-inlayhints.nvim",
     keys = {
-        { "<leader>ul", "<cmd>lua require('lsp-inlayhints').toggle()<cr>", desc = "Inlayhints Toggle (lsp-inlayhints)" },
+        { "<leader>uh", "<cmd>lua require('lsp-inlayhints').toggle()<cr>", desc = "Inlayhints Toggle (lsp-inlayhints)" },
     },
     opts = {
         inlay_hints = {
