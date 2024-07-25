@@ -28,6 +28,8 @@ return {
         notify = true,
         show_help = true, -- show help message on the command line when the popup is visible
         show_keys = true, -- show the currently pressed key and its label as a message in the command line
+        -- sort = { "local", "order", "group", "alphanum", "mod" }, -- default
+        sort = { "order", "alphanum", "mod", "group", "local" },
         plugins = {
             marks = true, -- show a list of your marks on ' and `
             registers = true, -- show your registers on " in NORMAL or <C-r> in INSERT mode
@@ -97,11 +99,11 @@ return {
             },
             { "<leader>c", group = "code" },
             { "<leader>d", group = "debug" },
-            { "<leader>f", group = "find/search" },
+            { "<leader>f", group = "find" },
             { "<leader>g", group = "git" },
             { "<leader>gh", group = "hunks" },
             { "<leader>h", group = "harpoon" },
-            { "<leader>s", group = "spectre" },
+            { "<leader>s", group = "search" },
             { "<leader>t", group = "terminal" },
             {
                 "<leader>w",

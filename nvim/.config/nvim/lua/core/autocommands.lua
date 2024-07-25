@@ -1,6 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.api.nvim_create_user_command
--- Use 'q' to quit from plugins
+-- Use `q` to quit from plugins
 autocmd("FileType", {
     pattern = {
         "help",
@@ -19,6 +19,7 @@ autocmd("FileType", {
         "notify",
         "checkhealth",
         "spectre_panel",
+        "grug-far",
     },
     callback = function()
         vim.cmd([[
@@ -37,9 +38,9 @@ autocmd("User", {
         ]])
     end
 })
--- Set 'wrap' and 'spell' in markdown and gitcommit
+-- Set `wrap` and `spell` in markdown and gitcommit
 autocmd("FileType", {
-    pattern = {"markdown", "gitcommit"},
+    pattern = { "markdown", "gitcommit" },
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
@@ -62,7 +63,7 @@ autocmd("TextYankPost", {
 })
 -- Restore cursor position when opening recent file
 autocmd("BufReadPost", {
-    pattern = {"*"},
+    pattern = { "*" },
     callback = function()
         vim.api.nvim_exec('silent! normal! g`"zv', false)
     end
@@ -78,7 +79,7 @@ autocmd("InsertEnter", {
     end
 })
 -- Automatically close tab when nvim-tree is the last window in tab
--- vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
+-- vim.cmd("autocmd BufEnter * ++nested if winnr("$") == 1 && bufname() == "NvimTree_" . tabpagenr() | quit | endif")
 autocmd("BufEnter", {
     nested = true,
     callback = function()
@@ -101,22 +102,22 @@ autocmd("WinEnter", {
     end
 })
 -- Disable diagnostics in insert mode
-autocmd('ModeChanged', {
-    pattern = { 'n:i', 'v:s' },
-    desc = 'Disable diagnostics in insert and select mode',
-    callback = function()
-        vim.diagnostic.enable(false)
-    end
-})
+-- autocmd("ModeChanged", {
+--     pattern = { "n:i", "v:s" },
+--     desc = "Disable diagnostics in insert and select mode",
+--     callback = function()
+--         vim.diagnostic.enable(false)
+--     end
+-- })
 -- Enable diagnostics in normal mode
-autocmd('ModeChanged', {
-    pattern = 'i:n',
-    desc = 'Enable diagnostics when leaving insert mode',
-    callback = function()
-        vim.diagnostic.enable(true)
-    end
-})
--- Create a 'Format' command for formatting files
+-- autocmd("ModeChanged", {
+--     pattern = "i:n",
+--     desc = "Enable diagnostics when leaving insert mode",
+--     callback = function()
+--         vim.diagnostic.enable(true)
+--     end
+-- })
+-- Create a `Format` command for formatting files
 cmd("Format", function()
     vim.cmd("lua vim.lsp.buf.format{async=true}")
 end, { desc = "Format" })
@@ -125,3 +126,14 @@ cmd("Cwd", function()
   vim.cmd(":cd %:p:h")
   vim.cmd(":pwd")
 end, { desc = "Change working directory" })
+-- Create custom keybinds for grug-far
+autocmd("FileType", {
+  group =  vim.api.nvim_create_augroup("my-grug-far-custom-keybinds", { clear = true }),
+  pattern = { "grug-far" },
+  callback = function()
+    vim.keymap.set("n", "<leader>z", function()
+      local state = unpack(require("grug-far").toggle_flags({ "--fixed-strings" }))
+      vim.notify("grug-far: toggled --fixed-strings " .. (state and "ON" or "OFF"))
+    end, { desc = "Fixed Strings (grug-far)", buffer = true })
+  end,
+})
