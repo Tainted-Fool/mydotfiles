@@ -20,6 +20,7 @@ autocmd("FileType", {
         "checkhealth",
         "spectre_panel",
         "grug-far",
+        "startuptime",
     },
     callback = function()
         vim.cmd([[

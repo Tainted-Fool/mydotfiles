@@ -4,7 +4,7 @@ local opt = vim.opt -- to save typing
 opt.backup = false -- create a backup file
 -- opt.clipboard = "unnamedplus", -- allows access to the system clipboard
 -- opt.cmdheight = 1 -- more space in command line
-opt.colorcolumn = "+1" -- color column at 'textwidth' plus 1
+opt.colorcolumn = "+1" -- color column at `textwidth` plus 1
 opt.completeopt = { "menu", "menuone", "noselect" } -- completion options
 opt.conceallevel = 0 -- turns certain characters invisible like `` - 3 hides * markup for bold and italics
 -- opt.confirm = true -- confirm to save changes before exiting modified buffer
@@ -35,7 +35,7 @@ opt.shiftwidth = 2 -- the number of spaces inserted for each indentation (vim-sl
 -- opt.shortmess:append({W = true, I = true, c = true, C = true}) -- append to the short messasge list
 opt.showcmd = true -- show command in bottom bar
 -- opt.showcmdloc = "statusline" -- show command in bottom bar
-opt.showmode = false -- show mode like 'normal', 'insert', etc.
+opt.showmode = false -- show mode like `normal`, `insert`, etc.
 opt.showtabline = 0 -- show tabs - 0 is never, 2 is always
 opt.sidescrolloff = 8 -- amount of screen columns to keep left and right
 opt.signcolumn = "yes" -- always show the sign column
@@ -66,7 +66,7 @@ opt.shortmess:append("c") -- append to the short messasge list
 -- Set options by passing vimscript commands
 vim.cmd("set whichwrap+=<,>,[,],h,l") -- allows specific characters to move to new line when at end/start
 -- Set options by passing vimscript commands - another way to write it
-vim.cmd([[set iskeyword+=-]]) -- treat 'some-word' as one word
+vim.cmd([[set iskeyword+=-]]) -- treat `some-word` as one word
 -- Default cursor settings
 -- vim.cmd [[set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20]]
 -- Change the default cursor settings
@@ -75,15 +75,30 @@ vim.cmd([[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]])
 vim.loader.enable()
 -- Enable automatic codelens refreshing for lsp that support it.
 vim.g.codelens_enabled = true
--- Set system clipboard
-vim.g.clipboard = {
-    name = 'OSC 52',
-    copy = {
-        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-    },
-    paste = {
-        ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-        ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-    },
-}
+-- Set system clipboard OSC 52 (new method)
+-- vim.g.clipboard = {
+--     name = "OSC 52",
+--     copy = {
+--         ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+--         ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+--     },
+--     paste = {
+--         ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+--         ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+--     },
+-- }
+-- Set System clipboard WSL
+-- if vim.fn.has('wsl') == 1 then
+--     vim.g.clipboard = {
+--         name = 'WslClipboard',
+--         copy = {
+--             ['+'] = 'clip.exe',
+--             ['*'] = 'clip.exe',
+--         },
+--         paste = {
+--             ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--             ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--         },
+--         cache_enabled = 0,
+--     }
+-- end

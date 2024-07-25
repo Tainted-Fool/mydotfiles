@@ -167,6 +167,9 @@ AUTOPAIR_INIT_INHIBIT=1
 # ^R is to look through history
 zvm_after_init_commands+=("[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh")
 
+# Add system clipboard for WSL
+export PATH="$PATH:/mnt/c/tools/win32yank"
+
 # disable sort when completing `git checkout`
 # zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
