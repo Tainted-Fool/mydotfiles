@@ -1,14 +1,7 @@
 return {
     -- Increment/decrement/interate various elements
     "monaqa/dial.nvim",
-    -- lazy = true,
     event = "VeryLazy",
-    -- keys = {
-    --     { "<C-a>", "<Cmd>DialIncrement<CR>", desc = "Increment", mode = "n", },
-    --     { "<C-x>", "<Cmd>DialDecrement<CR>", desc = "Decrement", mode = "n", },
-    --     { "<C-a>", "<Cmd>DialIncrement<CR>", desc = "Increment", mode = "v", },
-    --     { "<C-x>", "<Cmd>DialDecrement<CR>", desc = "Decrement", mode = "v", },
-    -- },
     config = function()
         local dial_conf = require("dial.config")
         local augend = require("dial.augend")
@@ -54,9 +47,9 @@ return {
             }
         })
 
-        keymap("n", "<C-a>", map.inc_normal("mygroup"), "Increment")
-        keymap("n", "<C-x>", map.dec_normal("mygroup"), "Decrement")
-        keymap("v", "<C-a>", map.inc_normal("visual"), "Increment")
-        keymap("v", "<C-x>", map.dec_normal("visual"), "Decrement")
+        keymap("n", "<C-a>", map.inc_normal("mygroup"), "Increment (dial)")
+        keymap("n", "<C-x>", map.dec_normal("mygroup"), "Decrement (dial)")
+        keymap("v", "<C-a>", map.inc_normal("visual"), "Increment (dial)")
+        keymap("v", "<C-x>", map.dec_normal("visual"), "Decrement (dial)")
     end
 }

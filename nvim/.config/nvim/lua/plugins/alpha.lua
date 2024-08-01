@@ -6,9 +6,6 @@ return {
     },
     lazy = true, -- load after everything else
     event = "VimEnter",
-    keys = {
-        { "<leader>a", "<cmd>Alpha<cr>", desc = "Dashboard (Alpha)" }
-    },
     opts = function()
         local dashboard = require("alpha.themes.dashboard")
         local icons = require("core.icons")
@@ -42,13 +39,14 @@ return {
 
         dashboard.section.header.val = vim.split(logo, "\n")
         dashboard.section.buttons.val = {
+            dashboard.button("c", icons.kind.Constructor  .. "  Configuration", ":e $MYVIMRC <CR>"),
+            dashboard.button("e", icons.misc.Explorer .. "  File Explorer", ":Oil <CR>"),
             dashboard.button("f", icons.ui.FindFile .. "  Find File", ":Telescope find_files hidden=true<CR>"),
-            dashboard.button("e", icons.ui.NewFile .. "  New File", ":ene <BAR> startinsert <CR>"),
+            dashboard.button("n", icons.ui.NewFile .. "  New File", ":ene <BAR> startinsert <CR>"),
             dashboard.button("p", icons.ui.Project .. "  Find Project", ":Telescope projects <CR>"),
+            dashboard.button("q", icons.misc.Quit .. "  Quit", ":qa<CR>"),
             dashboard.button("r", icons.ui.RecentFiles .. "  Recent Files", ":Telescope oldfiles <CR>"),
             dashboard.button("t", icons.ui.FindText .. "  Find Text", ":Telescope live_grep <CR>"),
-            dashboard.button("c", icons.kind.Constructor  .. "  Configuration", ":e $MYVIMRC <CR>"),
-            dashboard.button("q", icons.misc.Quit .. "  Quit", ":qa<CR>"),
         }
         dashboard.section.header.opts.hl = "Function"
         dashboard.section.buttons.opts.hl = "Keyword"

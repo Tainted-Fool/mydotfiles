@@ -4,6 +4,7 @@ return {
     branch = "harpoon2",
     event = "VeryLazy",
     keys = {
+        { "<leader>h", "", desc = "harpoon" },
         { "<leader>ha", "<cmd>lua require('harpoon'):list():append()<cr>", desc = "Add (Harpoon)" },
         { "<leader>hl", "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", desc = "List (Harpoon)" },
         { "<leader>hm", "<cmd>Telescope harpoon marks<cr>", desc = "Marks (Harpoon)" },

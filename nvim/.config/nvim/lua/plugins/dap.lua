@@ -3,6 +3,7 @@ return {
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
     keys = {
+        { "<leader>d", "", desc = "debug" },
         { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "Toggle Breakpoint (DAP)" },
         { "<leader>dB", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", desc = "Breakpoint Condition (DAP)" },
         { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "Continue (DAP)" },

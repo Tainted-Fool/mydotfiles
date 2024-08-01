@@ -166,7 +166,11 @@ return {
         Clock = "",
         Collapsed = "",
         CurrentLine = "",
+        Dashboard = "󰕮",
         Expand = "",
+        Explorer = "",
+        FZF = "󱡠", -- 5 character hex code
+        Harpoon = "󱡀", -- 5 character hex code
         Package = "", -- duplicate
         Pending = "➜",
         Prompt = "",
@@ -180,5 +184,6 @@ return {
         Tag = "",
         Watch = "",
         UI = "󰙵", -- 5 character hex code
+        VENV = "󰂓", -- 5 character hex code
     }
 }

@@ -4,6 +4,7 @@ return {
     event = "VeryLazy",
     cmd = "ToggleTerm",
     keys = {
+        { "<leader>t", "", desc = "terminal" },
         { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float (Toggleterm)"},
         { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal (Toggleterm)" },
         { "<leader>tl", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Lazygit (Toggleterm)" },

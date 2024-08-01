@@ -16,7 +16,7 @@ return {
                 require("which-key").show({ keys = "<c-w>", loop = true })
             end,
             desc = "Window Hydra Mode (which-key)",
-        },
+        }
     },
     dependencies = {
         "echasnovski/mini.icons", -- icon provider
@@ -55,6 +55,9 @@ return {
             wo = { winblend = 20 },
         },
         spec = {
+            -- Single keymaps
+            { "<leader>a", "<cmd>Alpha<cr>", desc = "Dashboard (Alpha)" },
+            { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer (nvim-tree)" },
             { "<leader>q", "<cmd>q!<cr>", desc = "Quit" },
             { "<leader>-", "<C-W>s", desc = "Split Window Below" },
             { "<leader>\\", "<C-W>v", desc = "Split Window Right" },
@@ -83,13 +86,7 @@ return {
             { "<leader>ws", "<C-w>s", desc = "Split Window Below" },
             { "<leader>wv", "<C-w>v", desc = "Split Window Right" },
             { "<leader>ww", "<C-w>w", desc = "Switch Windows" },
-        }
-    },
-    config = function(_, opts)
-        local wk = require("which-key")
-        local icons = require("core.icons")
-        wk.setup(opts)
-        wk.add({
+            -- Groups
             {
                 "<leader>b",
                 group = "buffer",
@@ -98,13 +95,9 @@ return {
                 end
             },
             { "<leader>c", group = "code" },
-            { "<leader>d", group = "debug" },
             { "<leader>f", group = "find" },
             { "<leader>g", group = "git" },
-            { "<leader>gh", group = "hunks" },
-            { "<leader>h", group = "harpoon" },
             { "<leader>s", group = "search" },
-            { "<leader>t", group = "terminal" },
             {
                 "<leader>w",
                 group = "windows",
@@ -113,12 +106,11 @@ return {
                     return require("which-key.extras").expand.win()
                 end
             },
-            { "<leader>v", group = "venv" },
             {
                 "<leader>u",
                 group = "ui",
                 icon = {
-                    icon = icons.misc.UI,
+                    icon = require("core.icons").misc.UI,
                     ---@type string azure|blue|cyan|green|grey|orange|purple|red|yellow
                     color = "cyan",
                 }
@@ -127,7 +119,7 @@ return {
                 "<leader>x",
                 group = "diagnostics/quickfix",
                 icon = {
-                    icon = icons.misc.Quickfix,
+                    icon = require("core.icons").misc.Quickfix,
                     color = "green",
                 }
             },
@@ -135,6 +127,15 @@ return {
             { "]", group = "next" },
             { "g", group = "goto" },
             { "z", group = "fold" },
-        })
-    end
+        },
+        icons = {
+            rules = {
+                { pattern = "alpha", icon = require("core.icons").misc.Dashboard, color = "purple" },
+                { pattern = "explorer", icon = require("core.icons").misc.Explorer, color = "azure" },
+                { pattern = "fzf", icon = require("core.icons").misc.FZF, color = "orange" },
+                { plugin = "harpoon", pattern = "harpoon", icon = require("core.icons").misc.Harpoon, color = "cyan" },
+                { plugin = "venv-selector.nvim", pattern = "venv", icon = require("core.icons").misc.VENV, color = "green" },
+            }
+        }
+    }
 }

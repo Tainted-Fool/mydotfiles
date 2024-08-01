@@ -2,6 +2,9 @@ return {
     -- Git symbols next to line numbers
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
+    keys = {
+            { "<leader>gh", "", desc = "hunks" },
+    },
     opts = {
         signs = {
             add = { text = "┃" },

@@ -1,54 +1,30 @@
 return {
-    {
-        -- Save/restore sessions
-        "rmagatti/auto-session",
-        opts = {
-            log_level = "error",
-            auto_session_enable_last_session = false,
-            auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
-            auto_session_enabled = true,
-            auto_save_enabled = nil,
-            auto_restore_enabled = false,
-            auto_session_suppress_dirs = {
-                os.getenv("HOME"), -- if neovim is opened from $HOME, then DO NOT restore session
-                "~/",
-            },
-            auto_session_use_git_branch = nil,
-            bypass_session_save_file_types = {
-                "alpha",
-                "noice",
-                "notify",
-                "blank",
-                "NvimTree",
-                "",
-                "oil",
-                "lazy",
-                "vim",
-                "man",
-                "help",
-            }
-        }
-    },
-    {
-        -- View sessions with Telescope
-        "rmagatti/session-lens",
-        -- event = "VeryLazy",
-        cmd = {
-            "SessionSave",
-            "SessionDelete",
-            "SessionRestore",
+    -- Save/restore sessions
+    "rmagatti/auto-session",
+    opts = {
+        log_level = "error",
+        auto_session_enable_last_session = false,
+        auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
+        auto_session_enabled = true,
+        auto_save_enabled = nil,
+        auto_restore_enabled = false,
+        auto_session_suppress_dirs = {
+            os.getenv("HOME"), -- if neovim is opened from $HOME, then DO NOT restore session
+            "~/",
         },
-        keys = {
-            { "<leader>ur", "<cmd>SessionRestore<cr>", desc = "Restore (Session)" },
-            { "<leader>us", "<cmd>SessionSave<cr>", desc = "Save (Sessions)" },
-        },
-        opts = {
-            path_display = { "shorten" },
-            theme_conf = {
-                border = false,
-            },
-            previewer = true,
-            prompt_title = "Sessions",
+        auto_session_use_git_branch = nil,
+        bypass_session_save_file_types = {
+            "alpha",
+            "noice",
+            "notify",
+            "blank",
+            "NvimTree",
+            "",
+            "oil",
+            "lazy",
+            "vim",
+            "man",
+            "help",
         }
     }
 }
