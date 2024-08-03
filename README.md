@@ -63,7 +63,7 @@ dit config --local status.showuntrackedfiles no
 - The second line creates an alias for `git` as `dit`
 - The last line hides untracked files
 
-Now we can checkout the repo to acquire the neccessary files
+Now we can checkout the repo to acquire the necessary files
 
 ```bash
 dit checkout
@@ -184,7 +184,7 @@ sudo apt install zoxide
 
 ### Install Azure CLI
 
-Usful for doing a lot of Azure stuff
+Useful for doing a lot of Azure stuff
 
 ```bash
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py --silent
@@ -244,7 +244,7 @@ Kept getting error getting this to work
 sudo npm install tslib
 sudo npm install -g yarn
 sudo yarn add tslib
-# un-comment the plugin
+# uncomment the plugin
 # run this command inside vim `:PlugInstall`
 ```
 
