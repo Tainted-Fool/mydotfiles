@@ -6,7 +6,7 @@ return {
     build = ":MasonUpdate",
     keys = {
         { "<leader>cl", "<cmd>LspInfo<cr>", desc = "LSP Info (nvim-lspconfig)" },
-        { "<leader>um","<cmd>Mason<cr>", desc = "LSP Manager (Mason)" },
+        { "<leader>um","<cmd>Mason<cr>", desc = "LSP Manager (mason)" },
     },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp", -- LSP completion

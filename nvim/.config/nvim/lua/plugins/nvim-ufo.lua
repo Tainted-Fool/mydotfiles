@@ -63,9 +63,9 @@ return {
             table.insert(newVirtText, { suffix, "MoreMsg" })
             return newVirtText
         end
-        vim.keymap.set("n", "zR", "<cmd>lua require('ufo').openAllFolds()<CR>", { desc = "Open all folds" })
-        vim.keymap.set("n", "zM", "<cmd>lua require('ufo').closeAllFolds()<CR>", { desc = "Close all folds" })
-        vim.keymap.set("n", "zr", "<cmd>lua require('ufo').openFoldsExceptKinds()<CR>", { desc = "Open less folds" })
+        vim.keymap.set("n", "zR", "<cmd>lua require('ufo').openAllFolds()<CR>", { desc = "Open All Folds (nvim-ufo)" })
+        vim.keymap.set("n", "zM", "<cmd>lua require('ufo').closeAllFolds()<CR>", { desc = "Close All Folds (nvim-ufo)" })
+        vim.keymap.set("n", "zr", "<cmd>lua require('ufo').openFoldsExceptKinds()<CR>", { desc = "Open Less Folds (nvim-ufo)" })
         require("ufo").setup({
             -- uncomment to use treesitter as fold provider or defaults to nvim lsp :138
             -- provider_selection = function()

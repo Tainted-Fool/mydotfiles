@@ -27,10 +27,8 @@ return {
         config = function(_, opts)
             local cmp = require("cmp")
             local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
             -- Add autopairs to atuo-completion
             cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
             require("nvim-autopairs").setup(opts)
         end
     }

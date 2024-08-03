@@ -9,7 +9,6 @@ return {
         local keymap = function(mode, keys, func, desc)
             vim.keymap.set(mode, keys, func, { desc = desc, noremap = true, silent = true })
         end
-
         dial_conf.augends:register_group({
             default = {
                 augend.integer.alias.decimal,
@@ -46,7 +45,6 @@ return {
                 augend.date.alias["%m/%d/%Y"],
             }
         })
-
         keymap("n", "<C-a>", map.inc_normal("mygroup"), "Increment (dial)")
         keymap("n", "<C-x>", map.dec_normal("mygroup"), "Decrement (dial)")
         keymap("v", "<C-a>", map.inc_normal("visual"), "Increment (dial)")

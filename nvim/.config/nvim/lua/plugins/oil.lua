@@ -5,7 +5,7 @@ return {
     keys = {
         { "<leader>o", "<cmd>lua require('oil').open_float()<cr>", desc = "Open (oil)" },
     },
-    cmd = { "Oil" },
+    cmd = "Oil",
     opts = {
         view_options = {
             show_hidden = true,

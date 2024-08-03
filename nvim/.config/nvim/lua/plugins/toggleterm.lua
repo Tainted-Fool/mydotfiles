@@ -5,14 +5,14 @@ return {
     cmd = "ToggleTerm",
     keys = {
         { "<leader>t", "", desc = "terminal" },
-        { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float (Toggleterm)"},
-        { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal (Toggleterm)" },
-        { "<leader>tl", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Lazygit (Toggleterm)" },
-        { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", desc = "Node (Toggleterm)" },
-        { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc = "Python (Toggleterm)" },
-        { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "HTop (Toggleterm)" },
-        { "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", desc = "Disk Usage (Toggleterm)" },
-        { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical (Toggleterm)" },
+        { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float (toggleterm)"},
+        { "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "Horizontal (toggleterm)" },
+        { "<leader>tl", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Lazygit (toggleterm)" },
+        { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", desc = "Node (toggleterm)" },
+        { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc = "Python (toggleterm)" },
+        { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "HTop (toggleterm)" },
+        { "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", desc = "Disk Usage (toggleterm)" },
+        { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical (toggleterm)" },
     },
     config = function()
         require("toggleterm").setup({

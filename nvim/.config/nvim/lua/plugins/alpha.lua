@@ -6,17 +6,18 @@ return {
     },
     lazy = true, -- load after everything else
     event = "VimEnter",
+    keys = {
+        { "<leader>a", "<cmd>Alpha<cr>", desc = "Dashboard (alpha)" },
+    },
     opts = function()
         local dashboard = require("alpha.themes.dashboard")
         local icons = require("core.icons")
-
     --     local logo = [[
     -- 🛸　　　 　🌎　°　　🌓　•　　.°•　　　🚀 ✯ ,
     -- 　　　★　*　　　　　°　　　　🛰 　°·      🪐,
     -- .　　　•　° ★　•  ☄                        ,
     --                ▁▂▃▄▅▆▇▇▆▅▄▃▂▁.           ,
     --     ]]
-
         -- local logo = [[
         --     ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗
         --     ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║
@@ -25,7 +26,6 @@ return {
         --     ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
         --     ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
         -- ]]
-
         local logo = [[
                                                                              
                ████ ██████           █████      ██                     
@@ -36,11 +36,11 @@ return {
           ███████████ ███    ███ █████████ █████ █████ ████ █████  
          ██████  █████████████████████ ████ █████ █████ ████ ██████ 
         ]]
-
         dashboard.section.header.val = vim.split(logo, "\n")
         dashboard.section.buttons.val = {
             dashboard.button("c", icons.kind.Constructor  .. "  Configuration", ":e $MYVIMRC <CR>"),
-            dashboard.button("e", icons.misc.Explorer .. "  File Explorer", ":Oil <CR>"),
+            dashboard.button("e", icons.misc.Explorer .. "  File Explorer", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>"),
+            -- dashboard.button("e", icons.misc.Explorer .. "  File Explorer", ":Oil <CR>"),
             dashboard.button("f", icons.ui.FindFile .. "  Find File", ":Telescope find_files hidden=true<CR>"),
             dashboard.button("n", icons.ui.NewFile .. "  New File", ":ene <BAR> startinsert <CR>"),
             dashboard.button("p", icons.ui.Project .. "  Find Project", ":Telescope projects <CR>"),
@@ -65,7 +65,6 @@ return {
                 end
             })
         end
-
         -- Setup fortune-mod
         local function footer()
             local handle = io.popen("fortune")-- sudo apt install fortune-mod
@@ -74,12 +73,10 @@ return {
                 vim.notify("Run `sudo apt install fortune-mod`")
                 return
             end
-
             local fortune = handle:read("*a")
             handle:close()
             return fortune
         end
-
         -- Display fortune-mod and startuptime
         vim.api.nvim_create_autocmd("User", {
             once = true,
@@ -99,7 +96,6 @@ return {
                 pcall(vim.cmd.AlphaRedraw)
             end
         })
-
         require("alpha").setup(dashboard.opts)
     end
 }

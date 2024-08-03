@@ -29,32 +29,32 @@ return {
             "<leader>sF", function()
                 require("spectre").open_file_search({ select_word = false })
             end,
-            desc = "Current File (Spectre)",
+            desc = "Current File (spectre)",
         },
         {
             "<leader>sR", function()
                 require("spectre").toggle()
             end,
-            desc = "Replace All (Spectre)",
+            desc = "Replace All (spectre)",
         },
         {
             "<leader>sS", function()
                 require("spectre").open_file_search({ select_word = true })
             end,
-            desc = "Current File and Word (Spectre)",
+            desc = "Current File and Word (spectre)",
         },
         {
             "<leader>sW", function()
                 require("spectre").open_visual({ select_word = true })
             end,
-            desc = "Current Word (Spectre)",
+            desc = "Current Word (spectre)",
             mode = "n",
         },
         {
             "<leader>sW", function()
                 require("spectre").open_visual()
             end,
-            desc = "Current Word (Spectre)",
+            desc = "Current Word (spectre)",
             mode = "v",
         }
     }

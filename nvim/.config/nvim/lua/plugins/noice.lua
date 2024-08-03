@@ -8,12 +8,12 @@ return {
     },
     keys = {
         { "<leader>sn", "", desc = "noice" },
-        { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message (Noice)" },
-        { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History (Noice)" },
-        { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All (Noice)" },
-        { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All (Noice)" },
-        { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Noice)" },
-        { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline (Noice)" },
+        { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message (noice)" },
+        { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History (noice)" },
+        { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All (noice)" },
+        { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All (noice)" },
+        { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (noice)" },
+        { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline (noice)" },
     },
     opts = {
         lsp = {

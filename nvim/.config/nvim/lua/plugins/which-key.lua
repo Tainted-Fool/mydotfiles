@@ -56,8 +56,6 @@ return {
         },
         spec = {
             -- Single keymaps
-            { "<leader>a", "<cmd>Alpha<cr>", desc = "Dashboard (Alpha)" },
-            { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer (nvim-tree)" },
             { "<leader>q", "<cmd>q!<cr>", desc = "Quit" },
             { "<leader>-", "<C-W>s", desc = "Split Window Below" },
             { "<leader>\\", "<C-W>v", desc = "Split Window Right" },

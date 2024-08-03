@@ -1,6 +1,11 @@
 return {
     -- Better hover capabilities with 'K' and 'gK'
     "lewis6991/hover.nvim",
+    event = "VeryLazy",
+    keys = {
+        { "K", "lua hover.hover", desc = "Show Hover (hover)" },
+        { "gK", "lua hover.hover_select", desc = "Show Hover Select (hover)" },
+    },
     config = function()
         local util = vim.lsp.util
         local ___ =
@@ -55,7 +60,5 @@ return {
             preview_window = false,
             title = true,
         })
-        vim.keymap.set("n", "K", hover.hover, { desc = "Show hover", noremap = true, silent = true })
-        vim.keymap.set("n", "gK", hover.hover_select, { desc = "Show hover select", noremap = true, silent = true })
     end
 }

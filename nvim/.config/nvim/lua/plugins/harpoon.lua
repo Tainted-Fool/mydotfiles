@@ -5,9 +5,9 @@ return {
     event = "VeryLazy",
     keys = {
         { "<leader>h", "", desc = "harpoon" },
-        { "<leader>ha", "<cmd>lua require('harpoon'):list():append()<cr>", desc = "Add (Harpoon)" },
-        { "<leader>hl", "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", desc = "List (Harpoon)" },
-        { "<leader>hm", "<cmd>Telescope harpoon marks<cr>", desc = "Marks (Harpoon)" },
+        { "<leader>ha", "<cmd>lua require('harpoon'):list():append()<cr>", desc = "Add (harpoon)" },
+        { "<leader>hl", "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", desc = "List (harpoon)" },
+        { "<leader>hm", "<cmd>Telescope harpoon marks<cr>", desc = "Marks (harpoon)" },
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -32,7 +32,7 @@ return {
                 sorter = conf.generic_sorter({}),
             }):find()
         end
-        vim.keymap.set("n", "<C-s>", function() toggle_telescope(harpoon:list()) end,
-            { desc = "Open Harpoon Window" })
+        vim.keymap.set("n", "hf", function() toggle_telescope(harpoon:list()) end,
+            { desc = "Fuzzy List (harpoon)" })
     end
 }
