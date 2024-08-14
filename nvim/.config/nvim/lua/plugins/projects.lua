@@ -1,6 +1,7 @@
 return {
     -- Project manager
-    "ahmedkhalf/project.nvim",
+    -- "ahmedkhalf/project.nvim", -- not maintained anymore
+    "DrKJeff16/project.nvim",
     event = "VeryLazy",
     opts = {
         active = true,

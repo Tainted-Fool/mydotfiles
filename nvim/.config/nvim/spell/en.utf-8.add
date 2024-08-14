@@ -40,3 +40,6 @@ config
 wsl
 repoBranchName
 repoURL
+Phislets
+phishlets
+github
