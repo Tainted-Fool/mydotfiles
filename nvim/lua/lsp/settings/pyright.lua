@@ -6,7 +6,7 @@ return {
         textDocument = {
             publishDiagnostic = {
                 tagSupport = {
-                    valueSet = { 2 }
+                    valueSet = { 2 },
                 }
             }
         }
@@ -23,7 +23,7 @@ return {
                 typeCheckingMode = "off", -- basic, strict, off - using ruff-lsp
                 inlayHints = {
                     variableTypes = true,
-                    functionReturnTypes = true
+                    functionReturnTypes = true,
                 }
             }
         }

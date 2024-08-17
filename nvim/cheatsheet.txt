@@ -1,0 +1,11 @@
+# This is a normal comment
+# Below is a metadata comment: section-name @tag1 @tag2
+## my-cheatsheet @custom @cheatsheet
+Go to next word under cursor | *
+Go to previous word under cursor | #
+Convert word to snake_case | crs
+Convert word to camelCase | crc
+Convert word to MixedCase | crm
+Convert word to UPPER_CASE | cru
+Convert word to kebab-case | cr-
+Convert word to dot.case | cr.

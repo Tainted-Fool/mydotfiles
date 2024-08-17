@@ -2,17 +2,17 @@
 if (vim.g.vscode) then
     -- VScode settings
     require("core.vscode")
+    vim.keymap.set("n", "[<Space>", "O<Esc>j", { desc = "Create Space Above", noremap = true, silent = true })
+    vim.keymap.set("n", "]<Space>", "o<Esc>k", { desc = "Create Space Below", noremap = true, silent = true })
 else
     -- Globals
     require("core.globals")
-
     -- User Settings
     require("core.options")
     require("core.keymaps")
-
+    -- require("core.utils") -- testing
     -- User Autocommands
     require("core.autocommands")
-
     -- User Plugins
     require("core.lazy")
 end

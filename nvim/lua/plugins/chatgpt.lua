@@ -1,8 +1,8 @@
 return {
-    -- chat with gpt3
+    -- Chat with gpt3
     "jackmort/chatgpt.nvim",
-    lazy = true,
-    enabled = false,
+    lazy = true, -- load after everything else
+    enabled = false, -- disable plugin
     opts = {
         -- api_key_cmd = "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",
         yank_register = "+",
@@ -16,29 +16,29 @@ return {
                 toggle_help = "<C-h>",
                 cycle_windows = "<Tab>",
                 use_output_as_input = "<C-i>",
-            },
+            }
         },
         chat = {
             welcome_message = WELCOME_MESSAGE,
             loading_text = "Loading, please wait ...",
-            question_sign = "", -- 🙂
-            answer_sign = "ﮧ", -- 🤖
-            border_left_sign = "",
-            border_right_sign = "",
+            question_sign = require("core.icons").misc.Question,
+            answer_sign = require("core.icons").misc.Answer,
+            border_left_sign = require("core.icons").misc.BorderLeft,
+            border_right_sign = require("core.icons").misc.BorderRight,
             max_line_length = 120,
             sessions_window = {
-                active_sign = "  ",
-                inactive_sign = "  ",
-                current_line_sign = "",
+                active_sign = require("core.icons").misc.Robot,
+                inactive_sign = require("core.icons").diagnostics.Error,
+                current_line_sign = require("core.icons").misc.CurrentLine,
                 border = {
                     style = "rounded",
                     text = {
                         top = " Sessions ",
-                    },
+                    }
                 },
                 win_options = {
                     winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-                },
+                }
             },
             keymaps = {
                 close = "<C-c>",
@@ -63,7 +63,7 @@ return {
                 toggle_message_role = "<C-r>",
                 toggle_system_role_open = "<C-s>",
                 stop_generating = "<C-x>",
-            },
+            }
         },
         popup_layout = {
             default = "center",
@@ -74,7 +74,7 @@ return {
             right = {
                 width = "30%",
                 width_settings_open = "50%",
-            },
+            }
         },
         popup_window = {
             border = {
@@ -82,7 +82,7 @@ return {
                 style = "rounded",
                 text = {
                     top = " ChatGPT ",
-                },
+                }
             },
             win_options = {
                 wrap = true,
@@ -92,7 +92,7 @@ return {
             },
             buf_options = {
                 filetype = "markdown",
-            },
+            }
         },
         system_window = {
             border = {
@@ -100,24 +100,24 @@ return {
                 style = "rounded",
                 text = {
                     top = " SYSTEM ",
-                },
+                }
             },
             win_options = {
                 wrap = true,
                 linebreak = true,
                 foldcolumn = "2",
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-            },
+            }
         },
         popup_input = {
-            prompt = "  ",
+            prompt = require("core.icons").misc.Prompt,
             border = {
                 highlight = "FloatBorder",
                 style = "rounded",
                 text = {
                     top_align = "center",
                     top = " Prompt ",
-                },
+                }
             },
             win_options = {
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
@@ -127,28 +127,28 @@ return {
             max_visible_lines = 20,
         },
         settings_window = {
-            setting_sign = "  ",
+            setting_sign = require("core.icons").misc.Settings,
             border = {
                 style = "rounded",
                 text = {
                     top = " Settings ",
-                },
+                }
             },
             win_options = {
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-            },
+            }
         },
         help_window = {
-            setting_sign = "  ",
+            setting_sign = require("core.icons").misc.Settings,
             border = {
                 style = "rounded",
                 text = {
                     top = " Help ",
-                },
+                }
             },
             win_options = {
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-            },
+            }
         },
         openai_params = {
             model = "gpt-3.5-turbo",
@@ -174,9 +174,8 @@ return {
         highlights = {
             help_key = "@symbol",
             help_description = "@comment",
-        },
+        }
     },
-
     -- chatgpt.setup({
     --     defaults,
     --     api_key_cmd = "echo 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",

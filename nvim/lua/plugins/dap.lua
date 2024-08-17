@@ -1,39 +1,56 @@
 return {
-    -- debug adapter protocol
+    -- Debug adapter protocol
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
+    keys = {
+        { "<leader>d", "", desc = "debug" },
+        { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "Toggle Breakpoint (dap)" },
+        { "<leader>dB", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", desc = "Breakpoint Condition (dap)" },
+        { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "Continue (dap)" },
+        { "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "Step Into (dap)" },
+        { "<leader>dl", "<cmd>lua require('dap').run_last()<cr>", desc = "Run Last (dap)" },
+        { "<leader>do", "<cmd>lua require('dap').step_over()<cr>", desc = "Step Over (dap)" },
+        { "<leader>dO", "<cmd>lua require('dap').step_out()<cr>", desc = "Step Out (dap)" },
+        { "<leader>dr", "<cmd>lua require('dap').repl.toggle()<cr>", desc = "REPL Toggle (dap)" },
+        { "<leader>dt", "<cmd>lua require('dap').terminate()<cr>", desc = "Terminate (dap)" },
+        { "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", desc = "UI Toggle (dap)" },
+    },
     dependencies = {
         "rcarriga/nvim-dap-ui", -- debugger ui
         "mfussenegger/nvim-dap-python", -- dap for python
-        { "thehamsta/nvim-dap-virtual-text", opts = {commented = true} }, -- virtual text for dap
-        "nvim-neotest/nvim-nio", -- dependency for nvim-dap
-    },
-    {
-        "rcarriga/cmp-dap",
-        dependencies = { "nvim-cmp" },
-        config = function()
-            require("cmp").setup.filetype(
-                { "dap-repl", "dapui_watches", "dapui_hover" },
-                {
-                    sources = {
-                        { name = "dap" },
+        { "thehamsta/nvim-dap-virtual-text", opts = { commented = true } }, -- virtual text for dap
+        "nvim-neotest/nvim-nio",
+        {
+            "rcarriga/cmp-dap",
+            dependencies = { "nvim-cmp" },
+            config = function()
+                require("cmp").setup.filetype(
+                    {
+                        "dap-repl",
+                        "dapui_watches",
+                        "dapui_hover",
                     },
-                }
-            )
-        end,
+                    {
+                        sources = {
+                            { name = "dap" }
+                        }
+                    }
+                )
+            end
+        }
     },
     config = function()
-        local windows = vim.fn.has('win32') == 1 -- true if on windows
+        local icons = require("core.icons")
+        local windows = vim.fn.has("win32") == 1 -- true if on windows
         local dap = require("dap")
         local dapui = require("dapui")
         local dap_python = require("dap-python")
-
         dapui.setup({
             expand_lines = true,
             icons = {
-                expanded = "",
-                collapsed = "",
-                circular = ""
+                expanded = icons.misc.Expanded,
+                collapsed = icons.misc.Collapsed,
+                circular = icons.misc.Circular,
             },
             mappings = {
                 expand = { "<CR>", "<2-LeftMouse>" },
@@ -41,35 +58,46 @@ return {
                 remove = "d",
                 edit = "e",
                 repl = "r",
-                toggle = "t"
+                toggle = "t",
             },
-            layouts = { {
-                elements = { {
-                    id = "scopes",
-                    size = 0.33
-                }, {
-                    id = "breakpoints",
-                    size = 0.17
-                }, {
-                    id = "stacks",
-                    size = 0.25
-                }, {
-                    id = "watches",
-                    size = 0.25
-                } },
-                size = 0.33,
-                position = "left"
-            }, {
-                elements = { {
-                    id = "repl",
-                    size = 0.45
-                }, {
-                    id = "console",
-                    size = 0.55
-                } },
-                size = 0.27,
-                position = "bottom"
-            } },
+            layouts = {
+                {
+                    elements = {
+                        {
+                            id = "scopes",
+                            size = 0.33,
+                        },
+                        {
+                            id = "breakpoints",
+                            size = 0.17,
+                        },
+                        {
+                            id = "stacks",
+                            size = 0.25,
+                        },
+                        {
+                            id = "watches",
+                            size = 0.25,
+                        }
+                    },
+                    size = 0.33,
+                    position = "left",
+                },
+                {
+                    elements = {
+                        {
+                            id = "repl",
+                            size = 0.45,
+                        },
+                        {
+                            id = "console",
+                            size = 0.55,
+                        }
+                    },
+                    size = 0.27,
+                    position = "bottom",
+                }
+            },
             floating = {
                 max_height = 0.9,
                 max_width = 0.5,
@@ -79,14 +107,12 @@ return {
                 }
             }
         })
-
         vim.fn.sign_define("DapBreakpoint", {
-            text = "",
+            text = icons.ui.Bug,
             texthl = "DiagnosticSignError",
             linehl = "",
-            numhl = ""
+            numhl = "",
         })
-
         -- DAP settings for python
         -- dap_python.setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
         -- RUN THESE COMMANDS
@@ -97,7 +123,6 @@ return {
         -- END
         dap_python.setup("~/.virtualenvs/debugpy/bin/python")
         -- dap_python.setup()
-
         -- DAP settings for bash
         dap.adapters.bashdb = {
             type = "executable",
@@ -125,15 +150,20 @@ return {
                 terminalKind = "integrated",
             }
         }
-
         -- DAP settings for c
         dap.adapters.codelldb = {
             type = "server",
             port = "${port}",
             executable = {
-                command = vim.fn.stdpath('data') .. "/mason/bin/codelldb",
+                command = vim.fn.stdpath("data").."/mason/bin/codelldb",
                 args = { "--port", "${port}" },
-                detached = function() if windows then return false else return true end end,
+                detached = function()
+                    if windows then
+                        return false
+                    else
+                        return true
+                    end
+                end
             }
         }
         dap.configurations.c = {
@@ -144,20 +174,18 @@ return {
                 program = function()
                     return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/bin/program", "file")
                 end,
-                cwd = '${workspaceFolder}',
+                cwd = "${workspaceFolder}",
                 stopOnEntry = false,
                 args = {},
-            },
+            }
         }
-
         -- DAP settings for cplusplus
         dap.configurations.cpp = dap.configurations.c
-
         -- DAP settings for csharp
         dap.adapters.coreclr = {
             type = "executable",
             command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
-            args = { "--interpreter=vscode" },
+            args = {"--interpreter=vscode"},
         }
         dap.configurations.cs = {
             {
@@ -165,21 +193,18 @@ return {
                 name = "launch - netcoredbg",
                 request = "launch",
                 program = function()
-                    return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-                end,
-            },
+                    return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+                end
+            }
         }
-
         -- Open dapui when dap in initialized
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
         end
-
         -- Close dapui when dap is terminated
         dap.listeners.before.event_terminated["dapui_config"] = function()
             dapui.close()
         end
-
         -- Close dapui when dap is exited
         dap.listeners.before.event_exited["dapui_config"] = function()
             dapui.close()

@@ -5,6 +5,5 @@ return {
     end,
     mason = true,
     autostart = true,
-    settings = {
-    }
+    settings = {},
 }
