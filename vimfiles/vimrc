@@ -1286,7 +1286,8 @@ let g:vimwiki_global_ext = 0
 """""""""""""""""""
 "WhichKey Settings"
 """""""""""""""""""
-map <silent> <leader>h :WhichKey! g:dict<Cr>
+map <silent> <leader> :WhichKey! g:dict<Cr>
+map <silent> <leader>q :q!<CR>
 
 let g:which_key_hspace = 5
 let g:which_key_centered = 1
@@ -1308,6 +1309,7 @@ let g:dict= {
 \ '<leader>M': ['FZF', 'Search Keybindings'],
 \ '<leader>n': ['NERDTree', 'NERDTree Toggle'],
 \ '<leader>p': ['Python', 'Run Python Script'],
+\ '<leader>q': [':q!', 'Quit'],
 \ '<leader>t': [':edit', 'New Buffer'],
 \ '<leader>T': ['FloatTerm', 'Open Terminal'],
 \ '<leader>u': [':source%', 'Source Vimrc'],
