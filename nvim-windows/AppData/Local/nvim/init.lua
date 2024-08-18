@@ -1,0 +1,1 @@
+../../../../nvim-linux/.config/nvim/init.lua

@@ -1,6 +1,21 @@
 """""""""
 "Plugins"
 """""""""
+" set vim shell. NOTE: pwsh has issues with `:PlugClean` and others see below
+" comment below to go back to default settings
+
+if has("win32")
+  set shell=pwsh.exe
+  set shellcmdflag=\ -ExecutionPolicy\ RemoteSigned\ -NoProfile\ -Nologo\ -NonInteractive\ -Command
+
+  " PlugUpdate
+  command! MyPlugUpdate :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugUpdate
+  " PlugInstall
+  command! MyPlugInstall :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugInstall
+  " PlugClean
+  command! MyPlugClean :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugClean
+endif
+
 " automatic installation of vim-plug and missing plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs

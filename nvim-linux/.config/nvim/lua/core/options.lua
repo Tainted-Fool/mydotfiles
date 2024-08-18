@@ -74,6 +74,16 @@ vim.cmd([[set guicursor=n-v-c-sm:block,i-ci-ve-r-cr-o:hor20,a:blinkon100]])
 vim.loader.enable()
 -- Enable automatic codelens refreshing for lsp that support it.
 vim.g.codelens_enabled = true
+-- Change default shell to pwsh.exe
+if vim.loop.os_uname().sysname == "Windows_NT" then
+  vim.cmd([[
+  let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
+  let &shellcmdflag = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;"'
+  let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+  let &shellpipe  = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
+  set shellquote= shellxquote=
+]])
+end
 -- Set system clipboard OSC 52 (new method)
 -- vim.g.clipboard = {
 --     name = "OSC 52",
