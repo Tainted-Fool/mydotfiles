@@ -39,7 +39,8 @@ dploy stow .\conda C:\Users\laz
 dploy stow .\git C:\Users\laz
 dploy stow .\nvim C:\Users\laz\AppData\Local\nvim
 dploy stow .\PowerShellProfile C:\Users\laz\Documents\PowerShell # run `echo $PROFILE` first
-dploy stow .\vimfiles $HOME\vimfiles
+dploy stow .\vim $HOME\vimfiles\vimrc
+dploy stow .\lazygit $HOME\AppData\Local\lazygit
 ```
 
 > Below is obsolete but kept for history stake. Simply clone the repo into `.dotfiles` and run `stow`
