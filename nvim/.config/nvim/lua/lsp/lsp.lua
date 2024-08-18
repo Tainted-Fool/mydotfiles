@@ -106,19 +106,30 @@ return {
                 local keymap = function(keys, func, desc)
                     vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, noremap = true, silent = true })
                 end
+                local diagnostic_goto = function(next, severity)
+                    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+                    severity = severity and vim.diagnostic.severity[severity] or nil
+                    return function()
+                        go({ severity = severity })
+                    end
+                end
                 -- Declare keymaps when LSP is running
+                -- keymap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (lsp)"
+                keymap("ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Go to Code Action (lsp)") -- default map to `gra`
                 keymap("gd", "<cmd>Telescope lsp_definitions<cr>", "Go to Definition (lsp)")
                 keymap("gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declaration (lsp)") -- not supported by all LSPs
-                -- keymap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP Hover (LSP)")
+                keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format Current Buffer (lsp)")
                 keymap("gh", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP Hover (lsp)")
                 keymap("gi", "<cmd>Telescope lsp_implementations<cr>", "Go to Implementation (lsp)") -- not supported by all LSPs
-                keymap("gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Show Diagnostic on Line (lsp)")
-                keymap("]d", "<cmd>lua vim.diagnostic.goto_next({border = 'rounded'})<cr>", "Go to Next Diagnostic (lsp)")
-                keymap("[d", "<cmd>lua vim.diagnostic.goto_prev({border = 'rounded'})<cr>", "Go to Previous Diagnostic (lsp)")
-                -- keymap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (LSP)")
+                keymap("gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Float Line Diagnostic (lsp)")
                 keymap("gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (lsp)")
-                keymap("ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Go to Code Action (lsp)")
-                keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format Current Buffer (lsp)")
+                keymap("<leader>cf", vim.diagnostic.open_float, "Float Line Diagnostics (lsp)")
+                keymap("]d", diagnostic_goto(true), "Next Diagnostic (lsp)")
+                keymap("[d", diagnostic_goto(false), "Prev Diagnostic (lsp)")
+                keymap("]e", diagnostic_goto(true, "ERROR"), "Next Error (lsp)")
+                keymap("[e", diagnostic_goto(false, "ERROR"), "Prev Error (lsp)")
+                keymap("]w", diagnostic_goto(true, "WARN"), "Next Warning (lsp)")
+                keymap("[w", diagnostic_goto(false, "WARN"), "Prev Warning (lsp)")
             end
         })
         -- Default LSP communication capabilities

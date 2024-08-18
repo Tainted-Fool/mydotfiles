@@ -39,6 +39,9 @@ keymap("n", "g#", "g#zz", "Search Partial Word Under Cursor Backward")
 -- Quickly add space above/below
 keymap("n", "[<Space>", "O<Esc>j", "Create Space Above")
 keymap("n", "]<Space>", "o<Esc>k", "Create Space Below")
+-- Comment line above/below
+keymap("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", "Add Comment Below")
+keymap("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", "Add Comment Above")
 -- Insert mode
 keymap("i", "fj", "<ESC>", "Exit Insert Mode")
 -- Move lines up and down
@@ -71,6 +74,8 @@ keymap("x", "<A-Up>", ":move '<-2<CR>gv-gv", "Move Line Up")
 -- Move to beginning or end of line
 keymap({ "n", "o", "x" }, "<S-h>", "^", "Move to Beginning of Line")
 keymap({ "n", "o", "x" }, "<S-l>", "g_", "Move to End of Line")
+-- Save file
+keymap({ "i", "n", "x", "s" }, "<C-s>", "<cmd>w<cr><esc>", "Save File")
 -- Enable/disable highlight group
 vim.keymap.set("n", "<CR>", function()
     ---@diagnostic disable-next-line: undefined-field

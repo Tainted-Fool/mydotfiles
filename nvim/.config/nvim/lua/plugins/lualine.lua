@@ -107,6 +107,10 @@ return {
                 return ""
             end
         end
+        -- Show session name
+        local session = function()
+            return require("auto-session.lib").current_session_name(true)
+        end
         -- Show search count message
         -- local count = {
         --     function() return require("noice").api.status.search.get end,
@@ -126,7 +130,7 @@ return {
             options = {
                 globalstatus = true, -- enable to have a single statusline
                 icons_enabled = true,
-                theme = "auto", -- "auto" tries to match colorscheme
+                theme = "kanagawa", -- "auto" tries to match colorscheme
                 -- theme = "iceberg_dark",
                 -- theme = "codedark",
                 component_separators = {
@@ -170,6 +174,7 @@ return {
                     },
                 },
                 lualine_x = {
+                    session,
                     "encoding",
                     "fileformat",
                     -- filetype,

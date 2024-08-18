@@ -29,7 +29,6 @@ opt.pumblend = 10 -- pop up menu blend
 opt.pumheight = 10 -- pop up menu height
 opt.relativenumber = true -- set relative numbered lines
 opt.scrolloff = 4 -- amount of lines to keep above and below cursor (keep it high to place it in the middle)
--- opt.sessionoptions = {"buffers", "curdir", "tabpages", "winsize"} -- what to save for sessions
 -- opt.shiftround = true -- round indent
 opt.shiftwidth = 2 -- the number of spaces inserted for each indentation (vim-sleuth)
 -- opt.shortmess:append({W = true, I = true, c = true, C = true}) -- append to the short messasge list

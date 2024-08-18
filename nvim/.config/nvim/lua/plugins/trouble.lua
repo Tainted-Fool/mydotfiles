@@ -15,7 +15,7 @@ return {
                     end
                 end
             end,
-            desc = "Previous Quickfix"
+            desc = "Previous Quickfix (trouble)"
         },
         {
             "]q", function()
@@ -28,7 +28,7 @@ return {
                     end
                 end
             end,
-            desc = "Next Quickfix"
+            desc = "Next Quickfix (trouble)"
         },
         { "<leader>cs", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (trouble)" },
         { "<leader>cS", "<cmd>Trouble lsp toggle<cr>", desc = "LSP references/definitions (trouble)" },

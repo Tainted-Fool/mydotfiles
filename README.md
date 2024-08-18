@@ -178,6 +178,7 @@ sudo apt install eza
 ### Install Zoxide
 
 A better `cd` command
+
 ```bash
 sudo apt install zoxide
 ```

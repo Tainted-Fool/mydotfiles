@@ -77,6 +77,7 @@ return {
             { "<leader>ui", "<cmd>Inspect<cr>", desc = "Inspect" },
             { "<leader>uI", "<cmd>InspectTree<cr>", desc = "Inspect Symbols" },
             { "<leader>ul", "<cmd>Lazy<cr>", desc = "Plugin Manager (Lazy)" },
+            { "<leader>uR", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", desc = "Redraw/Clear hlsearch/Diff Update" },
             -- Window keymap
             { "<leader>wc", "<C-w>c", desc = "Close Window" },
             { "<leader>we", "<C-w>=", desc = "Split Window Equal Size" },

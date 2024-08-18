@@ -206,3 +206,12 @@ unset __conda_setup
 
 # Add this at the bot to measure oh-my-zsh startup time
 # zprof
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/laz/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<

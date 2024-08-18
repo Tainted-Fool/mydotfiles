@@ -18,6 +18,8 @@ B = function()
 end
 -- Print server capabilities
 -- =vim.lsp.get_active_clients()[4].server_capabilities
+-- Keymap declaration
+-- nvim -V1 then :verb map
 -- S = function()
 --     return vim.lsp.get_active_clients()
 -- end

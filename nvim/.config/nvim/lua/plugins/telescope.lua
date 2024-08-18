@@ -119,9 +119,7 @@ return {
         telescope.load_extension("fzf")
         telescope.load_extension("noice")
         telescope.load_extension("projects")
-        telescope.load_extension("session-lens")
         telescope.load_extension("undo")
-        -- telescope.load_extension("mapper")
     end,
     keys = {
         { "<leader>cm", "<cmd>Telescope notify<cr>", desc = "Display Messages (telescope)" },
