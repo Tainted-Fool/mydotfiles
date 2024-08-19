@@ -1,21 +1,6 @@
 """""""""
 "Plugins"
 """""""""
-" set vim shell. NOTE: pwsh has issues with `:PlugClean` and others see below
-" comment below to go back to default settings
-
-if has("win32")
-  set shell=pwsh.exe
-  set shellcmdflag=\ -ExecutionPolicy\ RemoteSigned\ -NoProfile\ -Nologo\ -NonInteractive\ -Command
-
-  " PlugUpdate
-  command! MyPlugUpdate :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugUpdate
-  " PlugInstall
-  command! MyPlugInstall :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugInstall
-  " PlugClean
-  command! MyPlugClean :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugClean
-endif
-
 " automatic installation of vim-plug and missing plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -172,7 +157,19 @@ set encoding=utf-8
 scriptencoding utf-8
 
 " set what shell vim to use
-set shell=zsh
+if has("unix")
+  set shell=zsh
+elseif has("win32")
+  set shell=pwsh.exe
+  set shellcmdflag=\ -ExecutionPolicy\ RemoteSigned\ -NoProfile\ -Nologo\ -NonInteractive\ -Command
+
+  " PlugUpdate
+  command! MyPlugUpdate :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugUpdate
+  " PlugInstall
+  command! MyPlugInstall :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugInstall
+  " PlugClean
+  command! MyPlugClean :set shell=cmd.exe shellcmdflag=/c noshellslash guioptions-=! <bar> noau PlugClean
+endif
 
 " set no compatiable for vi
 set nocompatible
@@ -380,7 +377,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 """""""
 "Theme"
 """""""
-" inspect $TERM instead of $t_Co
+" set true colors and enable theme - linux
 if &term =~ '256color'
   " enable true 24-bit colors instead of 8-bit colors
   if has('termguicolors')
@@ -392,6 +389,14 @@ if &term =~ '256color'
   colorscheme onehalfdark
 endif
 
+" set true colors and enable theme - windows
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+  set t_Co=256
+  colorscheme onehalfdark
+endif
 " set background color
 set background=dark
 
@@ -853,9 +858,10 @@ noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 0, 4)<Cr>
 """""""""""""""""""
 nnoremap <leader>i :Startify<Cr>
 
- " create a custom header
- let g:startify_custom_header =
-       \ startify#pad(split(system('figlet -w 100 Vim'), '\n'))
+" create a custom header
+if has("unix")
+  let g:startify_custom_header = startify#pad(split(system('figlet -w 100 Vim'), '\n'))
+endif
 
 " bookmarks - syntax is clear; add your own
 let g:startify_bookmarks = [ {'I': '~/i3/i3/config'},{'L': '~/.blerc'},{'Z': '~/.zshrc'},{'B': '~/.bashrc'},{'V': '~/.vimrc'}]

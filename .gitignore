@@ -1,3 +1,6 @@
+# ignore vim folders
+~/.vim/*
+
 # ignore nvim plugin folder
 nvim/.config/nvim/plugin/*
 

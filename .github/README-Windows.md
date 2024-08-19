@@ -26,7 +26,7 @@ Check the other branch `linux` for that operating system
 
 ## Using Stow
 
-Switched to `stow` for dotfile management, more specificly `dploy stow`. It's a lot easier to manage and update dotfiles by symbolic links. The only downside is we must navigate to our `.dotfiles` directory and run `git` commands.
+Switched to `stow` for dotfile management, more specifically `dploy stow`. It's a lot easier to manage and update dotfiles by symbolic links. The only downside is we must navigate to our `.dotfiles` directory and run `git` commands.
 
 ```PowerShell
 pip install dploy
@@ -37,10 +37,10 @@ dploy unstow <source_dir> <dest_dir>
 cd ~\.dotfiles
 dploy stow .\conda C:\Users\laz
 dploy stow .\git C:\Users\laz
-dploy stow .\nvim C:\Users\laz\AppData\Local\nvim
-dploy stow .\PowerShellProfile C:\Users\laz\Documents\PowerShell # run `echo $PROFILE` first
-dploy stow .\vim $HOME\vimfiles\vimrc
-dploy stow .\lazygit $HOME\AppData\Local\lazygit
+dploy stow .\nvim\.config\nvim C:\Users\laz\AppData\Local\nvim
+dploy stow .\PowerShellProfile C:\Users\laz\Documents\PowerShell
+dploy stow .\vim\.vim C:\Users\laz\vimfiles
+dploy stow .\lazygit\.config\lazygit C:\Users\laz\Appdata\Roaming\lazygit
 ```
 
 > Below is obsolete but kept for history stake. Simply clone the repo into `.dotfiles` and run `stow`
@@ -89,9 +89,9 @@ dit push -u origin <localBranchName>
 Once the repo is up, we can clone it to a new system and pull the files
 
 ```PowerShell
-# git clone --bare --branch <repoBranchName> <repoURL> $HOME\.dotfiles 
+# git clone --bare --branch <repoBranchName> <repoURL> $HOME\.dotfiles
 git clone --bare --branch windows https://github.com/Tainted-Fool/mydotfiles `
-$HOME\.dotfiles 
+$HOME\.dotfiles
 echo "`nfunction dit() {git --git-dir=$HOME\.dotfiles\ `
 --work-tree=$HOME $args}" >> $PROFILE
 dit config --local status.showuntrackedfiles no
@@ -203,7 +203,7 @@ Invoke-WebRequest -Uri https://repo.anaconda.com/archive/Anaconda3-2022.05-Windo
 .\Anaconda.exe
 ```
 
-Make sure to insall this as well. Fixs weird issue with Vim and Anaconda
+Make sure to install this as well. Fixes weird issue with Vim and Anaconda
 
 ```PowerShell
 conda install -c conda-forge vim
@@ -249,7 +249,7 @@ pacman -Syu
 pacman -S --needed base-devel mingw-w64-x86_64-toolchain
 ```
 
-Alternativly you can download [Visual Studio build tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019). Another way is to download `mingw` by choco. Reference guide [here](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support)
+Alternatively you can download [Visual Studio build tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019). Another way is to download `mingw` by choco. Reference guide [here](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support)
 
 ```PowerShell
 # chocolately install
