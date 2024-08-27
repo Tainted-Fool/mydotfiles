@@ -1,6 +1,7 @@
 return {
     -- Replace UI for messages, cmdline, and popupmenu
     "folke/noice.nvim",
+    enabled = true,
     event = "VeryLazy",
     dependencies = {
         { "MunifTanjim/nui.nvim", lazy = true }, -- to render the UI

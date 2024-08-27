@@ -114,12 +114,12 @@ return {
         })
         -- Load extensions
         telescope.load_extension("file_browser")
-        telescope.load_extension("dap")
         telescope.load_extension("ui-select")
-        telescope.load_extension("fzf")
-        telescope.load_extension("noice")
-        telescope.load_extension("projects")
+        telescope.load_extension("dap")
         telescope.load_extension("undo")
+        telescope.load_extension("fzf")
+        telescope.load_extension("projects")
+        telescope.load_extension("noice")
     end,
     keys = {
         { "<leader>cm", "<cmd>Telescope notify<cr>", desc = "Display Messages (telescope)" },

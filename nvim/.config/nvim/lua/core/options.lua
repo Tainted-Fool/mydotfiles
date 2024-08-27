@@ -2,7 +2,7 @@ local opt = vim.opt -- to save typing
 -- Set options by using lua api (0=false, 1=true)
 -- opt.autowrite = true -- enable auto write
 opt.backup = false -- create a backup file
--- opt.clipboard = "unnamedplus", -- allows access to the system clipboard
+opt.clipboard = "unnamedplus" -- allows access to the system clipboard
 -- opt.cmdheight = 1 -- more space in command line
 opt.colorcolumn = "+1" -- color column at `textwidth` plus 1
 opt.completeopt = { "menu", "menuone", "noselect" } -- completion options
