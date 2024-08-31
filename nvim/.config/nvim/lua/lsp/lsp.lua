@@ -100,8 +100,8 @@ return {
             -- "vulture", -- Python (legacy)
         }
         -- Declare on_attach function
-        vim.api.nvim_create_autocmd("LspAttach", {
-            group = vim.api.nvim_create_augroup("Lsp-Attach", { clear = true }),
+        vim.api.nvim_create_autocmd("LSPAttach", {
+            group = vim.api.nvim_create_augroup("LSP-Attach", { clear = true }),
             callback = function(event)
                 local keymap = function(keys, func, desc)
                     vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, noremap = true, silent = true })
@@ -130,6 +130,14 @@ return {
                 keymap("[e", diagnostic_goto(false, "ERROR"), "Prev Error (lsp)")
                 keymap("]w", diagnostic_goto(true, "WARN"), "Next Warning (lsp)")
                 keymap("[w", diagnostic_goto(false, "WARN"), "Prev Warning (lsp)")
+                keymap("<leader>uH", function()
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+                end, "Disable Endhints/Inlay (lsp)")
+                -- Enable inlay hints
+                local client = vim.lsp.get_client_by_id(event.data.client_id)
+                if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHints) then
+                    vim.lsp.inlay_hint.enable()
+                end
             end
         })
         -- Default LSP communication capabilities
@@ -146,14 +154,14 @@ return {
                 "additionalTextEdits",
             }
         }
-        -- Enable folding by LSP on line :350
+        -- Enable folding by LSP or use treesitter in nvim-ufo.lua :70
         capabilities.textDocument.foldingRange = {
             dynamicRegistration = false,
             lineFoldingOnly = true,
         }
         -- Extend capabilities with nvim-cmp
-        -- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
-        capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+        capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
+        -- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
         -- Setup Mason
         mason.setup({
             ui = {
@@ -179,12 +187,6 @@ return {
             handlers = {
                 function(server_name)
                     lspconfig[server_name].setup({
-                        on_attach = function(client, _)
-                            -- Enable inlay hints
-                            if client.server_capabilities.inlayHintProvider then
-                                vim.lsp.inlay_hint.enable = true
-                            end
-                        end,
                         capabilities = capabilities,
                     })
                     -- If LSP server config file exists, then use those options
