@@ -4,7 +4,7 @@ return {
     event = "VeryLazy",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     keys = {
-        { "%", desc = "Match pairs (vim-matchup)" },
+        { "%", desc = "Match Pairs (vim-matchup)" },
     },
     setup = function()
         vim.g.matchup_matchparen_offscreen = { method = "popup" }

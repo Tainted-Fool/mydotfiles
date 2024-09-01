@@ -123,7 +123,6 @@ return {
                 keymap("gi", "<cmd>Telescope lsp_implementations<cr>", "Go to Implementation (lsp)") -- not supported by all LSPs
                 keymap("gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Float Line Diagnostic (lsp)")
                 keymap("gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (lsp)")
-                keymap("<leader>cf", vim.diagnostic.open_float, "Float Line Diagnostics (lsp)")
                 keymap("]d", diagnostic_goto(true), "Next Diagnostic (lsp)")
                 keymap("[d", diagnostic_goto(false), "Prev Diagnostic (lsp)")
                 keymap("]e", diagnostic_goto(true, "ERROR"), "Next Error (lsp)")

@@ -7,9 +7,7 @@ return {
             "Tainted-Fool/breadcrumbs.nvim",
             -- enabled = false,
             commit = "9f76427",
-            config = function()
-                require("breadcrumbs").setup()
-            end
+            config = true,
         }
     },
     opts = {

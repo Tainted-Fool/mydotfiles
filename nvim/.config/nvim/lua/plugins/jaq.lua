@@ -4,7 +4,7 @@ return {
     event = "VeryLazy",
     cmd = "Jaq",
     keys = {
-        { "<leader>cr", "<cmd>w | Jaq<cr>", desc = "Run (JAQ)" },
+        { "<leader>cr", "<cmd>w | Jaq<cr>", desc = "Run (jaq)" },
     },
     opts = {
         cmds = {

@@ -12,9 +12,7 @@ return {
         "onsails/lspkind.nvim", -- lsp completion icons
         {
             "zbirenbaum/copilot-cmp", -- copilot completion
-            config = function()
-                require("copilot_cmp").setup()
-            end
+            config = true,
         }
     },
     config = function()

@@ -3,7 +3,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
     keys = {
-            { "<leader>gh", "", desc = "hunks" },
+        { "<leader>gh", "", desc = "hunks" },
     },
     opts = {
         signs = {

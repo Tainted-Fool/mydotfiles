@@ -1,10 +1,10 @@
 return {
-    -- Better hover capabilities with 'K' and 'gK'
+    -- Better hover capabilities with 'K' and 'gk'
     "lewis6991/hover.nvim",
     event = "VeryLazy",
     keys = {
-        { "K", "lua hover.hover", desc = "Show Hover (hover)" },
-        { "gK", "lua hover.hover_select", desc = "Show Hover Select (hover)" },
+        { "K", "<cmd>lua require('hover').hover()<cr>", desc = "Show Hover (hover)" },
+        { "gk", "<cmd>lua require('hover').hover_select()<cr>", desc = "Show Hover Select (hover)" },
     },
     config = function()
         local util = vim.lsp.util

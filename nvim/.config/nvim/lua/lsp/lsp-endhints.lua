@@ -1,4 +1,5 @@
 return {
+    -- LSP inlay hints at the end of line
     "chrisgrieser/nvim-lsp-endhints",
     event = "LspAttach",
     keys = {

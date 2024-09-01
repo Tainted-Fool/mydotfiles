@@ -2,7 +2,11 @@ return {
     -- Grug Find and Replace
     "magicduck/grug-far.nvim",
     opts = {
-        extraRgArgs = "--hidden --no-ignore --no-ignore-vcs",
+        engines = {
+            ripgrep = {
+                extraArgs = "--hidden --no-ignore --no-ignore-vcs",
+            }
+        },
         headerMaxWidth = 80,
         keymaps = {
             replace = { n = "<leader>R" },
@@ -24,7 +28,7 @@ return {
     keys = {
         {
             "<leader>sf", function()
-                require("grug-far").grug_far({
+                require("grug-far").open({
                     transient = true,
                     prefills = {
                         filesFilter = vim.fn.expand("%:t") -- current filename with extension
@@ -37,7 +41,7 @@ return {
         {
             "<leader>sr", function()
                 local ext = vim.bo.buftype == "" and vim.fn.expand("%:e") -- :h filename-modifiers
-                require("grug-far").grug_far({
+                require("grug-far").open({
                     transient = true,
                     prefills = {
                         filesFilter = ext and ext ~= "" and "*." .. ext or nil
@@ -49,7 +53,7 @@ return {
         },
         {
             "<leader>ss", function()
-                require("grug-far").grug_far({
+                require("grug-far").open({
                     transient = true,
                     prefills = {
                         filesFilter = vim.fn.expand("%:t"), -- current filename with extension
@@ -62,7 +66,7 @@ return {
         },
         {
             "<leader>sw", function()
-                require("grug-far").grug_far({
+                require("grug-far").open({
                     transient = true,
                     prefills = {
                         search = vim.fn.expand("<cword>"), -- current word under cursor

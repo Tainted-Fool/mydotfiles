@@ -8,7 +8,5 @@ return {
         { "<leader>uD", "<cmd>lua require('lsp_lines').toggle()<cr>:=vim.diagnostic.config({virtual_lines={only_current_line=true}})<cr>", desc = "Diagnostics Toggle On (lsp-lines)" },
     },
     event = "LspAttach",
-    config = function()
-        require("lsp_lines").setup()
-    end
+    config = true,
 }

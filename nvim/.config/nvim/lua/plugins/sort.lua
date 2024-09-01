@@ -5,7 +5,5 @@ return {
         { "go", "<cmd>Sort<cr>", desc = "Sort (sort)" },
         { "go", "<esc><cmd>Sort<cr>", desc = "Sort (sort)", mode = "v" },
     },
-    config = function()
-        require("sort").setup()
-    end
+    config = true,
 }
