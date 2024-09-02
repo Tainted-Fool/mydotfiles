@@ -169,6 +169,8 @@ zvm_after_init_commands+=("[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh")
 
 # Add system clipboard for WSL
 export PATH="$PATH:/mnt/c/tools/win32yank"
+# Add Windows binaries
+export PATH="$PATH:/mnt/c/Windows/System32"
 
 # disable sort when completing `git checkout`
 # zstyle ':completion:*:git-checkout:*' sort false
