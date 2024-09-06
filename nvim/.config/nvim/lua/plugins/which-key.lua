@@ -61,7 +61,7 @@ return {
             { "<leader>\\", "<C-W>v", desc = "Split Window Right" },
             -- Buffer keymaps
             { "<leader>ba", "<cmd>%bd<cr>:e#<cr>:bd#<cr>", desc = "Close All" },
-            { "<leader>bc", "<cmd>bd<cr>", desc = "Close" },
+            { "<leader>bc", "<cmd>bd!<cr>", desc = "Close" },
             { "<leader>bf", "<cmd>Format<cr>:w<cr>", desc = "Format and Save" },
             { "<leader>bo", "<cmd>e #<cr>", desc = "Other" },
             { "<leader>bq", "<cmd>wq!<cr>", desc = "Save and Quit" },
