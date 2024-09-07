@@ -1,4 +1,5 @@
 if (vim.g.vscode) then
+    require("core.vskeymaps")
     require("core.lazyman")
 else
     require("core.globals")
