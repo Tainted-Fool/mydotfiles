@@ -19,8 +19,8 @@ return {
                 sh = "sh %",
                 php = "php %",
                 c = "gcc % -o $fileBase && ./$fileBase",
-                -- c = "gcc % -no-pie -o $fileBase && ./$fileBase", -- no pie
-                -- c = "gcc % -m32 -fno-stack-protector -z execstack -no-pie -o $fileBase && ./$fileBase", -- 32-bit no protection
+                -- c = "gcc % -g -no-pie -o $fileBase && ./$fileBase", -- no pie
+                -- c = "gcc % -g -m32 -fno-stack-protector -z execstack -no-pie -o $fileBase && ./$fileBase", -- 32-bit no protection
                 cpp = "g++ % -o $fileBase && ./$fileBase",
                 cs = "dotnet run %",
                 ps1 = "pwsh %",

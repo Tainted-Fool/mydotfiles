@@ -3,9 +3,16 @@ return {
     "rmagatti/auto-session",
     lazy = false,
     init = function()
-        vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+        vim.opt.sessionoptions:append("localoptions")
     end,
-    cmd = { "SessionDelete", "SessionPurgeOrphaned", "SessionRestore", "SessionSave", "SessionSearch", "SessionToggleAutoSave" },
+    cmd = {
+        "SessionDelete",
+        "SessionPurgeOrphaned",
+        "SessionRestore",
+        "SessionSave",
+        "SessionSearch",
+        "SessionToggleAutoSave",
+    },
     keys = {
         { "<leader>ur", "<cmd>SessionRestore<cr>", desc = "Restore (session)" },
         { "<leader>us", "<cmd>SessionSearch<cr>", desc = "Search (session)" },
@@ -15,19 +22,10 @@ return {
         { "<leader>uX", "<cmd>SessionPurgeOrphaned<cr>", desc = "Remove All Orphaned (session)" },
     },
     opts = {
-        log_level = "error",
-        auto_session_enable_last_session = vim.loop.cwd() == vim.loop.os_homedir(),
-        auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
-        auto_session_enabled = true,
-        auto_save_enabled = nil,
-        auto_restore_enabled = true,
-        auto_session_suppress_dirs = {
-            os.getenv("HOME"), -- if neovim is opened from $HOME, then DO NOT restore session
-            "~/",
-            "/",
-        },
-        auto_session_use_git_branch = nil,
-        bypass_session_save_file_types = {
+        auto_save = false,
+        auto_restore = false,
+        auto_restore_last_session = false,
+        bypass_save_filetypes = {
             "",
             "alpha",
             "blank",
@@ -40,6 +38,21 @@ return {
             "NvimTree",
             "oil",
             "vim",
+        },
+        enabled = true,
+        log_level = "error",
+        root_dir = vim.fn.stdpath("data") .. "/sessions",
+        suppressed_dirs = {
+            "~/",
+            "/",
+        },
+        session_lens = {
+            previewer = true,
+            mappings = {
+                delete_session = { "i", "<C-D>" },
+                alternate_session = { "i", "<C-S>" },
+                copy_session = { "i", "<C-Y>" },
+            }
         }
     }
 }

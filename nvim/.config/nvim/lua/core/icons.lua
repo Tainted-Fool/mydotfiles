@@ -166,10 +166,11 @@ return {
         Clock = "",
         Collapsed = "",
         CurrentLine = "",
+        Cursor = "󱄧", -- 5 character hex code
         Dashboard = "󰕮",
         Expand = "",
         Explorer = "",
-        FZF = "󱡠", -- 5 character hex code
+        FZF = "", -- 4 character hex code
         Harpoon = "󱡀", -- 5 character hex code
         Package = "", -- duplicate
         Pending = "➜",

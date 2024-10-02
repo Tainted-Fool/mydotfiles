@@ -70,9 +70,11 @@ return {
             -- Code keymaps
             { "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Actions" },
             { "<leader>cA", "<cmd>!chmod +x %<cr>", desc = "Add Execute Bit" },
+            { "<leader>cR", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename Variable" },
             { "<leader>cx", "<cmd>.lua<cr>", desc = "Execute Lua Line" },
             { "<leader>cX", "<cmd>source %<cr>", desc = "Source File" },
             -- UI keymaps
+            { "<leader>ud", "<cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<cr>", desc = "Toggle Diagnostics" },
             { "<leader>ui", "<cmd>Inspect<cr>", desc = "Inspect" },
             { "<leader>uI", "<cmd>InspectTree<cr>", desc = "Inspect Symbols" },
             { "<leader>ul", "<cmd>Lazy<cr>", desc = "Plugin Manager (Lazy)" },
@@ -133,6 +135,7 @@ return {
                 { pattern = "explorer", icon = require("core.icons").misc.Explorer, color = "azure" },
                 { pattern = "fzf", icon = require("core.icons").misc.FZF, color = "orange" },
                 { plugin = "harpoon", pattern = "harpoon", icon = require("core.icons").misc.Harpoon, color = "cyan" },
+                { plugin = "multicursor", pattern = "multicursor", icon = require("core.icons").misc.Cursor, color = "grey" },
                 { plugin = "venv-selector.nvim", pattern = "venv", icon = require("core.icons").misc.VENV, color = "green" },
             }
         }

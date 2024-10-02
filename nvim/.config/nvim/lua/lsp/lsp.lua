@@ -77,7 +77,7 @@ return {
             -- "pyright",  -- Python (Microsoft)
             -- "pylsp", -- Python (Community)
             -- "sumneko_lua", -- Lua (legacy)
-            "tsserver", -- TypeScript
+            "ts_ls", -- TypeScript
         }
         -- Accepts Mason and lspconfig package names (dap, format, lint)
         local tools = {
@@ -95,7 +95,7 @@ return {
             "markdownlint", -- Markdown
             "mypy", -- Python
             "pylint", -- Python
-            "ruff-lsp", -- Python
+            "ruff_lsp", -- Python
             -- "ruff", -- Python (legacy)
             -- "vulture", -- Python (legacy)
         }
