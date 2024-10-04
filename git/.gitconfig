@@ -37,8 +37,10 @@
 	ft = fetch --tags --all
 	lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
 	oops = commit --amend --no-edit # Add files to previous commit WITHOUT changing message
+	rec = pull --recurse-submodules # Pull latest update for all submodules
 	reword = commit --amend # Edit last commit message
 	st = status
+	sub = submodule update --recursive --remote # Update submodules
 	uncommit = reset --soft HEAD~1 # Undo last commit but keep files in stage area
 	untrack = rm --cache --	# Remove files from Git but not from disk
 
