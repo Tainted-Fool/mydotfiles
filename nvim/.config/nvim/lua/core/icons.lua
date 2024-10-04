@@ -127,6 +127,7 @@ return {
         RecentFiles = "",
         Scopes = "",
         Search = "",
+        Skull = "💀", -- 5 character hex code
         SignIn = "",
         SignOut = "",
         Stacks = "",
