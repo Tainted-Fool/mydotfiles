@@ -50,21 +50,25 @@ return {
                         ["]a"] = "@parameter.inner",
                         ["]c"] = "@class.outer",
                         ["]f"] = "@function.outer",
+                        ["]l"] = "@block.outer",
                     },
                     goto_next_end = {
                         ["]A"] = "@parameter.inner",
                         ["]C"] = "@class.outer",
                         ["]F"] = "@function.outer",
+                        ["]L"] = "@block.outer",
                     },
                     goto_previous_start = {
                         ["[a"] = "@parameter.inner",
                         ["[c"] = "@class.outer",
                         ["[f"] = "@function.outer",
+                        ["[l"] = "@block.inner",
                     },
                     goto_previous_end = {
                         ["[A"] = "@parameter.inner",
                         ["[C"] = "@class.outer",
                         ["[F"] = "@function.outer",
+                        ["[L"] = "@block.inner",
                     }
                 },
                 swap = {
