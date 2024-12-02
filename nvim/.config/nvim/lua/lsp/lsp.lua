@@ -95,8 +95,8 @@ return {
             "markdownlint", -- Markdown
             "mypy", -- Python
             "pylint", -- Python
-            "ruff_lsp", -- Python
-            -- "ruff", -- Python (legacy)
+            -- "ruff_lsp", -- Python (legacy)
+            "ruff", -- Python
             -- "vulture", -- Python (legacy)
         }
         -- Declare on_attach function

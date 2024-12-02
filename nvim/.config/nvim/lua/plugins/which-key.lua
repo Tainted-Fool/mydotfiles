@@ -98,6 +98,7 @@ return {
             { "<leader>c", group = "code" },
             { "<leader>f", group = "find" },
             { "<leader>g", group = "git" },
+            { "<leader>G", group = "goose" },
             { "<leader>s", group = "search" },
             {
                 "<leader>w",
@@ -134,8 +135,9 @@ return {
                 { pattern = "alpha", icon = require("core.icons").misc.Dashboard, color = "purple" },
                 { pattern = "explorer", icon = require("core.icons").misc.Explorer, color = "azure" },
                 { pattern = "fzf", icon = require("core.icons").misc.FZF, color = "orange" },
+                { pattern = "goose", icon = require("core.icons").misc.Egg, color = "grey" },
                 { plugin = "harpoon", pattern = "harpoon", icon = require("core.icons").misc.Harpoon, color = "cyan" },
-                { plugin = "multicursor", pattern = "multicursor", icon = require("core.icons").misc.Cursor, color = "grey" },
+                { plugin = "multicursor", pattern = "multicursor", icon = require("core.icons").misc.Cursor, color = "red" },
                 { plugin = "venv-selector.nvim", pattern = "venv", icon = require("core.icons").misc.VENV, color = "green" },
             }
         }

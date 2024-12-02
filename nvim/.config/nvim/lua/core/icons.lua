@@ -169,6 +169,7 @@ return {
         CurrentLine = "",
         Cursor = "󱄧", -- 5 character hex code
         Dashboard = "󰕮",
+        Egg = "", -- 4 character hex code
         Expand = "",
         Explorer = "",
         FZF = "", -- 4 character hex code

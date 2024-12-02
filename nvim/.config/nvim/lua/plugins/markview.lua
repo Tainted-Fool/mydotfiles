@@ -3,7 +3,7 @@ return {
     "oxy2dev/markview.nvim",
     opts = {
         code_blocks = {
-            style = "language", -- simple | minimal | language
+            style = "simple", -- simple | minimal | language
             language_direction = "left", -- left | right
             position = "overlay", -- inline | overlay
             pad_char = " ",

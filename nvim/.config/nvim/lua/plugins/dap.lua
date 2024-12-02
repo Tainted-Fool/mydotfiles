@@ -87,11 +87,11 @@ return {
                     elements = {
                         {
                             id = "repl",
-                            size = 0.45,
+                            size = 0.65,
                         },
                         {
                             id = "console",
-                            size = 0.55,
+                            size = 0.35,
                         }
                     },
                     size = 0.27,
