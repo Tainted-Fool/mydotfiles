@@ -172,6 +172,7 @@ return {
         Egg = "", -- 4 character hex code
         Expand = "",
         Explorer = "",
+        Fun = "󱁖", -- 5 character hex code
         FZF = "", -- 4 character hex code
         Harpoon = "󱡀", -- 5 character hex code
         Package = "", -- duplicate
@@ -183,6 +184,7 @@ return {
         Robot = "󰚩", -- 5 character hex code
         Settings = "",
         Smiley = "",
+        Snow = "󰜗", -- 5 character hex code
         Squirrel = "",
         Tag = "",
         Watch = "",

@@ -88,12 +88,12 @@ alias start="/mnt/c/Windows/explorer.exe "
 alias code="/mnt/c/tools/vscode/bin/code "
 
 # shorthand batcat
-alias bat="batcat "
+# alias bat="batcat "
 
 # colorize cat
 # view a list of themes `bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file`
 # alias cat="batcat -pp --paging=never --style='plain' --theme=TwoDark "
-alias cat="batcat -pp --paging=never --style='plain' " # add BAT_THEME in .zshrc
+alias cat="bat -pp --paging=never --style='plain' " # add BAT_THEME in .zshrc
 
 # shorthand remmina
 alias rdp="remmina"
