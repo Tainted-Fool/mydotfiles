@@ -41,6 +41,7 @@
 	reword = commit --amend # Edit last commit message
 	st = status
 	sub = submodule update --recursive --remote # Update submodules
+	subpull = submodule update --init --recursive # Pull submodules
 	uncommit = reset --soft HEAD~1 # Undo last commit but keep files in stage area
 	untrack = rm --cache --	# Remove files from Git but not from disk
 
