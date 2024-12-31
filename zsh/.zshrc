@@ -31,6 +31,12 @@ if [ -d "$HOME/.cargo/bin" ]; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+# Install tmux plugin manager
+MY_TMUX="$HOME/.tmux/plugins/tpm"
+if [ ! -d "${MY_TMUX}" ]; then
+    git clone https://github.com/tmux-plugins/tpm ${MY_TMUX}
+fi
+
 # Install typewritten zsh theme
 MY_THEME="${ZSH}/custom/themes/typewritten"
 if [ ! -d "${MY_THEME}" ]; then
@@ -192,23 +198,6 @@ export PATH="$PATH:/mnt/c/Windows/System32"
 # make use of popup feature in tmux
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("/opt/anaconda3/bin/conda" "shell.zsh" "hook" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-# Add this at the bot to measure oh-my-zsh startup time
-# zprof
-
 # >>> juliaup initialize >>>
 
 # !! Contents within this block are managed by juliaup !!
@@ -217,3 +206,6 @@ path=('/home/laz/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<
+
+# Add this at the bot to measure oh-my-zsh startup time
+# zprof
