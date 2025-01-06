@@ -1,0 +1,10 @@
+##?E `date`
+e cfg.editor=vim
+e scr.color=3
+e scr.theme=onedark
+e scr.utf8=true
+e scr.utf8.curvy=true
+e asm.describe=true
+e bin.relocs.apply=true
+decai -e api=r2ai
+decai -e cmds=pdc,pdg,pdd,pdsf,ccf
