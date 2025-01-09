@@ -1,10 +1,36 @@
+# Show date on startup
 ##?E `date`
+
+# Set editor to vim
 e cfg.editor=vim
+
+# Show true colors
 e scr.color=3
+
+# Set theme
 e scr.theme=onedark
+
+# Set better output
 e scr.utf8=true
 e scr.utf8.curvy=true
+
+# Show asm comments
 e asm.describe=true
+
+# Show comments at the right of disassembly if they fit
+e asm.cmt.right=true
+
+# Show  pseudocode in disassembly
+e asm.pseudo=true
+
+# Get rid of annoying error at startup
 e bin.relocs.apply=true
+
+# Search in all areas
+e search.in=dbg.maps
+
+# Locally run the LLM
 decai -e api=r2ai
+
+# Use these commands when decompiling
 decai -e cmds=pdc,pdg,pdd,pdsf,ccf
