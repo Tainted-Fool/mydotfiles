@@ -6,10 +6,10 @@ return {
     },
     event = "VeryLazy",
     keys = {
-        { "]b", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer (Bufferline)" },
-        { "[b", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev Buffer (Bufferline)" },
-        { "]B", "<Cmd>BufferLineMoveNext<CR>", desc = "Move Buffer Next (Bufferline)" },
-        { "[B", "<Cmd>BufferLineMovePrev<CR>", desc = "Move Buffer Prev (Bufferline)" },
+        { "]b", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer (bufferline)" },
+        { "[b", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev Buffer (bufferline)" },
+        { "]B", "<Cmd>BufferLineMoveNext<CR>", desc = "Move Buffer Next (bufferline)" },
+        { "[B", "<Cmd>BufferLineMovePrev<CR>", desc = "Move Buffer Prev (bufferline)" },
     },
     opts = {
         options = {

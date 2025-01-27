@@ -1,6 +1,7 @@
 -- Better yank/paste
 return {
     "gbprod/yanky.nvim",
+    enabled = false,
     event = "VeryLazy",
     opts = {
         highlight = { timer = 150 },

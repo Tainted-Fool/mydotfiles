@@ -10,6 +10,7 @@ return {
         { "<leader>tl", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Lazygit (toggleterm)" },
         { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", desc = "Node (toggleterm)" },
         { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc = "Python (toggleterm)" },
+        { "<leader>tP", "<cmd>lua _HPYTHON_TOGGLE()<cr>", desc = "Python Horizontal (toggleterm)" },
         { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "HTop (toggleterm)" },
         { "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", desc = "Disk Usage (toggleterm)" },
         { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical (toggleterm)" },
@@ -92,6 +93,13 @@ return {
         })
         function _PYTHON_TOGGLE()
             python:toggle()
+        end
+        local Hpython = Terminal:new({
+            cmd = "python",
+            direction = "horizontal",
+        })
+        function _HPYTHON_TOGGLE()
+            Hpython:toggle()
         end
     end
 }
