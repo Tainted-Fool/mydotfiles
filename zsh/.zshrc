@@ -101,20 +101,20 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=fj
 # ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 
 # Fzf and fdfind configuration
-export FZF_DEFAULT_COMMAND="fdfind --type=f --hidden --strip-cwd-prefix --exclude .git"
+export FZF_DEFAULT_COMMAND="fd --type=f --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always --line-range :500 {}'"
-export FZF_ALT_C_COMMAND="fdfind --type=d --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 _fzf_compgen_path() {
-  fdfind --type=f --hidden --exclude .git . "$1" # [cmd] ** tab completion
+  fd --type=f --hidden --exclude .git . "$1" # [cmd] ** tab completion
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fdfind --type=d --hidden --exclude .git . "$1" # tab completion
+  fd --type=d --hidden --exclude .git . "$1" # tab completion
 }
 
 # Setup file previews with bat and directory previews with eza with ^T and [cmd] ** tab
@@ -126,7 +126,7 @@ _fzf_comprun() {
     cd)           fzf --preview "eza --tree --color=always {} | head -200" "$@" ;;
     export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
     ssh)          fzf --preview "dig {}"                   "$@" ;;
-    *)            fzf --preview "batcat -n --color=always --line-range :500 {}" "$@" ;;
+    *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
   esac
 }
 

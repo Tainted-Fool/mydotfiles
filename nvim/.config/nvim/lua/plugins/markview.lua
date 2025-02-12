@@ -8,12 +8,14 @@ return {
             position = "overlay", -- inline | overlay
             pad_char = " ",
             pad_amount = 2,
-            hl = "dark",
+            border_hl = "dark",
             min_width = 70,
             sign = true,
         },
-        list_items = {
-            shift_amount = 2,
+        markdown = {
+            list_items = {
+                shift_amount = 2,
+            }
         }
     }
 }
