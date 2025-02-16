@@ -1272,7 +1272,7 @@ let g:vim_markdown_conceal_code_blocks = 0
 "let g:vim_markdown_strikethrough = 1
 
 " add syntax highlight for code blocks
-let g:vim_markdown_fenced_languages = ['bash=sh', 'csharp=cs', 'css', 'html', 'javascript', 'js=javascript', 'python', 'xml', 'yaml', 'pwsh=powershell']
+let g:vim_markdown_fenced_languages = [ 'bash', 'bash=sh', 'csharp=cs', 'css', 'html', 'javascript', 'js=javascript', 'python', 'python2=python', 'xml', 'yaml', 'pwsh=powershell' ]
 
 " disable json conceal to see quotation marks
 let g:vim_json_conceal = 0

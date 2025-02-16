@@ -1,11 +1,11 @@
 # Update kali
-function apt-updater {
-    sudo apt-get update &&
-    sudo apt-get dist-upgrade -Vy &&
-    sudo apt-get autoremove -y &&
-    sudo apt-get autoclean &&
-    sudo apt-get clean &&
-}
+# function apt-updater {
+#     sudo apt-get update &&
+#     sudo apt-get dist-upgrade -Vy &&
+#     sudo apt-get autoremove -y &&
+#     sudo apt-get autoclean &&
+#     sudo apt-get clean &&
+# }
 
 # Update pip
 function pip-updater {
@@ -89,6 +89,10 @@ function checkargs() {
 function timezsh() {
   shell=${1-$SHELL}
   for i in $(seq 1 5); do time $shell -i -c exit; done
+}
+
+function decompyler() {
+  docker run --rm -v ~/repos/CaptureTheFlag/ncl:/data decompyler "/data/gym/$1"
 }
 
 # Open Obsidian notebook in VS Code in home directory

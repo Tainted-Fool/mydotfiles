@@ -21,9 +21,16 @@ return {
                 ]]
             },
             python = {
-                command = { "python3" },
+                command = { "python" },
                 language_code = "python",
                 extension = "py",
+                exec_type = "interpreted"
+            },
+            python2 = {
+                command = { "python2" },
+                language_code = "python2",
+                extension = "py",
+                exec_type = "interpreted"
             }
         }
     }

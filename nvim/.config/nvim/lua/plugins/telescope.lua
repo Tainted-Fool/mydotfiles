@@ -92,6 +92,7 @@ return {
                 file_browser = {
                     theme = "dropdown", -- dropdown, ivy, cursor
                     hidden = true,
+                    auto_depth = true,
                     hijack_netrw = true,
                     mappings = {
                         ["i"] = { }, -- own custom insert mode mappings
