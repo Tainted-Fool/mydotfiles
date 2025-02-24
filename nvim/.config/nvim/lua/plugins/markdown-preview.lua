@@ -7,7 +7,13 @@ return {
         { "<leader>cd", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle (markdown-preview)" },
     },
     ft = { "markdown" },
-    build = "cd app && npm install",
+    build = ":call mkdp#util#install()",
+    -- build = function()
+    --     vim.cmd [[Lazy load markdown-preview.nvim]]
+    --     vim.cmd [[Lazy build markdown-preview.nvim]]
+    --     vim.fn["mkdp#util#install"]()
+    -- end,
+    -- build = "cd app && npm install",
     -- build = "cd app && yarn install",
     config = function()
         vim.g.mkdp_auto_close = true

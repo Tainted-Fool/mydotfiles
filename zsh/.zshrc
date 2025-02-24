@@ -177,6 +177,8 @@ zvm_after_init_commands+=("[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh")
 export PATH="$PATH:/mnt/c/tools/win32yank"
 # Add Windows binaries
 export PATH="$PATH:/mnt/c/Windows/System32"
+# Add metasploit tools
+export PATH="$PATH:/opt/metasploit/tools/exploit"
 
 # disable sort when completing `git checkout`
 # zstyle ':completion:*:git-checkout:*' sort false
