@@ -20,8 +20,14 @@ e asm.describe=true
 # Show comments at the right of disassembly if they fit
 e asm.cmt.right=true
 
-# Show  pseudocode in disassembly
-e asm.pseudo=true
+# Show pseudocode in disassembly
+# e asm.pseudo=true
+
+# Show intel syntax
+e asm.syntax=intel
+
+# Update cmd prompt to current EIP
+# e cmd.prompt=sr PC
 
 # Get rid of annoying error at startup
 e bin.relocs.apply=true
