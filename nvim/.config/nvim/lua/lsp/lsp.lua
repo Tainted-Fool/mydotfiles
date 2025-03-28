@@ -26,10 +26,11 @@ return {
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local icons = require("core.icons")
         -- Declare configurations for diagnostics when LSP is running
+        vim.diagnostic.enable(false)
         vim.diagnostic.config({
             virtual_text = false, -- show diagnostic message using virtual text
             virtual_lines = {
-                only_current_line = true, -- show virtual text when your cursor is on line
+                current_line = true, -- show virtual text when your cursor is on line
             },
             signs = {
                 text = {
