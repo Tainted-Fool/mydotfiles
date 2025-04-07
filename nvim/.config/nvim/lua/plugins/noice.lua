@@ -56,6 +56,11 @@ return {
                 -- Ignore error from `:q` with nvim-treesitter-context
                 filter = { event = "msg_show", find = "nvim_win_close" },
                 opts = { skip = true },
+            },
+            {
+                -- Show external commands
+                view = "notify",
+                filter = { event = "msg_show", kind = "shell_out" },
             }
         }
     }
