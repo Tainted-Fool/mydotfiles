@@ -18,9 +18,9 @@ return {
                 go = "go run %",
                 sh = "sh %",
                 php = "php %",
-                c = "gcc % -o $fileBase && ./$fileBase",
-                -- c = "gcc % -g -no-pie -o $fileBase && ./$fileBase", -- no pie
-                -- c = "gcc % -g -m32 -fno-stack-protector -z execstack -no-pie -o $fileBase && ./$fileBase", -- 32-bit no protection
+                c = "gcc % -g -o $fileBase && ./$fileBase", -- debug on
+                -- c = "gcc % -g -z noexecstack -o $fileBase && ./$fileBase", -- disable NX
+                -- c = "gcc % -g -m32 -std=c99 -fno-stack-protector -z execstack -no-pie -o $fileBase && ./$fileBase", -- 32-bit no protection
                 cpp = "g++ % -o $fileBase && ./$fileBase",
                 cs = "dotnet run %",
                 ps1 = "pwsh %",

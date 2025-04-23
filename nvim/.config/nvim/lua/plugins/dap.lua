@@ -152,27 +152,23 @@ return {
         }
         -- DAP settings for c
         dap.adapters.codelldb = {
-            type = "server",
-            port = "${port}",
-            executable = {
-                command = vim.fn.stdpath("data").."/mason/bin/codelldb",
-                args = { "--port", "${port}" },
-                detached = function()
-                    if windows then
-                        return false
-                    else
-                        return true
-                    end
+            type = "executable",
+            command = "codelldb",
+            detached = function()
+                if windows then
+                    return false
+                else
+                    return true
                 end
-            }
+            end
         }
         dap.configurations.c = {
             {
-                name = "Launch",
+                name = "Launch file",
                 type = "codelldb",
                 request = "launch",
                 program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/bin/program", "file")
+                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
                 end,
                 cwd = "${workspaceFolder}",
                 stopOnEntry = false,
@@ -195,6 +191,22 @@ return {
                 program = function()
                     return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
                 end
+            }
+        }
+        -- DAP settings for rust
+        -- dap.configurations.rust = dap.configurations.c
+        dap.configurations.rust = {
+            {
+                name = "Launch file",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                end,
+                cwd = "${workspaceFolder}",
+                stopOnEntry = false,
+                args = {},
+                sourceLanguages = { "rust" }
             }
         }
         -- Open dapui when dap in initialized

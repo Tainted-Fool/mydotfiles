@@ -26,6 +26,7 @@ e asm.cmt.right=true
 # Show intel syntax
 e asm.syntax=intel
 
+# Show all local variables
 e asm.var.summary=0
 
 # Update cmd prompt to current EIP
