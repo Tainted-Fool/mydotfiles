@@ -91,7 +91,7 @@ return {
                     .. " plugins in "
                     .. ms
                     .. "ms"
-                    .. "\n"
+                    .. "\n \n"
                     .. footer()
                 pcall(vim.cmd.AlphaRedraw)
             end
