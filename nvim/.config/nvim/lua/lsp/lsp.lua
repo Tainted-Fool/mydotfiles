@@ -138,6 +138,11 @@ return {
                 if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHints) then
                     vim.lsp.inlay_hint.enable()
                 end
+                -- Disable rename for specific LSP servers
+                -- if vim.lsp.get_clients({ bufnr = event.buf, name = "pyright" }) then
+                if client and client.name == "jedi_language_server" then
+                    client.server_capabilities.renameProvider = false
+                end
             end
         })
         -- Default LSP communication capabilities

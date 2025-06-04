@@ -50,12 +50,13 @@ return {
                     "--line-number", -- show line number
                     "--column", -- show column number
                     "--smart-case", -- smart case search
-                    "--max-depth=2",
+                    "--max-depth=4",
                     -- exclude directories from search
                     "--glob=!**/gef/*",
                     "--glob=!**/peda/*",
                     "--glob=!**/peda-arm/*",
                     "--glob=!**/pwndbg/*",
+                    "--glob=!.git/*",
                 },
                 mappings = {
                     i = {
@@ -82,11 +83,12 @@ return {
                         "rg",
                         "--files",
                         "--hidden",
-                        "--max-depth=2",
+                        "--max-depth=4",
                         "--glob=!**/gef/*",
                         "--glob=!**/peda/*",
                         "--glob=!**/peda-arm/*",
                         "--glob=!**/pwndbg/*",
+                        "--glob=!.git/*",
                     }
                 }
             },
