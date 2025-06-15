@@ -120,7 +120,8 @@ return {
                 keymap("gd", "<cmd>Telescope lsp_definitions<cr>", "Go to Definition (lsp)")
                 keymap("gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declaration (lsp)") -- not supported by all LSPs
                 keymap("gf", "<cmd>lua vim.lsp.buf.format()<cr>", "Format Current Buffer (lsp)")
-                keymap("gh", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP Hover (lsp)")
+                -- keymap("gh", "<cmd>lua vim.lsp.buf.hover()<cr>", "Show LSP Hover (lsp)")
+                keymap("gh", function() vim.lsp.buf.hover { border = "rounded" } end, "Show LSP Hover (lsp)")
                 keymap("gi", "<cmd>Telescope lsp_implementations<cr>", "Go to Implementation (lsp)") -- not supported by all LSPs
                 keymap("gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Float Line Diagnostic (lsp)")
                 keymap("gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (lsp)")
