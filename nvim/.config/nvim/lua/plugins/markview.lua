@@ -1,6 +1,8 @@
 return {
     -- Markdown viewer
     "oxy2dev/markview.nvim",
+    lazy = false,
+    priority = 49,
     opts = {
         code_blocks = {
             style = "simple", -- simple | minimal | language

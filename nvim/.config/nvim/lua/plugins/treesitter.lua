@@ -1,7 +1,10 @@
 return {
     -- Syntax highlighting
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/nvim-treesitter-context" }, -- see context in winbar
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-context", -- see context in winbar
+        "oxy2dev/markview.nvim", -- markdown preview
+    },
     event = { "BufReadPre", "BufNewFile", "VeryLazy" }, -- load when file is read or open
     build = ":TSUpdate", -- whenever you install or update through lazy
     cmd = { "TSUpdate", "TSUpdateSync", "TSInstall" }, -- load on these commands
