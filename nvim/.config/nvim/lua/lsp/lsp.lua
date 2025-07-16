@@ -75,6 +75,7 @@ return {
             "lua_ls",   -- Lua
             "marksman", -- Markdown
             "omnisharp", -- C Sharp
+            -- "powershell-es", --PowerShell Editor Services
             -- "pyright",  -- Python (Microsoft)
             -- "pylsp", -- Python (Community)
             -- "sumneko_lua", -- Lua (legacy)
@@ -83,9 +84,10 @@ return {
         -- Accepts Mason and lspconfig package names (dap, format, lint)
         local tools = {
             -- DAP
-            "bash-debug-adapter",
+            "bash-debug-adapter", -- Bash
             "codelldb", -- C, C++
             "debugpy", -- pip install debugpy
+            -- "local-lua-debugger-vscode", -- Lua
             "netcoredbg", -- CSharp
             -- Formatter
             "black", -- Python
@@ -100,7 +102,39 @@ return {
             "ruff", -- Python
             -- "vulture", -- Python (legacy)
         }
-        -- Declare on_attach function
+        -- Default LSP communication capabilities
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+        }
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
+        capabilities.textDocument.completion.completionItem.resolveSupport = {
+            properties = {
+                "documentation",
+                "detail",
+                "additionalTextEdits",
+            }
+        }
+        -- Enable folding by LSP or use treesitter in nvim-ufo.lua :70
+        capabilities.textDocument.foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+        }
+        -- Extend capabilities with nvim-cmp
+        capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
+        -- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+        -- Configure LSP servers - what to do before LSP is attached
+        for _, server_name in ipairs(servers) do
+            local opts = { capabilities = capabilities }
+            local require_ok, custom_opts = pcall(require, "lsp.settings." .. server_name)
+            if require_ok then
+                opts = vim.tbl_deep_extend("force", opts, custom_opts)
+                lspconfig[server_name].setup(opts)
+                -- vim.notify("LSP server " .. server_name .. " has been installed and configured", "info")
+            end
+        end
+        -- Declare on_attach function - what to do after LSP is attached
         vim.api.nvim_create_autocmd("LSPAttach", {
             group = vim.api.nvim_create_augroup("LSP-Attach", { clear = true }),
             callback = function(event)
@@ -138,36 +172,10 @@ return {
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
                 if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHints) then
                     vim.lsp.inlay_hint.enable()
-                end
-                -- Disable rename for specific LSP servers
-                -- if vim.lsp.get_clients({ bufnr = event.buf, name = "pyright" }) then
-                if client and client.name == "jedi_language_server" then
-                    client.server_capabilities.renameProvider = false
+                    -- vim.notify("Inlay hints enabled for " .. client.name, "info")
                 end
             end
         })
-        -- Default LSP communication capabilities
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-        }
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-        capabilities.textDocument.completion.completionItem.resolveSupport = {
-            properties = {
-                "documentation",
-                "detail",
-                "additionalTextEdits",
-            }
-        }
-        -- Enable folding by LSP or use treesitter in nvim-ufo.lua :70
-        capabilities.textDocument.foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-        }
-        -- Extend capabilities with nvim-cmp
-        capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
-        -- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
         -- Setup Mason
         mason.setup({
             ui = {
@@ -190,20 +198,6 @@ return {
         mason_lspconfig.setup({
             ensure_installed = servers,
             automatic_installation = true,
-            handlers = {
-                function(server_name)
-                    lspconfig[server_name].setup({
-                        capabilities = capabilities,
-                    })
-                    -- If LSP server config file exists, then use those options
-                    local require_ok, conf_opts = pcall(require, "lsp.settings." .. server_name)
-                    if require_ok then
-                        local server_opts = vim.tbl_deep_extend("force", conf_opts, capabilities)
-                        lspconfig[server_name].setup(server_opts)
-                        -- vim.notify("LSP server " .. server_name .. " has been installed and configured", "info")
-                    end
-                end
-            }
         })
     end
 }

@@ -17,9 +17,9 @@ B = function()
     return vim.notify(vim.bo.filetype)
 end
 -- Print server capabilities
--- =vim.lsp.get_active_clients()[4].server_capabilities
+-- =vim.lsp.get_client_by_id(4).server_capabilities
 -- Keymap declaration
 -- nvim -V1 then :verb map
 -- S = function()
---     return vim.lsp.get_active_clients()
+--     return vim.lsp.get_clients()
 -- end

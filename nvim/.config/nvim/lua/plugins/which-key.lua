@@ -64,7 +64,8 @@ return {
             { "<leader>bc", "<cmd>bd!<cr>", desc = "Close" },
             { "<leader>bf", "<cmd>Format<cr>:w<cr>", desc = "Format and Save" },
             { "<leader>bo", "<cmd>e #<cr>", desc = "Other" },
-            { "<leader>bq", "<cmd>wq!<cr>", desc = "Save and Quit" },
+            { "<leader>bq", "<cmd>q!<cr>", desc = "Quit" },
+            { "<leader>bQ", "<cmd>wq!<cr>", desc = "Save and Quit" },
             { "<leader>bw", "<cmd>w<cr>", desc = "Save/Write" },
             { "<leader>bx", "<cmd>w<cr>:bd!<cr>", desc = "Save and Close" },
             -- Code keymaps
@@ -79,7 +80,7 @@ return {
             { "<leader>uI", "<cmd>InspectTree<cr>", desc = "Inspect Symbols" },
             { "<leader>ul", "<cmd>Lazy<cr>", desc = "Plugin Manager (Lazy)" },
             { "<leader>un", "<cmd>nohlsearch<cr>", desc = "No Highlight" },
-            { "<leader>uR", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", desc = "Redraw/Clear hlsearch/Diff Update" },
+            { "<leader>uR", "<cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", desc = "Redraw/Clear hlsearch/Diff Update" },
             -- Window keymap
             { "<leader>wc", "<C-w>c", desc = "Close Window" },
             { "<leader>we", "<C-w>=", desc = "Split Window Equal Size" },

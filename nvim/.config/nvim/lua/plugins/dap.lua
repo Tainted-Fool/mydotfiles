@@ -9,11 +9,14 @@ return {
         { "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "Continue (dap)" },
         { "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "Step Into (dap)" },
         { "<leader>dl", "<cmd>lua require('dap').run_last()<cr>", desc = "Run Last (dap)" },
+        { "<leader>dL", "<cmd>lua require('osv').launch({port = 8086})<cr>", desc = "Launch Lua (dap)" },
         { "<leader>do", "<cmd>lua require('dap').step_over()<cr>", desc = "Step Over (dap)" },
         { "<leader>dO", "<cmd>lua require('dap').step_out()<cr>", desc = "Step Out (dap)" },
         { "<leader>dr", "<cmd>lua require('dap').repl.toggle()<cr>", desc = "REPL Toggle (dap)" },
         { "<leader>dt", "<cmd>lua require('dap').terminate()<cr>", desc = "Terminate (dap)" },
         { "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", desc = "UI Toggle (dap)" },
+        { "<leader>dw", "<cmd>lua require('dap.ui.widgets').hover()<cr>", desc = "Widgets Toggle (dap)" },
+        { "<leader>dW", "<cmd>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').frames)<cr>", desc = "Widgets Float (dap)" },
     },
     dependencies = {
         "rcarriga/nvim-dap-ui", -- debugger ui
@@ -37,7 +40,8 @@ return {
                     }
                 )
             end
-        }
+        },
+        "jbyuki/one-small-step-for-vimkind", -- lua debugger
     },
     config = function()
         local icons = require("core.icons")
@@ -209,6 +213,21 @@ return {
                 sourceLanguages = { "rust" }
             }
         }
+        -- DAP settings for lua
+        dap.configurations.lua = {
+            {
+                name = "Attach to running Neovim instance",
+                type = "nlua",
+                request = "attach",
+            }
+        }
+        dap.adapters.nlua = function(callback, config)
+            callback({
+            type = "server",
+            host = config.host or "127.0.0.1",
+            port = config.port or 8086,
+            })
+        end
         -- Open dapui when dap in initialized
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
