@@ -75,7 +75,7 @@ return {
             "lua_ls",   -- Lua
             "marksman", -- Markdown
             "omnisharp", -- C Sharp
-            -- "powershell-es", --PowerShell Editor Services
+            "powershell_es", -- PowerShell Editor Services
             -- "pyright",  -- Python (Microsoft)
             -- "pylsp", -- Python (Community)
             -- "sumneko_lua", -- Lua (legacy)

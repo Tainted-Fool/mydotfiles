@@ -211,3 +211,11 @@ export PATH
 
 # Add this at the bot to measure oh-my-zsh startup time
 # zprof
+
+# Google Apps Manager (GAM)
+alias gam="/home/laz/bin/gam7/gam"
+
+# Dotnet export
+DOTNET_ROOT=$HOME/.dotnet
+export PATH=$HOME/.dotnet/:$PATH
+export PATH=$HOME/.dotnet/tools/:$PATH
