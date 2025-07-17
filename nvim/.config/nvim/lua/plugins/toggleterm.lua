@@ -11,6 +11,8 @@ return {
         { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", desc = "Node (toggleterm)" },
         { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc = "Python (toggleterm)" },
         { "<leader>tP", "<cmd>lua _HPYTHON_TOGGLE()<cr>", desc = "Python Horizontal (toggleterm)" },
+        { "<leader>ts", "<cmd>lua _PWSH_TOGGLE()<cr>", desc = "Pwsh (toggleterm)" },
+        { "<leader>tS", "<cmd>lua _HPWSH_TOGGLE()<cr>", desc = "Pwsh Horizontal (toggleterm)" },
         { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "HTop (toggleterm)" },
         { "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", desc = "Disk Usage (toggleterm)" },
         { "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "Vertical (toggleterm)" },
@@ -100,6 +102,20 @@ return {
         })
         function _HPYTHON_TOGGLE()
             Hpython:toggle()
+        end
+        local pwsh = Terminal:new({
+            cmd = "pwsh",
+            hidden = true,
+        })
+        function _PWSH_TOGGLE()
+            pwsh:toggle()
+        end
+        local Hpwsh = Terminal:new({
+            cmd = "pwsh",
+            direction = "horizontal",
+        })
+        function _HPWSH_TOGGLE()
+            Hpwsh:toggle()
         end
     end
 }
