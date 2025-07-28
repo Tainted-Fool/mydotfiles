@@ -134,6 +134,21 @@ return {
                 -- vim.notify("LSP server " .. server_name .. " has been installed and configured", "info")
             end
         end
+        -- Not working
+        -- lspconfig.powershell_es.setup({
+        --     capabilities = capabilities,
+        --     settings = {
+        --         powershell = {
+        --             developer = {
+        --                 editorServicesLogLevel = "Information",
+        --             },
+        --             integratedConsole = {
+        --                 showOnStartup = false,
+        --                 suppressStartupBanner = true,
+        --             }
+        --         }
+        --     }
+        -- })
         -- Declare on_attach function - what to do after LSP is attached
         vim.api.nvim_create_autocmd("LSPAttach", {
             group = vim.api.nvim_create_augroup("LSP-Attach", { clear = true }),
@@ -174,6 +189,15 @@ return {
                     vim.lsp.inlay_hint.enable()
                     -- vim.notify("Inlay hints enabled for " .. client.name, "info")
                 end
+                -- if client and client.name == "powershell_es" then
+                    -- Disable code lens provider for PowerShell - working
+                    -- client.server_capabilities.codeLensProvider.resolveProvider = false
+
+                    -- Disable showonStartup and suppressStartupBanner -- Not working
+                    -- client.settings.powershell.codeFormatting.Preset = 'OTBS'
+                    -- client.settings.powershell.integratedConsole.showOnStartup = false
+                    -- client.settings.powershell.integratedConsole.suppressStartupBanner = true
+                -- end
             end
         })
         -- Setup Mason

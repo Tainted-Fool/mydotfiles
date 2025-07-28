@@ -21,16 +21,6 @@ export HOMEG="/mnt/g/My Drive/"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set PATH to include user's private bin if found
-if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-# Set PATH to include cargo's bin if found
-if [ -d "$HOME/.cargo/bin" ]; then
-    PATH="$HOME/.cargo/bin:$PATH"
-fi
-
 # Install tmux plugin manager
 MY_TMUX="$HOME/.tmux/plugins/tpm"
 if [ ! -d "${MY_TMUX}" ]; then
@@ -173,13 +163,6 @@ AUTOPAIR_INIT_INHIBIT=1
 # ^R is to look through history
 zvm_after_init_commands+=("[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh")
 
-# Add system clipboard for WSL
-export PATH="$PATH:/mnt/c/tools/win32yank"
-# Add Windows binaries
-export PATH="$PATH:/mnt/c/Windows/System32"
-# Add metasploit tools
-export PATH="$PATH:/opt/metasploit/tools/exploit"
-
 # disable sort when completing `git checkout`
 # zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
@@ -200,15 +183,6 @@ export PATH="$PATH:/opt/metasploit/tools/exploit"
 # make use of popup feature in tmux
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
-# >>> juliaup initialize >>>
-
-# !! Contents within this block are managed by juliaup !!
-
-path=('/home/laz/.juliaup/bin' $path)
-export PATH
-
-# <<< juliaup initialize <<<
-
 # Add this at the bot to measure oh-my-zsh startup time
 # zprof
 
@@ -217,5 +191,34 @@ alias gam="/home/laz/bin/gam7/gam"
 
 # Dotnet export
 DOTNET_ROOT=$HOME/.dotnet
-export PATH=$HOME/.dotnet/:$PATH
-export PATH=$HOME/.dotnet/tools/:$PATH
+
+# PATH Export
+# if running in tmux, do not modify PATH
+if [[ -z $TMUX ]]; then
+    # Set PATH to include user's private bin if found
+    if [ -d "$HOME/.local/bin" ]; then
+        PATH="$HOME/.local/bin:$PATH"
+    fi
+
+    # Set PATH to include cargo's bin if found
+    if [ -d "$HOME/.cargo/bin" ]; then
+        PATH="$HOME/.cargo/bin:$PATH"
+    fi
+
+    # Add system clipboard for WSL
+    export PATH="$PATH:/mnt/c/tools/win32yank"
+    # Add Windows binaries
+    export PATH="$PATH:/mnt/c/Windows/System32"
+    # Add metasploit tools
+    export PATH="$PATH:/opt/metasploit/tools/exploit"
+
+    # >>> juliaup initialize >>>
+    # !! Contents within this block are managed by juliaup !!
+    path=('/home/laz/.juliaup/bin' $path)
+    export PATH
+    # <<< juliaup initialize <<<
+
+    # Dotnet export
+    export PATH=$HOME/.dotnet/:$PATH
+    export PATH=$HOME/.dotnet/tools/:$PATH
+fi

@@ -130,7 +130,7 @@ return {
             options = {
                 globalstatus = true, -- enable to have a single statusline
                 icons_enabled = true,
-                theme = "kanagawa", -- "auto" tries to match colorscheme
+                theme = "auto", -- "auto" tries to match colorscheme
                 -- theme = "iceberg_dark",
                 -- theme = "codedark",
                 component_separators = {

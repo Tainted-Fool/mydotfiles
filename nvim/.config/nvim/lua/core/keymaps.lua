@@ -86,3 +86,5 @@ vim.keymap.set("n", "<CR>", function()
         return "<CR>"
     end
 end, { expr = true })
+-- Terminal mode
+keymap("t", "<Esc>", "<C-\\><C-n>", "Exit Terminal")
