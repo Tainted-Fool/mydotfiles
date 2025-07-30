@@ -53,15 +53,15 @@ return {
             }
         })
         -- Set popup options for hover window
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-            border = "rounded",
-            -- width = 60,
-        })
+        -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        --     border = "rounded",
+        --     -- width = 60,
+        -- })
         -- Set popup options for signature help window
-        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-            border = "rounded",
-            -- width = 60,
-        })
+        -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        --     border = "rounded",
+        --     -- width = 60,
+        -- })
         -- Declare LSP servers
         local servers = {
             "basedpyright", -- Python (Open-source pyright)
@@ -103,37 +103,37 @@ return {
             -- "vulture", -- Python (legacy)
         }
         -- Default LSP communication capabilities
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-        }
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-        capabilities.textDocument.completion.completionItem.resolveSupport = {
-            properties = {
-                "documentation",
-                "detail",
-                "additionalTextEdits",
-            }
-        }
+        -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+        -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+        -- capabilities.textDocument.completion.completionItem.resolveSupport = {
+        --     properties = {
+        --         "documentation",
+        --         "detail",
+        --         "additionalTextEdits",
+        --     }
+        -- }
         -- Enable folding by LSP or use treesitter in nvim-ufo.lua :70
-        capabilities.textDocument.foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-        }
+        -- capabilities.textDocument.foldingRange = {
+        --     dynamicRegistration = false,
+        --     lineFoldingOnly = true,
+        -- }
         -- Extend capabilities with nvim-cmp
-        capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
+        -- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
         -- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
         -- Configure LSP servers - what to do before LSP is attached
-        for _, server_name in ipairs(servers) do
-            local opts = { capabilities = capabilities }
-            local require_ok, custom_opts = pcall(require, "lsp.settings." .. server_name)
-            if require_ok then
-                opts = vim.tbl_deep_extend("force", opts, custom_opts)
-                lspconfig[server_name].setup(opts)
-                -- vim.notify("LSP server " .. server_name .. " has been installed and configured", "info")
-            end
-        end
+        -- Not needed - configure by mason-lspconfig now
+        -- for _, server_name in ipairs(servers) do
+        --     local opts = { capabilities = capabilities }
+        --     local require_ok, custom_opts = pcall(require, "lsp.settings." .. server_name)
+        --     if require_ok then
+        --         opts = vim.tbl_deep_extend("force", opts, custom_opts)
+        --         vim.notify("Custom options loaded for LSP server: " .. server_name, "info")
+        --     end
+        --     -- lspconfig[server_name].setup(opts)
+        --     -- vim.notify("LSP server " .. server_name .. " has been installed and configured", "info")
+        -- end
+
         -- Not working
         -- lspconfig.powershell_es.setup({
         --     capabilities = capabilities,
@@ -149,6 +149,7 @@ return {
         --         }
         --     }
         -- })
+
         -- Declare on_attach function - what to do after LSP is attached
         vim.api.nvim_create_autocmd("LSPAttach", {
             group = vim.api.nvim_create_augroup("LSP-Attach", { clear = true }),
@@ -189,11 +190,17 @@ return {
                     vim.lsp.inlay_hint.enable()
                     -- vim.notify("Inlay hints enabled for " .. client.name, "info")
                 end
+                -- Respect server-specific on_attach function
+                local require_ok, custom_opts = pcall(require, "lsp.settings." .. client.name)
+                if require_ok and custom_opts.on_attach then
+                    custom_opts.on_attach(client, event.buf)
+                    -- vim.notify("Custom options loaded for LSP server: " .. client.name, "info")
+                end
                 -- if client and client.name == "powershell_es" then
                     -- Disable code lens provider for PowerShell - working
                     -- client.server_capabilities.codeLensProvider.resolveProvider = false
 
-                    -- Disable showonStartup and suppressStartupBanner -- Not working
+                    -- Disable showonStartup and suppressStartupBanner -- not working
                     -- client.settings.powershell.codeFormatting.Preset = 'OTBS'
                     -- client.settings.powershell.integratedConsole.showOnStartup = false
                     -- client.settings.powershell.integratedConsole.suppressStartupBanner = true

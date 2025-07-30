@@ -1,10 +1,10 @@
 return {
     -- Better signature help
     "ray-x/lsp_signature.nvim",
-    keys = {
-        { "<C-s>", desc = "Toggle (lsp-signature)" },
-        { "<C-]>", desc = "Select Key (lsp-signature)" },
-    },
+    -- keys = {
+    --     { "<C-s>", desc = "Toggle (lsp-signature)" },
+    --     { "<C-]>", desc = "Select Key (lsp-signature)" },
+    -- },
     opts = {
         -- doc_lines = 0, -- show lines of comment/docs
         floating_window = false, -- show hint in a floating window, set to false for virtual text only mode

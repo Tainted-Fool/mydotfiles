@@ -20,6 +20,16 @@ return {
     },
     dependencies = {
         "rcarriga/nvim-dap-ui", -- debugger ui
+        {
+            "m00qek/baleia.nvim", -- colorize text with ANSE escape sequences
+            lazy = true,
+            tag = "v1.4.0"
+        },
+        {
+            "m00qek/baleia.nvim", -- colorize text with ANSE escape sequences
+            lazy = true,
+            tag = "v1.4.0"
+        },
         "mfussenegger/nvim-dap-python", -- dap for python
         { "thehamsta/nvim-dap-virtual-text", opts = { commented = true } }, -- virtual text for dap
         "nvim-neotest/nvim-nio",
@@ -42,6 +52,7 @@ return {
             end
         },
         "jbyuki/one-small-step-for-vimkind", -- lua debugger
+        "willem-j-an/nvim-dap-powershell", -- powershell debugger
     },
     config = function()
         local icons = require("core.icons")
@@ -49,6 +60,7 @@ return {
         local dap = require("dap")
         local dapui = require("dapui")
         local dap_python = require("dap-python")
+        local dap_powershell = require("dap-powershell")
         dapui.setup({
             expand_lines = true,
             icons = {
@@ -231,6 +243,7 @@ return {
         -- Open dapui when dap in initialized
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
+            require('dap-powershell').correct_repl_colors()
         end
         -- Close dapui when dap is terminated
         dap.listeners.before.event_terminated["dapui_config"] = function()
@@ -240,5 +253,7 @@ return {
         dap.listeners.before.event_exited["dapui_config"] = function()
             dapui.close()
         end
+        -- Load dap-powershell
+        dap_powershell.setup()
     end
 }
