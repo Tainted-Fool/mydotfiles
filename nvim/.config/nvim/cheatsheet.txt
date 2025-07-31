@@ -19,3 +19,4 @@ Open a URL under cursor / gx
 Re-indent the whole file / gg=G
 Run current line as shell command / !!<C-R><C-L><enter>
 Run current line as python command / !!python<enter>
+View detailed mapping information / :verbose map <key>

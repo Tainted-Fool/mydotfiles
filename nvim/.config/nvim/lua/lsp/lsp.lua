@@ -26,7 +26,7 @@ return {
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local icons = require("core.icons")
         -- Declare configurations for diagnostics when LSP is running
-        vim.diagnostic.enable(false)
+        -- vim.diagnostic.enable(false) -- disable diagnostics - on by default
         vim.diagnostic.config({
             virtual_text = false, -- show diagnostic message using virtual text
             virtual_lines = {
@@ -52,16 +52,6 @@ return {
                 prefix = "",
             }
         })
-        -- Set popup options for hover window
-        -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        --     border = "rounded",
-        --     -- width = 60,
-        -- })
-        -- Set popup options for signature help window
-        -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        --     border = "rounded",
-        --     -- width = 60,
-        -- })
         -- Declare LSP servers
         local servers = {
             "basedpyright", -- Python (Open-source pyright)
@@ -102,54 +92,6 @@ return {
             "ruff", -- Python
             -- "vulture", -- Python (legacy)
         }
-        -- Default LSP communication capabilities
-        -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-        -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-        -- capabilities.textDocument.completion.completionItem.resolveSupport = {
-        --     properties = {
-        --         "documentation",
-        --         "detail",
-        --         "additionalTextEdits",
-        --     }
-        -- }
-        -- Enable folding by LSP or use treesitter in nvim-ufo.lua :70
-        -- capabilities.textDocument.foldingRange = {
-        --     dynamicRegistration = false,
-        --     lineFoldingOnly = true,
-        -- }
-        -- Extend capabilities with nvim-cmp
-        -- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
-        -- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-
-        -- Configure LSP servers - what to do before LSP is attached
-        -- Not needed - configure by mason-lspconfig now
-        -- for _, server_name in ipairs(servers) do
-        --     local opts = { capabilities = capabilities }
-        --     local require_ok, custom_opts = pcall(require, "lsp.settings." .. server_name)
-        --     if require_ok then
-        --         opts = vim.tbl_deep_extend("force", opts, custom_opts)
-        --         vim.notify("Custom options loaded for LSP server: " .. server_name, "info")
-        --     end
-        --     -- lspconfig[server_name].setup(opts)
-        --     -- vim.notify("LSP server " .. server_name .. " has been installed and configured", "info")
-        -- end
-
-        -- Not working
-        -- lspconfig.powershell_es.setup({
-        --     capabilities = capabilities,
-        --     settings = {
-        --         powershell = {
-        --             developer = {
-        --                 editorServicesLogLevel = "Information",
-        --             },
-        --             integratedConsole = {
-        --                 showOnStartup = false,
-        --                 suppressStartupBanner = true,
-        --             }
-        --         }
-        --     }
-        -- })
-
         -- Declare on_attach function - what to do after LSP is attached
         vim.api.nvim_create_autocmd("LSPAttach", {
             group = vim.api.nvim_create_augroup("LSP-Attach", { clear = true }),
@@ -157,11 +99,10 @@ return {
                 local keymap = function(keys, func, desc)
                     vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc, noremap = true, silent = true })
                 end
-                local diagnostic_goto = function(next, severity)
-                    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+                local diagnostic_jump = function(count, severity)
                     severity = severity and vim.diagnostic.severity[severity] or nil
                     return function()
-                        go({ severity = severity })
+                        vim.diagnostic.jump({count = count, severity = severity, float = true})
                     end
                 end
                 -- Declare keymaps when LSP is running
@@ -175,12 +116,12 @@ return {
                 keymap("gi", "<cmd>Telescope lsp_implementations<cr>", "Go to Implementation (lsp)") -- not supported by all LSPs
                 keymap("gl", "<cmd>lua vim.diagnostic.open_float({border = 'rounded'})<cr>", "Float Line Diagnostic (lsp)")
                 keymap("gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show Signature Help (lsp)")
-                keymap("]d", diagnostic_goto(true), "Next Diagnostic (lsp)")
-                keymap("[d", diagnostic_goto(false), "Prev Diagnostic (lsp)")
-                keymap("]e", diagnostic_goto(true, "ERROR"), "Next Error (lsp)")
-                keymap("[e", diagnostic_goto(false, "ERROR"), "Prev Error (lsp)")
-                keymap("]w", diagnostic_goto(true, "WARN"), "Next Warning (lsp)")
-                keymap("[w", diagnostic_goto(false, "WARN"), "Prev Warning (lsp)")
+                keymap("]d", diagnostic_jump(1, nil), "Next Diagnostic (lsp)")
+                keymap("[d", diagnostic_jump(-1, nil), "Prev Diagnostic (lsp)")
+                keymap("]e", diagnostic_jump(1, "ERROR"), "Next Error (lsp)")
+                keymap("[e", diagnostic_jump(-1, "ERROR"), "Prev Error (lsp)")
+                keymap("]w", diagnostic_jump(1, "WARN"), "Next Warning (lsp)")
+                keymap("[w", diagnostic_jump(-1, "WARN"), "Prev Warning (lsp)")
                 keymap("<leader>uH", function()
                     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
                 end, "Disable Endhints/Inlay (lsp)")
@@ -196,15 +137,6 @@ return {
                     custom_opts.on_attach(client, event.buf)
                     -- vim.notify("Custom options loaded for LSP server: " .. client.name, "info")
                 end
-                -- if client and client.name == "powershell_es" then
-                    -- Disable code lens provider for PowerShell - working
-                    -- client.server_capabilities.codeLensProvider.resolveProvider = false
-
-                    -- Disable showonStartup and suppressStartupBanner -- not working
-                    -- client.settings.powershell.codeFormatting.Preset = 'OTBS'
-                    -- client.settings.powershell.integratedConsole.showOnStartup = false
-                    -- client.settings.powershell.integratedConsole.suppressStartupBanner = true
-                -- end
             end
         })
         -- Setup Mason
