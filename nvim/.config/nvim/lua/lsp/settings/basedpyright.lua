@@ -1,6 +1,6 @@
 return {
     on_attach = function(client, _)
-        client.server_capabilities.hoverProvider = false -- disable hover
+        client.server_capabilities.hoverProvider = true -- disable hover
     end,
     capabilities = {
         textDocument = {
@@ -16,7 +16,10 @@ return {
     settings = {
         basedpyright = {
             disableOrganizeImports = true, -- using ruff-lsp
-            typeCheckingMode = "standard",
+            analysis = {
+                typeCheckingMode = "standard", -- off | basic | strict | standard
+                logLevel = "error", -- debug | info | warn | error
+            },
         },
         -- python = {
         --     analysis = {

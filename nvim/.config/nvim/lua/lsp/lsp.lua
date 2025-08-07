@@ -60,7 +60,7 @@ return {
             -- "csharp_ls" -- C Sharp
             "cssls",    -- CSS
             "html",     -- HTML
-            "jedi_language_server", -- Python (better docs)
+            -- "jedi_language_server", -- Python (better docs)
             "jsonls",   -- JSON
             "lua_ls",   -- Lua
             "marksman", -- Markdown
