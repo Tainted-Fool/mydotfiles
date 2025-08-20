@@ -1,7 +1,7 @@
 return {
     -- Markdown viewer
     "oxy2dev/markview.nvim",
-    lazy = false,
+    lazy = true,
     priority = 49,
     opts = {
         code_blocks = {

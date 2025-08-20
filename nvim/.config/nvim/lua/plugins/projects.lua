@@ -27,7 +27,7 @@ return {
         scope_chdir = "global" -- global | tab | win
     },
     config = function(_, opts)
-        require("project_nvim").setup(opts)
+        require("project").setup(opts)
         -- Recommended session options configurations
         vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
         vim.o.autochdir = true -- use current file dir as working dir
