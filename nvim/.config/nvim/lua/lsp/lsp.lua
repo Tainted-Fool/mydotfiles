@@ -137,6 +137,20 @@ return {
                     custom_opts.on_attach(client, event.buf)
                     -- vim.notify("Custom options loaded for LSP server: " .. client.name, "info")
                 end
+                --- Highlight the current variable and its usuage in the buffer -> switched to illuminate.nvim
+                -- if client.server_capabilities.documentHighlightProvider then
+                --     local gid = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+                --     vim.api.nvim_create_autocmd("CursorHold", {
+                --         group = gid,
+                --         buffer = event.buf,
+                --         callback = vim.lsp.buf.document_highlight,
+                --     })
+                --     vim.api.nvim_create_autocmd("CursorMoved", {
+                --         group = gid,
+                --         buffer = event.buf,
+                --         callback = vim.lsp.buf.clear_references,
+                --     })
+                -- end
             end
         })
         -- Setup Mason

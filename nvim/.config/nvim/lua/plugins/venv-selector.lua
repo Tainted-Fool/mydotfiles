@@ -1,7 +1,6 @@
 return {
     -- Switch between python virtualenvs
     "linux-cultist/venv-selector.nvim",
-    branch = "regexp", -- new 2024 version
     event = "VeryLazy",
     cmd = "VenvSelect",
     keys = {
