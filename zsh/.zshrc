@@ -222,3 +222,8 @@ if [[ -z $TMUX ]]; then
     export PATH=$HOME/.dotnet/:$PATH
     export PATH=$HOME/.dotnet/tools/:$PATH
 fi
+
+# Python virtual environment initialize
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"

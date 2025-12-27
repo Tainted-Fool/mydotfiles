@@ -95,6 +95,11 @@ function decompyler() {
   docker run --rm -v ~/repos/CaptureTheFlag/ncl:/data decompyler "/data/gym/$1"
 }
 
+# awk 'BEGIN {for(i=32;i<127;i++)printf("%d=%c ",i,i);print}'
+function getascii() {
+  awk 'BEGIN {for(i=32;i<127;i++)printf "%3d 0x%02x %c\n",i,i,i}'
+}
+
 # Open Obsidian notebook in VS Code in home directory
 # function notes() {
 #     # Create a variable for notebook directory
