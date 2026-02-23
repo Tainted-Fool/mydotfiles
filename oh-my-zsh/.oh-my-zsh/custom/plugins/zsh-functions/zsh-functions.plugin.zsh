@@ -113,3 +113,6 @@ function getascii() {
 #     code $DIR
 # }
 
+function vol2() {
+    python2 ~/repos/volatility/vol.py $1
+}
