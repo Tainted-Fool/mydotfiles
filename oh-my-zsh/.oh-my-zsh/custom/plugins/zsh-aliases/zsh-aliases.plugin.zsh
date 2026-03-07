@@ -135,3 +135,7 @@ fi
 if [ -x "$(command -v zoxide)" ]; then
   alias cd="z"
 fi
+
+# get IP address of tun0 and eth0
+alias getiptun="ip a show tun0 | grep inet | cut -d ' ' -f 6 | head -1"
+alias getipeth="ip a show eth0 | grep inet | cut -d ' ' -f 6 | head -1"
