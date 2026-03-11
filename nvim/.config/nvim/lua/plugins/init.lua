@@ -8,7 +8,7 @@ return {
     "tpope/vim-abolish", -- convert words to snake, camel, mix case "crs", "crc", "crm"
     "tpope/vim-sleuth", -- Automatically adjusts "tabstop", "shiftwidth", and "expandtab"
     -- "christoomey/vim-sort-motion", -- sort based on text objects or motions `gs`, `gs2j`, `gsi(`
-    { "NvChad/nvim-colorizer.lua", opts = { user_default_options = { names = false } } }, -- displays the hexvalue color
+    -- { "NvChad/nvim-colorizer.lua", opts = { user_default_options = { names = false } } }, -- displays the hexvalue color
     -- { "epwalsh/obsidian.nvim", opts = {} } -- use obsidian in neovim
     "girishji/pythondoc.vim", -- python docs
     -- "AckslD/swenv.nvim", -- switch between python virtualenvs
