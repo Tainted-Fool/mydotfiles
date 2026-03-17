@@ -1,6 +1,7 @@
 local opt = vim.opt -- to save typing
 -- Set options by using lua api (0=false, 1=true)
 -- opt.autowrite = true -- enable auto write
+-- opt.autochdir = true -- change to the directory of the open file - MAY BREAK SOME PLUGINS
 opt.backup = false -- create a backup file
 opt.clipboard = "unnamedplus" -- allows access to the system clipboard
 -- opt.cmdheight = 1 -- more space in command line
