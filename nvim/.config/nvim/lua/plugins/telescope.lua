@@ -19,6 +19,17 @@ return {
             cond = function()
                 return vim.fn.executable("make") == 1
             end
+        },
+        {
+            "princejoogie/dir-telescope.nvim", -- directory picker for telescope
+            config = function()
+                require("dir-telescope").setup({
+                    hidden = true,
+                    no_ignore = false,
+                    show_preview = true,
+                    follow_symlinks = false,
+                })
+            end,
         }
     },
     config = function()
@@ -26,6 +37,36 @@ return {
         local telescope = require("telescope")
         local actions = require("telescope.actions")
         local fb_actions = telescope.extensions.file_browser.actions
+
+        -- Lauch telescope-file-browser in folder mode, then launch live_grep within the selected directory
+        local ts_select_dir_for_grep = function(prompt_bufnr)
+            local action_state = require("telescope.actions.state")
+            local fb = require("telescope").extensions.file_browser
+            local live_grep = require("telescope.builtin").live_grep
+            local current_line = action_state.get_current_line()
+
+            fb.file_browser({
+                files = false,
+                depth = false,
+                attach_mappings = function(prompt_bufnr)
+                    require("telescope.actions").select_default:replace(function()
+                        local entry_path = action_state.get_selected_entry().Path
+                        local dir = entry_path:is_dir() and entry_path or entry_path:parent()
+                        local relative = dir:make_relative(vim.fn.getcwd())
+                        local absolute = dir:absolute()
+
+                        live_grep({
+                            results_title = relative .. "/",
+                            cwd = absolute,
+                            default_text = current_line,
+                        })
+                    end)
+
+                    return true
+                end,
+            })
+        end
+
         telescope.setup({
             defaults = {
                 prompt_prefix = icons.ui.Telescope .. " ",
@@ -90,6 +131,16 @@ return {
                         "--glob=!**/pwndbg/*",
                         "--glob=!.git/*",
                     }
+                },
+                live_grep = {
+                    mappings = {
+                        i = {
+                            ["<C-f>"] = ts_select_dir_for_grep,
+                        },
+                        n = {
+                            ["<C-f>"] = ts_select_dir_for_grep,
+                        }
+                    }
                 }
             },
             extensions = {
@@ -135,6 +186,7 @@ return {
         telescope.load_extension("fzf")
         telescope.load_extension("projects")
         telescope.load_extension("noice")
+        telescope.load_extension("dir")
     end,
     keys = {
         { "<leader>cm", "<cmd>Telescope notify<cr>", desc = "Display Messages (telescope)" },
@@ -142,9 +194,11 @@ return {
         { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers (telescope)" },
         { "<leader>fc", "<cmd>Telescope colorscheme<cr>", desc = "Colorschemes (telescope)" },
         { "<leader>fC", "<cmd>FzfLua colorschemes<cr>", desc = "Colorschemes (fzf)" },
-        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Files (telescope)" },
+        { "<leader>ff", "<cmd>Telescope find_files cwd=<cr>", desc = "Files (telescope)" },
         { "<leader>fF", "<cmd>FzfLua files<cr>", desc = "Files (fzf)" },
-        { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Git (fzf)" },
+        { "<leader>fd", "<cmd>FileInDirectory<cr>", desc = "Files in dir (dir-telescope)" },
+        { "<leader>fg", "<cmd>GrepInDirectory<cr>", desc = "Grep in dir (dir-telescope)" },
+        { "<leader>fG", "<cmd>FzfLua git_files<cr>", desc = "Git (fzf)" },
         { "<leader>fh", "<cmd>FzfLua command_history<cr>", desc = "Command History (fzf)" },
         { "<leader>fH", "<cmd>FzfLua search_history<cr>", desc = "History (fzf)" },
         { "<leader>fi", "<cmd>Telescope highlights<cr>", desc = "Highlight Groups (telescope)" },

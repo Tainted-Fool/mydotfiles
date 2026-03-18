@@ -1,5 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.api.nvim_create_user_command
+local augroup = vim.api.nvim_create_augroup
 -- Use `q` to quit from plugins
 autocmd("FileType", {
     pattern = {
@@ -71,7 +72,7 @@ autocmd("BufReadPost", {
 })
 -- Clear all notifications when entering insert mode
 autocmd("InsertEnter", {
-    group = vim.api.nvim_create_augroup("NotifyClearGrp", {}),
+    group = augroup("NotifyClearGrp", {}),
     pattern = "*",
     callback = function()
         require("notify").dismiss({
@@ -102,6 +103,42 @@ autocmd("WinEnter", {
         })
     end
 })
+-- Create custom keybinds for grug-far
+autocmd("FileType", {
+  group =  augroup("my-grug-far-custom-keybinds", { clear = true }),
+  pattern = { "grug-far" },
+  callback = function()
+    vim.keymap.set("n", "<leader>z", function()
+      local state = unpack(require("grug-far").toggle_flags({ "--fixed-strings" }))
+      vim.notify("grug-far: toggled --fixed-strings " .. (state and "ON" or "OFF"))
+    end, { desc = "Fixed Strings (grug-far)", buffer = true })
+  end,
+})
+-- Change CWD to the directory of the opened file
+-- autocmd("TabNewEntered", {
+--     desc = "Automatically change CWD for a tab",
+--     group = augroup("tag-change-cwd", { clear = true }),
+--     callback = function()
+--         local dirname
+--         local path = vim.fn.expand("<amatch>")
+--
+--     if vim.fn.isdirectory(dirname) == 1 then
+--         dirname = path
+-- else
+--     dirname = vim.fn.fnamemodify(path, ":h")
+--         end
+--     vim.cmd("tcd " .. dirname)
+--     end,
+-- })
+-- Change CWD to the directory of the passed in file
+-- autocmd("VimEnter", {
+--     desc = "CD to passwed $PWD when vim starts",
+--     group = augroup("cd-on-startup", { clear = true }),
+--     callback = function()
+--         local pwd = vim.fn.getcwd()
+--         vim.api.nvim_set_current_dir(pwd)
+--     end,
+-- })
 -- Disable diagnostics in insert mode
 -- autocmd("ModeChanged", {
 --     pattern = { "n:i", "v:s" },
@@ -127,14 +164,3 @@ cmd("Cwd", function()
   vim.cmd(":cd %:p:h")
   vim.cmd(":pwd")
 end, { desc = "Change working directory" })
--- Create custom keybinds for grug-far
-autocmd("FileType", {
-  group =  vim.api.nvim_create_augroup("my-grug-far-custom-keybinds", { clear = true }),
-  pattern = { "grug-far" },
-  callback = function()
-    vim.keymap.set("n", "<leader>z", function()
-      local state = unpack(require("grug-far").toggle_flags({ "--fixed-strings" }))
-      vim.notify("grug-far: toggled --fixed-strings " .. (state and "ON" or "OFF"))
-    end, { desc = "Fixed Strings (grug-far)", buffer = true })
-  end,
-})

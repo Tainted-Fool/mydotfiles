@@ -11,7 +11,7 @@ return {
             use_pattern_matching = false, --default: false
             no_fallback = false, --default: false
         },
-        manual_mode = true, -- default: false
+        manual_mode = false, -- default: false
         patterns = {
             ".git",
             ".github",
@@ -33,7 +33,7 @@ return {
             allow = false, -- default: false
             notify = true, -- default: true
         },
-        enable_autochdir = true, -- default: false
+        enable_autochdir = false, -- default: false
         show_hidden = true, -- default: false
         exclude_dirs = {},
         silent_chdir = true, --default: true
