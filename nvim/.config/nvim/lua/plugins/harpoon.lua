@@ -32,7 +32,7 @@ return {
                 sorter = conf.generic_sorter({}),
             }):find()
         end
-        vim.keymap.set("n", "hf", function() toggle_telescope(harpoon:list()) end,
+        vim.keymap.set("n", "<C-h>", function() toggle_telescope(harpoon:list()) end,
             { desc = "Fuzzy List (harpoon)" })
     end
 }
