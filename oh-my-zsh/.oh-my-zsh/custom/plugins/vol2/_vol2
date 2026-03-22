@@ -1,0 +1,75 @@
+#compdef vol2
+
+# Zsh completion for Volatility 2 with caching
+
+_vol2() {
+    local cache=~/.cache/volatility2
+    mkdir -p $cache
+
+    local plugin_cache=$cache/plugin.txt
+    local profile_cache=$cache/profiles.txt
+    local address_cache=$cache/address_spaces.txt
+    local scanner_cache=$cache/scanner_checks.txt
+
+    local -a plugins profiles addrspaces scanners opts
+
+    # cache plugins
+    if [[ ! -f $plugin_cache || $(($(date +%s) - $(stat -c %Y $plugin_cache))) -gt 86400 ]]; then
+        vol2 --info 2>/dev/null | awk '/^Plugins$/ {in_plugins=1; next} /^$/ {in_plugins=0} in_plugins && /^[a-zA-Z0-9_]+\s+-/ {print $1}' > $plugin_cache
+    fi
+
+    # cache profiles
+    if [[ ! -f $profile_cache || $(($(date +%s) - $(stat -c %Y $profile_cache))) -gt 86400 ]]; then
+        vol2 --info 2>/dev/null | awk '/^Profiles$/ {in_profiles=1; next} /^Address Spaces$/ {in_profiles=0} in_profiles && /^[a-zA-Z0-9_]+\s+-/ {print $1}' > $profile_cache
+    fi
+
+    # cache address
+    if [[ ! -f $address_cache || $(($(date +%s) - $(stat -c %Y $address_cache))) -gt 86400 ]]; then
+        vol2 --info 2>/dev/null | awk '/^Address Spaces$/ {in_addresses=1; next} /^Scanner Checks$/ {in_addresses=0} in_addresses && /^[a-zA-Z0-9_]+\s+-/ {print $1}' > $address_cache
+    fi
+
+    # cache scanner
+    if [[ ! -f $scanner_cache || $(($(date +%s) - $(stat -c %Y $scanner_cache))) -gt 86400 ]]; then
+        vol2 --info 2>/dev/null | awk '/^Scanner Checks$/ {in_scanners=1; next} /^Plugins$/ {in_scanners=0} in_scanners && /^[a-zA-Z0-9_]+\s+-/ {print $1}' > $scanner_cache
+    fi
+
+    plugins=(${(f)"$(cat $plugin_cache)"})
+    profiles=(${(f)"$(cat $profile_cache)"})
+    addrspaces=(${(f)"$(cat $address_cache)"})
+    scanners=(${(f)"$(cat $scanner_cache)"})
+
+    # Extract all options (short + long)
+    opts=(${(f)"$(vol2 --help 2>/dev/null | grep -oE -- '(^|\s)-[a-zA-Z0-9]|--[a-zA-Z0-9_-]+' | tr -d ' ' | sort -u)"})
+
+    _arguments -C \
+        '--profile=:profiles:(( ${profiles} ))' \
+        '--location=:address spaces:(( ${addrspaces} ))' \
+        '--dtb=:scanner checks:(( ${scanners} ))' \
+        '(-f --filename)'{-f,--filename}'[memory image]:file:_files' \
+        '*:: :->maybe_plugins'
+
+    case $state in
+        maybe_plugins)
+            local i first_nonopt
+            for (( i = 2; i <= CURRENT; i++ )); do
+                if [[ ${words[i]} == -f || ${words[i]} == --filename ]]; then
+                    (( i++ ))
+                    continue
+                fi
+                if [[ ${words[i]} == -* ]]; then
+                    continue
+                fi
+                first_nonopt=$i
+                break
+            done
+
+            if [[ -z $first_nonopt || $CURRENT -eq $first_nonopt ]]; then
+                _describe 'plugins' plugins
+            else
+                _values 'options' "${opts[@]}"
+            fi
+            ;;
+    esac
+}
+
+_vol2 "$@"

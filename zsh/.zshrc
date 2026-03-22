@@ -67,6 +67,7 @@ plugins=(
     git # add git alias and functions
     urltools # encode/decode URL strings `urlencode <URL>`
     web-search # add alias for searching `google`, `bing`, `ddg`, yandex`
+    vol2 # custom tab completion for volatility2
 )
 
 # Custom plugins can be found in $ZSH_CUSTOM/plugins/

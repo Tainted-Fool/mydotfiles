@@ -12,4 +12,4 @@ lazy-lock.json
 tmux/.config/tmux/plugins/*
 
 # ignore zsh plugin folder
-oh-my-zsh/.oh-my-zsh/custom/plugins/*
+# oh-my-zsh/.oh-my-zsh/custom/plugins/*
