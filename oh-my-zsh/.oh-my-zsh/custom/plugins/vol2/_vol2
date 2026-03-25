@@ -40,36 +40,50 @@ _vol2() {
 
     # Extract all options (short + long)
     opts=(${(f)"$(vol2 --help 2>/dev/null | grep -oE -- '(^|\s)-[a-zA-Z0-9]|--[a-zA-Z0-9_-]+' | tr -d ' ' | sort -u)"})
+    opts=()
+    while IFS= read -r line; do
+        # Match lines like: "-w, --write    Enable write support"
+        if [[ $line =~ ^([[:space:]]*)(-[a-zA-Z0-9]+)(, ([[:space:]]*)--[a-zA-Z0-9_-]+)?[[:space:]]+(.*)$ ]]; then
+            short=${match[2]}
+            long=$(echo "$line" | grep -oE -- '--[a-zA-Z0-9_-]+' | head -n1)
+            desc=$(echo "$line" | sed -E 's/^.*[[:space:]]{2,}//')
+
+            [[ -n $short ]] && opts+=("${short}[${desc}]")
+            [[ -n $long ]] && opts+=("${long}[${desc}]")
+        fi
+    done < <(vol2 --help 2>/dev/null)
+
 
     _arguments -C \
         '--profile=:profiles:(( ${profiles} ))' \
         '--location=:address spaces:(( ${addrspaces} ))' \
         '--dtb=:scanner checks:(( ${scanners} ))' \
         '(-f --filename)'{-f,--filename}'[memory image]:file:_files' \
-        '*:: :->maybe_plugins'
+        '*:options:->rest'
 
-    case $state in
-        maybe_plugins)
-            local i first_nonopt
-            for (( i = 2; i <= CURRENT; i++ )); do
-                if [[ ${words[i]} == -f || ${words[i]} == --filename ]]; then
-                    (( i++ ))
-                    continue
-                fi
-                if [[ ${words[i]} == -* ]]; then
-                    continue
-                fi
-                first_nonopt=$i
-                break
-            done
+    if [[ ${words[CURRENT]} == -* ]]; then
+        _describe 'options' opts
+        return
+    fi
 
-            if [[ -z $first_nonopt || $CURRENT -eq $first_nonopt ]]; then
-                _describe 'plugins' plugins
-            else
-                _values 'options' "${opts[@]}"
-            fi
-            ;;
-    esac
+    local i first_nonopt
+    for (( i = 2; i <= CURRENT; i++ )); do
+        if [[ ${words[i]} == -f || ${words[i]} == --filename ]]; then
+            (( i++ ))
+            continue
+        fi
+        if [[ ${words[i]} == -* ]]; then
+            continue
+        fi
+        first_nonopt=$i
+        break
+    done
+
+    if [[ -z $first_nonopt || $CURRENT -eq $first_nonopt ]]; then
+        _describe 'plugins' plugins
+    else
+        _values 'options' "${opts[@]}"
+    fi
 }
 
 _vol2 "$@"
