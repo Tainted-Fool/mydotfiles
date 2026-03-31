@@ -85,19 +85,56 @@ function checkargs() {
     echo "$1"
 }
 
-# check startup time of shell
+# Check startup time of shell
 function timezsh() {
   shell=${1-$SHELL}
   for i in $(seq 1 5); do time $shell -i -c exit; done
 }
 
+# Decompile python bytecode to python2/3 source code
 function decompyler() {
   docker run --rm -v ~/repos/CaptureTheFlag/ncl:/data decompyler "/data/gym/$1"
 }
 
+# Print ascii table
 # awk 'BEGIN {for(i=32;i<127;i++)printf("%d=%c ",i,i);print}'
 function getascii() {
   awk 'BEGIN {for(i=32;i<127;i++)printf "%3d 0x%02x %c\n",i,i,i}'
+}
+
+# Do binary math
+bitmath() {
+    local mode="d"
+    local expr
+
+    case "$1" in
+        -d|-x|-b|-o)
+            mode="${1#-}"
+            shift
+            ;;
+    esac
+
+    expr="$*"
+    local result=$(( expr ))
+
+    case "$mode" in
+        d) printf '%d\n' "$result" ;;
+        x) printf '0x%x\n' "$result" ;;
+        o) printf '0%o\n' "$result" ;;
+        b)
+            local bin=""
+            local n=$result
+            if (( n == 0 )); then
+                echo 0
+                return
+            fi
+            while (( n > 0 )); do
+                bin="$(( n & 1 ))$bin"
+                n=$(( n >> 1 ))
+            done
+            echo "$bin"
+            ;;
+    esac
 }
 
 # Open Obsidian notebook in VS Code in home directory
