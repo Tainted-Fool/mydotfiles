@@ -3,6 +3,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = "BufEnter",
+    -- Adds `{` and other brackets as rainbow
     dependencies = "hiphish/rainbow-delimiters.nvim",
     config = function()
         local highlight = {

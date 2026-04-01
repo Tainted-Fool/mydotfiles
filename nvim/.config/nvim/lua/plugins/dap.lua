@@ -23,12 +23,7 @@ return {
         {
             "m00qek/baleia.nvim", -- colorize text with ANSE escape sequences
             lazy = true,
-            tag = "v1.4.0"
-        },
-        {
-            "m00qek/baleia.nvim", -- colorize text with ANSE escape sequences
-            lazy = true,
-            tag = "v1.4.0"
+            -- tag = "v1.4.0"
         },
         "mfussenegger/nvim-dap-python", -- dap for python
         { "thehamsta/nvim-dap-virtual-text", opts = { commented = true } }, -- virtual text for dap
