@@ -10,7 +10,7 @@ return {
         vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
+        local treesitter = require("nvim-treesitter.config")
         treesitter.setup({
             matchup = {
                 enable = true,

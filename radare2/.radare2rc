@@ -38,6 +38,9 @@ e bin.relocs.apply=true
 # Search in all areas
 e search.in=dbg.maps
 
+# Follow fork/clone calls
+e dbg.follow.child=true
+
 # Locally run the LLM
 decai -e api=r2ai
 

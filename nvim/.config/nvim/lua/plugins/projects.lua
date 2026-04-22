@@ -38,8 +38,10 @@ return {
         exclude_dirs = {},
         silent_chdir = true, --default: true
         scope_chdir = "global", -- global | tab | win
-        datapath = vim.fn.stdpath("data"),
-        historysize = 100,
+        history = {
+            size = 100,
+            save_dir = vim.fn.stdpath("data"),
+        },
         log = {
             enabled = false, -- default: false
             max_size = 1.1,

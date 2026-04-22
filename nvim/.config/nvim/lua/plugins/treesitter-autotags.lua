@@ -4,7 +4,7 @@ return {
     event = "VeryLazy",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
+        local treesitter = require("nvim-treesitter.config")
         treesitter.setup({
             autotag = {
                 enable = true,

@@ -8,7 +8,7 @@ return {
         { "<leader>,", desc = "Swap Parameter Backward(ts-textobject)" },
     },
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
+        local treesitter = require("nvim-treesitter.config")
         treesitter.setup({
             textobjects = {
                 select = {

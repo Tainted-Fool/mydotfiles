@@ -5,6 +5,7 @@ return {
         "nvim-treesitter/nvim-treesitter-context", -- see context in winbar
         "oxy2dev/markview.nvim", -- markdown preview
     },
+    -- branch = "master", -- Legacy
     event = { "BufReadPre", "BufNewFile", "VeryLazy" }, -- load when file is read or open
     build = ":TSUpdate", -- whenever you install or update through lazy
     cmd = { "TSUpdate", "TSUpdateSync", "TSInstall" }, -- load on these commands
@@ -13,7 +14,7 @@ return {
         { "V", desc = "Decrement Selection (treesitter)", mode = "x" },
     },
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
+        local treesitter = require("nvim-treesitter.config")
         treesitter.setup({
             ensure_installed = {
                 "bash",
@@ -39,6 +40,8 @@ return {
                 "regex",
                 "rst",
                 "ruby",
+                "rust",
+                "scala",
                 "sql",
                 "vim",
                 "vimdoc",
