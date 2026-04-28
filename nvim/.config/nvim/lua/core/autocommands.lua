@@ -164,3 +164,30 @@ cmd("Cwd", function()
   vim.cmd(":cd %:p:h")
   vim.cmd(":pwd")
 end, { desc = "Change working directory" })
+-- Add numbers to the front of line
+cmd("Count", function(opts)
+    local n = tonumber(opts.args)
+    if not n then return end
+    local nums = vim.fn.range(1, n)
+    local dotted = vim.tbl_map(function(v)
+        return v .. "."
+    end, nums)
+    vim.fn.append(vim.fn.line("."), dotted)
+end, { nargs = 1 })
+-- Add numbers to the front of highlighted lines
+cmd("Number", function()
+    local start_line = vim.fn.getpos("'<")[2]
+    local end_line   = vim.fn.getpos("'>")[2]
+    local lines = vim.fn.getline(start_line, end_line)
+    local numbered = {}
+    local count = 1
+    for i, line in ipairs(lines) do
+        if line:match("%S") then
+            numbered[i] = string.format("%d. %s", count, line) -- Transform line: "a" → "1. a"
+            count = count + 1
+        else
+            numbered[i] = line
+        end
+    end
+    vim.fn.setline(start_line, numbered)
+end, { range = true })

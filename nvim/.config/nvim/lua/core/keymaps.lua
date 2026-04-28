@@ -59,8 +59,8 @@ keymap("v", ">", ">gv", "Indent Visual Selection Backward")
 keymap("v", "<A-Down>", ":m '>+1<CR>gv=gv", "Move Line Down")
 keymap("v", "<A-Up>", ":m '<-2<CR>gv=gv", "Move Line Up")
 -- Create a 'Number' command for auto numbering highlighted lines
-vim.cmd([[command! -nargs=0 -range=% Number <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. ']])
-keymap("v", "<A-a>", ":Number<CR>:nohl<CR>", "Auto Number Selected Lines")
+-- vim.cmd([[command! -nargs=0 -range=% Number <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. ']])
+-- keymap("v", "<A-a>", ":Number<CR>:nohl<CR>", "Auto Number Selected Lines")
 -- Better paste
 -- It deletes the selected content and drops it in the black hole register
 -- and puts the content of the default register in place of the selected text
