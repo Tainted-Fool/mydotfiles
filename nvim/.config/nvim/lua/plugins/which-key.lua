@@ -58,7 +58,7 @@ return {
             -- Single keymaps
             { "<leader>q", "<cmd>q!<cr>", desc = "Quit" },
             { "<leader>-", "<C-W>s", desc = "Split Window Below" },
-            { "<leader>\\", "<C-W>v", desc = "Split Window Right" },
+            { "<leader>\\", "<C-W>v", desc = "Split Window Right" }, -- split & [no]sync :windo set [no]scrollbind
             -- Buffer keymaps
             { "<leader>ba", "<cmd>%bd<cr>:e#<cr>:bd#<cr>", desc = "Close All" },
             { "<leader>bc", "<cmd>bd!<cr>", desc = "Close" },
