@@ -103,39 +103,39 @@ function getascii() {
 }
 
 # Do binary math
-bitmath() {
-    local mode="d"
-    local expr
-
-    case "$1" in
-        -d|-x|-b|-o)
-            mode="${1#-}"
-            shift
-            ;;
-    esac
-
-    expr="$*"
-    local result=$(( expr ))
-
-    case "$mode" in
-        d) printf '%d\n' "$result" ;;
-        x) printf '0x%x\n' "$result" ;;
-        o) printf '0%o\n' "$result" ;;
-        b)
-            local bin=""
-            local n=$result
-            if (( n == 0 )); then
-                echo 0
-                return
-            fi
-            while (( n > 0 )); do
-                bin="$(( n & 1 ))$bin"
-                n=$(( n >> 1 ))
-            done
-            echo "$bin"
-            ;;
-    esac
-}
+# bitmath() {
+#     local mode="d"
+#     local expr
+#
+#     case "$1" in
+#         -d|-x|-b|-o)
+#             mode="${1#-}"
+#             shift
+#             ;;
+#     esac
+#
+#     expr="$*"
+#     local result=$(( expr ))
+#
+#     case "$mode" in
+#         d) printf '%d\n' "$result" ;;
+#         x) printf '0x%x\n' "$result" ;;
+#         o) printf '0%o\n' "$result" ;;
+#         b)
+#             local bin=""
+#             local n=$result
+#             if (( n == 0 )); then
+#                 echo 0
+#                 return
+#             fi
+#             while (( n > 0 )); do
+#                 bin="$(( n & 1 ))$bin"
+#                 n=$(( n >> 1 ))
+#             done
+#             echo "$bin"
+#             ;;
+#     esac
+# }
 
 # Open Obsidian notebook in VS Code in home directory
 # function notes() {
