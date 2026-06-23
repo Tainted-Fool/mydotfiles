@@ -76,7 +76,8 @@ vim.loader.enable()
 -- Enable automatic codelens refreshing for lsp that support it.
 vim.g.codelens_enabled = true
 -- Change default shell to pwsh.exe
-if vim.loop.os_uname().sysname == "Windows_NT" then
+-- if vim.loop.os_uname().sysname == "Windows_NT" then
+if vim.uv.os_uname().sysname == "Windows_NT" then
   vim.cmd([[
   let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
   let &shellcmdflag = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;"'

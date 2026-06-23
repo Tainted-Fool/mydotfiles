@@ -24,10 +24,12 @@ autocmd("FileType", {
         "startuptime",
     },
     callback = function()
-        vim.cmd([[
-            nnoremap <silent> <buffer> q :close<cr>
-            set nobuflisted
-        ]])
+        -- vim.cmd([[
+        --     nnoremap <silent> <buffer> q :close<cr>
+        --     set nobuflisted
+        -- ]])
+        vim.keymap.set("n", "q", "<cmd>close<cr>", { silent = true, buffer = true })
+        vim.opt_local.buflisted = false
     end
 })
 -- Remove stausline and tabline when in Alpha dashboard
@@ -157,7 +159,8 @@ autocmd("FileType", {
 -- })
 -- Create a `Format` command for formatting files
 cmd("Format", function()
-    vim.cmd("lua vim.lsp.buf.format{async=true}")
+    -- vim.cmd("lua vim.lsp.buf.format{async=true}")
+    vim.lsp.buf.format({ async = true })
 end, { desc = "Format" })
 -- Change working directory
 cmd("Cwd", function()

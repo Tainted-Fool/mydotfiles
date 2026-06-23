@@ -42,7 +42,24 @@ e search.in=dbg.maps
 e dbg.follow.child=true
 
 # Locally run the LLM
-decai -e api=r2ai
+decai -e api=ollama
+decai -e baseurl=http://192.168.1.17:11434
+decai -e model=gpt-oss:20b
 
 # Use these commands when decompiling
-decai -e cmds=pdc,pdg,pdd,pdsf,ccf
+# decai -e cmds=pdc,pdg,pdd,pdsf,ccf
+
+# Locally run the LLM
+e r2ai.api=ollama
+e r2ai.baseurl=http://192.168.1.17:11434
+e r2ai.model=gpt-oss:20b
+
+# Let LLM use tools
+e r2ai.auto.yolo=true
+decai -e yolo=true
+
+# Let LLM use files
+e r2ai.http.use_files=true
+
+# Let LLM use the Clippy plugin
+# e r2ai.clippy=true
