@@ -99,7 +99,7 @@ return {
                     f = "find_project_files",
                     r = "recent_project_files",
                     s = "search_in_project_files",
-                    w = "change_working_directory",
+                    w = "change_cwd",
                 },
                 i = {
                     ["<C-b>"] = "browse_project_files",
@@ -107,7 +107,7 @@ return {
                     ["<C-f>"] = "find_project_files",
                     ["<C-r>"] = "recent_project_files",
                     ["<C-s>"] = "search_in_project_files",
-                    ["<C-w>"] = "change_working_directory",
+                    ["<C-w>"] = "change_cwd",
                 }
             }
         }
