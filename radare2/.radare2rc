@@ -15,7 +15,7 @@ e scr.utf8=true
 e scr.utf8.curvy=true
 
 # Show asm comments
-e asm.describe=true
+e asm.describe=false
 
 # Show comments at the right of disassembly if they fit
 e asm.cmt.right=true
@@ -41,25 +41,31 @@ e search.in=dbg.maps
 # Follow fork/clone calls
 e dbg.follow.child=true
 
-# Locally run the LLM
-decai -e api=ollama
-decai -e baseurl=http://192.168.1.17:11434
-decai -e model=gpt-oss:20b
+# Allow cacheing of file
+e io.cache=1
 
 # Use these commands when decompiling
 # decai -e cmds=pdc,pdg,pdd,pdsf,ccf
 
-# Locally run the LLM
-e r2ai.api=ollama
-e r2ai.baseurl=http://192.168.1.17:11434
-e r2ai.model=gpt-oss:20b
-
-# Let LLM use tools
-e r2ai.auto.yolo=true
+# decai settings
+decai -e api=ollama
+decai -e baseurl=http://192.168.1.17:11434
+decai -e cache=true
+decai -e files=true
+decai -e model=gpt-oss:20b
+decai -e think=true
+decai -e timeout=360
 decai -e yolo=true
 
-# Let LLM use files
+# r2ai settings
+e r2ai.api=ollama
+e r2ai.auto.max_runs=100
+e r2ai.auto.yolo=true
+e r2ai.baseurl=http://192.168.1.17:11434
+e r2ai.data=true
+e r2ai.data.reason=true
+e r2ai.http.max_retries=6
+e r2ai.http.timeout=360
 e r2ai.http.use_files=true
-
-# Let LLM use the Clippy plugin
-# e r2ai.clippy=true
+e r2ai.max_tokens=16000
+e r2ai.model=gpt-oss:20b

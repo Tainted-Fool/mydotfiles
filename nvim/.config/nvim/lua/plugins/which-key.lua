@@ -101,6 +101,15 @@ return {
             { "<leader>f", group = "find" },
             { "<leader>g", group = "git" },
             { "<leader>G", group = "gag" },
+            {
+                "<leader>n",
+                group = "jupyter-notebook",
+                icon = {
+                    icon = require("core.icons").ui.Note,
+                    ---@type string azure|blue|cyan|green|grey|orange|purple|red|yellow
+                    color = "yellow",
+                }
+            },
             { "<leader>s", group = "search" },
             {
                 "<leader>w",
@@ -140,7 +149,7 @@ return {
                 { pattern = "gag", icon = require("core.icons").misc.Fun, color = "red" },
                 { pattern = "goose", icon = require("core.icons").misc.Egg, color = "grey" },
                 { plugin = "harpoon", pattern = "harpoon", icon = require("core.icons").misc.Harpoon, color = "cyan" },
-                { plugin = "multicursor", pattern = "multicursor", icon = require("core.icons").misc.Cursor, color = "red" },
+                -- { plugin = "multicursor", pattern = "multicursor", icon = require("core.icons").misc.Cursor, color = "red" },
                 { pattern = "snow", icon = require("core.icons").misc.Snow, color = "azure" },
                 { plugin = "venv-selector.nvim", pattern = "venv", icon = require("core.icons").misc.VENV, color = "green" },
             }
