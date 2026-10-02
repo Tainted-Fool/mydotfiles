@@ -28,6 +28,7 @@ return {
             "toggleterm",
             "DressingSelect",
             "TelescopePrompt",
+            "markdown",
         },
         filetypes_allowlist = {},
         modes_denylist = {},
@@ -54,6 +55,13 @@ return {
         vim.api.nvim_create_autocmd("FileType", {
             callback = function()
                 local buffer = vim.api.nvim_get_current_buf()
+                -- Check if current filetype is blacklisted before applying the buffer-local maps
+                local ft = vim.bo[buffer].filetype
+                for _, denied_ft in ipairs(opts.filetypes_denylist) do
+                    if ft == denied_ft then
+                        return
+                    end
+                end
                 map("]]", "next", buffer)
                 map("[[", "prev", buffer)
             end,

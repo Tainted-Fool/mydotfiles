@@ -1,6 +1,6 @@
 return {
     -- Markdown fence block editor
-    "acksld/nvim-femaco.lua",
+    "gen4438/nvim-femaco.lua",
     event = "VeryLazy",
     cmd = "FeMaco",
     keys = {
