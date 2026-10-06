@@ -221,12 +221,13 @@ if [[ -z $TMUX ]]; then
     # Dotnet export
     export PATH=$HOME/.dotnet/:$PATH
     export PATH=$HOME/.dotnet/tools/:$PATH
+
+    # Opencode
+    export PATH=/home/laz/.opencode/bin:$PATH
+
+    # Python virtual environment initialize
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init - bash)"
 fi
 
-# Python virtual environment initialize
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
-
-# opencode
-export PATH=/home/laz/.opencode/bin:$PATH
