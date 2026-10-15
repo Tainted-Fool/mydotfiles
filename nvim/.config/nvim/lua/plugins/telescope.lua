@@ -30,13 +30,18 @@ return {
                     follow_symlinks = false,
                 })
             end,
-        }
+        },
+        {
+            "nvim-telescope/telescope-live-grep-args.nvim" ,
+            version = "^1.0.0",
+        },
     },
     config = function()
         local icons = require("core.icons")
         local telescope = require("telescope")
         local actions = require("telescope.actions")
         local fb_actions = telescope.extensions.file_browser.actions
+        local lga_actions = require("telescope-live-grep-args.actions")
 
         -- Lauch telescope-file-browser in folder mode, then launch live_grep within the selected directory
         local ts_select_dir_for_grep = function(prompt_bufnr)
@@ -141,6 +146,20 @@ return {
                             ["<C-f>"] = ts_select_dir_for_grep,
                         }
                     }
+                },
+                live_grep_args = {
+                    mappings = {
+                        i = {
+                            ["<C-f>"] = ts_select_dir_for_grep,
+                            ["<C-e>"] = lga_actions.quote_prompt(),
+                            ["<C-a>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                            -- freeze the current list and start a fuzzy search in the frozen list
+                            ["<C-s>"] = lga_actions.to_fuzzy_refine,
+                        },
+                        n = {
+                            ["<C-f>"] = ts_select_dir_for_grep,
+                        }
+                    }
                 }
             },
             extensions = {
@@ -187,6 +206,7 @@ return {
         telescope.load_extension("projects")
         telescope.load_extension("noice")
         telescope.load_extension("dir")
+        telescope.load_extension("live_grep_args")
     end,
     keys = {
         { "<leader>cm", "<cmd>Telescope notify<cr>", desc = "Display Messages (telescope)" },
@@ -220,7 +240,8 @@ return {
         { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Commits (telescope)" },
         { "<leader>gf", "<cmd>Telescope git_files<cr>", desc = "Files (telescope)" },
         { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Status (telescope)" },
-        { "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep (telescope)" },
+        -- { "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep (telescope)" },
+        { "<leader>sg", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", desc = "Live grep with args (live-grep-args)" },
         { "<leader>ue", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File Explorer (telescope)" },
         { "<leader>xd", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Diagnostics (telescope)" },
         { "<leader>xf", "<cmd>TodoTelescope<cr>", desc = "Todo (telescope)" },
